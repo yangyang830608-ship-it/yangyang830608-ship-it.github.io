@@ -1,36 +1,23 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="zh">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIAN | AI Creative & Media Art Portfolio</title>
+    <title>ARTIST PORTFOLIO - 作品集</title>
     <style>
-        /* --- 核心全局样式与酸性黑基础 --- */
+        /* 基础极简重置 */
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            user-select: none;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
         }
-        body, html {
-            background-color: #050505;
-            color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
-            overflow-x: hidden;
-            scroll-behavior: smooth;
-        }
-        
-        ::-webkit-scrollbar { display: none; }
 
-        /* 全局背景网格纹理 */
-        .bg-grid {
-            position: fixed;
-            top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
-            background-size: 50px 50px;
-            pointer-events: none;
-            z-index: 1;
+        body {
+            background-color: #0a0a0a;
+            color: #ffffff;
+            overflow-x: hidden;
+            letter-spacing: 0.05em;
         }
 
         /* 极小化固定艺术馆导航 */
@@ -47,420 +34,300 @@
             color: #666;
         }
         nav .logo { font-weight: 900; color: #fff; font-size: 14px; letter-spacing: 0.1em; }
+        nav .menu { display: flex; gap: 30px; }
         nav a { color: #666; text-decoration: none; transition: 0.3s; }
         nav a:hover { color: #fff; text-shadow: 0 0 10px #fff; }
 
-        /* --- 通用页面结构 --- */
-       section {
-    position: relative;
-    width: 100vw;
-    height: 100vh;          /* 强行让每一页都精准吃满刚好一个屏幕的高度 */
-    overflow: hidden;       /* 防止内容溢出打乱排版 */
-    padding: 80px 60px;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    z-index: 2;
-    border-bottom: 1px solid rgba(255,255,255,0.03);
-}
+        /* 强行独立全屏切片逻辑，防止页面折叠 */
+        section {
+            position: relative;
+            width: 100vw;
+            height: 100vh;
+            overflow: hidden;
+            padding: 100px 60px 60px 60px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
+            background-color: #0a0a0a;
+        }
 
         .container {
             width: 100%;
             max-width: 1200px;
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
         }
 
-        /* 艺术大标题样式（用于项目开篇） */
-        .section-header {
-            margin-bottom: 60px;
-            width: 100%;
-        }
-        .section-num {
-            font-size: 12px;
-            color: #a8b2ff;
-            letter-spacing: 0.2em;
-            font-family: monospace;
-            display: block;
-            margin-bottom: 10px;
-        }
-        .section-title-zh {
-            font-size: 36px;
-            font-weight: 400;
-            letter-spacing: 0.05em;
-            color: #f5f5f5;
-            margin-bottom: 5px;
-        }
-        .section-title-en {
-            font-size: 14px;
-            font-weight: 300;
-            letter-spacing: 0.3em;
-            color: #555;
-            text-transform: uppercase;
-        }
-
-        /* --- PAGE 1: 首页 HERO --- */
-        .page-hero { height: 100vh; padding: 0; }
-        .hero-container {
+        /* 页面大标题 */
+        .page-header {
             display: flex;
             justify-content: space-between;
-            align-items: center;
-            width: 100%;
-            max-width: 1200px;
-            padding: 0 40px;
-        }
-        .hero-text h1 {
-            font-size: 80px;
-            font-weight: 900;
-            letter-spacing: -0.03em;
-            line-height: 0.85;
-            margin-bottom: 30px;
-            background: linear-gradient(135deg, #fff 30%, #a8b2ff 70%, #ffb6e9 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .hero-text p {
-            font-size: 12px;
-            letter-spacing: 0.15em;
-            line-height: 2;
-            color: #666;
-            margin-bottom: 40px;
-        }
-        .cta-btn {
-            display: inline-block;
-            padding: 15px 35px;
-            border: 1px solid rgba(255,255,255,0.15);
-            background: transparent;
-            color: #fff;
-            font-size: 11px;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            text-decoration: none;
-            transition: 0.4s ease;
-        }
-        .cta-btn:hover {
-            border-color: #fff;
-            box-shadow: 0 0 25px rgba(168, 178, 255, 0.3);
-            transform: translateY(-2px);
-        }
-        .artifact-visual {
-            position: relative;
-            width: 380px; height: 380px;
-            background: linear-gradient(45deg, #111, #222, #111);
-            border-radius: 43% 57% 70% 30% / 30% 45% 55% 70%;
-            animation: liquidMorph 12s infinite alternate ease-in-out, rotate 25s infinite linear;
-            box-shadow: inset 0 0 40px rgba(255,255,255,0.1), 0 0 60px rgba(168, 178, 255, 0.08);
-        }
-        .artifact-visual::after {
-            content: '';
-            position: absolute;
-            top: 10%; left: 10%; width: 80%; height: 80%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(168,178,255,0.1) 50%, transparent 100%);
-            border-radius: inherit;
-        }
-        @keyframes liquidMorph {
-            0% { border-radius: 43% 57% 70% 30% / 30% 45% 55% 70%; }
-            50% { border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%; }
-            100% { border-radius: 50% 50% 30% 70% / 40% 60% 40% 60%; }
-        }
-        @keyframes rotate { 100% { transform: rotate(360deg); } }
-
-        /* --- PAGE 2: 目录页 INDEX --- */
-        .index-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 40px;
-            margin-top: 40px;
-        }
-        .index-column h3 {
-            font-size: 12px;
-            letter-spacing: 0.2em;
-            color: #a8b2ff;
-            border-bottom: 1px solid rgba(255,255,255,0.1);
+            align-items: flex-end;
+            border-bottom: 1px solid #222;
             padding-bottom: 15px;
-            margin-bottom: 25px;
-            text-transform: uppercase;
         }
-        .index-item {
-            margin-bottom: 30px;
-            cursor: pointer;
-        }
-        .index-item:hover .index-item-title {
-            color: #fff;
-            transform: translateX(5px);
-        }
-        .index-item-title {
-            font-size: 16px;
-            color: #aaa;
-            transition: 0.3s;
-            display: flex;
-            align-items: center;
-        }
-        .index-item-title span {
-            font-size: 11px;
-            font-family: monospace;
-            margin-right: 10px;
-            color: #444;
-        }
-        .index-item-tags {
-            font-size: 11px;
-            color: #444;
-            margin-top: 5px;
-            letter-spacing: 0.05em;
-            padding-left: 25px;
-        }
+        .page-title { font-size: 24px; font-weight: 300; color: #fff; }
+        .page-num { font-size: 14px; color: #444; font-family: monospace; }
 
-        /* --- PAGE 3: 寻找微光 - P1 (大图+工作流) --- */
-        .project-meta-grid {
+        /* 内容双栏排版 */
+        .content-grid {
             display: flex;
             gap: 60px;
-            border-bottom: 1px solid rgba(255,255,255,0.05);
-            padding-bottom: 30px;
-            margin-bottom: 40px;
-            font-size: 13px;
-            color: #666;
-        }
-        .project-meta-grid strong { color: #aaa; font-weight: 400; margin-right: 8px;}
-        
-        .hero-shot-container {
-            width: 100%;
-            height: 520px;
-            background: #111;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            margin-bottom: 50px;
-            display: flex;
             align-items: center;
-            justify-content: center;
+            flex: 1;
+            padding: 40px 0;
             overflow: hidden;
         }
-        .hero-placeholder-text {
-            color: #333; font-size: 13px; letter-spacing: 0.2em; text-align: center; line-height: 2;
-        }
-
-        .workflow-section {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 60px;
-            margin-top: 40px;
-        }
-        .workflow-intro h4 { font-size: 18px; font-weight: 400; color: #fff; margin-bottom: 15px; }
-        .workflow-intro p { font-size: 13px; color: #666; line-height: 2; }
-        
-        .workflow-blocks {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-        }
-        .wf-card {
-            background: rgba(255,255,255,0.01);
-            border-left: 2px solid #a8b2ff;
-            padding: 25px;
-        }
-        .wf-card h5 { font-size: 14px; font-weight: 600; color: #aaa; margin-bottom: 10px; letter-spacing: 0.05em;}
-        .wf-card p { font-size: 13px; color: #666; line-height: 1.8; }
-
-        /* --- PAGE 4: 寻找微光 - P2 (高潮与镜头解剖) --- */
-        .split-layout {
-            display: grid;
-            grid-template-columns: 1.2fr 0.8fr;
-            gap: 40px;
-            width: 100%;
-        }
-        .mid-images-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-        }
-        .mid-image-box {
+        .text-side { flex: 1; max-width: 450px; }
+        .image-side { 
+            flex: 1.2; 
+            height: 100%; 
+            display: flex; 
+            justify-content: center; 
+            align-items: center; 
             background: #111;
-            height: 220px;
-            border: 1px solid rgba(255,255,255,0.05);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #222;
-            font-size: 11px;
-            letter-spacing: 0.1em;
+            border: 1px solid #222;
             position: relative;
+            overflow: hidden;
         }
-        .mid-image-box .img-tag { position: absolute; bottom: 15px; left: 15px; color: #444; }
-        
-        .director-notes {
-            padding-left: 20px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
+        .image-side img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
         }
-        .note-item {
-            margin-bottom: 30px;
-            border-bottom: 1px dashed rgba(255,255,255,0.05);
-            padding-bottom: 20px;
-        }
-        .note-item h4 { font-size: 14px; color: #a8b2ff; margin-bottom: 10px; font-weight: 400;}
-        .note-item p { font-size: 13px; color: #777; line-height: 1.8; }
 
-        /* --- PAGE 5: 寻找微光 - P3 (39张全矩阵) --- */
+        /* 文字排版 */
+        h2 { font-size: 32px; font-weight: 700; margin-bottom: 25px; color: #fff; letter-spacing: -0.02em; }
+        p { font-size: 14px; line-height: 1.8; color: #aaa; margin-bottom: 20px; text-align: justify; }
+        
+        /* 艺术标签 */
+        .tag-container { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
+        .tag { font-size: 11px; padding: 6px 14px; background: #161616; border: 1px solid #262626; color: #888; border-radius: 20px; }
+
+        /* 第5页：分镜矩阵网格专用样式 */
         .matrix-grid {
             display: grid;
-            grid-template-columns: repeat(8, 1fr); /* 8列高密度矩阵，完美容纳30+张图 */
-            gap: 12px;
-            width: 100%;
-            margin-top: 20px;
+            grid-template-columns: repeat(6, 100px);
+            grid-template-rows: repeat(6, 70px);
+            gap: 15px;
+            justify-content: center;
+            align-content: center;
+            flex: 1;
         }
-        .matrix-item {
+        .matrix-cell {
             background: #111;
-            aspect-ratio: 4/3;
-            border: 1px solid rgba(255,255,255,0.03);
+            border: 1px solid #222;
             display: flex;
             align-items: center;
             justify-content: center;
-            color: #222;
             font-size: 10px;
-            font-family: monospace;
-            position: relative;
-            transition: 0.3s;
-        }
-        .matrix-item:hover {
-            border-color: rgba(168,178,255,0.4);
-            transform: scale(1.05);
-            z-index: 5;
-        }
-        .matrix-item span { position: absolute; top: 5px; left: 5px; color: #333; }
-        .matrix-footer-text {
-            margin-top: 40px;
-            text-align: center;
-            font-size: 12px;
             color: #444;
-            letter-spacing: 0.1em;
-        }
-
-        /* --- PAGE 6: 实体装置与交互展示 --- */
-        .showcase-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-        }
-        .showcase-card {
-            background: rgba(255,255,255,0.01);
-            border: 1px solid rgba(255,255,255,0.03);
-            padding: 40px;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-        }
-        .showcase-media {
-            width: 100%;
-            height: 300px;
-            background: #111;
-            margin-bottom: 30px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #222;
-            font-size: 12px;
-            letter-spacing: 0.1em;
-        }
-        .showcase-card h3 { font-size: 20px; font-weight: 400; margin-bottom: 10px; color: #f5f5f5; }
-        .showcase-card p { font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 20px; }
-        .showcase-tech { font-size: 11px; font-family: monospace; color: #a8b2ff; letter-spacing: 0.05em; }
-
-        /* --- PAGE 7: 艺术护城河及摄影 --- */
-        .gallery-grid {
-            display: grid;
-            grid-template-columns: repeat(3, 1fr);
-            gap: 20px;
-        }
-        .gallery-item {
-            background: #111;
-            height: 400px;
-            border: 1px solid rgba(255,255,255,0.03);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: #222;
-            font-size: 12px;
+            transition: all 0.4s ease;
+            cursor: pointer;
             position: relative;
+            overflow: hidden;
         }
-        .gallery-desc {
-            position: absolute;
-            bottom: -30px; left: 0;
-            font-size: 12px; color: #555;
-        }
+        .matrix-cell img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .matrix-cell:hover { border-color: #fff; color: #fff; transform: scale(1.05); z-index: 10; }
+        .matrix-cell:hover img { opacity: 1; }
 
+        /* 背景装饰微光 */
+        .glow {
+            position: absolute;
+            width: 400px; height: 400px;
+            background: radial-gradient(circle, rgba(255,220,100,0.05) 0%, rgba(0,0,0,0) 70%);
+            pointer-events: none;
+            z-index: 1;
+        }
     </style>
 </head>
 <body>
 
-    <div class="bg-grid"></div>
-
     <nav>
-        <div class="logo">LIAN.</div>
-        <div>
-            <a href="#hero">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#index">目录</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#light-p1">AI漫剧</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#interaction">新媒体交互</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#fine-art">纯艺与摄影</a>
+        <div class="logo">PORTFOLIO.</div>
+        <div class="menu">
+            <a href="#page1">目录</a>
+            <a href="#page2">AI漫剧</a>
+            <a href="#page6">新媒体交互</a>
+            <a href="#page7">纯艺与摄影</a>
         </div>
-        <div>©2026 ARCHIVE</div>
     </nav>
 
-    <section class="page-hero" id="hero">
-        <div class="hero-container">
-            <div class="hero-text">
-                <h1>LIAN</h1>
-                <p>数字媒体艺术家 / AI创意导演<br>专注于AI全流程叙事、新媒体世界观构建与前沿数字交互展览设计。</p>
-                <a href="#index" class="cta-btn">进入展厅 ENTER</a>
+    <section id="page1">
+        <div class="container">
+            <div class="page-header">
+                <div class="page-title">INDEX / 作品目录</div>
+                <div class="page-num">01 / 07</div>
             </div>
-            <div class="artifact-visual" id="artifact"></div>
+            <div class="content-grid">
+                <div class="text-side">
+                    <h2>海 & 祂 & 花</h2>
+                    <p>综合艺术与视觉探索个人作品集。本作品集涵盖了从数字分镜、AI辅助叙事、新媒体交互装置到纯艺与摄影探索的多维实验，探讨人、环境与深层精神意识之间的共生纽带。</p>
+                    <div class="tag-container">
+                        <span class="tag"># 2026作品集</span>
+                        <span class="tag"># 视觉传达</span>
+                        <span class="tag"># 跨界数字艺术</span>
+                    </div>
+                </div>
+                <div class="image-side">
+                    <img src="image_43f020.jpg" alt="作品集目录概览">
+                </div>
+            </div>
         </div>
     </section>
 
-    <section id="index">
+    <section id="page2">
         <div class="container">
-            <div class="section-header">
-                <span class="section-num">00 / ARCHIVE INDEX</span>
-                <h2 class="section-title-zh">作品集导览目录</h2>
-                <div class="section-title-en">Portfolio Architecture & Narrative Order</div>
+            <div class="page-header">
+                <div class="page-title">AI DIGITAL COMIC - CHAPTER 1</div>
+                <div class="page-num">02 / 07</div>
             </div>
-            
-            <div class="index-grid">
-                <div class="index-column">
-                    <h3>第一幕：核心敲门砖 (AI创意与叙事)</h3>
-                    
-                    <div class="index-item" onclick="document.getElementById('light-p1').scrollIntoView();">
-                        <div class="index-item-title"><span>01</span> 寻找微光 (Looking for the Light)</div>
-                        <div class="index-item-tags">治愈系AI概念漫剧分镜设计 / 39帧全流程控图</div>
-                    </div>
-                    
-                    <div class="index-item">
-                        <div class="index-item-title"><span>02</span> 书店打卡装置 & 中草药3D模型生成</div>
-                        <div class="index-item-tags">AI辅助场景概念设计与跨媒介空间生成</div>
+            <div class="content-grid">
+                <div class="text-side">
+                    <h2>醒来、直面未知的晦暗</h2>
+                    <p>叙事在一片沉闷、压抑的黑色底调中展开。主角在黑暗的温床中苏醒，身边仅有一只亮黄色的猫咪陪伴。窗外是一片夺目而带有神秘感的高饱和金黄色，暗示着某种既渴望又令人驻足的彼岸。</p>
+                    <div class="tag-container">
+                        <span class="tag"># AI叙事</span>
+                        <span class="tag"># 分镜概念</span>
+                        <span class="tag"># 情感色彩学</span>
                     </div>
                 </div>
+                <div class="image-side">
+                    <img src="1.jpg" alt="分镜1">
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="index-column">
-                    <h3>第二幕：动态与新媒体 (数字视听能力)</h3>
-                    
-                    <div class="index-item" onclick="document.getElementById('interaction').scrollIntoView();">
-                        <div class="index-item-title"><span>03</span> 图形生成 + TouchDesigner 粒子交互</div>
-                        <div class="index-item-tags">实时数据流可视化与线下动态人机交互系统</div>
-                    </div>
-                    
-                    <div class="index-item" onclick="document.getElementById('interaction').scrollIntoView();">
-                        <div class="index-item-title"><span>04</span> 独立MG动画 × 斯拜科展厅视频剪辑</div>
-                        <div class="index-item-tags">视听语言节奏控制、后期剪辑与商业落地案例</div>
+    <section id="page3">
+        <div class="container">
+            <div class="page-header">
+                <div class="page-title">AI DIGITAL COMIC - CHAPTER 2</div>
+                <div class="page-num">03 / 07</div>
+            </div>
+            <div class="content-grid">
+                <div class="text-side">
+                    <h2>凝视与内心的拉扯</h2>
+                    <p>随着视角的拉近与转换，主角陷入了深刻的沉思。高饱和度的金黄色窗光在暗色房间的对比下显得愈发神圣。猫咪不仅是陪伴者，更是引路人，将视线不断锚定在房间与外界的临界点上。</p>
+                    <div class="tag-container">
+                        <span class="tag"># 构图张力</span>
+                        <span class="tag"># 颗粒质感</span>
+                        <span class="tag"># 情绪流化</span>
                     </div>
                 </div>
+                <div class="image-side">
+                    <img src="2.jpg" alt="分镜2">
+                </div>
+            </div>
+        </div>
+    </section>
 
-                <div class="index-column">
-                    <h3>第三幕：艺术护城河 (纯艺与顶级审美)</h3>
-                    
-                    <div class="index-item" onclick="document.getElementById('fine-art').scrollIntoView();">
-                        <div class="index-item-title"><span>05</span> 玻璃交互投影装置 & 综合材料艺术</div>
-                        <div class="index-item-tags">空间装置物性研究、光影折射与当代纯艺装置</div>
+    <section id="page4">
+        <div class="container">
+            <div class="page-header">
+                <div class="page-title">AI DIGITAL COMIC - CHAPTER 3</div>
+                <div class="page-num">04 / 07</div>
+            </div>
+            <div class="content-grid">
+                <div class="text-side">
+                    <h2>窗外的微光雨序</h2>
+                    <p>当主角把目光完全投向窗外时，世界开始发生奇妙的形变。那些符号化的花朵仿佛在夜空中流淌，像雨一样落下。黑暗不再是单纯的压抑，而是孕育奇迹的夜空，预示着精神世界的一场洗礼。</p>
+                    <div class="tag-container">
+                        <span class="tag"># 符号主义</span>
+                        <span class="tag"># 色彩解构</span>
+                        <span class="tag"># 超现实意象</span>
                     </div>
-                    
-                    <div class="index-item" onclick="document.getElementById('fine-art').scrollIntoView();">
-                        <div class="index-item
+                </div>
+                <div class="image-side">
+                    <img src="4.jpg" alt="分镜4">
+                </div>
+            </div>
+        </div>
+    </section>
 
+    <section id="page5">
+        <div class="container">
+            <div class="page-header">
+                <div class="page-title">STORYBOARD MATRIX - FULL 39 FRAMES</div>
+                <div class="page-num">05 / 07</div>
+            </div>
+            <div class="matrix-grid">
+                <div class="matrix-cell"><img src="1.jpg"></div>
+                <div class="matrix-cell"><img src="2.jpg"></div>
+                <div class="matrix-cell"><img src="3.jpg"></div>
+                <div class="matrix-cell"><img src="4.jpg"></div>
+                <div class="matrix-cell"><img src="5.jpg"></div>
+                <div class="matrix-cell"><img src="6.jpg"></div>
+                <div class="matrix-cell"><img src="7.jpg"></div>
+                <div class="matrix-cell"><img src="8.jpg"></div>
+                <div class="matrix-cell"><img src="9.jpg"></div>
+                <div class="matrix-cell"><img src="35.jpg"></div>
+                <div class="matrix-cell"><span>11</span></div><div class="matrix-cell"><span>12</span></div>
+                <div class="matrix-cell"><span>13</span></div><div class="matrix-cell"><span>14</span></div>
+                <div class="matrix-cell"><span>15</span></div><div class="matrix-cell"><span>16</span></div>
+                <div class="matrix-cell"><span>17</span></div><div class="matrix-cell"><span>18</span></div>
+                <div class="matrix-cell"><span>19</span></div><div class="matrix-cell"><span>20</span></div>
+                <div class="matrix-cell"><span>21</span></div><div class="matrix-cell"><span>22</span></div>
+                <div class="matrix-cell"><span>23</span></div><div class="matrix-cell"><span>24</span></div>
+                <div class="matrix-cell"><span>25</span></div><div class="matrix-cell"><span>26</span></div>
+                <div class="matrix-cell"><span>27</span></div><div class="matrix-cell"><span>28</span></div>
+                <div class="matrix-cell"><span>29</span></div><div class="matrix-cell"><span>30</span></div>
+                <div class="matrix-cell"><span>31</span></div><div class="matrix-cell"><span>32</span></div>
+                <div class="matrix-cell"><span>33</span></div><div class="matrix-cell"><span>34</span></div>
+                <div class="matrix-cell"><span>35</span></div><div class="matrix-cell"><span>36</span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="page6">
+        <div class="container">
+            <div class="page-header">
+                <div class="page-title">NEW MEDIA INTERACTION - GENERATIVE GRAPHICS</div>
+                <div class="page-num">06 / 07</div>
+            </div>
+            <div class="content-grid">
+                <div class="text-side">
+                    <h2>动态涌现与无序的完美个体</h2>
+                    <p>利用数字媒介探索图形生成的无限可能性。作品通过算法模拟流体与粒子的碰撞，创造出具有生命张力的无序螺旋结构。打破传统艺术界限，让观众在与画面的交互中，体验数据转化为有机艺术的过程。</p>
+                    <div class="tag-container">
+                        <span class="tag"># 触控交互</span>
+                        <span class="tag"># 粒子系统</span>
+                        <span class="tag"># 算法美学</span>
+                    </div>
+                </div>
+                <div class="image-side">
+                    <img src="image_43f020.jpg" alt="生成图形细节展示">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="page7">
+        <div class="container">
+            <div class="page-header">
+                <div class="page-title">FINE ART & PHOTOGRAPHY</div>
+                <div class="page-num">07 / 07</div>
+            </div>
+            <div class="content-grid">
+                <div class="text-side">
+                    <h2>日常的镜头聚焦</h2>
+                    <p>回归现实的生命力捕捉。通过微距与高反差摄影，记录日常生活角落中那些不被注意的“生长的痕迹”。材料的肌理、光线的折射，在这里共同交织出一种安静且充满神性的艺术仪式感。</p>
+                    <div class="tag-container">
+                        <span class="tag"># 材料实验</span>
+                        <span class="tag"># 镜头语言</span>
+                        <span class="tag"># 独立摄影</span>
+                    </div>
+                </div>
+                <div class="image-side">
+                    <img src="35.jpg" alt="纯艺与摄影探索">
+                </div>
+            </div>
+        </div>
+    </section>
+
+</body>
+</html>
