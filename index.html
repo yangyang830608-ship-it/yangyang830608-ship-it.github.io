@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIAN | Digital Media Art Portfolio</title>
+    <title>LIAN | AI Creative & Media Art Portfolio</title>
     <style>
         /* --- 核心全局样式与酸性黑基础 --- */
         * {
@@ -13,23 +13,22 @@
             user-select: none;
         }
         body, html {
-            background-color: #0a0a0a;
+            background-color: #050505;
             color: #ffffff;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", "PingFang SC", "Hiragino Sans GB", "Microsoft YaHei", sans-serif;
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
         
-        /* 隐藏滚动条但保留滚动功能 */
         ::-webkit-scrollbar { display: none; }
 
-        /* 全局背景网格纹理（科技感细腻留白） */
+        /* 全局背景网格纹理 */
         .bg-grid {
             position: fixed;
             top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: linear-gradient(rgba(255,255,255,0.02) 1px, transparent 1px),
-                              linear-gradient(90deg, rgba(255,255,255,0.02) 1px, transparent 1px);
-            background-size: 40px 40px;
+            background-image: linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+            background-size: 50px 50px;
             pointer-events: none;
             z-index: 1;
         }
@@ -45,39 +44,75 @@
             font-size: 11px;
             letter-spacing: 0.3em;
             text-transform: uppercase;
-            color: #888;
+            color: #666;
         }
-        nav .logo { font-weight: 900; color: #fff; font-size: 14px; }
-        nav a { color: #888; text-decoration: none; transition: 0.3s; }
+        nav .logo { font-weight: 900; color: #fff; font-size: 14px; letter-spacing: 0.1em; }
+        nav a { color: #666; text-decoration: none; transition: 0.3s; }
         nav a:hover { color: #fff; text-shadow: 0 0 10px #fff; }
 
-        /* --- PAGE 1: 首页 HERO (Digital Artifact) --- */
-        .page-hero {
+        /* --- 通用页面结构 --- */
+        section {
             position: relative;
-            width: 100vw; height: 100vh;
+            width: 100vw;
+            min-height: 100vh;
+            padding: 120px 60px;
             display: flex;
-            align-items: center;
+            flex-direction: column;
             justify-content: center;
+            align-items: center;
             z-index: 2;
+            border-bottom: 1px solid rgba(255,255,255,0.03);
         }
-        .hero-container {
+
+        .container {
             width: 100%;
             max-width: 1200px;
-            padding: 0 40px;
+        }
+
+        /* 艺术大标题样式（用于项目开篇） */
+        .section-header {
+            margin-bottom: 60px;
+            width: 100%;
+        }
+        .section-num {
+            font-size: 12px;
+            color: #a8b2ff;
+            letter-spacing: 0.2em;
+            font-family: monospace;
+            display: block;
+            margin-bottom: 10px;
+        }
+        .section-title-zh {
+            font-size: 36px;
+            font-weight: 400;
+            letter-spacing: 0.05em;
+            color: #f5f5f5;
+            margin-bottom: 5px;
+        }
+        .section-title-en {
+            font-size: 14px;
+            font-weight: 300;
+            letter-spacing: 0.3em;
+            color: #555;
+            text-transform: uppercase;
+        }
+
+        /* --- PAGE 1: 首页 HERO --- */
+        .page-hero { height: 100vh; padding: 0; }
+        .hero-container {
             display: flex;
             justify-content: space-between;
             align-items: center;
-        }
-        .hero-text {
-            max-width: 450px;
+            width: 100%;
+            max-width: 1200px;
+            padding: 0 40px;
         }
         .hero-text h1 {
-            font-size: 72px;
+            font-size: 80px;
             font-weight: 900;
             letter-spacing: -0.03em;
-            line-height: 0.9;
-            margin-bottom: 24px;
-            /* Y2K 渐变效果占位 */
+            line-height: 0.85;
+            margin-bottom: 30px;
             background: linear-gradient(135deg, #fff 30%, #a8b2ff 70%, #ffb6e9 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
@@ -86,49 +121,41 @@
             font-size: 12px;
             letter-spacing: 0.15em;
             line-height: 2;
-            color: #888;
+            color: #666;
             margin-bottom: 40px;
         }
         .cta-btn {
             display: inline-block;
             padding: 15px 35px;
-            border: 1px solid rgba(255,255,255,0.2);
+            border: 1px solid rgba(255,255,255,0.15);
             background: transparent;
             color: #fff;
             font-size: 11px;
             letter-spacing: 0.2em;
             text-transform: uppercase;
             text-decoration: none;
-            cursor: pointer;
-            position: relative;
             transition: 0.4s ease;
         }
         .cta-btn:hover {
             border-color: #fff;
-            box-shadow: 0 0 20px rgba(168, 178, 255, 0.4);
+            box-shadow: 0 0 25px rgba(168, 178, 255, 0.3);
             transform: translateY(-2px);
         }
-
-        /* 方案一中央：液态金属主视觉（使用纯CSS模拟3D全息渐变质感） */
         .artifact-visual {
             position: relative;
-            width: 400px; height: 400px;
-            background: linear-gradient(45deg, #1f1c2c, #928dab, #1f1c2c);
+            width: 380px; height: 380px;
+            background: linear-gradient(45deg, #111, #222, #111);
             border-radius: 43% 57% 70% 30% / 30% 45% 55% 70%;
-            animation: liquidMorph 12s infinite alternate ease-in-out, rotate 20s infinite linear;
-            box-shadow: inset 0 0 40px rgba(255,255,255,0.2),
-                        0 0 60px rgba(168, 178, 255, 0.15);
-            filter: blur(1px);
+            animation: liquidMorph 12s infinite alternate ease-in-out, rotate 25s infinite linear;
+            box-shadow: inset 0 0 40px rgba(255,255,255,0.1), 0 0 60px rgba(168, 178, 255, 0.08);
         }
-        /* Y2K 全息高光层 */
         .artifact-visual::after {
             content: '';
             position: absolute;
             top: 10%; left: 10%; width: 80%; height: 80%;
-            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.8) 0%, rgba(0,240,255,0.2) 50%, transparent 100%);
+            background: radial-gradient(circle at 30% 30%, rgba(255,255,255,0.4) 0%, rgba(168,178,255,0.1) 50%, transparent 100%);
             border-radius: inherit;
         }
-
         @keyframes liquidMorph {
             0% { border-radius: 43% 57% 70% 30% / 30% 45% 55% 70%; }
             50% { border-radius: 70% 30% 52% 48% / 60% 40% 60% 40%; }
@@ -136,165 +163,229 @@
         }
         @keyframes rotate { 100% { transform: rotate(360deg); } }
 
-        /* --- PAGE 2: 作品展厅 (Acid Dream 漂浮空间) --- */
-        .page-portfolio {
-            min-height: 100vh;
-            position: relative;
-            padding: 120px 40px;
-            z-index: 2;
-        }
-        .section-title {
-            font-size: 11px;
-            letter-spacing: 0.4em;
-            color: #444;
-            text-transform: uppercase;
-            margin-bottom: 80px;
-            text-align: center;
-        }
-        /* 方案三：非对称错落布局空间 */
-        .portfolio-space {
-            position: relative;
-            max-width: 1200px;
-            margin: 0 auto;
-            height: 800px; /* 给漂浮提供空间 */
-        }
-        /* 抽象作品展品通用样式 */
-        .exhibit-item {
-            position: absolute;
-            cursor: pointer;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-        .exhibit-item:hover {
-            transform: scale(1.03);
-            z-index: 10;
-        }
-        .exhibit-media {
-            width: 100%;
-            background: #151515;
-            border: 1px solid rgba(255,255,255,0.05);
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        /* 故障扫描线效果 */
-        .exhibit-media::before {
-            content: '';
-            position: absolute;
-            width: 100%; height: 100%;
-            background: linear-gradient(transparent 50%, rgba(0, 0, 0, 0.3) 50%);
-            background-size: 100% 4px;
-            z-index: 2;
-            opacity: 0.3;
-        }
-        .exhibit-info {
-            margin-top: 15px;
-            font-size: 11px;
-            letter-spacing: 0.1em;
-        }
-        .exhibit-info h3 { font-size: 16px; font-weight: 400; margin-bottom: 5px; color: #fff;}
-        .exhibit-info span { color: #555; }
-
-        /* 错落定位（非对称） */
-        .item-a { left: 5%; top: 0; width: 450px; }
-        .item-a .exhibit-media { height: 300px; background: linear-gradient(135deg, #0e1726, #111); }
-        
-        .item-b { right: 5%; top: 150px; width: 380px; }
-        .item-b .exhibit-media { height: 480px; background: linear-gradient(135deg, #1a0f1a, #111); }
-        
-        .item-c { left: 15%; top: 420px; width: 400px; }
-        .item-c .exhibit-media { height: 280px; background: linear-gradient(135deg, #1b1b11, #111); }
-
-        /* Y2K 装饰贴纸元素 */
-        .y2k-sticker {
-            position: absolute;
-            font-size: 10px;
-            border: 1px dashed rgba(255,255,255,0.2);
-            padding: 5px 10px;
-            color: #888;
-            text-transform: uppercase;
-            letter-spacing: 0.2em;
-            pointer-events: none;
-        }
-
-        /* --- PAGE 3: 沉浸式项目内页 (楚文化数字项目世界观) --- */
-        .page-project-detail {
-            min-height: 100vh;
-            width: 100vw;
-            background-color: #050503; /* 极深的金黑底色 */
-            position: relative;
-            z-index: 3;
-            border-top: 1px solid rgba(212, 175, 55, 0.1); /* 暗金线 */
-            padding: 120px 40px;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        /* 楚文化独立粒子/烟雾氛围背景 */
-        .chu-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 50% 30%, rgba(212, 175, 55, 0.05) 0%, transparent 70%);
-            pointer-events: none;
-            z-index: 1;
-        }
-        .project-container {
-            max-width: 1000px;
-            width: 100%;
-            z-index: 2;
-        }
-        .project-header {
-            margin-bottom: 60px;
-        }
-        .project-tag {
-            color: #d4af37; /* 楚文化青铜器暗金色 */
-            font-size: 11px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            margin-bottom: 15px;
-            display: block;
-        }
-        .project-title {
-            font-size: 48px;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            color: #f5f5f5;
-            margin-bottom: 20px;
-        }
-        .project-meta-grid {
-            display: flex;
+        /* --- PAGE 2: 目录页 INDEX --- */
+        .index-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
             gap: 40px;
-            border-top: 1px solid rgba(255,255,255,0.05);
-            padding-top: 20px;
-            font-size: 11px;
-            color: #666;
+            margin-top: 40px;
         }
-        .project-meta-grid strong { color: #aaa; font-weight: 400; margin-right: 5px;}
-        
-        /* 全屏沉浸沉降式大图/视频展示区 */
-        .project-hero-media {
-            width: 100%;
-            height: 500px;
-            background: linear-gradient(180deg, #111 0%, #1c120c 100%);
-            border: 1px solid rgba(212, 175, 55, 0.15);
-            margin-bottom: 40px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            color: rgba(212, 175, 55, 0.4);
+        .index-column h3 {
             font-size: 12px;
             letter-spacing: 0.2em;
-            position: relative;
+            color: #a8b2ff;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+            padding-bottom: 15px;
+            margin-bottom: 25px;
+            text-transform: uppercase;
         }
-        /* 模拟金色粒子流动 */
-        .project-hero-media::after {
-            content: '▲ [ AI GENERATIVE VIDEO / INTERACTIVE INSTALLATION ]';
-            position: absolute;
-            bottom: 20px; left: 20px;
-            font-size: 10px;
+        .index-item {
+            margin-bottom: 30px;
+            cursor: pointer;
+        }
+        .index-item:hover .index-item-title {
+            color: #fff;
+            transform: translateX(5px);
+        }
+        .index-item-title {
+            font-size: 16px;
+            color: #aaa;
+            transition: 0.3s;
+            display: flex;
+            align-items: center;
+        }
+        .index-item-title span {
+            font-size: 11px;
+            font-family: monospace;
+            margin-right: 10px;
+            color: #444;
+        }
+        .index-item-tags {
+            font-size: 11px;
+            color: #444;
+            margin-top: 5px;
+            letter-spacing: 0.05em;
+            padding-left: 25px;
+        }
+
+        /* --- PAGE 3: 寻找微光 - P1 (大图+工作流) --- */
+        .project-meta-grid {
+            display: flex;
+            gap: 60px;
+            border-bottom: 1px solid rgba(255,255,255,0.05);
+            padding-bottom: 30px;
+            margin-bottom: 40px;
+            font-size: 13px;
             color: #666;
         }
+        .project-meta-grid strong { color: #aaa; font-weight: 400; margin-right: 8px;}
+        
+        .hero-shot-container {
+            width: 100%;
+            height: 520px;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.05);
+            position: relative;
+            margin-bottom: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            overflow: hidden;
+        }
+        .hero-placeholder-text {
+            color: #333; font-size: 13px; letter-spacing: 0.2em; text-align: center; line-height: 2;
+        }
+
+        .workflow-section {
+            display: grid;
+            grid-template-columns: 1fr 2fr;
+            gap: 60px;
+            margin-top: 40px;
+        }
+        .workflow-intro h4 { font-size: 18px; font-weight: 400; color: #fff; margin-bottom: 15px; }
+        .workflow-intro p { font-size: 13px; color: #666; line-height: 2; }
+        
+        .workflow-blocks {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 30px;
+        }
+        .wf-card {
+            background: rgba(255,255,255,0.01);
+            border-left: 2px solid #a8b2ff;
+            padding: 25px;
+        }
+        .wf-card h5 { font-size: 14px; font-weight: 600; color: #aaa; margin-bottom: 10px; letter-spacing: 0.05em;}
+        .wf-card p { font-size: 13px; color: #666; line-height: 1.8; }
+
+        /* --- PAGE 4: 寻找微光 - P2 (高潮与镜头解剖) --- */
+        .split-layout {
+            display: grid;
+            grid-template-columns: 1.2fr 0.8fr;
+            gap: 40px;
+            width: 100%;
+        }
+        .mid-images-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 20px;
+        }
+        .mid-image-box {
+            background: #111;
+            height: 220px;
+            border: 1px solid rgba(255,255,255,0.05);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222;
+            font-size: 11px;
+            letter-spacing: 0.1em;
+            position: relative;
+        }
+        .mid-image-box .img-tag { position: absolute; bottom: 15px; left: 15px; color: #444; }
+        
+        .director-notes {
+            padding-left: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+        .note-item {
+            margin-bottom: 30px;
+            border-bottom: 1px dashed rgba(255,255,255,0.05);
+            padding-bottom: 20px;
+        }
+        .note-item h4 { font-size: 14px; color: #a8b2ff; margin-bottom: 10px; font-weight: 400;}
+        .note-item p { font-size: 13px; color: #777; line-height: 1.8; }
+
+        /* --- PAGE 5: 寻找微光 - P3 (39张全矩阵) --- */
+        .matrix-grid {
+            display: grid;
+            grid-template-columns: repeat(8, 1fr); /* 8列高密度矩阵，完美容纳30+张图 */
+            gap: 12px;
+            width: 100%;
+            margin-top: 20px;
+        }
+        .matrix-item {
+            background: #111;
+            aspect-ratio: 4/3;
+            border: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222;
+            font-size: 10px;
+            font-family: monospace;
+            position: relative;
+            transition: 0.3s;
+        }
+        .matrix-item:hover {
+            border-color: rgba(168,178,255,0.4);
+            transform: scale(1.05);
+            z-index: 5;
+        }
+        .matrix-item span { position: absolute; top: 5px; left: 5px; color: #333; }
+        .matrix-footer-text {
+            margin-top: 40px;
+            text-align: center;
+            font-size: 12px;
+            color: #444;
+            letter-spacing: 0.1em;
+        }
+
+        /* --- PAGE 6: 实体装置与交互展示 --- */
+        .showcase-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 40px;
+        }
+        .showcase-card {
+            background: rgba(255,255,255,0.01);
+            border: 1px solid rgba(255,255,255,0.03);
+            padding: 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+        .showcase-media {
+            width: 100%;
+            height: 300px;
+            background: #111;
+            margin-bottom: 30px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222;
+            font-size: 12px;
+            letter-spacing: 0.1em;
+        }
+        .showcase-card h3 { font-size: 20px; font-weight: 400; margin-bottom: 10px; color: #f5f5f5; }
+        .showcase-card p { font-size: 13px; color: #666; line-height: 1.8; margin-bottom: 20px; }
+        .showcase-tech { font-size: 11px; font-family: monospace; color: #a8b2ff; letter-spacing: 0.05em; }
+
+        /* --- PAGE 7: 艺术护城河及摄影 --- */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+        }
+        .gallery-item {
+            background: #111;
+            height: 400px;
+            border: 1px solid rgba(255,255,255,0.03);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #222;
+            font-size: 12px;
+            position: relative;
+        }
+        .gallery-desc {
+            position: absolute;
+            bottom: -30px; left: 0;
+            font-size: 12px; color: #555;
+        }
+
     </style>
 </head>
 <body>
@@ -304,9 +395,11 @@
     <nav>
         <div class="logo">LIAN.</div>
         <div>
-            <a href="#hero">Index</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#portfolio">Artifacts</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a href="#chu-project">Exhibition</a>
+            <a href="#hero">首页</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#index">目录</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#light-p1">AI漫剧</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#interaction">新媒体交互</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a href="#fine-art">纯艺与摄影</a>
         </div>
         <div>©2026 ARCHIVE</div>
     </nav>
@@ -315,88 +408,58 @@
         <div class="hero-container">
             <div class="hero-text">
                 <h1>LIAN</h1>
-                <p>DIGITAL MEDIA ARTIST<br>SPECIALIZING IN AI CREATIVE, INTERACTIVE EXPERIENCES & DIGITAL EXHIBITION DESIGN.</p>
-                <a href="#portfolio" class="cta-btn">Enter Exhibition</a>
+                <p>数字媒体艺术家 / AI创意导演<br>专注于AI全流程叙事、新媒体世界观构建与前沿数字交互展览设计。</p>
+                <a href="#index" class="cta-btn">进入展厅 ENTER</a>
             </div>
-            
             <div class="artifact-visual" id="artifact"></div>
         </div>
     </section>
 
-    <section class="page-portfolio" id="portfolio">
-        <div class="section-title">// SELECTED ARTIFACTS / 精选遗物</div>
-        
-        <div class="portfolio-space">
-            <div class="y2k-sticker" style="left: 45%; top: 10%;">[ SYSTEM: ACTIVE ]</div>
-            <div class="y2k-sticker" style="right: 15%; top: 50%;">✦ AI GENERATED</div>
-            <div class="y2k-sticker" style="left: 2%; top: 70%;">[ INTERACTIVE SYSTEM 2.0 ]</div>
-
-            <div class="exhibit-item item-a" onclick="document.getElementById('chu-project').scrollIntoView();">
-                <div class="exhibit-media">
-                    <span style="color:#444; font-size:11px; letter-spacing:0.1em;">[ 点击进入沉浸式世界观 ]</span>
-                </div>
-                <div class="exhibit-info">
-                    <h3>重构楚文化：数字解构实验</h3>
-                    <span>AI Video & Generative Art / 2026</span>
-                </div>
+    <section id="index">
+        <div class="container">
+            <div class="section-header">
+                <span class="section-num">00 / ARCHIVE INDEX</span>
+                <h2 class="section-title-zh">作品集导览目录</h2>
+                <div class="section-title-en">Portfolio Architecture & Narrative Order</div>
             </div>
-
-            <div class="exhibit-item item-b">
-                <div class="exhibit-media">
-                    <span style="color:#444; font-size:11px; letter-spacing:0.1em;">[ VIEW PROJECT 02 ]</span>
+            
+            <div class="index-grid">
+                <div class="index-column">
+                    <h3>第一幕：核心敲门砖 (AI创意与叙事)</h3>
+                    
+                    <div class="index-item" onclick="document.getElementById('light-p1').scrollIntoView();">
+                        <div class="index-item-title"><span>01</span> 寻找微光 (Looking for the Light)</div>
+                        <div class="index-item-tags">治愈系AI概念漫剧分镜设计 / 39帧全流程控图</div>
+                    </div>
+                    
+                    <div class="index-item">
+                        <div class="index-item-title"><span>02</span> 书店打卡装置 & 中草药3D模型生成</div>
+                        <div class="index-item-tags">AI辅助场景概念设计与跨媒介空间生成</div>
+                    </div>
                 </div>
-                <div class="exhibit-info">
-                    <h3>赛博格蝴蝶：液态拟态交互装置</h3>
-                    <span>Interactive / UIUX Design</span>
+
+                <div class="index-column">
+                    <h3>第二幕：动态与新媒体 (数字视听能力)</h3>
+                    
+                    <div class="index-item" onclick="document.getElementById('interaction').scrollIntoView();">
+                        <div class="index-item-title"><span>03</span> 图形生成 + TouchDesigner 粒子交互</div>
+                        <div class="index-item-tags">实时数据流可视化与线下动态人机交互系统</div>
+                    </div>
+                    
+                    <div class="index-item" onclick="document.getElementById('interaction').scrollIntoView();">
+                        <div class="index-item-title"><span>04</span> 独立MG动画 × 斯拜科展厅视频剪辑</div>
+                        <div class="index-item-tags">视听语言节奏控制、后期剪辑与商业落地案例</div>
+                    </div>
                 </div>
-            </div>
 
-            <div class="exhibit-item item-c">
-                <div class="exhibit-media">
-                    <span style="color:#444; font-size:11px; letter-spacing:0.1em;">[ VIEW PROJECT 03 ]</span>
-                </div>
-                <div class="exhibit-info">
-                    <h3>无序梦境：基于大语言模型的空间叙事</h3>
-                    <span>Digital Exhibition / XR</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section class="page-project-detail" id="chu-project">
-        <div class="chu-bg"></div>
-        
-        <div class="project-container">
-            <div class="project-header">
-                <span class="project-tag">PROJECT 01 / 楚文化数字重构</span>
-                <h2 class="project-title">漆流暗涌：基于AI生成技术的楚文化视觉解构</h2>
-                
-                <div class="project-meta-grid">
-                    <div><strong>Role:</strong> 独立创作者 (Artist)</div>
-                    <div><strong>Tech:</strong> Midjourney / ComfyUI / TouchDesigner</div>
-                    <div><strong>Date:</strong> 2026.03</div>
-                </div>
-            </div>
-
-            <div class="project-hero-media">
-                <span>[ 楚文化暗金粒子流动视觉主体预留区 ]</span>
-            </div>
-
-            <div style="font-size: 14px; line-height: 2; color: #aaa; max-width: 700px;">
-                <p style="margin-bottom: 20px;">本项作品旨在解构传统楚文化中“神秘、浪漫、巫觋”的视觉图腾。通过提取楚国漆器经典的“红与黑、金与幽”的色彩通感，利用 AI 生成对抗网络进行流体形态的重塑。</p>
-                <p>在第二阶段中，数据流被实时导入 TouchDesigner，使用户的动态能够实时干预漆器纹样的崩解与再生，实现跨越时空的交互数字拟态展览。</p>
-            </div>
-        </div>
-    </section>
-
-    <script>
-        const artifact = document.getElementById('artifact');
-        window.addEventListener('mousemove', (e) => {
-            const x = (window.innerWidth / 2 - e.clientX) / 25;
-            const y = (window.innerHeight / 2 - e.clientY) / 25;
-            artifact.style.transform = `translate(${x}px, ${y}px)`;
-        });
-    </script>
-</body>
-</html>
+                <div class="index-column">
+                    <h3>第三幕：艺术护城河 (纯艺与顶级审美)</h3>
+                    
+                    <div class="index-item" onclick="document.getElementById('fine-art').scrollIntoView();">
+                        <div class="index-item-title"><span>05</span> 玻璃交互投影装置 & 综合材料艺术</div>
+                        <div class="index-item-tags">空间装置物性研究、光影折射与当代纯艺装置</div>
+                    </div>
+                    
+                    <div class="index-item" onclick="document.getElementById('fine-art').scrollIntoView();">
+                        <div class="index-item
 
