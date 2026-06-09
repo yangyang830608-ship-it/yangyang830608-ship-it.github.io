@@ -3,293 +3,612 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTIST PORTFOLIO</title>
+    <title>ARTIST PORTFOLIO — FUTURE ART LAB</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Syne:wght@500;700;800&family=Inter:wght@300;400;600&disabled" rel="stylesheet">
+    
     <style>
-        /* 恢复你原本的液态金属/前沿艺术风格核心全局样式 */
+        /* ==========================================================================
+           【一、整体风格与基调 - 核心美学 CSS】
+           ========================================================================== */
+        :root {
+            --bg-color: #050507;
+            --neon-blue: #00f0ff;
+            --neon-purple: #bd00ff;
+            --chrome-grad: linear-gradient(135deg, #e6e6e6 0%, #ffffff 45%, #888888 55%, #ffffff 100%);
+            --acid-gray: rgba(255, 255, 255, 0.03);
+            --border-color: rgba(255, 255, 255, 0.08);
+            --font-title: 'Syne', 'Clash Display', -apple-system, sans-serif;
+            --font-body: 'Space Grotesk', 'Inter', sans-serif;
+        }
+
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+            margin: 0; padding: 0; box-sizing: border-box;
+            user-select: none;
         }
 
         body {
-            background-color: #0a0a0a;
+            background-color: var(--bg-color);
             color: #ffffff;
+            font-family: var(--font-body);
             overflow-x: hidden;
-            letter-spacing: 0.05em;
+            letter-spacing: 0.02em;
+            scroll-behavior: smooth;
         }
 
-        /* 原版精致艺术固定导航 */
+        /* 隐藏滚动条，保持画廊纯净感 */
+        ::-webkit-scrollbar { width: 4px; }
+        ::-webkit-scrollbar-track { background: #050507; }
+        ::-webkit-scrollbar-thumb { background: #1a1a24; border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); }
+
+        /* ==========================================================================
+           【二、网页框架 - 全局导航组件】
+           ========================================================================== */
+        /* 顶部主导航 */
         nav {
             position: fixed;
-            top: 40px; left: 40px; right: 40px;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            top: 30px; left: 40px; right: 40px;
+            display: flex; justify-content: space-between; align-items: center;
             z-index: 100;
-            font-size: 11px;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
-            color: #666;
+            mix-blend-mode: difference;
         }
-        nav .logo { font-weight: 900; color: #fff; font-size: 14px; letter-spacing: 0.1em; }
-        nav .menu { display: flex; gap: 30px; }
-        nav a { color: #666; text-decoration: none; transition: 0.3s; }
-        nav a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
+        nav .logo {
+            font-family: var(--font-title);
+            font-weight: 800; font-size: 16px; letter-spacing: 0.1em;
+            background: var(--chrome-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+        }
+        nav .menu { display: flex; gap: 35px; }
+        nav a {
+            color: #888; text-decoration: none; font-size: 11px; text-transform: uppercase;
+            letter-spacing: 0.2em; transition: color 0.4s, text-shadow 0.4s;
+        }
+        nav a:hover, nav a.active {
+            color: #fff; text-shadow: 0 0 8px var(--neon-blue);
+        }
 
-        /* 强行独立全屏切片：既保证每一页像画册一样完美独立，又绝对不会产生嵌套折叠 */
+        /* 右侧点状导航（Chapter监测） */
+        .dot-nav {
+            position: fixed; right: 40px; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 20px; z-index: 99;
+        }
+        .dot-item {
+            width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.15);
+            transition: all 0.4s ease; cursor: pointer; position: relative;
+        }
+        .dot-item:hover, .dot-item.active {
+            background: var(--neon-blue); transform: scale(1.5);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+        .dot-label {
+            position: absolute; right: 20px; top: -4px; color: #444; font-size: 9px;
+            font-family: var(--font-body); text-transform: uppercase; opacity: 0; pointer-events: none;
+            transition: 0.3s; white-space: nowrap; letter-spacing: 0.1em;
+        }
+        .dot-item:hover .dot-label { opacity: 1; color: var(--neon-blue); }
+
+        /* ==========================================================================
+           【三、核心章节排版逻辑】
+           ========================================================================== */
+        /* 强制全屏切片容器 */
         section {
             position: relative;
-            width: 100vw;
-            height: 100vh;
+            width: 100vw; height: 100vh;
             overflow: hidden;
-            padding: 100px 60px 60px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.02);
-            background-color: #0a0a0a;
+            display: flex; align-items: center; justify-content: center;
+            background-color: var(--bg-color);
         }
 
         .container {
-            width: 100%;
-            max-width: 1200px;
-            height: 100%;
-            display: flex;
-            flex-direction: column;
-            justify-content: space-between;
-            z-index: 2;
+            width: 100%; max-width: 1300px; height: 82vh;
+            padding: 0 40px; display: flex; flex-direction: column;
+            justify-content: space-between; position: relative; z-index: 5;
         }
 
-        /* 恢复原版流线型页眉 */
+        /* 全屏章节宽幅分隔线 */
+        .chapter-divider {
+            position: relative; width: 100vw; height: 100vh; background: #000;
+            display: flex; align-items: center; justify-content: center;
+        }
+        .divider-line {
+            position: absolute; width: 100%; height: 1px;
+            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
+            box-shadow: 0 0 15px var(--neon-blue);
+        }
+        .divider-text {
+            font-family: var(--font-title); font-size: 5vw; font-weight: 800;
+            text-transform: uppercase; letter-spacing: 0.2em; color: #111; z-index: 2;
+            animation: pulseGlow 3s infinite ease-in-out;
+        }
+
+        @keyframes pulseGlow {
+            0%, 100% { color: #111; text-shadow: none; }
+            50% { color: #fff; text-shadow: 0 0 30px rgba(0,240,255,0.4); }
+        }
+
+        /* 统一标准头部排版 */
         .page-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
-            border-bottom: 1px solid #1a1a1a;
-            padding-bottom: 15px;
+            display: flex; justify-content: space-between; align-items: flex-end;
+            border-bottom: 1px solid var(--border-color); padding-bottom: 15px;
         }
-        .page-title { font-size: 18px; font-weight: 300; color: #888; letter-spacing: 0.2em; text-transform: uppercase; }
-        .page-num { font-size: 13px; color: #333; font-family: monospace; }
+        .page-title { font-family: var(--font-title); font-size: 14px; font-weight: 700; color: #fff; letter-spacing: 0.15em; text-transform: uppercase;}
+        .page-num { font-size: 11px; color: #333; font-family: var(--font-body); }
 
-        /* 标准左右双栏重现 */
+        /* 标准两栏布局 */
         .content-grid {
-            display: flex;
-            gap: 60px;
-            align-items: center;
-            flex: 1;
-            padding: 40px 0;
-            overflow: hidden;
+            display: flex; gap: 80px; align-items: center; flex: 1; padding: 40px 0; overflow: hidden;
         }
-        .text-side { flex: 1; max-width: 450px; }
+        .text-side { flex: 1; max-width: 440px; }
         .image-side { 
-            flex: 1.2; 
-            height: 100%; 
-            display: flex; 
-            justify-content: center; 
-            align-items: center; 
-            background: #111;
-            border: 1px solid #1c1c1c;
-            position: relative;
-            overflow: hidden;
-            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+            flex: 1.4; height: 100%; display: flex; justify-content: center; align-items: center; 
+            background: #09090d; border: 1px solid var(--border-color); position: relative; overflow: hidden;
         }
-        .image-side img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
+        .image-side img, .image-side video { width: 100%; height: 100%; object-fit: cover; transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); }
 
-        /* 恢复你原本的排版字重与高级留白 */
-        h1 { font-size: 48px; font-weight: 200; letter-spacing: 0.1em; line-height: 1.2; margin-bottom: 30px; }
-        h2 { font-size: 28px; font-weight: 400; margin-bottom: 25px; color: #fff; letter-spacing: 0.05em; }
-        p { font-size: 13px; line-height: 1.8; color: #888; margin-bottom: 20px; text-align: justify; }
+        /* 文字样式设定 */
+        h1 { font-family: var(--font-title); font-size: 56px; font-weight: 800; line-height: 1.1; letter-spacing: -0.01em; }
+        h1.chrome-text { background: var(--chrome-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5)); }
+        h2 { font-family: var(--font-title); font-weight: 700; font-size: 26px; line-height: 1.3; margin-bottom: 20px; letter-spacing: 0.02em; }
+        p.desc { font-family: var(--font-body); font-size: 13px; line-height: 1.8; color: #8a8a93; text-align: justify; margin-bottom: 25px; font-weight: 300; }
         
-        .tag-container { display: flex; gap: 8px; margin-top: 30px; flex-wrap: wrap; }
-        .tag { font-size: 10px; padding: 5px 12px; background: #111; border: 1px solid #222; color: #555; border-radius: 2px; }
+        /* 标签 */
+        .tag-container { display: flex; gap: 8px; flex-wrap: wrap; margin-bottom: 20px; }
+        .tag { font-family: var(--font-body); font-size: 10px; color: #555; border: 1px solid var(--border-color); padding: 4px 10px; background: var(--acid-gray); }
 
-        /* 第五页：39帧分镜矩阵改良版网格 —— 确保所有图片都能挤进去并完美显示出来 */
-        .matrix-grid {
-            display: grid;
-            grid-template-columns: repeat(5, 1fr);
-            gap: 12px;
-            flex: 1;
-            padding: 20px 0;
-            width: 100%;
-            max-height: 70vh;
-            overflow-y: auto;
+        /* ==========================================================================
+           【四、具体页面特色交互组件样式】
+           ========================================================================== */
+        /* 1. Y2K缓慢流动液态金属球背景（第一页封面） */
+        .canvas-bg { position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1; background: radial-gradient(circle at 50% 50%, #12131a 0%, #050507 80%); }
+        .liquid-orb {
+            position: absolute; top: 25%; right: 10%; width: 500px; height: 500px;
+            background: linear-gradient(45deg, #181b28, #3b0066, #005577);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            filter: blur(40px); opacity: 0.4;
+            animation: liquidFlow 12s infinite alternate ease-in-out;
         }
-        .matrix-cell {
-            background: #111;
-            border: 1px solid #1c1c1c;
-            aspect-ratio: 3 / 2;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 11px;
-            color: #333;
-            transition: all 0.3s ease;
-            position: relative;
-            overflow: hidden;
+        @keyframes liquidFlow {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg) scale(1); }
+            50% { border-radius: 50% 50% 30% 70% / 50% 60% 40% 60%; transform: rotate(90deg) scale(1.1); }
+            100% { border-radius: 60% 40% 60% 40% / 40% 50% 50% 60%; transform: rotate(180deg) scale(0.9); }
         }
-        .matrix-cell img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
-        .matrix-cell:hover { border-color: #fff; transform: scale(1.02); z-index: 10; }
-        .matrix-cell:hover img { opacity: 1; }
 
-        /* 恢复第一页：液态金属/数字艺术感背景模板 */
-        .liquid-bg {
-            position: absolute;
-            top: 0; left: 0; width: 100%; height: 100%;
-            background: radial-gradient(circle at 70% 30%, #161a22 0%, #0a0a0a 70%);
-            z-index: 1;
-            opacity: 0.6;
+        /* 2. 漂浮不对称卡片（Chapter 1 Page 2） */
+        .floating-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; width: 100%; height: 100%; padding: 20px; }
+        .float-card {
+            background: #0d0d13; border: 1px solid var(--border-color); overflow: hidden; position: relative;
+            cursor: pointer; transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.4s;
         }
+        .float-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
+        .float-card:hover { transform: translateY(-8px) scale(1.02); border-color: var(--neon-blue); }
+        .float-card:hover img { opacity: 1; }
+        .prompt-tip {
+            position: absolute; bottom: 0; left: 0; right: 0; padding: 15px;
+            background: linear-gradient(transparent, #000); opacity: 0; transition: 0.3s;
+            font-size: 11px; font-family: var(--font-body); color: var(--neon-blue);
+        }
+        .float-card:hover .prompt-tip { opacity: 1; }
+
+        /* 3. 折叠工作流面板 */
+        .workflow-trigger {
+            display: inline-flex; align-items: center; gap: 8px; font-size: 11px; text-transform: uppercase;
+            color: #fff; cursor: pointer; border-bottom: 1px dashed #444; padding-bottom: 2px; transition: 0.3s;
+        }
+        .workflow-trigger:hover { color: var(--neon-blue); border-color: var(--neon-blue); }
+        .workflow-panel {
+            max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            background: rgba(255,255,255,0.01); border-left: 2px solid #222; margin-top: 15px;
+        }
+        .workflow-panel p { padding: 15px; font-size: 11px; color: #666; font-family: var(--font-body); line-height: 1.6; }
+
+        /* 4. 等宽双列垂直分割流动光效（Chapter 1 Page 3） */
+        .split-grid { display: flex; width: 100%; height: 100%; position: relative; gap: 40px; }
+        .split-col { flex: 1; display: flex; flex-direction: column; justify-content: space-between; padding: 20px 0; }
+        .v-line {
+            width: 1px; height: 100%; background: rgba(255,255,255,0.05); position: relative;
+        }
+        .v-line::after {
+            content: ''; position: absolute; top: 0; left: -1px; width: 3px; height: 60px;
+            background: linear-gradient(to bottom, var(--neon-blue), transparent);
+            animation: flowLight 4s infinite linear;
+        }
+        @keyframes flowLight { 0% { top: -60px; } 100% { top: 100%; } }
+
+        /* 5. 沉浸式大图背景与文本悬浮（Chapter 3） */
+        .immersive-bg { position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1; }
+        .immersive-bg img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.4); }
+        .glass-panel {
+            background: rgba(5, 5, 7, 0.75); backdrop-filter: blur(15px);
+            border: 1px solid rgba(255,255,255,0.05); padding: 40px; max-width: 500px;
+            box-shadow: 0 30px 60px rgba(0,0,0,0.8);
+        }
+
+        /* 6. 玻璃全息反光滤镜（Chapter 3 Page 4） */
+        .glass-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; width:100%; height:100%; padding:40px 0; }
+        .glass-item {
+            background: #09090d; border: 1px solid var(--border-color); position: relative; overflow: hidden; cursor: pointer;
+        }
+        .glass-item img { width:100%; height:100%; object-fit: cover; transition: filter 0.5s, transform 0.5s; }
+        .glass-item:hover img {
+            transform: scale(1.03);
+            filter: contrast(1.1) brightness(1.1) saturate(1.2);
+        }
+        /* CSS模拟全息微弱反光层 */
+        .glass-item::before {
+            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(0,240,255,0.1), rgba(189,0,255,0.1), transparent);
+            transform: skewX(-25deg); transition: 0.75s; z-index: 2; pointer-events: none;
+        }
+        .glass-item:hover::before { left: 150%; }
+
+        /* ==========================================================================
+           【五、EPILOGUE - 摄影瀑布流长滚动容器】
+           ========================================================================== */
+        .epilogue-scroll-container {
+            width: 100vw; min-height: 100vh; background: #030305; padding: 120px 40px 60px 40px;
+            display: flex; flex-direction: column; align-items: center;
+        }
+        .masonry-grid {
+            column-count: 3; column-gap: 20px; width: 100%; max-width: 1200px; margin-top: 50px;
+        }
+        .masonry-item {
+            break-inside: avoid; margin-bottom: 20px; background: #09090d;
+            border: 1px solid var(--border-color); overflow: hidden; cursor: pointer; transition: 0.4s;
+        }
+        .masonry-item img { width: 100%; height: auto; display: block; opacity: 0.8; transition: 0.4s; }
+        .masonry-item:hover { border-color: #fff; }
+        .masonry-item:hover img { opacity: 1; transform: scale(1.01); }
+
+        /* 纯黑网页脚部 */
+        footer {
+            width: 100%; max-width: 1200px; border-top: 1px solid #111; margin-top: 100px;
+            padding: 40px 0 20px 0; display: flex; justify-content: space-between; align-items: center;
+            font-family: var(--font-body); font-size: 11px; color: #444;
+        }
+        footer .links a { color: #444; text-decoration: none; margin-left: 20px; transition: 0.3s; }
+        footer .links a:hover { color: #fff; }
+
+        /* ==========================================================================
+           【六、大图黑场放大 Lightbox 弹窗组件】
+           ========================================================================== */
+        .lightbox {
+            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(0,0,0,0.95);
+            z-index: 1000; display: flex; align-items: center; justify-content: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.4s ease;
+        }
+        .lightbox.active { opacity: 1; pointer-events: auto; }
+        .lightbox img, .lightbox video { max-width: 90%; max-height: 85%; object-fit: contain; box-shadow: 0 0 50px rgba(0,0,0,0.8); }
+        .lightbox-caption { position: absolute; bottom: 40px; color: #888; font-size: 12px; font-family: var(--font-body); letter-spacing: 0.1em; }
+
+        /* 占位信息提示 */
+        .placeholder-text { font-family: var(--font-title); font-size: 11px; color: #333; letter-spacing: 0.1em; text-transform: uppercase; }
     </style>
 </head>
 <body>
 
     <nav>
-        <div class="logo">PORTFOLIO.</div>
+        <div class="logo">PORTFOLIO.LAB</div>
         <div class="menu">
-            <a href="#page1">Cover</a>
-            <a href="#page2">Index</a>
-            <a href="#page3">AI Storyboard</a>
-            <a href="#page6">Other Works</a>
+            <a href="#ch1" class="nav-link active">Ch 1</a>
+            <a href="#ch2" class="nav-link">Ch 2</a>
+            <a href="#ch3" class="nav-link">Ch 3</a>
+            <a href="#epilogue" class="nav-link">Epilogue</a>
         </div>
     </nav>
 
-    <section id="page1">
-        <div class="liquid-bg"></div>
+    <div class="dot-nav">
+        <div class="dot-item active" onclick="scrollToSec('ch1')"><span class="dot-label">Chapter 1</span></div>
+        <div class="dot-item" onclick="scrollToSec('ch2')"><span class="dot-label">Chapter 2</span></div>
+        <div class="dot-item" onclick="scrollToSec('ch3')"><span class="dot-label">Chapter 3</span></div>
+        <div class="dot-item" onclick="scrollToSec('epilogue')"><span class="dot-label">Epilogue</span></div>
+    </div>
+
+
+    <section id="ch1">
+        <div class="canvas-bg"><div class="liquid-orb"></div></div>
         <div class="container">
-            <div class="page-header" style="border: none;">
-                <div></div>
-                <div class="page-num">01 / 06</div>
+            <div class="page-header" style="border:none;"><div class="page-title"></div><div class="page-num">01 / 06</div></div>
+            <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
+                <h1 class="chrome-text">AI 创意与叙事</h1>
+                <p style="font-family:var(--font-title); font-size:16px; font-weight:300; color:#555; letter-spacing:0.3em; margin-top:15px; text-transform:uppercase;">分镜 · 生成 · 跨界概念</p>
             </div>
-            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
-                <p style="text-transform: uppercase; letter-spacing: 0.5em; color: #444; margin-bottom: 10px;">Personal Art Portfolio</p>
-                <h1>VISUAL EXPLORATION<br><span style="color: #444;">& DIGITAL MEDIA EXPERIMENT</span></h1>
-                <div class="tag-container">
-                    <span class="tag">CONCEPT ART</span>
-                    <span class="tag">AI INTERACTIVE</span>
-                    <span class="tag">NEW MEDIA</span>
-                </div>
+            <div style="display:flex; justify-content:space-between; font-size:10px; color:#333; letter-spacing:0.1em;">
+                <span>STORYBOARD / GENERATION / CONCEPT</span>
+                <span>CHAPTER 1 / 3</span>
             </div>
         </div>
     </section>
 
-    <section id="page2">
+    <section id="ch1-p2">
         <div class="container">
             <div class="page-header">
-                <div class="page-title">INDEX / 作品目录</div>
+                <div class="page-title">AI漫剧分镜：叙事工作流</div>
                 <div class="page-num">02 / 06</div>
             </div>
-            <div class="content-grid" style="align-items: flex-start; padding-top: 60px;">
-                <div class="text-side" style="max-width: 600px;">
-                    <h2 style="font-size: 20px; margin-bottom: 40px; color: #444;">CONTENTS</h2>
-                    <div style="display: flex; flex-direction: column; gap: 25px;">
-                        <p style="font-size: 14px; color: #aaa; border-bottom: 1px solid #1c1c1c; padding-bottom: 10px; display: flex; justify-content: space-between;">
-                            <span>01. AI分镜叙事项目 / AI DIGITAL STORYBOARD</span>
-                            <span style="color: #444;">PAGE 03 - 05</span>
-                        </p>
-                        <p style="font-size: 14px; color: #aaa; border-bottom: 1px solid #1c1c1c; padding-bottom: 10px; display: flex; justify-content: space-between;">
-                            <span>02. 综合艺术与新媒体交互 / OTHER WORKS</span>
-                            <span style="color: #444;">PAGE 06</span>
-                        </p>
+            <div class="content-grid">
+                <div class="text-side">
+                    <h2>从文本到动态视觉的AI实验</h2>
+                    <p class="desc">探讨离散图像之间的叙事连贯性。基于 Midjourney 与 DALL·E 3 进行底层世界观跑图，并通过高拟真控制链锁定角色一致性，重构暗黑实验风格下的视觉脚本。</p>
+                    <div class="tag-container">
+                        <span class="tag">#分镜</span>
+                        <span class="tag">#提示词工程</span>
+                        <span class="tag">#图生视频</span>
+                    </div>
+                    <div class="workflow-trigger" onclick="toggleWorkflow()">+ VIEW AI WORKFLOW PROMPTS</div>
+                    <div class="workflow-panel" id="wfPanel">
+                        <p>Prompt Matrix: /imagine prompt: cinematic shot, liquid metallic texture, dark gallery ambient, neon blue illumination, grainy texture, 8k, aspect ratio 16:9 --v 6.0</p>
+                    </div>
+                </div>
+                <div class="image-side" style="background:none; border:none;">
+                    <div class="floating-grid">
+                        <div class="float-card" onclick="openLightbox(this)"><img src="1.jpg"><div class="prompt-tip">View Frame 01</div></div>
+                        <div class="float-card" onclick="openLightbox(this)"><img src="2.jpg"><div class="prompt-tip">View Frame 02</div></div>
+                        <div class="float-card" onclick="openLightbox(this)"><img src="3.jpg"><div class="prompt-tip">View Frame 03</div></div>
+                        <div class="float-card" onclick="openLightbox(this)"><img src="4.jpg"><div class="prompt-tip">View Frame 04</div></div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="page3">
+    <section id="ch1-p3">
         <div class="container">
             <div class="page-header">
-                <div class="page-title">PROJECT 01: AI DIGITAL COMIC (PART I)</div>
+                <div class="page-title">概念延展项目</div>
                 <div class="page-num">03 / 06</div>
             </div>
             <div class="content-grid">
-                <div class="text-side">
-                    <h2>叙事序幕 / THE AWAKENING</h2>
-                    <p>在这里替换你本部分的真实项目阐述。当前页面集中展示前期故事线中主角与环境、角色的初次状态呈现。</p>
-                    <div class="tag-container">
-                        <span class="tag"># AI Generation</span>
-                        <span class="tag"># Narrative Art</span>
+                <div class="split-grid">
+                    <div class="split-col">
+                        <div>
+                            <h2 style="font-size:18px; margin-bottom:10px;">书店打卡空间装置</h2>
+                            <p class="desc" style="font-size:12px;">由AI生成空间方案，进而落地线下实体装置的转化实验。打通数字概念与触觉空间的转换路径。</p>
+                        </div>
+                        <div style="height:65%; background:#09090d; border:1px solid var(--border-color); cursor:pointer;" onclick="openLightbox(this)">
+                            <img src="5.jpg" style="width:100%; height:100%; object-fit:cover;">
+                        </div>
                     </div>
-                </div>
-                <div class="image-side">
-                    <img src="1.jpg" alt="分镜画面展示">
+                    <div class="v-line"></div>
+                    <div class="split-col">
+                        <div>
+                            <h2 style="font-size:18px; margin-bottom:10px;">中草药资产 3D 生成</h2>
+                            <p class="desc" style="font-size:12px; margin-bottom:5px;">利用 Meshy / TripoSR 生成植物与草药的底层网格(Mesh)，并通过 Blender 雕刻拓扑进行材质精细化渲染。</p>
+                            <span class="tag" style="font-size:8px;">AI MESH RENDER</span>
+                        </div>
+                        <div style="height:65%; display:grid; grid-template-columns:repeat(2,1fr); gap:10px;">
+                            <div style="border:1px solid var(--border-color); cursor:pointer;" onclick="openLightbox(this)"><img src="6.jpg" style="width:100%; height:100%; object-fit:cover;"></div>
+                            <div style="border:1px solid var(--border-color); cursor:pointer;" onclick="openLightbox(this)"><img src="7.jpg" style="width:100%; height:100%; object-fit:cover;"></div>
+                        </div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="page4">
+    <section id="ch1-p4">
         <div class="container">
-            <div class="page-header">
-                <div class="page-title">PROJECT 01: AI DIGITAL COMIC (PART II)</div>
-                <div class="page-num">04 / 06</div>
-            </div>
+            <div class="page-header"><div class="page-title">AI 工作流生成图谱与小样</div><div class="page-num">04-06 / 06</div></div>
             <div class="content-grid">
                 <div class="text-side">
-                    <h2>视角转换与探寻 / ENVIRONMENT & TRANSITION</h2>
-                    <p>在这里替换你本部分的真实项目阐述。当前页面集中展示窗外意象的流变，以及故事视角的进一步向外推移。</p>
-                    <div class="tag-container">
-                        <span class="tag"># Composition</span>
-                        <span class="tag"># Visual Flow</span>
+                    <h2>概念整合与管线迭代</h2>
+                    <p class="desc">此模块集中收纳全流程中的阶段性测试与GIF/MP4视频微动效。通过模块化的漂浮矩阵，将散落的高质量测试资产整合为叙事系统的有机支撑体。</p>
+                </div>
+                <div class="image-side" style="background:none; border:none;">
+                    <div class="floating-grid" style="grid-template-columns: repeat(3, 1fr);">
+                        <div class="float-card" onclick="openLightbox(this)"><img src="8.jpg"></div>
+                        <div class="float-card" onclick="openLightbox(this)"><img src="9.jpg"></div>
+                        <div class="float-card" onclick="openLightbox(this)"><img src="35.jpg"></div>
                     </div>
                 </div>
-                <div class="image-side">
-                    <img src="4.jpg" alt="分镜画面展示">
-                </div>
             </div>
         </div>
     </section>
 
-    <section id="page5">
-        <div class="container">
-            <div class="page-header">
-                <div class="page-title">PROJECT 01: FULL STORYBOARD MATRIX</div>
-                <div class="page-num">05 / 06</div>
-            </div>
-            <div class="matrix-grid">
-                <div class="matrix-cell"><img src="1.jpg"></div>
-                <div class="matrix-cell"><img src="2.jpg"></div>
-                <div class="matrix-cell"><img src="3.jpg"></div>
-                <div class="matrix-cell"><img src="4.jpg"></div>
-                <div class="matrix-cell"><img src="5.jpg"></div>
-                <div class="matrix-cell"><img src="6.jpg"></div>
-                <div class="matrix-cell"><img src="7.jpg"></div>
-                <div class="matrix-cell"><img src="8.jpg"></div>
-                <div class="matrix-cell"><img src="9.jpg"></div>
-                <div class="matrix-cell"><img src="35.jpg"></div>
-            </div>
-        </div>
-    </section>
 
-    <section id="page6">
+    <div class="chapter-divider" id="ch2">
+        <div class="divider-line"></div>
+        <div class="divider-text">Chapter Two</div>
+    </div>
+
+    <section id="ch2-p2">
         <div class="container">
-            <div class="page-header">
-                <div class="page-title">PROJECT 02: OTHER MIXED MEDIA WORKS</div>
-                <div class="page-num">06 / 06</div>
-            </div>
+            <div class="page-header"><div class="page-title">动态与交互媒体</div><div class="page-num">02 / 06</div></div>
             <div class="content-grid">
                 <div class="text-side">
-                    <h2>综合媒介与交互实验 / MULTI-DISCIPLINARY EXPERIMENTS</h2>
-                    <p>在这里替换你其余作品（如玻璃设计、综合材料、动态微距、生成图形等）的统筹概述。这一章节用于向面试官证明你在跨界视觉、新媒体技术和多维材料上的综合把控力。</p>
+                    <h2>图形生成与 TouchDesigner 粒子流</h2>
+                    <p class="desc">利用数流逻辑触发实时渲染粒子系统。基于无序螺旋结构仿真物理流体，模拟算法世界的动态生命特征。</p>
                     <div class="tag-container">
-                        <span class="tag"># Interaction</span>
-                        <span class="tag"># Generative Art</span>
-                        <span class="tag"># Fine Art</span>
+                        <span class="tag">TouchDesigner</span><span class="tag">p5.js</span><span class="tag">实时生成</span>
                     </div>
+                    <span class="placeholder-text">[ 鼠标悬停右侧唤醒流体映射 ]</span>
                 </div>
-                <div class="image-side">
-                    <img src="image_43f020.jpg" alt="综合作品集拼贴">
+                <div class="image-side" style="cursor:crosshair;">
+                    <img src="image_43f020.jpg" alt="TD RENDER">
                 </div>
             </div>
         </div>
     </section>
 
+    <section id="ch2-p3">
+        <div class="container">
+            <div class="page-header"><div class="page-title">剪辑能力与动态视觉</div><div class="page-num">03 / 06</div></div>
+            <div class="content-grid" style="flex-direction: column; align-items: flex-start; justify-content: center;">
+                <div style="display: flex; gap:20px; width:100%; height:70%; margin-top:20px;">
+                    <div style="flex:1; border:1px solid var(--border-color); position:relative; cursor:pointer;" onclick="openLightbox(this)">
+                        <img src="1.jpg" style="width:100%; height:100%; object-fit:cover; filter:grayscale(0.5);">
+                        <div style="position:absolute; top:30px; left:30px; font-family:var(--font-title); font-size:12px;">[ 01 MG动画剪辑 ]</div>
+                    </div>
+                    <div style="flex:1; border:1px solid var(--border-color); position:relative; cursor:pointer;" onclick="openLightbox(this)">
+                        <img src="2.jpg" style="width:100%; height:100%; object-fit:cover; filter:grayscale(0.5);">
+                        <div style="position:absolute; top:30px; left:30px; font-family:var(--font-title); font-size:12px;">[ 02 斯拜科展厅实拍视频 ]</div>
+                    </div>
+                </div>
+                <p class="desc" style="margin-top:20px; font-size:11px;">动态节奏与后期视听语言剪辑控制证明。点击缩略图调用高级黑场画廊模块。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ch2-p4">
+        <div class="container">
+            <div class="page-header"><div class="page-title">动态工具集成</div><div class="page-num">04-06 / 06</div></div>
+            <div class="content-grid">
+                <div class="text-side">
+                    <h2>跨媒介控制链路</h2>
+                    <p class="desc">综合归档包含交互投影装置的现场抓拍图像与信号链路解析图表。整合底层工具链路，搭建数字媒介的创作闭环。</p>
+                    <div class="tag-container">
+                        <span class="tag">After Effects</span><span class="tag">DaVinci Resolve</span>
+                    </div>
+                </div>
+                <div class="image-side">
+                    <img src="image_43f020.jpg" style="filter: hue-rotate(90deg) brightness(0.6);">
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <div class="chapter-divider" id="ch3">
+        <div class="divider-line"></div>
+        <div class="divider-text">Chapter Three</div>
+    </div>
+
+    <section id="ch3-p2">
+        <div class="immersive-bg"><img src="35.jpg"></div>
+        <div class="container" style="justify-content: center; align-items: flex-start;">
+            <div class="glass-panel">
+                <div style="font-size:10px; color:var(--neon-purple); font-family:var(--font-body); margin-bottom:10px; letter-spacing:0.2em;">MATERIAL LAB</div>
+                <h2>玻璃交互投影与综合材料装置</h2>
+                <p class="desc" style="margin-bottom:0;">将实体媒介、晶体透光结构与数字投影技术结合，光线穿透材质打破既定维度。探讨物质实相与数字化虚拟显影之间的模糊界限。</p>
+            </div>
+        </div>
+    </section>
+
+    <section id="ch3-p4">
+        <div class="container">
+            <div class="page-header"><div class="page-title">玻璃工艺设计与物料物理形变</div><div class="page-num">04-05 / 06</div></div>
+            <div class="glass-grid">
+                <div class="glass-item" onclick="openLightbox(this)"><img src="3.jpg"></div>
+                <div class="glass-item" onclick="openLightbox(this)"><img src="4.jpg"></div>
+                <div class="glass-item" onclick="openLightbox(this)"><img src="6.jpg"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ch3-p6">
+        <div class="container" style="justify-content:center; align-items:center;">
+            <p style="font-family:var(--font-title); font-size:24px; font-weight:300; letter-spacing:0.15em; color:#666; font-style:italic; text-align:center;">
+                “ 用镜头捕捉现实的诗意 ”
+            </p>
+            <a href="#epilogue" style="margin-top:40px; font-size:11px; color:var(--neon-blue); text-decoration:none; letter-spacing:0.3em; border:1px solid #222; padding:12px 30px; background:var(--acid-gray);">
+                ENTER EPILOGUE
+            </a>
+        </div>
+    </section>
+
+
+    <div class="epilogue-scroll-container" id="epilogue">
+        <div style="text-align: center;">
+            <p style="font-size:10px; color:#444; letter-spacing:0.4em; text-transform:uppercase;">Epilogue</p>
+            <h1 style="font-size:32px; font-weight:400; margin-top:10px; letter-spacing:0.1em;">PHOTOGRAPHY</h1>
+        </div>
+
+        <div class="masonry-grid">
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="1.jpg"></div>
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="3.jpg"></div>
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="5.jpg"></div>
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="2.jpg"></div>
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="4.jpg"></div>
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="6.jpg"></div>
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="7.jpg"></div>
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="8.jpg"></div>
+            <div class="masonry-item" onclick="openLightbox(this)"><img src="9.jpg"></div>
+        </div>
+
+        <footer>
+            <div>© 2026 PORTFOLIO. ALL RIGHTS RESERVED.</div>
+            <div class="links">
+                <a href="mailto:your@email.com">EMAIL</a>
+                <a href="#">INSTAGRAM</a>
+                <a href="#">LINKEDIN</a>
+            </div>
+        </footer>
+    </div>
+
+
+    <div class="lightbox" id="globalLightbox" onclick="closeLightbox()">
+        <img id="lightboxImg" src="">
+        <div class="lightbox-caption" id="lightboxCaption"></div>
+    </div>
+
+
+    <script>
+        // 1. 折叠面板逻辑
+        function toggleWorkflow() {
+            var panel = document.getElementById("wfPanel");
+            if (panel.style.maxHeight && panel.style.maxHeight !== "0px") {
+                panel.style.maxHeight = "0px";
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        }
+
+        // 2. 独立全屏点击导航锚点平滑滑动
+        function scrollToSec(id) {
+            document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
+        }
+
+        // 3. 全局高级黑场放大 Lightbox 逻辑
+        function openLightbox(element) {
+            var targetImgSrc = element.querySelector('img').src;
+            var lightbox = document.getElementById('globalLightbox');
+            var lightboxImg = document.getElementById('lightboxImg');
+            var caption = document.getElementById('lightboxCaption');
+            
+            lightboxImg.src = targetImgSrc;
+            caption.innerText = "VIEWING ASSET — " + targetImgSrc.split('/').pop();
+            lightbox.classList.add('active');
+        }
+
+        function closeLightbox() {
+            document.getElementById('globalLightbox').classList.remove('active');
+        }
+
+        // 4. 视口滚动监听：动态高亮导航点及文字
+        const sections = document.querySelectorAll('section, .chapter-divider, .epilogue-scroll-container');
+        const navDots = document.querySelectorAll('.dot-item');
+        const navLinks = document.querySelectorAll('.nav-link');
+
+        window.addEventListener('scroll', () => {
+            let current = '';
+            sections.forEach(section => {
+                const sectionTop = section.offsetTop;
+                if (pageYOffset >= sectionTop - 300) {
+                    current = section.getAttribute('id');
+                }
+            });
+
+            // 联动重设高亮状态
+            if(current) {
+                let baseCh = current.split('-')[0]; // 处理 ch1-p2 这种子级页面
+                
+                // 点状导航激活
+                navDots.forEach(dot => {
+                    dot.classList.remove('active');
+                    if(dot.getAttribute('onclick').includes(baseCh)) {
+                        dot.classList.add('active');
+                    }
+                });
+
+                // 菜单栏高亮激活
+                navLinks.forEach(link => {
+                    link.classList.remove('active');
+                    if(link.getAttribute('href').includes(baseCh)) {
+                        link.classList.add('active');
+                    }
+                });
+            }
+        });
+    </script>
 </body>
 </html>
