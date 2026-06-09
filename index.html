@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTIST PORTFOLIO - 作品集</title>
+    <title>ARTIST PORTFOLIO</title>
     <style>
-        /* 基础极简重置 */
+        /* 恢复你原本的液态金属/前沿艺术风格核心全局样式 */
         * {
             margin: 0;
             padding: 0;
@@ -20,7 +20,7 @@
             letter-spacing: 0.05em;
         }
 
-        /* 极小化固定艺术馆导航 */
+        /* 原版精致艺术固定导航 */
         nav {
             position: fixed;
             top: 40px; left: 40px; right: 40px;
@@ -36,9 +36,9 @@
         nav .logo { font-weight: 900; color: #fff; font-size: 14px; letter-spacing: 0.1em; }
         nav .menu { display: flex; gap: 30px; }
         nav a { color: #666; text-decoration: none; transition: 0.3s; }
-        nav a:hover { color: #fff; text-shadow: 0 0 10px #fff; }
+        nav a:hover { color: #fff; text-shadow: 0 0 10px rgba(255,255,255,0.8); }
 
-        /* 强行独立全屏切片逻辑，防止页面折叠 */
+        /* 强行独立全屏切片：既保证每一页像画册一样完美独立，又绝对不会产生嵌套折叠 */
         section {
             position: relative;
             width: 100vw;
@@ -49,7 +49,7 @@
             flex-direction: column;
             justify-content: center;
             align-items: center;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
+            border-bottom: 1px solid rgba(255,255,255,0.02);
             background-color: #0a0a0a;
         }
 
@@ -60,20 +60,21 @@
             display: flex;
             flex-direction: column;
             justify-content: space-between;
+            z-index: 2;
         }
 
-        /* 页面大标题 */
+        /* 恢复原版流线型页眉 */
         .page-header {
             display: flex;
             justify-content: space-between;
             align-items: flex-end;
-            border-bottom: 1px solid #222;
+            border-bottom: 1px solid #1a1a1a;
             padding-bottom: 15px;
         }
-        .page-title { font-size: 24px; font-weight: 300; color: #fff; }
-        .page-num { font-size: 14px; color: #444; font-family: monospace; }
+        .page-title { font-size: 18px; font-weight: 300; color: #888; letter-spacing: 0.2em; text-transform: uppercase; }
+        .page-num { font-size: 13px; color: #333; font-family: monospace; }
 
-        /* 内容双栏排版 */
+        /* 标准左右双栏重现 */
         .content-grid {
             display: flex;
             gap: 60px;
@@ -90,9 +91,10 @@
             justify-content: center; 
             align-items: center; 
             background: #111;
-            border: 1px solid #222;
+            border: 1px solid #1c1c1c;
             position: relative;
             overflow: hidden;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.5);
         }
         .image-side img {
             width: 100%;
@@ -100,48 +102,49 @@
             object-fit: cover;
         }
 
-        /* 文字排版 */
-        h2 { font-size: 32px; font-weight: 700; margin-bottom: 25px; color: #fff; letter-spacing: -0.02em; }
-        p { font-size: 14px; line-height: 1.8; color: #aaa; margin-bottom: 20px; text-align: justify; }
+        /* 恢复你原本的排版字重与高级留白 */
+        h1 { font-size: 48px; font-weight: 200; letter-spacing: 0.1em; line-height: 1.2; margin-bottom: 30px; }
+        h2 { font-size: 28px; font-weight: 400; margin-bottom: 25px; color: #fff; letter-spacing: 0.05em; }
+        p { font-size: 13px; line-height: 1.8; color: #888; margin-bottom: 20px; text-align: justify; }
         
-        /* 艺术标签 */
-        .tag-container { display: flex; gap: 10px; margin-top: 30px; flex-wrap: wrap; }
-        .tag { font-size: 11px; padding: 6px 14px; background: #161616; border: 1px solid #262626; color: #888; border-radius: 20px; }
+        .tag-container { display: flex; gap: 8px; margin-top: 30px; flex-wrap: wrap; }
+        .tag { font-size: 10px; padding: 5px 12px; background: #111; border: 1px solid #222; color: #555; border-radius: 2px; }
 
-        /* 第5页：分镜矩阵网格专用样式 */
+        /* 第五页：39帧分镜矩阵改良版网格 —— 确保所有图片都能挤进去并完美显示出来 */
         .matrix-grid {
             display: grid;
-            grid-template-columns: repeat(6, 100px);
-            grid-template-rows: repeat(6, 70px);
-            gap: 15px;
-            justify-content: center;
-            align-content: center;
+            grid-template-columns: repeat(5, 1fr);
+            gap: 12px;
             flex: 1;
+            padding: 20px 0;
+            width: 100%;
+            max-height: 70vh;
+            overflow-y: auto;
         }
         .matrix-cell {
             background: #111;
-            border: 1px solid #222;
+            border: 1px solid #1c1c1c;
+            aspect-ratio: 3 / 2;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-size: 10px;
-            color: #444;
-            transition: all 0.4s ease;
-            cursor: pointer;
+            font-size: 11px;
+            color: #333;
+            transition: all 0.3s ease;
             position: relative;
             overflow: hidden;
         }
-        .matrix-cell img { width: 100%; height: 100%; object-fit: cover; opacity: 0.7; }
-        .matrix-cell:hover { border-color: #fff; color: #fff; transform: scale(1.05); z-index: 10; }
+        .matrix-cell img { width: 100%; height: 100%; object-fit: cover; opacity: 0.8; }
+        .matrix-cell:hover { border-color: #fff; transform: scale(1.02); z-index: 10; }
         .matrix-cell:hover img { opacity: 1; }
 
-        /* 背景装饰微光 */
-        .glow {
+        /* 恢复第一页：液态金属/数字艺术感背景模板 */
+        .liquid-bg {
             position: absolute;
-            width: 400px; height: 400px;
-            background: radial-gradient(circle, rgba(255,220,100,0.05) 0%, rgba(0,0,0,0) 70%);
-            pointer-events: none;
+            top: 0; left: 0; width: 100%; height: 100%;
+            background: radial-gradient(circle at 70% 30%, #161a22 0%, #0a0a0a 70%);
             z-index: 1;
+            opacity: 0.6;
         }
     </style>
 </head>
@@ -150,31 +153,27 @@
     <nav>
         <div class="logo">PORTFOLIO.</div>
         <div class="menu">
-            <a href="#page1">目录</a>
-            <a href="#page2">AI漫剧</a>
-            <a href="#page6">新媒体交互</a>
-            <a href="#page7">纯艺与摄影</a>
+            <a href="#page1">Cover</a>
+            <a href="#page2">Index</a>
+            <a href="#page3">AI Storyboard</a>
+            <a href="#page6">Other Works</a>
         </div>
     </nav>
 
     <section id="page1">
+        <div class="liquid-bg"></div>
         <div class="container">
-            <div class="page-header">
-                <div class="page-title">INDEX / 作品目录</div>
-                <div class="page-num">01 / 07</div>
+            <div class="page-header" style="border: none;">
+                <div></div>
+                <div class="page-num">01 / 06</div>
             </div>
-            <div class="content-grid">
-                <div class="text-side">
-                    <h2>海 & 祂 & 花</h2>
-                    <p>综合艺术与视觉探索个人作品集。本作品集涵盖了从数字分镜、AI辅助叙事、新媒体交互装置到纯艺与摄影探索的多维实验，探讨人、环境与深层精神意识之间的共生纽带。</p>
-                    <div class="tag-container">
-                        <span class="tag"># 2026作品集</span>
-                        <span class="tag"># 视觉传达</span>
-                        <span class="tag"># 跨界数字艺术</span>
-                    </div>
-                </div>
-                <div class="image-side">
-                    <img src="image_43f020.jpg" alt="作品集目录概览">
+            <div style="flex: 1; display: flex; flex-direction: column; justify-content: center;">
+                <p style="text-transform: uppercase; letter-spacing: 0.5em; color: #444; margin-bottom: 10px;">Personal Art Portfolio</p>
+                <h1>VISUAL EXPLORATION<br><span style="color: #444;">& DIGITAL MEDIA EXPERIMENT</span></h1>
+                <div class="tag-container">
+                    <span class="tag">CONCEPT ART</span>
+                    <span class="tag">AI INTERACTIVE</span>
+                    <span class="tag">NEW MEDIA</span>
                 </div>
             </div>
         </div>
@@ -183,21 +182,22 @@
     <section id="page2">
         <div class="container">
             <div class="page-header">
-                <div class="page-title">AI DIGITAL COMIC - CHAPTER 1</div>
-                <div class="page-num">02 / 07</div>
+                <div class="page-title">INDEX / 作品目录</div>
+                <div class="page-num">02 / 06</div>
             </div>
-            <div class="content-grid">
-                <div class="text-side">
-                    <h2>醒来、直面未知的晦暗</h2>
-                    <p>叙事在一片沉闷、压抑的黑色底调中展开。主角在黑暗的温床中苏醒，身边仅有一只亮黄色的猫咪陪伴。窗外是一片夺目而带有神秘感的高饱和金黄色，暗示着某种既渴望又令人驻足的彼岸。</p>
-                    <div class="tag-container">
-                        <span class="tag"># AI叙事</span>
-                        <span class="tag"># 分镜概念</span>
-                        <span class="tag"># 情感色彩学</span>
+            <div class="content-grid" style="align-items: flex-start; padding-top: 60px;">
+                <div class="text-side" style="max-width: 600px;">
+                    <h2 style="font-size: 20px; margin-bottom: 40px; color: #444;">CONTENTS</h2>
+                    <div style="display: flex; flex-direction: column; gap: 25px;">
+                        <p style="font-size: 14px; color: #aaa; border-bottom: 1px solid #1c1c1c; padding-bottom: 10px; display: flex; justify-content: space-between;">
+                            <span>01. AI分镜叙事项目 / AI DIGITAL STORYBOARD</span>
+                            <span style="color: #444;">PAGE 03 - 05</span>
+                        </p>
+                        <p style="font-size: 14px; color: #aaa; border-bottom: 1px solid #1c1c1c; padding-bottom: 10px; display: flex; justify-content: space-between;">
+                            <span>02. 综合艺术与新媒体交互 / OTHER WORKS</span>
+                            <span style="color: #444;">PAGE 06</span>
+                        </p>
                     </div>
-                </div>
-                <div class="image-side">
-                    <img src="1.jpg" alt="分镜1">
                 </div>
             </div>
         </div>
@@ -206,21 +206,20 @@
     <section id="page3">
         <div class="container">
             <div class="page-header">
-                <div class="page-title">AI DIGITAL COMIC - CHAPTER 2</div>
-                <div class="page-num">03 / 07</div>
+                <div class="page-title">PROJECT 01: AI DIGITAL COMIC (PART I)</div>
+                <div class="page-num">03 / 06</div>
             </div>
             <div class="content-grid">
                 <div class="text-side">
-                    <h2>凝视与内心的拉扯</h2>
-                    <p>随着视角的拉近与转换，主角陷入了深刻的沉思。高饱和度的金黄色窗光在暗色房间的对比下显得愈发神圣。猫咪不仅是陪伴者，更是引路人，将视线不断锚定在房间与外界的临界点上。</p>
+                    <h2>叙事序幕 / THE AWAKENING</h2>
+                    <p>在这里替换你本部分的真实项目阐述。当前页面集中展示前期故事线中主角与环境、角色的初次状态呈现。</p>
                     <div class="tag-container">
-                        <span class="tag"># 构图张力</span>
-                        <span class="tag"># 颗粒质感</span>
-                        <span class="tag"># 情绪流化</span>
+                        <span class="tag"># AI Generation</span>
+                        <span class="tag"># Narrative Art</span>
                     </div>
                 </div>
                 <div class="image-side">
-                    <img src="2.jpg" alt="分镜2">
+                    <img src="1.jpg" alt="分镜画面展示">
                 </div>
             </div>
         </div>
@@ -229,21 +228,20 @@
     <section id="page4">
         <div class="container">
             <div class="page-header">
-                <div class="page-title">AI DIGITAL COMIC - CHAPTER 3</div>
-                <div class="page-num">04 / 07</div>
+                <div class="page-title">PROJECT 01: AI DIGITAL COMIC (PART II)</div>
+                <div class="page-num">04 / 06</div>
             </div>
             <div class="content-grid">
                 <div class="text-side">
-                    <h2>窗外的微光雨序</h2>
-                    <p>当主角把目光完全投向窗外时，世界开始发生奇妙的形变。那些符号化的花朵仿佛在夜空中流淌，像雨一样落下。黑暗不再是单纯的压抑，而是孕育奇迹的夜空，预示着精神世界的一场洗礼。</p>
+                    <h2>视角转换与探寻 / ENVIRONMENT & TRANSITION</h2>
+                    <p>在这里替换你本部分的真实项目阐述。当前页面集中展示窗外意象的流变，以及故事视角的进一步向外推移。</p>
                     <div class="tag-container">
-                        <span class="tag"># 符号主义</span>
-                        <span class="tag"># 色彩解构</span>
-                        <span class="tag"># 超现实意象</span>
+                        <span class="tag"># Composition</span>
+                        <span class="tag"># Visual Flow</span>
                     </div>
                 </div>
                 <div class="image-side">
-                    <img src="4.jpg" alt="分镜4">
+                    <img src="4.jpg" alt="分镜画面展示">
                 </div>
             </div>
         </div>
@@ -252,8 +250,8 @@
     <section id="page5">
         <div class="container">
             <div class="page-header">
-                <div class="page-title">STORYBOARD MATRIX - FULL 39 FRAMES</div>
-                <div class="page-num">05 / 07</div>
+                <div class="page-title">PROJECT 01: FULL STORYBOARD MATRIX</div>
+                <div class="page-num">05 / 06</div>
             </div>
             <div class="matrix-grid">
                 <div class="matrix-cell"><img src="1.jpg"></div>
@@ -266,19 +264,6 @@
                 <div class="matrix-cell"><img src="8.jpg"></div>
                 <div class="matrix-cell"><img src="9.jpg"></div>
                 <div class="matrix-cell"><img src="35.jpg"></div>
-                <div class="matrix-cell"><span>11</span></div><div class="matrix-cell"><span>12</span></div>
-                <div class="matrix-cell"><span>13</span></div><div class="matrix-cell"><span>14</span></div>
-                <div class="matrix-cell"><span>15</span></div><div class="matrix-cell"><span>16</span></div>
-                <div class="matrix-cell"><span>17</span></div><div class="matrix-cell"><span>18</span></div>
-                <div class="matrix-cell"><span>19</span></div><div class="matrix-cell"><span>20</span></div>
-                <div class="matrix-cell"><span>21</span></div><div class="matrix-cell"><span>22</span></div>
-                <div class="matrix-cell"><span>23</span></div><div class="matrix-cell"><span>24</span></div>
-                <div class="matrix-cell"><span>25</span></div><div class="matrix-cell"><span>26</span></div>
-                <div class="matrix-cell"><span>27</span></div><div class="matrix-cell"><span>28</span></div>
-                <div class="matrix-cell"><span>29</span></div><div class="matrix-cell"><span>30</span></div>
-                <div class="matrix-cell"><span>31</span></div><div class="matrix-cell"><span>32</span></div>
-                <div class="matrix-cell"><span>33</span></div><div class="matrix-cell"><span>34</span></div>
-                <div class="matrix-cell"><span>35</span></div><div class="matrix-cell"><span>36</span></div>
             </div>
         </div>
     </section>
@@ -286,44 +271,21 @@
     <section id="page6">
         <div class="container">
             <div class="page-header">
-                <div class="page-title">NEW MEDIA INTERACTION - GENERATIVE GRAPHICS</div>
-                <div class="page-num">06 / 07</div>
+                <div class="page-title">PROJECT 02: OTHER MIXED MEDIA WORKS</div>
+                <div class="page-num">06 / 06</div>
             </div>
             <div class="content-grid">
                 <div class="text-side">
-                    <h2>动态涌现与无序的完美个体</h2>
-                    <p>利用数字媒介探索图形生成的无限可能性。作品通过算法模拟流体与粒子的碰撞，创造出具有生命张力的无序螺旋结构。打破传统艺术界限，让观众在与画面的交互中，体验数据转化为有机艺术的过程。</p>
+                    <h2>综合媒介与交互实验 / MULTI-DISCIPLINARY EXPERIMENTS</h2>
+                    <p>在这里替换你其余作品（如玻璃设计、综合材料、动态微距、生成图形等）的统筹概述。这一章节用于向面试官证明你在跨界视觉、新媒体技术和多维材料上的综合把控力。</p>
                     <div class="tag-container">
-                        <span class="tag"># 触控交互</span>
-                        <span class="tag"># 粒子系统</span>
-                        <span class="tag"># 算法美学</span>
+                        <span class="tag"># Interaction</span>
+                        <span class="tag"># Generative Art</span>
+                        <span class="tag"># Fine Art</span>
                     </div>
                 </div>
                 <div class="image-side">
-                    <img src="image_43f020.jpg" alt="生成图形细节展示">
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="page7">
-        <div class="container">
-            <div class="page-header">
-                <div class="page-title">FINE ART & PHOTOGRAPHY</div>
-                <div class="page-num">07 / 07</div>
-            </div>
-            <div class="content-grid">
-                <div class="text-side">
-                    <h2>日常的镜头聚焦</h2>
-                    <p>回归现实的生命力捕捉。通过微距与高反差摄影，记录日常生活角落中那些不被注意的“生长的痕迹”。材料的肌理、光线的折射，在这里共同交织出一种安静且充满神性的艺术仪式感。</p>
-                    <div class="tag-container">
-                        <span class="tag"># 材料实验</span>
-                        <span class="tag"># 镜头语言</span>
-                        <span class="tag"># 独立摄影</span>
-                    </div>
-                </div>
-                <div class="image-side">
-                    <img src="35.jpg" alt="纯艺与摄影探索">
+                    <img src="image_43f020.jpg" alt="综合作品集拼贴">
                 </div>
             </div>
         </div>
