@@ -2,32 +2,31 @@
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
-    <title>方案二 · 酸性无序·涂鸦流体</title>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Inter:opsz@14..32&display=swap" rel="stylesheet">
+    <title>方案三 · 非对称3D漂浮雕塑</title>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
         * { margin:0; padding:0; box-sizing:border-box; }
-        body { background:#03030f; font-family:'Space Grotesk',sans-serif; overflow-x:hidden; }
-        .scheme-2 { min-height:100vh; background:linear-gradient(145deg,#03030f 0%,#0a0515 100%); display:flex; align-items:center; justify-content:center; }
+        body { background:#000; font-family:'Space Grotesk',sans-serif; overflow-x:hidden; }
+        .scheme-3 { min-height:100vh; display:flex; align-items:center; justify-content:center; background:#000; position:relative; }
         .container { width:90%; max-width:1400px; margin:0 auto; }
-        .hero-layout { display:flex; flex-wrap:wrap; align-items:center; gap:3rem; }
-        .visual-area { flex:1; min-height:460px; position:relative; }
-        .info-area { flex:1; background:rgba(0,0,0,0.35); backdrop-filter:blur(12px); border-radius:32px; padding:2rem; transform:rotate(-1deg); border:1px dashed #ff44aa; }
-        .blob-3d { position:absolute; width:280px; height:280px; background:radial-gradient(circle at 30% 30%, rgba(255,130,200,0.7), rgba(0,255,255,0.3)); filter:blur(25px); border-radius:63% 37% 54% 46% / 38% 55% 45% 62%; animation:floatGlass 6s infinite alternate; top:20%; left:10%; }
-        .blob-3d-second { position:absolute; width:200px; height:200px; background:radial-gradient(circle,#ff44cc,#00ffff); filter:blur(35px); border-radius:42% 58% 70% 30% / 44% 52% 48% 56%; bottom:10%; right:15%; animation:wobble 8s infinite alternate; }
-        @keyframes floatGlass { 0%{transform:translate(0,0);} 100%{transform:translate(20px,-30px) rotate(8deg);} }
-        @keyframes wobble { 0%{border-radius:42% 58% 70% 30% / 44% 52% 48% 56%;} 100%{border-radius:60% 40% 30% 70% / 55% 35% 65% 45%;} }
-        .scribble { background:#ffd966; display:inline-block; padding:0.2rem 1rem; border-radius:60px; transform:rotate(-3deg); color:#000; }
-        .sticky-note { background:#fffacd; padding:0.5rem 1rem; width:fit-content; transform:rotate(2deg); border-radius:12px; margin-top:1rem; }
-        .neon-tag { display:inline-block; background:rgba(255,42,109,0.2); border-radius:40px; padding:0.3rem 1rem; color:#ffb3d1; border:1px solid #ff2a6d; }
-        .social-links { display:flex; gap:1.5rem; margin-top:2rem; }
+        .hero-layout { display:flex; flex-wrap:wrap; align-items:flex-start; justify-content:space-between; gap:2rem; }
+        .visual-area { flex:1.2; min-height:480px; position:relative; perspective:800px; }
+        .info-area { flex:0.9; background:rgba(10,10,20,0.5); backdrop-filter:blur(16px); border-radius:48px; padding:2rem; border:1px solid rgba(0,255,255,0.3); transform:translateY(30px); }
+        .metal-horn { width:100px; height:180px; background:linear-gradient(145deg, silver, #e0eaff, #8a94a5); clip-path:polygon(50% 0%, 0% 100%, 100% 100%); filter:drop-shadow(0 0 15px #ff66cc); transform:rotate(15deg) translateX(40px); animation:levitate 4s infinite alternate; position:absolute; top:20%; left:30%; }
+        .liquid-ring { width:260px; height:260px; border-radius:50%; background:conic-gradient(from 0deg, #ff66cc, #00ffff, #ffaa44, #ff66cc); filter:blur(18px); opacity:0.7; position:absolute; z-index:-1; animation:spinRing 12s linear infinite; top:10%; left:5%; }
+        .glass-bow { width:140px; height:140px; background:radial-gradient(circle, rgba(255,255,255,0.5), rgba(0,255,255,0.2)); border-radius:30% 70% 70% 30% / 30% 35% 65% 70%; backdrop-filter:blur(10px); position:absolute; left:-20px; top:40%; animation:rock 5s infinite alternate; }
+        @keyframes levitate { 0%{transform:rotate(15deg) translateX(40px) translateY(0);} 100%{transform:rotate(15deg) translateX(40px) translateY(-20px);} }
+        @keyframes spinRing { from{transform:rotate(0deg);} to{transform:rotate(360deg);} }
+        @keyframes rock { 0%{border-radius:30% 70% 70% 30% / 30% 35% 65% 70%;} 100%{border-radius:65% 35% 45% 55% / 45% 60% 40% 55%;} }
+        .social-links { margin-top:2rem; display:flex; gap:1.5rem; }
         .social-icon { color:#ccc; font-size:1.5rem; }
-        .social-icon:hover { color:#ff66cc; }
-        @media (max-width:1000px) { .hero-layout{flex-direction:column;} }
+        .sticky-note { background:#191922; color:#ff99cc; padding:0.5rem 1rem; width:fit-content; border-radius:12px; margin-top:1.5rem; transform:rotate(1deg); }
+        @media (max-width:1000px) { .hero-layout{flex-direction:column; text-align:center;} .metal-horn{left:10%;} }
     </style>
 </head>
 <body>
-    <section class="scheme-2"><div class="container"><div class="hero-layout"><div class="visual-area"><div class="blob-3d"></div><div class="blob-3d-second"></div><div class="sticky-note" style="position:absolute; bottom:-10px; right:20px;">ART? YES</div></div><div class="info-area"><span class="scribble">✧ ACID EDIT ✧</span><h1 style="font-size:3rem; margin:1rem 0; background:linear-gradient(125deg,#ffdb77,#ff6ac4); background-clip:text; -webkit-background-clip:text; color:transparent;">ROMEO VEGA</h1><p><i class="fas fa-bolt" style="color:#ff44aa;"></i> 无序创意指导 · 液态视觉游击</p><p style="margin-top:0.5rem;">“轻松、好奇和放松——设计是自由的游戏。”</p><div style="display:flex; gap:10px; margin-top:15px;"><span class="neon-tag">#GLITCH</span><span class="neon-tag">#Y2K REVIVAL</span></div><div class="social-links"><a href="#" class="social-icon"><i class="fab fa-tiktok"></i></a><a href="#" class="social-icon"><i class="fab fa-twitter"></i></a></div></div></div></div></section>
+    <section class="scheme-3"><div class="container"><div class="hero-layout"><div class="info-area"><div style="background:rgba(0,255,255,0.2); border-radius:40px; padding:0.2rem 1.2rem; display:inline-block;">✦ 漂浮宇宙 ✦</div><h1 style="font-size:3.8rem; margin-top:1rem; background:linear-gradient(to right,#f0f0f0,#7b9cff,#ffaaff); background-clip:text; -webkit-background-clip:text; color:transparent;">NOVA ECLIPSE</h1><p style="margin-top:1rem; border-left:2px solid #ff44cc; padding-left:1rem;">3D 数字雕塑师 · 幻材质实验者<br>基于 Blender / 全息混合媒介</p><div class="sticky-note">✦ 独角兽效应·液态金属定制 ✦</div><div class="social-links"><a href="#" class="social-icon"><i class="fab fa-artstation"></i></a><a href="#" class="social-icon"><i class="fab fa-linkedin-in"></i></a></div></div><div class="visual-area"><div class="liquid-ring"></div><div class="metal-horn"></div><div class="glass-bow"></div></div></div></div></section>
 </body>
 </html>
 
