@@ -1,26 +1,24 @@
 <!DOCTYPE html>
-<html lang="zh">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>ARTIST PORTFOLIO — FUTURE ART LAB</title>
+    <title>LIAN | AI & New Media Art Portfolio</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Syne:wght@700;800&family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* ==========================================================================
-           【一、整体风格与基调 - 核心美学 CSS】
-           ========================================================================== */
+        /* --- 1. 核心视觉基调与变量 --- */
         :root {
             --bg-color: #050507;
             --neon-blue: #00f0ff;
-            --neon-purple: #bd00ff;
+            --neon-pink: #ff44cc;
             --chrome-grad: linear-gradient(135deg, #e6e6e6 0%, #ffffff 45%, #888888 55%, #ffffff 100%);
-            --acid-gray: rgba(255, 255, 255, 0.02);
-            --border-color: rgba(255, 255, 255, 0.08);
-            --font-title: 'Syne', -apple-system, sans-serif;
-            --font-body: 'Space Grotesk', 'Inter', sans-serif;
+            --glass-bg: rgba(0, 0, 0, 0.65);
+            --border-style: 1px solid rgba(255, 255, 255, 0.1);
+            --font-title: 'Syne', sans-serif;
+            --font-body: 'Space Grotesk', sans-serif;
         }
 
         * {
@@ -28,632 +26,399 @@
             user-select: none;
         }
 
-        body {
+        body, html {
             background-color: var(--bg-color);
             color: #ffffff;
             font-family: var(--font-body);
             overflow-x: hidden;
-            letter-spacing: 0.02em;
             scroll-behavior: smooth;
         }
 
-        /* 全局自定义滚动条 */
-        ::-webkit-scrollbar { width: 4px; height: 4px; }
-        ::-webkit-scrollbar-track { background: #050507; }
-        ::-webkit-scrollbar-thumb { background: #1a1a24; border-radius: 2px; }
-        ::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); }
-
-        /* ==========================================================================
-           【二、网页结构框架 - 右上角固定导航栏及辅助点导】
-           ========================================================================== */
-        /* 右上角固定半透圆角条导航 */
+        /* --- 2. 导航系统 --- */
+        /* 右上角固定导航条 */
         .top-nav {
             position: fixed;
             top: 24px; right: 24px;
-            background: rgba(5, 5, 7, 0.75);
+            background: rgba(5, 5, 7, 0.7);
             backdrop-filter: blur(20px);
-            border: 1px solid var(--border-color);
-            padding: 10px 24px;
+            border: var(--border-style);
+            padding: 10px 30px;
             border-radius: 30px;
             display: flex;
-            gap: 28px;
+            gap: 25px;
             z-index: 1000;
         }
+
         .top-nav a {
-            color: #71717a; text-decoration: none; font-size: 12px; font-weight: 500;
-            letter-spacing: 0.1em; transition: all 0.4s ease; position: relative; padding: 4px 0;
-        }
-        .top-nav a::after {
-            content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 1px;
-            background: var(--neon-blue); transition: all 0.3s ease; transform: translateX(-50%);
-            box-shadow: 0 0 8px var(--neon-blue);
-        }
-        .top-nav a:hover, .top-nav a.active {
-            color: #fff; text-shadow: 0 0 8px rgba(0, 240, 255, 0.5);
-        }
-        .top-nav a:hover::after, .top-nav a.active::after {
-            width: 100%;
+            color: #888;
+            text-decoration: none;
+            font-size: 13px;
+            letter-spacing: 0.1em;
+            transition: 0.4s;
+            position: relative;
+            padding: 5px 0;
         }
 
-        /* 右侧固定点状导航（悬浮标签匹配新章节命名） */
+        .top-nav a:hover, .top-nav a.active {
+            color: #fff;
+            text-shadow: 0 0 8px var(--neon-blue);
+        }
+
+        .top-nav a.active::after {
+            content: '';
+            position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
+            background: var(--neon-blue);
+            box-shadow: 0 0 10px var(--neon-blue);
+        }
+
+        /* 右侧点状导航 */
         .dot-nav {
-            position: fixed; right: 28px; top: 50%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 20px; z-index: 99;
+            position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 20px; z-index: 999;
         }
         .dot-item {
-            width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.15);
-            transition: all 0.4s ease; cursor: pointer; position: relative;
+            width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2);
+            cursor: pointer; position: relative; transition: 0.3s;
         }
         .dot-item:hover, .dot-item.active {
-            background: var(--neon-blue); transform: scale(1.5); box-shadow: 0 0 10px var(--neon-blue);
+            background: var(--neon-blue); transform: scale(1.3);
+            box-shadow: 0 0 10px var(--neon-blue);
         }
         .dot-label {
-            position: absolute; right: 20px; top: -5px; color: #444; font-size: 9px;
-            text-transform: uppercase; opacity: 0; pointer-events: none; transition: 0.3s; white-space: nowrap; letter-spacing: 0.15em;
+            position: absolute; right: 25px; top: -5px; color: var(--neon-blue);
+            font-size: 10px; opacity: 0; pointer-events: none; transition: 0.3s; white-space: nowrap;
         }
-        .dot-item:hover .dot-label { opacity: 1; color: var(--neon-blue); }
+        .dot-item:hover .dot-label { opacity: 1; }
 
-        /* 强制全屏切片底层 */
+        /* --- 3. 布局基础 --- */
         section {
-            position: relative; width: 100vw; height: 100vh; overflow: hidden;
-            display: flex; align-items: center; justify-content: center; background-color: var(--bg-color);
+            position: relative;
+            width: 100vw; height: 100vh;
+            overflow: hidden;
+            display: flex; align-items: center; justify-content: center;
         }
 
         .container {
-            width: 100%; max-width: 1400px; height: 82vh; padding: 0 40px;
-            display: flex; flex-direction: column; justify-content: space-between; position: relative; z-index: 5;
+            width: 100%; max-width: 1400px; padding: 0 60px;
+            position: relative; z-index: 10;
         }
 
-        /* 宽幅霓虹分割线 */
-        .chapter-divider {
-            position: relative; width: 100vw; height: 100vh; background: #000; display: flex; align-items: center; justify-content: center;
+        /* 章节封面通用标题 */
+        .chapter-label {
+            font-size: 12px; letter-spacing: 0.4em; color: #444;
+            text-transform: uppercase; margin-bottom: 20px; display: block;
         }
-        .divider-line {
-            position: absolute; width: 100%; height: 1px;
-            background: linear-gradient(90deg, transparent, var(--neon-blue), var(--neon-purple), transparent);
-            box-shadow: 0 0 15px var(--neon-blue);
+        .chrome-title {
+            font-family: var(--font-title);
+            font-size: 80px; font-weight: 800; line-height: 1;
+            background: var(--chrome-grad);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            margin-bottom: 10px;
         }
-        .divider-text {
-            font-family: var(--font-title); font-size: 4.5vw; font-weight: 800; text-transform: uppercase; letter-spacing: 0.25em; color: #111; z-index: 2;
-            animation: pulseGlow 3s infinite ease-in-out;
-        }
-        @keyframes pulseGlow { 0%, 100% { color: #111; text-shadow: none; } 50% { color: #fff; text-shadow: 0 0 30px rgba(0,240,255,0.3); } }
 
-        .page-header { display: flex; justify-content: space-between; align-items: flex-end; border-bottom: 1px solid var(--border-color); padding-bottom: 15px; }
-        .page-title { font-family: var(--font-title); font-size: 12px; font-weight: 700; color: #fff; letter-spacing: 0.15em; text-transform: uppercase;}
-        .page-num { font-size: 11px; color: #333; font-family: var(--font-body); }
+        /* --- 4. 具体页面样式 --- */
 
-        h1.chrome-text { font-family: var(--font-title); font-size: 64px; font-weight: 800; background: var(--chrome-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent; filter: drop-shadow(0 2px 10px rgba(0,0,0,0.5)); }
-        h2 { font-family: var(--font-title); font-weight: 700; font-size: 26px; margin-bottom: 18px; }
-        p.desc { font-size: 13px; line-height: 1.8; color: #8a8a93; text-align: justify; font-weight: 300; }
-        .tag-container { display: flex; gap: 8px; flex-wrap: wrap; margin-top: 15px; }
-        .tag { font-size: 10px; color: #555; border: 1px solid var(--border-color); padding: 4px 10px; background: var(--acid-gray); font-family: var(--font-body); }
-
-        /* ==========================================================================
-           【三、具体排版核心组件组件样式】
-           ========================================================================== */
-        /* 第一页：封面 Y2K 缓慢流体 */
-        .canvas-bg { position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1; background: radial-gradient(circle at 50% 50%, #0c0d14 0%, #050507 80%); }
+        /* PAGE 1: 封面液态球 */
         .liquid-orb {
-            position: absolute; top: 22%; right: 12%; width: 520px; height: 520px;
-            background: linear-gradient(45deg, #121420, #400070, #005f87); border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            filter: blur(45px); opacity: 0.35; animation: liquidFlow 15s infinite alternate ease-in-out;
+            position: absolute; top: 20%; right: 10%; width: 500px; height: 500px;
+            background: linear-gradient(45deg, #121420, #400070, #005f87);
+            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+            filter: blur(50px); opacity: 0.4;
+            animation: orbMorph 12s infinite alternate ease-in-out;
         }
-        @keyframes liquidFlow {
-            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg) scale(1); }
-            100% { border-radius: 55% 45% 65% 35% / 45% 55% 45% 55%; transform: rotate(180deg) scale(1.05); }
+        @keyframes orbMorph {
+            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg); }
+            100% { border-radius: 50% 50% 30% 70% / 40% 60% 40% 60%; transform: rotate(180deg); }
         }
 
-        /* 第二页：全新异构目录网格页（带淡入Up动效） */
-        .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 24px; flex: 1; padding: 30px 0; align-items: center; }
+        /* PAGE 2: 异构目录 */
+        .index-grid {
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;
+        }
         .index-card {
-            background: rgba(0, 0, 0, 0.4); border: 1px solid var(--border-color); border-radius: 24px; padding: 35px;
-            text-decoration: none; display: flex; flex-direction: column; justify-content: space-between; height: 210px;
-            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1); cursor: pointer; opacity: 0;
-            transform: translateY(30px); animation: staggeredFadeUp 0.6s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+            background: rgba(255,255,255,0.02);
+            border: var(--border-style); border-radius: 24px;
+            padding: 40px; text-decoration: none; color: #fff;
+            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            opacity: 0; transform: translateY(30px);
         }
-        .index-card:nth-child(even) { transform: translateY(50px); } /* 保持Y2K错位非对称感 */
-        
-        /* 依次延迟淡入控制 */
-        .index-card:nth-child(1) { animation-delay: 0.1s; }
-        .index-card:nth-child(2) { animation-delay: 0.2s; }
-        .index-card:nth-child(3) { animation-delay: 0.3s; }
-        .index-card:nth-child(4) { animation-delay: 0.4s; }
-
-        @keyframes staggeredFadeUp {
-            to { opacity: 1; transform: translateY(0); }
+        .index-card.visible { opacity: 1; transform: translateY(0); }
+        .index-card:hover {
+            background: rgba(255,255,255,0.05);
+            transform: translateY(-10px);
+            border-color: var(--neon-blue);
         }
+        .index-card:nth-child(even) { margin-top: 40px; }
+        .index-card h3 { 
+            font-family: var(--font-title); font-size: 40px; margin-bottom: 10px;
+            display: flex; align-items: center; gap: 15px;
+        }
+        .index-card .card-icon { font-size: 24px; color: var(--neon-blue); }
+        .index-card p { font-size: 14px; color: #888; line-height: 1.6; }
 
-        .index-card-header { display: flex; justify-content: space-between; align-items: center; }
-        .index-card h3 { font-family: var(--font-title); font-size: 24px; color: #fff; transition: 0.3s; display: flex; align-items: center; gap: 10px; }
-        .index-card h3 span.icon { font-size: 18px; color: rgba(255,255,255,0.2); transition: 0.3s; }
-        .index-card p { font-size: 12px; color: #666; line-height: 1.6; margin-top: 8px; font-family: var(--font-body); }
-        .index-card .arrow-icon { font-size: 16px; color: #333; transition: 0.3s; }
-        
-        /* 悬浮分流霓虹变色 */
-        .index-card.c-blue:hover { border-color: var(--neon-blue); box-shadow: 0 15px 35px rgba(0,240,255,0.06); }
-        .index-card.c-pink:hover { border-color: #ff44cc; box-shadow: 0 15px 35px rgba(255,68,204,0.06); }
-        .index-card:hover h3 { color: #fff; }
-        .index-card.c-blue:hover h3 span.icon { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
-        .index-card.c-pink:hover h3 span.icon { color: #ff44cc; text-shadow: 0 0 10px #ff44cc; }
-        .index-card.c-blue:hover .arrow-icon { color: var(--neon-blue); transform: translateX(4px); }
-        .index-card.c-pink:hover .arrow-icon { color: #ff44cc; transform: translateX(4px); }
-
-        /* 第三页：全屏大图跨页悬浮面板（包含非对称漂浮预览组） */
-        .immersive-hero { position: absolute; top:0; left:0; width:100%; height:100%; z-index: 1; background-color: #000; }
-        .immersive-hero img { width: 100%; height: 100%; object-fit: cover; filter: brightness(0.35); }
-        /* 保险机制网格线 */
-        .immersive-hero::before {
+        /* PAGE 3: 沉浸式项目页 */
+        .project-hero-bg {
+            position: absolute; top:0; left:0; width:100%; height:100%;
+            background-size: cover; background-position: center;
+            filter: brightness(0.4); z-index: 1;
+        }
+        .project-hero-bg::after {
             content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-            background-image: linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
-            background-size: 40px 40px; pointer-events: none; z-index: -1;
+            background: rgba(0,0,0,0.4);
+        }
+        .glass-info-box {
+            background: var(--glass-bg);
+            backdrop-filter: blur(20px);
+            border: var(--border-style);
+            padding: 40px; border-radius: 24px;
+            max-width: 600px;
+            position: absolute; bottom: 80px; left: 80px;
+        }
+        .tag {
+            display: inline-block; padding: 5px 12px; border-radius: 15px;
+            background: rgba(255,255,255,0.1); font-size: 11px; margin-right: 8px;
         }
 
-        .hero-split-layout { display: flex; width: 100%; height: 100%; align-items: center; gap: 60px; }
-        .glass-panel {
-            background: rgba(10, 10, 14, 0.65); backdrop-filter: blur(24px); border: 1px solid rgba(255,255,255,0.05);
-            padding: 40px; width: 45%; box-shadow: 0 40px 80px rgba(0,0,0,0.7); border-radius: 24px;
+        /* PAGE 4: 39帧滚动画廊 */
+        .gallery-container {
+            width: 100%; display: flex; flex-direction: column; gap: 40px;
         }
-        
-        /* 封面右侧非对称漂浮卡片组件 */
-        .hero-floating-aside { width: 55%; display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px; position: relative; }
-        .hero-float-card {
-            background: rgba(0,0,0,0.5); border: 1px solid rgba(255,255,255,0.05); border-radius: 12px;
-            aspect-ratio: 16 / 9; overflow: hidden; cursor: pointer; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1); position: relative;
-        }
-        .hero-float-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.6; transition: 0.4s; }
-        .hero-float-card:nth-child(even) { transform: translateY(25px); }
-        .hero-float-card:hover { transform: scale(1.05) translateY(-5px); border-color: var(--neon-blue); z-index: 10; }
-        .hero-float-card:hover img { opacity: 1; }
-        .hero-prompt-box {
-            position: absolute; bottom: 0; left:0; right:0; padding: 12px; background: linear-gradient(transparent, #000);
-            font-size: 10px; color: var(--neon-blue); opacity: 0; transition: 0.3s; font-family: var(--font-body);
-        }
-        .hero-float-card:hover .hero-prompt-box { opacity: 1; }
-
-        /* 折叠工作流面板式样 */
-        .wf-trigger {
-            margin-top: 25px; display: inline-flex; align-items: center; gap: 8px; font-size: 11px;
-            color: #fff; cursor: pointer; border-bottom: 1px dashed #444; padding-bottom: 2px; transition: 0.3s;
-        }
-        .wf-trigger:hover { color: var(--neon-blue); border-color: var(--neon-blue); }
-        .wf-fold-panel {
-            max-height: 0; overflow: hidden; transition: max-height 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            background: rgba(255,255,255,0.01); border-left: 2px solid #222; margin-top: 15px;
-        }
-        .wf-fold-panel p { padding: 15px; font-size: 11px; color: #666; font-family: var(--font-body); line-height: 1.6; }
-
-
-        /* 第四页：39张分镜图完整展示（三行独立水平滚动画廊） */
-        .matrix-scroll-zone { display: flex; flex-direction: column; gap: 30px; flex: 1; padding: 20px 0; overflow: visible; justify-content: center; position: relative; }
-        .scroll-row-container { width: 100%; display: flex; flex-direction: column; position: relative; }
         .scroll-row {
-            display: grid; grid-auto-flow: column; grid-auto-columns: 220px; gap: 16px;
-            overflow-x: auto; overflow-y: visible; padding: 10px 4px 20px 4px;
-            scroll-snap-type: x mandatory; scrollbar-width: thin; position: relative;
+            display: flex; gap: 16px; overflow-x: auto; padding: 20px 0;
+            scrollbar-width: thin; scrollbar-color: var(--neon-blue) transparent;
         }
-        /* 自定义霓虹滑块轨道 */
         .scroll-row::-webkit-scrollbar { height: 4px; }
-        .scroll-row::-webkit-scrollbar-track { background: rgba(255,255,255,0.01); }
-        .scroll-row::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.15); border-radius: 2px; transition: 0.3s; }
-        .scroll-row:hover::-webkit-scrollbar-thumb { background: var(--neon-blue); box-shadow: 0 0 10px var(--neon-blue); }
+        .scroll-row::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 2px; }
         
-        .frame-card {
-            position: relative; aspect-ratio: 16 / 9; background: #0b0b10; border: 1px solid rgba(255,255,255,0.06);
-            border-radius: 12px; cursor: pointer; scroll-snap-align: start; transform-origin: center center;
-            transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.3s, box-shadow 0.3s;
+        .frame-item {
+            flex: 0 0 240px; aspect-ratio: 16/9;
+            border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;
+            position: relative; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer; background: #111;
         }
-        /* 核心防遮挡设计：提高Hover状态下的层级和独立上下文 */
-        .frame-card:hover {
-            transform: scale(1.2); border-color: var(--neon-blue);
-            box-shadow: 0 15px 35px rgba(0,0,0,0.8), 0 0 15px rgba(0,240,255,0.3);
-            z-index: 9999 !important;
+        .frame-item img {
+            width: 100%; height: 100%; object-fit: cover; border-radius: 11px;
         }
-        .frame-card img { width: 100%; height: 100%; object-fit: cover; border-radius: 11px; display: block; pointer-events: none; }
-        .frame-card span { position: absolute; bottom: -20px; left: 4px; font-size: 10px; color: #444; font-family: var(--font-body); transition: 0.3s; }
-        .frame-card:hover span { color: var(--neon-blue); transform: scale(0.85) translateY(2px); }
+        .frame-item:hover {
+            transform: scale(1.2); z-index: 100;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px var(--neon-blue);
+            border-color: var(--neon-blue);
+        }
+        .frame-item span {
+            position: absolute; bottom: -25px; left: 5px;
+            font-size: 10px; color: #444;
+        }
+        .frame-item:hover span { color: var(--neon-blue); }
 
-        /* 后续章节并平铺通用组件式样 */
-        .grid-3col { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; width: 100%; height: 100%; padding: 35px 0; }
-        .glass-item { background: #09090d; border: 1px solid var(--border-color); overflow: hidden; cursor: pointer; position: relative; }
-        .glass-item img { width:100%; height:100%; object-fit: cover; transition: 0.5s; }
-        .glass-item:hover img { transform: scale(1.02); filter: brightness(1.08); }
-        .glass-item::before {
-            content: ''; position: absolute; top: 0; left: -100%; width: 50%; height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(0,240,255,0.08), rgba(189,0,255,0.08), transparent);
-            transform: skewX(-25deg); transition: 0.76s; z-index: 2; pointer-events: none;
+        /* 章节分割线 */
+        .chapter-divider {
+            height: 1px; width: 100%; 
+            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
+            margin: 40px 0;
         }
-        .glass-item:hover::before { left: 150%; }
 
-        /* ==========================================================================
-           【四、EPILOGUE - 摄影瀑布流独立长轴空间】
-           ========================================================================== */
-        .epilogue-container { width: 100vw; min-height: 100vh; background: #030305; padding: 130px 40px 40px 40px; display: flex; flex-direction: column; align-items: center; }
-        .masonry-grid { column-count: 3; column-gap: 20px; width: 100%; max-width: 1200px; margin-top: 45px; }
-        .masonry-item { break-inside: avoid; margin-bottom: 20px; background: #09090d; border: 1px solid var(--border-color); overflow: hidden; cursor: pointer; transition: 0.3s; }
-        .masonry-item img { width: 100%; height: auto; display: block; opacity: 0.75; transition: 0.4s; }
-        .masonry-item:hover { border-color: rgba(255,255,255,0.3); }
-        .masonry-item:hover img { opacity: 1; transform: scale(1.01); }
-        
-        footer {
-            width: 100%; max-width: 1200px; border-top: 1px solid #111; margin-top: 90px; padding: 35px 0;
-            display: flex; justify-content: space-between; align-items: center; font-size: 11px; color: #444; font-family: var(--font-body);
-        }
-        footer .links a { color: #444; text-decoration: none; margin-left: 20px; transition: 0.3s; }
-        footer .links a:hover { color: #fff; text-shadow: 0 0 5px #fff; }
-
-        /* Lightbox展厅画廊组件 */
-        .lightbox {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; background: rgba(2,2,4,0.97);
-            z-index: 10000; display: flex; align-items: center; justify-content: center; opacity: 0; pointer-events: none; transition: 0.4s ease;
-        }
-        .lightbox.active { opacity: 1; pointer-events: auto; }
-        .lightbox img { max-width: 85%; max-height: 85%; object-fit: contain; box-shadow: 0 20px 60px rgba(0,0,0,0.7); }
-
-        /* 移动端流式向下堆叠自适应 */
-        @media (max-width: 992px) {
-            .hero-split-layout { flex-direction: column; height: auto; overflow-y: auto; gap: 30px; }
-            .glass-panel, .hero-floating-aside { width: 100%; }
-            .hero-floating-aside { order: 2; margin-top: 20px; }
-        }
-        @media (max-width: 768px) {
-            .top-nav { display: none; }
-            .index-grid { grid-template-columns: 1fr; }
-            .index-card:nth-child(even) { transform: translateY(0); }
-            .scroll-row { grid-auto-columns: 160px; }
-            .grid-3col, .masonry-grid { column-count: 1; grid-template-columns: 1fr; }
+        /* --- 5. 动画 --- */
+        @keyframes staggeredFadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
         }
     </style>
 </head>
 <body>
 
-    <div class="top-nav">
-        <a href="#ch1-cover" class="nav-item active">AI生成</a>
-        <a href="#ch2-cover" class="nav-item">交互装置</a>
-        <a href="#ch3-cover" class="nav-item">综合材料</a>
-        <a href="#epilogue" class="nav-item">摄影</a>
-    </div>
+    <nav class="top-nav">
+        <a href="#ch1-start" class="active">AI生成</a>
+        <a href="#ch2-start">交互装置</a>
+        <a href="#ch3-start">综合材料</a>
+        <a href="#epilogue">摄影</a>
+    </nav>
 
     <div class="dot-nav">
-        <div class="dot-item active" onclick="scrollToSec('cover-root')"><span class="dot-label">Cover</span></div>
-        <div class="dot-item" onclick="scrollToSec('catalog')"><span class="dot-label">AI生成</span></div>
-        <div class="dot-item" onclick="scrollToSec('ch2-cover')"><span class="dot-label">交互装置</span></div>
-        <div class="dot-item" onclick="scrollToSec('ch3-cover')"><span class="dot-label">综合材料</span></div>
-        <div class="dot-item" onclick="scrollToSec('epilogue')"><span class="dot-label">摄影</span></div>
+        <div class="dot-item active" onclick="scrollToSec('cover')"><span class="dot-label">封面</span></div>
+        <div class="dot-item" onclick="scrollToSec('directory')"><span class="dot-label">目录</span></div>
+        <div class="dot-item" onclick="scrollToSec('ch1-start')"><span class="dot-label">AI生成</span></div>
+        <div class="dot-item" onclick="scrollToSec('storyboard-matrix')"><span class="dot-label">39帧矩阵</span></div>
     </div>
 
-
-    <section id="cover-root">
-        <div class="canvas-bg"><div class="liquid-orb"></div></div>
+    <section id="cover">
+        <div class="liquid-orb"></div>
         <div class="container">
-            <div class="page-header" style="border:none;"><div></div><div class="page-num">01 / 06</div></div>
-            <div style="flex:1; display:flex; flex-direction:column; justify-content:center;">
-                <h1 class="chrome-text" style="font-size: 56px;">AI 创意与叙事</h1>
-                <p style="font-family:var(--font-title); font-size:14px; font-weight:300; color:#555; letter-spacing:0.4em; margin-top:15px; text-transform:uppercase;">分镜 · 生成 · 跨界概念</p>
-            </div>
-            <div style="display:flex; justify-content:space-between; font-size:10px; color:#333; letter-spacing:0.1em;">
-                <span>STORYBOARD / GENERATION / CONCEPT</span>
-                <span>CHAPTER 1 / 3</span>
-            </div>
+            <span class="chapter-label">Chapter 1 / 3</span>
+            <h1 class="chrome-title">AI 创意与叙事</h1>
+            <p style="font-size: 18px; letter-spacing: 0.3em; color: #888;">分镜 · 生成 · 跨界概念</p>
         </div>
     </section>
 
-    <section id="catalog">
+    <section id="directory">
         <div class="container">
-            <div class="page-header">
-                <div class="page-title">CONTENTS // 跨界艺术生产架构</div>
-                <div class="page-num">02 / 06</div>
-            </div>
             <div class="index-grid">
-                <a class="index-card c-blue" onclick="scrollToSec('ch1-cover')">
-                    <div class="index-card-header">
-                        <h3><span class="icon">✦</span>AI 生成</h3>
-                        <span class="arrow-icon">→</span>
-                    </div>
-                    <p>分镜 · 3D模型 · 概念装置<br><span style="color:#444; display:block; margin-top:6px;">从文本到动态分镜的AI工作流整合。包含AI短片分镜、中草药3D模型与概念空间落地形态。</span></p>
+                <a href="#ch1-start" class="index-card c-blue">
+                    <h3><span class="card-icon">✦</span>AI 生成</h3>
+                    <p>分镜 · 3D模型 · 概念装置</p>
+                    <p style="margin-top:15px; color:#555; font-size:12px;">从文本到动态分镜的AI工作流整合。包含AI短片分镜、中草药3D模型与概念空间落地形态。</p>
                 </a>
-                <a class="index-card c-pink" onclick="scrollToSec('ch2-cover')">
-                    <div class="index-card-header">
-                        <h3><span class="icon">◈</span>交互装置</h3>
-                        <span class="arrow-icon">→</span>
-                    </div>
-                    <p>粒子 · 投影 · MG动画<br><span style="color:#444; display:block; margin-top:6px;">数据流算法、实时噪点映射与视听剪辑控制，构建人机感知的触觉互动场域。</span></p>
+                <a href="#ch2-start" class="index-card c-pink">
+                    <h3><span class="card-icon">◈</span>交互装置</h3>
+                    <p>粒子 · 投影 · MG动画</p>
+                    <p style="margin-top:15px; color:#555; font-size:12px;">数据流算法、实时噪点映射与视听剪辑控制，构建人机感知的触觉互动场域。</p>
                 </a>
-                <a class="index-card c-blue" onclick="scrollToSec('ch3-cover')">
-                    <div class="index-card-header">
-                        <h3><span class="icon">✦</span>综合材料</h3>
-                        <span class="arrow-icon">→</span>
-                    </div>
-                    <p>玻璃 · 装置 · 空间叙事<br><span style="color:#444; display:block; margin-top:6px;">线下实体物料改性、晶体折射折叠与前沿审美重塑，以物质实相打破数字化边界。</span></p>
+                <a href="#ch3-start" class="index-card c-blue">
+                    <h3><span class="card-icon">✦</span>综合材料</h3>
+                    <p>玻璃 · 装置 · 空间叙事</p>
+                    <p style="margin-top:15px; color:#555; font-size:12px;">线下实体物料改性、晶体折射折叠与前沿审美重塑，以物质实相打破数字化边界。</p>
                 </a>
-                <a class="index-card c-pink" onclick="scrollToSec('epilogue')">
-                    <div class="index-card-header">
-                        <h3><span class="icon">◇</span>摄影作品</h3>
-                        <span class="arrow-icon">→</span>
-                    </div>
-                    <p>现实的诗意<br><span style="color:#444; display:block; margin-top:6px;">底层色彩语言精选，捕捉微观自然与日常物理光影中的抽象叙事切片。</span></p>
+                <a href="#epilogue" class="index-card c-pink">
+                    <h3><span class="card-icon">◇</span>摄影作品</h3>
+                    <p>现实的诗意捕捉</p>
+                    <p style="margin-top:15px; color:#555; font-size:12px;">镜头语言精选，回归瞬时日常中的物理质感与微距色彩实验。</p>
                 </a>
             </div>
-            <div style="text-align:center; font-size:10px; color:#333; letter-spacing:0.2em; animation: pulseGlow 2s infinite;">
-                ↓ 点击任意板块，进入我的创作宇宙
+            <p style="text-align: center; margin-top: 50px; font-size: 10px; color: #333; letter-spacing: 2px;">↓ 点击任意板块，进入我的创作宇宙</p>
+        </div>
+    </section>
+
+    <section id="ch1-start">
+        <div class="project-hero-bg" style="background-image: url('image_43f020.jpg');"></div>
+        <div class="container" style="height: 100%;">
+            <div class="glass-info-box">
+                <h2 style="font-size: 24px; margin-bottom: 10px;">AI短片分镜：《寻找微光》</h2>
+                <p style="font-size: 14px; color: #ccc; margin-bottom: 20px;">治愈系AI概念短片分镜设计。从文本到动态分镜的AI工作流，通过 Midjourney 锁定视觉基调，SD进行细节修复，借助 DeepSeek 优化叙事逻辑，最终由即梦实现动态预览。</p>
+                <div class="tag-container">
+                    <span class="tag">#分镜</span><span class="tag">#提示词工程</span><span class="tag">#图生视频</span>
+                </div>
             </div>
         </div>
     </section>
 
-    <div class="chapter-divider" id="ch1-cover">
-        <div class="divider-line"></div>
-        <div class="divider-text">AI GENERATION</div>
-    </div>
-
-    <section id="ch1-project-hero">
-        <div class="immersive-hero"><img src="image_43f020.jpg" alt="Storyboard Core Cover"></div>
+    <section id="storyboard-matrix" style="background: #000;">
         <div class="container">
-            <div class="page-header" style="z-index: 10;"><div class="page-title">CORE CASE / 核心管线重构</div><div class="page-num">03 / 06</div></div>
+            <span class="chapter-label" style="color:var(--neon-blue)">[ AI短片分镜全览 · 39帧叙事流 ]</span>
             
-            <div class="hero-split-layout">
-                <div class="glass-panel">
-                    <div style="font-size:10px; color:var(--neon-blue); letter-spacing:0.2em; font-weight:600; margin-bottom:8px;">CHAPTER 1 — PROJECT 01</div>
-                    <h2 style="font-size:20px; line-height:1.4; margin-bottom:14px;">AI短片分镜：《寻找微光 (Looking for the Light) — 治愈系AI概念短片分镜设计》</h2>
-                    <p class="desc" style="color:#94949e; font-size:12px; margin-bottom:0;">打通离散概念到连续视听表达的叙事壁垒。借由 Midjourney 锁定角色与宏观美学架构，融入 Stable Diffusion 进行精准图生图细节修正，在 DeepSeek 生成的文本控制树下，结合即梦工具进行动态帧多阶迭代推广。</p>
-                    <div class="tag-container">
-                        <span class="tag">#分镜</span><span class="tag">#提示词工程</span><span class="tag">#图生视频</span>
-                    </div>
-                    
-                    <div class="wf-trigger" onclick="toggleWf()">+ VIEW PROMPT PIPELINE</div>
-                    <div class="wf-fold-panel" id="wfPanel">
-                        <p>Pipeline Configuration: /imagine prompt: ethereal glow particle streams, cinematic 16:9, translucent organic crystal structure, deep gallery atmosphere, neon blue edge rim lighting, grainy analogue film simulation --ar 16:9 --v 6.0</p>
-                    </div>
+            <div class="gallery-container">
+                <div class="scroll-row">
+                    <div class="frame-item"><img src="1.jpg"><span>#01</span></div>
+                    <div class="frame-item"><img src="2.jpg"><span>#02</span></div>
+                    <div class="frame-item"><img src="3.jpg"><span>#03</span></div>
+                    <div class="frame-item"><img src="4.jpg"><span>#04</span></div>
+                    <div class="frame-item"><img src="5.jpg"><span>#05</span></div>
+                    <div class="frame-item"><img src="6.jpg"><span>#06</span></div>
+                    <div class="frame-item"><img src="7.jpg"><span>#07</span></div>
+                    <div class="frame-item"><img src="8.jpg"><span>#08</span></div>
+                    <div class="frame-item"><img src="9.jpg"><span>#09</span></div>
+                    <div class="frame-item"><img src="1.jpg"><span>#10</span></div>
+                    <div class="frame-item"><img src="2.jpg"><span>#11</span></div>
+                    <div class="frame-item"><img src="3.jpg"><span>#12</span></div>
+                    <div class="frame-item"><img src="4.jpg"><span>#13</span></div>
                 </div>
 
-                <div class="hero-floating-aside">
-                    <div class="hero-float-card" onclick="openLightbox(this)"><img src="1.jpg"><div class="hero-prompt-box">Asset View // Frame 01</div></div>
-                    <div class="hero-float-card" onclick="openLightbox(this)"><img src="2.jpg"><div class="hero-prompt-box">Asset View // Frame 02</div></div>
-                    <div class="hero-float-card" onclick="openLightbox(this)"><img src="3.jpg"><div class="hero-prompt-box">Asset View // Frame 03</div></div>
-                    <div class="hero-float-card" onclick="openLightbox(this)"><img src="4.jpg"><div class="hero-prompt-box">Asset View // Frame 04</div></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="ch1-matrix">
-        <div class="container">
-            <div class="page-header">
-                <div class="page-title">[AI短片分镜全览 · 39帧叙事流]</div>
-                <div class="page-num">04 / 06</div>
-            </div>
-            
-            <div class="matrix-scroll-zone">
-                <div class="scroll-row-container" style="z-index: 10;">
-                    <div class="scroll-row">
-                        <div class="frame-card" style="z-index: 13;" onclick="openLightbox(this)"><img src="1.jpg"><span>#01</span></div>
-                        <div class="frame-card" style="z-index: 12;" onclick="openLightbox(this)"><img src="2.jpg"><span>#02</span></div>
-                        <div class="frame-card" style="z-index: 11;" onclick="openLightbox(this)"><img src="3.jpg"><span>#03</span></div>
-                        <div class="frame-card" style="z-index: 10;" onclick="openLightbox(this)"><img src="4.jpg"><span>#04</span></div>
-                        <div class="frame-card" style="z-index: 9;" onclick="openLightbox(this)"><img src="5.jpg"><span>#05</span></div>
-                        <div class="frame-card" style="z-index: 8;" onclick="openLightbox(this)"><img src="6.jpg"><span>#06</span></div>
-                        <div class="frame-card" style="z-index: 7;" onclick="openLightbox(this)"><img src="7.jpg"><span>#07</span></div>
-                        <div class="frame-card" style="z-index: 6;" onclick="openLightbox(this)"><img src="8.jpg"><span>#08</span></div>
-                        <div class="frame-card" style="z-index: 5;" onclick="openLightbox(this)"><img src="9.jpg"><span>#09</span></div>
-                        <div class="frame-card" style="z-index: 4;" onclick="openLightbox(this)"><img src="1.jpg"><span>#10</span></div>
-                        <div class="frame-card" style="z-index: 3;" onclick="openLightbox(this)"><img src="2.jpg"><span>#11</span></div>
-                        <div class="frame-card" style="z-index: 2;" onclick="openLightbox(this)"><img src="3.jpg"><span>#12</span></div>
-                        <div class="frame-card" style="z-index: 1;" onclick="openLightbox(this)"><img src="4.jpg"><span>#13</span></div>
-                    </div>
+                <div class="scroll-row">
+                    <div class="frame-item"><img src="5.jpg"><span>#14</span></div>
+                    <div class="frame-item"><img src="6.jpg"><span>#15</span></div>
+                    <div class="frame-item"><img src="7.jpg"><span>#16</span></div>
+                    <div class="frame-item"><img src="8.jpg"><span>#17</span></div>
+                    <div class="frame-item"><img src="9.jpg"><span>#18</span></div>
+                    <div class="frame-item"><img src="1.jpg"><span>#19</span></div>
+                    <div class="frame-item"><img src="2.jpg"><span>#20</span></div>
+                    <div class="frame-item"><img src="3.jpg"><span>#21</span></div>
+                    <div class="frame-item"><img src="4.jpg"><span>#22</span></div>
+                    <div class="frame-item"><img src="5.jpg"><span>#23</span></div>
+                    <div class="frame-item"><img src="6.jpg"><span>#24</span></div>
+                    <div class="frame-item"><img src="7.jpg"><span>#25</span></div>
+                    <div class="frame-item"><img src="8.jpg"><span>#26</span></div>
                 </div>
 
-                <div class="scroll-row-container" style="z-index: 9;">
-                    <div class="scroll-row">
-                        <div class="frame-card" style="z-index: 13;" onclick="openLightbox(this)"><img src="5.jpg"><span>#14</span></div>
-                        <div class="frame-card" style="z-index: 12;" onclick="openLightbox(this)"><img src="6.jpg"><span>#15</span></div>
-                        <div class="frame-card" style="z-index: 11;" onclick="openLightbox(this)"><img src="7.jpg"><span>#16</span></div>
-                        <div class="frame-card" style="z-index: 10;" onclick="openLightbox(this)"><img src="8.jpg"><span>#17</span></div>
-                        <div class="frame-card" style="z-index: 9;" onclick="openLightbox(this)"><img src="9.jpg"><span>#18</span></div>
-                        <div class="frame-card" style="z-index: 8;" onclick="openLightbox(this)"><img src="1.jpg"><span>#19</span></div>
-                        <div class="frame-card" style="z-index: 7;" onclick="openLightbox(this)"><img src="2.jpg"><span>#20</span></div>
-                        <div class="frame-card" style="z-index: 6;" onclick="openLightbox(this)"><img src="3.jpg"><span>#21</span></div>
-                        <div class="frame-card" style="z-index: 5;" onclick="openLightbox(this)"><img src="4.jpg"><span>#22</span></div>
-                        <div class="frame-card" style="z-index: 4;" onclick="openLightbox(this)"><img src="5.jpg"><span>#23</span></div>
-                        <div class="frame-card" style="z-index: 3;" onclick="openLightbox(this)"><img src="6.jpg"><span>#24</span></div>
-                        <div class="frame-card" style="z-index: 2;" onclick="openLightbox(this)"><img src="7.jpg"><span>#25</span></div>
-                        <div class="frame-card" style="z-index: 1;" onclick="openLightbox(this)"><img src="8.jpg"><span>#26</span></div>
-                    </div>
-                </div>
-
-                <div class="scroll-row-container" style="z-index: 8;">
-                    <div class="scroll-row">
-                        <div class="frame-card" style="z-index: 13;" onclick="openLightbox(this)"><img src="9.jpg"><span>#27</span></div>
-                        <div class="frame-card" style="z-index: 12;" onclick="openLightbox(this)"><img src="1.jpg"><span>#28</span></div>
-                        <div class="frame-card" style="z-index: 11;" onclick="openLightbox(this)"><img src="2.jpg"><span>#29</span></div>
-                        <div class="frame-card" style="z-index: 10;" onclick="openLightbox(this)"><img src="3.jpg"><span>#30</span></div>
-                        <div class="frame-card" style="z-index: 9;" onclick="openLightbox(this)"><img src="4.jpg"><span>#31</span></div>
-                        <div class="frame-card" style="z-index: 8;" onclick="openLightbox(this)"><img src="5.jpg"><span>#32</span></div>
-                        <div class="frame-card" style="z-index: 7;" onclick="openLightbox(this)"><img src="6.jpg"><span>#33</span></div>
-                        <div class="frame-card" style="z-index: 6;" onclick="openLightbox(this)"><img src="7.jpg"><span>#34</span></div>
-                        <div class="frame-card" style="z-index: 5;" onclick="openLightbox(this)"><img src="35.jpg"><span>#35</span></div>
-                        <div class="frame-card" style="z-index: 4;" onclick="openLightbox(this)"><img src="8.jpg"><span>#36</span></div>
-                        <div class="frame-card" style="z-index: 3;" onclick="openLightbox(this)"><img src="9.jpg"><span>#37</span></div>
-                        <div class="frame-card" style="z-index: 2;" onclick="openLightbox(this)"><img src="1.jpg"><span>#38</span></div>
-                        <div class="frame-card" style="z-index: 1;" onclick="openLightbox(this)"><img src="2.jpg"><span>#39</span></div>
-                    </div>
+                <div class="scroll-row">
+                    <div class="frame-item"><img src="9.jpg"><span>#27</span></div>
+                    <div class="frame-item"><img src="35.jpg"><span>#28</span></div>
+                    <div class="frame-item"><img src="1.jpg"><span>#29</span></div>
+                    <div class="frame-item"><img src="2.jpg"><span>#30</span></div>
+                    <div class="frame-item"><img src="3.jpg"><span>#31</span></div>
+                    <div class="frame-item"><img src="4.jpg"><span>#32</span></div>
+                    <div class="frame-item"><img src="5.jpg"><span>#33</span></div>
+                    <div class="frame-item"><img src="6.jpg"><span>#34</span></div>
+                    <div class="frame-item"><img src="7.jpg"><span>#35</span></div>
+                    <div class="frame-item"><img src="8.jpg"><span>#36</span></div>
+                    <div class="frame-item"><img src="9.jpg"><span>#37</span></div>
+                    <div class="frame-item"><img src="1.jpg"><span>#38</span></div>
+                    <div class="frame-item"><img src="2.jpg"><span>#39</span></div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="ch1-additional">
-        <div class="container">
-            <div class="page-header"><div class="page-title">中草药3D生成与跨界概念衍生</div><div class="page-num">05-06 / 06</div></div>
-            <div class="grid-3col">
-                <div class="glass-item" onclick="openLightbox(this)"><img src="5.jpg"></div>
-                <div class="glass-item" onclick="openLightbox(this)"><img src="6.jpg"></div>
-                <div class="glass-item" onclick="openLightbox(this)"><img src="7.jpg"></div>
-            </div>
-        </div>
-    </section>
-
-
-    <div class="chapter-divider" id="ch2-cover">
-        <div class="divider-line"></div>
-        <div class="divider-text">INTERACTIVE INSTALLATION</div>
-    </div>
-
-    <section id="ch2-main">
-        <div class="container">
-            <div class="page-header"><div class="page-title">粒子 · 投影 · MG动画</div><div class="page-num">01 / 06</div></div>
-            <div style="display:flex; gap:60px; flex:1; padding:40px 0; align-items:center;">
-                <div style="flex:1; max-width:440px;">
-                    <h2>TouchDesigner 实时生成流体</h2>
-                    <p class="desc">利用衍生几何与噪声场算法在空间内实现全域感光粒子映射。通过动态剪辑与后期音画同步语言，为数字漫剧与未来线下展厅搭建多维感官连接线。</p>
-                    <div class="tag-container">
-                        <span class="tag">#TouchDesigner</span><span class="tag">#MG动画</span><span class="tag">#实时生成</span>
-                    </div>
-                </div>
-                <div style="flex:1.4; height:100%; border:1px solid var(--border-color); cursor:crosshair; background:#000;">
-                    <img src="image_43f020.jpg" style="width:100%; height:100%; object-fit:cover; filter: hue-rotate(280deg);">
-                </div>
-            </div>
-        </div>
-    </section>
-
-
-    <div class="chapter-divider" id="ch3-cover">
-        <div class="divider-line"></div>
-        <div class="divider-text">MIXED MEDIA ART</div>
-    </div>
-
-    <section id="ch3-main">
-        <div class="container">
-            <div class="page-header"><div class="page-title">玻璃 · 装置 · 空间叙事</div><div class="page-num">01 / 06</div></div>
-            <div class="grid-3col">
-                <div class="glass-item" onclick="openLightbox(this)"><img src="3.jpg"></div>
-                <div class="glass-item" onclick="openLightbox(this)"><img src="4.jpg"></div>
-                <div class="glass-item" onclick="openLightbox(this)"><img src="35.jpg"></div>
-            </div>
-        </div>
-    </section>
-
-
-    <div class="epilogue-container" id="epilogue">
-        <div style="text-align: center;">
-            <p style="font-size:10px; color:#444; letter-spacing:0.4em; text-transform:uppercase;">Epilogue</p>
-            <h1 style="font-size:32px; font-weight:400; margin-top:8px; letter-spacing:0.12em;">现实的诗意</h1>
-        </div>
-
-        <div class="masonry-grid">
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="1.jpg"></div>
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="3.jpg"></div>
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="5.jpg"></div>
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="2.jpg"></div>
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="4.jpg"></div>
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="6.jpg"></div>
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="7.jpg"></div>
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="8.jpg"></div>
-            <div class="masonry-item" onclick="openLightbox(this)"><img src="9.jpg"></div>
-        </div>
-
-        <footer>
-            <div>© 2026 PORTFOLIO. LAB. ALL RIGHTS RESERVED.</div>
-            <div class="links">
-                <a href="mailto:your@email.com">EMAIL</a>
-                <a href="#">INSTAGRAM</a>
-            </div>
-        </footer>
-    </div>
-
-    <div class="lightbox" id="globalLightbox" onclick="closeLightbox()">
-        <img id="lightboxImg" src="">
-    </div>
-
+    <section id="ch2-start" style="background:#050507"><h2 class="chrome-title">交互装置</h2></section>
+    <section id="ch3-start" style="background:#050507"><h2 class="chrome-title">综合材料</h2></section>
+    <section id="epilogue" style="background:#050507"><h2 class="chrome-title">摄影作品</h2></section>
 
     <script>
-        // 1. 折叠面板逻辑
-        function toggleWf() {
-            var panel = document.getElementById("wfPanel");
-            if (panel.style.maxHeight && panel.style.maxHeight !== "0px") {
-                panel.style.maxHeight = "0px";
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            }
-        }
-
-        // 2. 平滑跳转锚点
+        // 平滑滚动
         function scrollToSec(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 3. 全局高级黑场展厅放大
-        function openLightbox(element) {
-            var targetImgSrc = element.querySelector('img').src;
-            var lightbox = document.getElementById('globalLightbox');
-            var lightboxImg = document.getElementById('lightboxImg');
-            lightboxImg.src = targetImgSrc;
-            lightbox.classList.add('active');
-        }
+        // 目录卡片淡入动画观察器
+        const observerOptions = { threshold: 0.2 };
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    const cards = entry.target.querySelectorAll('.index-card');
+                    cards.forEach((card, index) => {
+                        card.style.animation = `staggeredFadeUp 0.6s ${index * 0.15}s forwards`;
+                        card.classList.add('visible');
+                    });
+                }
+            });
+        }, observerOptions);
 
-        function closeLightbox() {
-            document.getElementById('globalLightbox').classList.remove('active');
-        }
+        observer.observe(document.querySelector('#directory'));
 
-        // 4. 捕捉横向鼠标滚轮：将3行画廊的垂直滚动力转化为高平滑度的横向位移
-        const rows = document.querySelectorAll('.scroll-row');
-        rows.forEach(row => {
+        // 处理横向滚动：Shift + 滚轮转换
+        const scrollRows = document.querySelectorAll('.scroll-row');
+        scrollRows.forEach(row => {
             row.addEventListener('wheel', (e) => {
                 if (e.deltaY !== 0) {
                     e.preventDefault();
-                    row.scrollLeft += e.deltaY * 1.4;
+                    row.scrollLeft += e.deltaY;
                 }
             });
         });
 
-        // 5. 跨轴滚动双重导航状态联动监听
-        const sections = document.querySelectorAll('section, .chapter-divider, .epilogue-container');
-        const dotItems = document.querySelectorAll('.dot-item');
-        const navItems = document.querySelectorAll('.nav-item');
-
+        // 导航高亮监听
         window.addEventListener('scroll', () => {
-            let current = '';
+            const sections = document.querySelectorAll('section');
+            const navLinks = document.querySelectorAll('.top-nav a');
+            const dotItems = document.querySelectorAll('.dot-item');
+            
+            let current = "";
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 350) {
+                if (pageYOffset >= sectionTop - 200) {
                     current = section.getAttribute('id');
                 }
             });
 
-            if(current) {
-                // 处理双阶子级联动判断
-                let base = current;
-                if(base.startsWith('ch1') || base === 'cover-root' || base === 'catalog') {
-                    // 全归属于 Chapter 1 顶部的“AI生成”
-                    setActiveNav('#ch1-cover');
-                    setActiveDot('catalog');
-                } else if(base.startsWith('ch2')) {
-                    setActiveNav('#ch2-cover');
-                    setActiveDot('ch2-cover');
-                } else if(base.startsWith('ch3')) {
-                    setActiveNav('#ch3-cover');
-                    setActiveDot('ch3-cover');
-                } else if(base === 'epilogue') {
-                    setActiveNav('#epilogue');
-                    setActiveDot('epilogue');
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href').includes(current.split('-')[0])) {
+                    link.classList.add('active');
                 }
-            }
-        });
-
-        function setActiveNav(hrefVal) {
-            navItems.forEach(item => {
-                item.classList.remove('active');
-                if(item.getAttribute('href') === hrefVal) item.classList.add('active');
             });
-        }
 
-        function setActiveDot(targetId) {
             dotItems.forEach(dot => {
                 dot.classList.remove('active');
-                if(dot.getAttribute('onclick').includes(targetId) || (targetId==='catalog' && dot.getAttribute('onclick').includes('cover-root'))) {
+                if (dot.getAttribute('onclick').includes(current)) {
                     dot.classList.add('active');
                 }
             });
-        }
+        });
     </script>
+
+    <style>
+        /* 额外动效声明 */
+        @keyframes staggeredFadeUp {
+            from { opacity: 0; transform: translateY(30px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+    </style>
 </body>
 </html>
