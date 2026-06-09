@@ -51,18 +51,19 @@
         nav a:hover { color: #fff; text-shadow: 0 0 10px #fff; }
 
         /* --- 通用页面结构 --- */
-        section {
-            position: relative;
-            width: 100vw;
-            min-height: 100vh;
-            padding: 120px 60px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            align-items: center;
-            z-index: 2;
-            border-bottom: 1px solid rgba(255,255,255,0.03);
-        }
+       section {
+    position: relative;
+    width: 100vw;
+    height: 100vh;          /* 强行让每一页都精准吃满刚好一个屏幕的高度 */
+    overflow: hidden;       /* 防止内容溢出打乱排版 */
+    padding: 80px 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index: 2;
+    border-bottom: 1px solid rgba(255,255,255,0.03);
+}
 
         .container {
             width: 100%;
