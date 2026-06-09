@@ -3,20 +3,22 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIAN | AI & New Media Art Portfolio</title>
+    <title>LIAN | AI & New Media Art Gallery</title>
+    
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Syne:wght@700;800&display=swap" rel="stylesheet">
     
     <style>
-        /* --- 1. 核心视觉基调与变量 --- */
+        /* --- 一、整体风格与高级基调配置 --- */
         :root {
-            --bg-color: #050507;
+            --bg-color: #030305;
             --neon-blue: #00f0ff;
             --neon-pink: #ff44cc;
-            --chrome-grad: linear-gradient(135deg, #e6e6e6 0%, #ffffff 45%, #888888 55%, #ffffff 100%);
-            --glass-bg: rgba(0, 0, 0, 0.65);
-            --border-style: 1px solid rgba(255, 255, 255, 0.1);
+            /* 复合镀铬金属渐变 */
+            --chrome-grad: linear-gradient(180deg, #ffffff 0%, #aaaaaa 40%, #222222 50%, #ffffff 55%, #777777 85%, #ffffff 100%);
+            --glass-bg: rgba(7, 7, 10, 0.65);
+            --border-style: 1px solid rgba(255, 255, 255, 0.08);
             --font-title: 'Syne', sans-serif;
             --font-body: 'Space Grotesk', sans-serif;
         }
@@ -34,255 +36,296 @@
             scroll-behavior: smooth;
         }
 
-        /* --- 2. 导航系统 --- */
-        /* 右上角固定导航条 */
+        /* 全局暗黑画廊微细滚动条 */
+        ::-webkit-scrollbar { width: 3px; height: 3px; }
+        ::-webkit-scrollbar-track { background: #030305; }
+        ::-webkit-scrollbar-thumb { background: rgba(255,255,255,0.1); border-radius: 2px; }
+        ::-webkit-scrollbar-thumb:hover { background: var(--neon-blue); }
+
+        /* 全局背景弱网格线装饰（打破廉价空洞感） */
+        body::before {
+            content: ''; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
+            background-image: linear-gradient(rgba(255,255,255,0.01) 1px, transparent 1px),
+                              linear-gradient(90deg, rgba(255,255,255,0.01) 1px, transparent 1px);
+            background-size: 80px 80px; background-position: center;
+            pointer-events: none; z-index: 2;
+        }
+
+        /* --- 二、右上角固定导航栏系统 --- */
         .top-nav {
             position: fixed;
             top: 24px; right: 24px;
-            background: rgba(5, 5, 7, 0.7);
-            backdrop-filter: blur(20px);
+            background: rgba(4, 4, 6, 0.85);
+            backdrop-filter: blur(24px); -webkit-backdrop-filter: blur(24px);
             border: var(--border-style);
-            padding: 10px 30px;
-            border-radius: 30px;
-            display: flex;
-            gap: 25px;
-            z-index: 1000;
+            padding: 8px 24px; border-radius: 30px;
+            display: flex; gap: 28px; z-index: 1000;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.5);
         }
 
         .top-nav a {
-            color: #888;
-            text-decoration: none;
-            font-size: 13px;
-            letter-spacing: 0.1em;
-            transition: 0.4s;
-            position: relative;
-            padding: 5px 0;
+            color: rgba(255,255,255,0.4); text-decoration: none;
+            font-size: 12px; font-weight: 500; letter-spacing: 0.15em;
+            transition: color 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            position: relative; padding: 6px 0;
         }
 
         .top-nav a:hover, .top-nav a.active {
-            color: #fff;
-            text-shadow: 0 0 8px var(--neon-blue);
+            color: #ffffff;
+            text-shadow: 0 0 12px rgba(0, 240, 255, 0.6);
         }
 
-        .top-nav a.active::after {
-            content: '';
-            position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
-            background: var(--neon-blue);
-            box-shadow: 0 0 10px var(--neon-blue);
+        .top-nav a::after {
+            content: ''; position: absolute; bottom: 0; left: 50%; width: 0; height: 1px;
+            background: var(--neon-blue); transition: all 0.4s ease; transform: translateX(-50%);
+            box-shadow: 0 0 8px var(--neon-blue);
         }
+        .top-nav a:hover::after, .top-nav a.active::after { width: 100%; }
 
-        /* 右侧点状导航 */
+        /* 右侧固定点状导航与标签 */
         .dot-nav {
-            position: fixed; right: 30px; top: 50%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 20px; z-index: 999;
+            position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
+            display: flex; flex-direction: column; gap: 18px; z-index: 999;
         }
         .dot-item {
-            width: 8px; height: 8px; border-radius: 50%; background: rgba(255,255,255,0.2);
-            cursor: pointer; position: relative; transition: 0.3s;
+            width: 5px; height: 5px; border-radius: 50%; background: rgba(255,255,255,0.15);
+            cursor: pointer; position: relative; transition: 0.3s cubic-bezier(0.16, 1, 0.3, 1);
         }
         .dot-item:hover, .dot-item.active {
-            background: var(--neon-blue); transform: scale(1.3);
+            background: var(--neon-blue); transform: scale(1.6);
             box-shadow: 0 0 10px var(--neon-blue);
         }
         .dot-label {
-            position: absolute; right: 25px; top: -5px; color: var(--neon-blue);
-            font-size: 10px; opacity: 0; pointer-events: none; transition: 0.3s; white-space: nowrap;
+            position: absolute; right: 20px; top: -6px; color: var(--neon-blue);
+            font-size: 10px; font-family: var(--font-body); letter-spacing: 0.1em;
+            opacity: 0; pointer-events: none; transition: 0.3s; white-space: nowrap;
         }
         .dot-item:hover .dot-label { opacity: 1; }
 
-        /* --- 3. 布局基础 --- */
+        /* --- 三、结构基础与高级转场 --- */
         section {
-            position: relative;
-            width: 100vw; height: 100vh;
-            overflow: hidden;
-            display: flex; align-items: center; justify-content: center;
+            position: relative; width: 100vw; height: 100vh;
+            overflow: hidden; display: flex; align-items: center; justify-content: center;
         }
 
         .container {
-            width: 100%; max-width: 1400px; padding: 0 60px;
+            width: 100%; max-width: 1400px; padding: 0 80px;
             position: relative; z-index: 10;
         }
 
-        /* 章节封面通用标题 */
-        .chapter-label {
-            font-size: 12px; letter-spacing: 0.4em; color: #444;
-            text-transform: uppercase; margin-bottom: 20px; display: block;
+        .chapter-number {
+            font-size: 11px; font-weight: 400; letter-spacing: 0.3em;
+            color: rgba(255,255,255,0.2); text-transform: uppercase; margin-bottom: 12px; display: block;
         }
+
+        /* 镀铬质感字体核心重塑 */
         .chrome-title {
             font-family: var(--font-title);
-            font-size: 80px; font-weight: 800; line-height: 1;
-            background: var(--chrome-grad);
-            -webkit-background-clip: text; -webkit-text-fill-color: transparent;
-            margin-bottom: 10px;
+            font-size: 4.5rem; font-weight: 800; line-height: 1.1; letter-spacing: -0.02em;
+            background: var(--chrome-grad); -webkit-background-clip: text; -webkit-text-fill-color: transparent;
+            filter: drop-shadow(0 2px 15px rgba(0,0,0,0.9)); margin-bottom: 15px;
         }
 
-        /* --- 4. 具体页面样式 --- */
+        /* --- 四、细化页面排版设计 --- */
 
-        /* PAGE 1: 封面液态球 */
+        /* 第1页：封面液态金属球 */
         .liquid-orb {
-            position: absolute; top: 20%; right: 10%; width: 500px; height: 500px;
-            background: linear-gradient(45deg, #121420, #400070, #005f87);
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            filter: blur(50px); opacity: 0.4;
-            animation: orbMorph 12s infinite alternate ease-in-out;
+            position: absolute; top: 15%; right: 5%; width: 580px; height: 580px;
+            background: linear-gradient(135deg, #090b15, #3a0066, #004b6b);
+            border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%;
+            filter: blur(60px); opacity: 0.45;
+            animation: orbMorph 16s infinite alternate ease-in-out;
+            z-index: 1;
         }
         @keyframes orbMorph {
-            0% { border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%; transform: rotate(0deg); }
-            100% { border-radius: 50% 50% 30% 70% / 40% 60% 40% 60%; transform: rotate(180deg); }
+            0% { border-radius: 40% 60% 60% 40% / 40% 40% 60% 60%; transform: rotate(0deg) scale(1); }
+            100% { border-radius: 60% 40% 40% 60% / 50% 60% 40% 50%; transform: rotate(120deg) scale(1.1); }
         }
 
-        /* PAGE 2: 异构目录 */
+        /* 第2页：两行两列非对称极简目录网格 */
         .index-grid {
-            display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px;
+            display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px;
+            align-items: center; padding-top: 20px;
         }
         .index-card {
-            background: rgba(255,255,255,0.02);
-            border: var(--border-style); border-radius: 24px;
-            padding: 40px; text-decoration: none; color: #fff;
-            transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0; transform: translateY(30px);
+            background: rgba(5, 5, 8, 0.4); border: var(--border-style); border-radius: 24px;
+            padding: 45px; text-decoration: none; color: #fff; display: block;
+            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1); opacity: 0; transform: translateY(40px);
         }
+        /* 保持Y2K酸性错位不对称感 */
+        .index-card:nth-child(even) { transform: translateY(80px); }
         .index-card.visible { opacity: 1; transform: translateY(0); }
-        .index-card:hover {
-            background: rgba(255,255,255,0.05);
-            transform: translateY(-10px);
-            border-color: var(--neon-blue);
-        }
-        .index-card:nth-child(even) { margin-top: 40px; }
-        .index-card h3 { 
-            font-family: var(--font-title); font-size: 40px; margin-bottom: 10px;
-            display: flex; align-items: center; gap: 15px;
-        }
-        .index-card .card-icon { font-size: 24px; color: var(--neon-blue); }
-        .index-card p { font-size: 14px; color: #888; line-height: 1.6; }
+        .index-card:nth-child(even).visible { transform: translateY(40px); } /* 保持纵向错落 */
 
-        /* PAGE 3: 沉浸式项目页 */
+        .index-card:hover {
+            background: rgba(10, 10, 15, 0.6);
+            transform: translateY(-5px) !important;
+        }
+        .index-card.c-blue:hover { border-color: var(--neon-blue); box-shadow: 0 20px 50px rgba(0, 240, 255, 0.05); }
+        .index-card.c-pink:hover { border-color: var(--neon-pink); box-shadow: 0 20px 50px rgba(255, 68, 204, 0.05); }
+
+        .index-card h3 { 
+            font-family: var(--font-title); font-size: 2.5rem; font-weight: 700;
+            margin-bottom: 8px; display: flex; align-items: center; gap: 12px; letter-spacing: -0.01em;
+        }
+        .index-card .card-icon { font-size: 20px; color: rgba(255,255,255,0.2); transition: 0.4s; }
+        .index-card.c-blue:hover .card-icon { color: var(--neon-blue); text-shadow: 0 0 10px var(--neon-blue); }
+        .index-card.c-pink:hover .card-icon { color: var(--neon-pink); text-shadow: 0 0 10px var(--neon-pink); }
+
+        .index-card .sub-desc {
+            font-size: 1rem; color: rgba(255,255,255,0.6); font-family: var(--font-body); font-weight: 300; margin-bottom: 15px;
+        }
+        .index-card .detail-text { font-size: 12px; color: rgba(255,255,255,0.25); line-height: 1.6; }
+
+        /* 第3页：核心项目全屏跨页大图 */
         .project-hero-bg {
             position: absolute; top:0; left:0; width:100%; height:100%;
             background-size: cover; background-position: center;
-            filter: brightness(0.4); z-index: 1;
+            filter: brightness(0.3); z-index: 1; transition: transform 1s ease;
         }
+        /* 纯黑网格融合保险层 */
         .project-hero-bg::after {
             content: ''; position: absolute; top:0; left:0; width:100%; height:100%;
-            background: rgba(0,0,0,0.4);
+            background: rgba(3,3,5,0.5);
         }
         .glass-info-box {
-            background: var(--glass-bg);
-            backdrop-filter: blur(20px);
-            border: var(--border-style);
-            padding: 40px; border-radius: 24px;
-            max-width: 600px;
-            position: absolute; bottom: 80px; left: 80px;
+            background: rgba(4, 4, 6, 0.65); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
+            border: var(--border-style); padding: 45px; border-radius: 24px;
+            width: 100%; max-width: 640px; box-shadow: 0 30px 70px rgba(0,0,0,0.8);
+            position: absolute; bottom: 80px; left: 80px; z-index: 10;
         }
+        .tag-container { display: flex; gap: 8px; margin-top: 20px; }
         .tag {
-            display: inline-block; padding: 5px 12px; border-radius: 15px;
-            background: rgba(255,255,255,0.1); font-size: 11px; margin-right: 8px;
+            padding: 4px 12px; border-radius: 4px; border: var(--border-style);
+            background: rgba(255,255,255,0.02); font-size: 10px; color: rgba(255,255,255,0.4); letter-spacing: 0.05em;
         }
 
-        /* PAGE 4: 39帧滚动画廊 */
-        .gallery-container {
-            width: 100%; display: flex; flex-direction: column; gap: 40px;
+        /* 第4页：39张分镜图（三行独立水平滚动画廊） */
+        .gallery-zone {
+            width: 100%; display: flex; flex-direction: column; gap: 24px;
+            overflow: visible; padding: 10px 0;
+        }
+        .scroll-row-wrapper {
+            width: 100%; overflow: visible; position: relative;
         }
         .scroll-row {
-            display: flex; gap: 16px; overflow-x: auto; padding: 20px 0;
-            scrollbar-width: thin; scrollbar-color: var(--neon-blue) transparent;
+            display: grid; grid-auto-flow: column; grid-auto-columns: 240px; gap: 16px;
+            overflow-x: auto; overflow-y: visible; padding: 15px 4px 25px 4px;
+            scrollbar-width: thin; scrollbar-color: rgba(0, 240, 255, 0.2) transparent;
+            isolation: isolate; /* 建立层叠上下文，防止Hover放大被截断 */
         }
+        
+        /* 霓虹风格细条滚动滑块 */
         .scroll-row::-webkit-scrollbar { height: 4px; }
-        .scroll-row::-webkit-scrollbar-thumb { background: var(--neon-blue); border-radius: 2px; }
+        .scroll-row::-webkit-scrollbar-track { background: rgba(255,255,255,0.01); }
+        .scroll-row::-webkit-scrollbar-thumb { background: rgba(0, 240, 255, 0.15); border-radius: 2px; }
+        .scroll-row:hover::-webkit-scrollbar-thumb { background: var(--neon-blue); box-shadow: 0 0 8px var(--neon-blue); }
         
         .frame-item {
-            flex: 0 0 240px; aspect-ratio: 16/9;
-            border: 1px solid rgba(255,255,255,0.2); border-radius: 12px;
-            position: relative; transition: 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-            cursor: pointer; background: #111;
+            position: relative; aspect-ratio: 16/9;
+            border: 1px solid rgba(255,255,255,0.08); border-radius: 12px;
+            background: #09090f; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            cursor: pointer;
         }
         .frame-item img {
-            width: 100%; height: 100%; object-fit: cover; border-radius: 11px;
+            width: 100%; height: 100%; object-fit: cover; border-radius: 11px; display: block;
         }
+        /* 核心防遮挡设计：通过 3D transform 强制提升渲染层级 */
         .frame-item:hover {
-            transform: scale(1.2); z-index: 100;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.8), 0 0 20px var(--neon-blue);
+            transform: scale(1.2) translateZ(0); z-index: 999;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.9), 0 0 15px rgba(0,240,255,0.25);
             border-color: var(--neon-blue);
         }
         .frame-item span {
-            position: absolute; bottom: -25px; left: 5px;
-            font-size: 10px; color: #444;
+            position: absolute; bottom: -22px; left: 4px;
+            font-size: 10px; font-family: var(--font-body); color: rgba(255,255,255,0.2); transition: 0.3s;
         }
         .frame-item:hover span { color: var(--neon-blue); }
 
-        /* 章节分割线 */
-        .chapter-divider {
-            height: 1px; width: 100%; 
-            background: linear-gradient(90deg, transparent, var(--neon-blue), transparent);
-            margin: 40px 0;
+        /* 引导指针动效 */
+        .scroll-indicator {
+            text-align: center; margin-top: 45px; font-size: 10px;
+            color: rgba(255,255,255,0.2); letter-spacing: 0.2em;
+            animation: pulseGlow 2.5s infinite ease-in-out;
         }
+        @keyframes pulseGlow { 0%, 100% { opacity: 0.3; } 50% { opacity: 0.8; color: var(--neon-blue); } }
 
-        /* --- 5. 动画 --- */
-        @keyframes staggeredFadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
+        /* 移动端流式向下堆叠自适应 */
+        @media (max-width: 992px) {
+            .index-grid { grid-template-columns: 1fr; gap: 20px; }
+            .index-card:nth-child(even) { transform: translateY(0); }
+            .index-card.visible, .index-card:nth-child(even).visible { transform: translateY(0); }
+            .glass-info-box { position: relative; bottom: 0; left: 0; max-width: 100%; padding: 30px; }
+            .chrome-title { font-size: 3rem; }
+        }
+        @media (max-width: 768px) {
+            .top-nav { display: none; }
+            .scroll-row { grid-auto-columns: 160px; }
+            .container { padding: 0 30px; }
         }
     </style>
 </head>
 <body>
 
     <nav class="top-nav">
-        <a href="#ch1-start" class="active">AI生成</a>
-        <a href="#ch2-start">交互装置</a>
-        <a href="#ch3-start">综合材料</a>
-        <a href="#epilogue">摄影</a>
+        <a href="#cover" class="nav-link active">AI生成</a>
+        <a href="#ch2-placeholder" class="nav-link">交互装置</a>
+        <a href="#ch3-placeholder" class="nav-link">综合材料</a>
+        <a href="#epi-placeholder" class="nav-link">摄影</a>
     </nav>
 
     <div class="dot-nav">
-        <div class="dot-item active" onclick="scrollToSec('cover')"><span class="dot-label">封面</span></div>
-        <div class="dot-item" onclick="scrollToSec('directory')"><span class="dot-label">目录</span></div>
-        <div class="dot-item" onclick="scrollToSec('ch1-start')"><span class="dot-label">AI生成</span></div>
-        <div class="dot-item" onclick="scrollToSec('storyboard-matrix')"><span class="dot-label">39帧矩阵</span></div>
+        <div class="dot-item active" onclick="scrollToSec('cover')"><span class="dot-label">COVER</span></div>
+        <div class="dot-item" onclick="scrollToSec('directory')"><span class="dot-label">CATALOG</span></div>
+        <div class="dot-item" onclick="scrollToSec('ch1-core')"><span class="dot-label">PROJECT</span></div>
+        <div class="dot-item" onclick="scrollToSec('storyboard-matrix')"><span class="dot-label">39 FRAMES</span></div>
     </div>
 
     <section id="cover">
         <div class="liquid-orb"></div>
         <div class="container">
-            <span class="chapter-label">Chapter 1 / 3</span>
+            <span class="chapter-number">Chapter 1 / 3</span>
             <h1 class="chrome-title">AI 创意与叙事</h1>
-            <p style="font-size: 18px; letter-spacing: 0.3em; color: #888;">分镜 · 生成 · 跨界概念</p>
+            <p style="font-size: 14px; letter-spacing: 0.4em; color: rgba(255,255,255,0.4); font-weight: 300; text-transform: uppercase;">分镜 · 生成 · 跨界概念</p>
         </div>
     </section>
 
     <section id="directory">
         <div class="container">
             <div class="index-grid">
-                <a href="#ch1-start" class="index-card c-blue">
+                <a href="#cover" class="index-card c-blue">
                     <h3><span class="card-icon">✦</span>AI 生成</h3>
-                    <p>分镜 · 3D模型 · 概念装置</p>
-                    <p style="margin-top:15px; color:#555; font-size:12px;">从文本到动态分镜的AI工作流整合。包含AI短片分镜、中草药3D模型与概念空间落地形态。</p>
+                    <div class="sub-desc">分镜 · 3D模型 · 概念装置</div>
+                    <div class="detail-text">从文本到动态分镜的AI工作流，证明AI叙事与生成能力。包含AI短片分镜、中草药3D模型、AI概念装置。</div>
                 </a>
-                <a href="#ch2-start" class="index-card c-pink">
+                <a href="#ch2-placeholder" class="index-card c-pink">
                     <h3><span class="card-icon">◈</span>交互装置</h3>
-                    <p>粒子 · 投影 · MG动画</p>
-                    <p style="margin-top:15px; color:#555; font-size:12px;">数据流算法、实时噪点映射与视听剪辑控制，构建人机感知的触觉互动场域。</p>
+                    <div class="sub-desc">粒子 · 投影 · MG动画</div>
+                    <div class="detail-text">动态视觉、实时交互与后期剪辑，支撑AI漫剧的动效生产与现场体验。</div>
                 </a>
-                <a href="#ch3-start" class="index-card c-blue">
+                <a href="#ch3-placeholder" class="index-card c-blue">
                     <h3><span class="card-icon">✦</span>综合材料</h3>
-                    <p>玻璃 · 装置 · 空间叙事</p>
-                    <p style="margin-top:15px; color:#555; font-size:12px;">线下实体物料改性、晶体折射折叠与前沿审美重塑，以物质实相打破数字化边界。</p>
+                    <div class="sub-desc">玻璃 · 装置 · 空间叙事</div>
+                    <div class="detail-text">线下实体作品与顶级审美，体现材质、光影与空间感知力。</div>
                 </a>
-                <a href="#epilogue" class="index-card c-pink">
-                    <h3><span class="card-icon">◇</span>摄影作品</h3>
-                    <p>现实的诗意捕捉</p>
-                    <p style="margin-top:15px; color:#555; font-size:12px;">镜头语言精选，回归瞬时日常中的物理质感与微距色彩实验。</p>
+                <a href="#epi-placeholder" class="index-card c-pink">
+                    <h3><span class="card-icon">◇</span>摄影</h3>
+                    <div class="sub-desc">现实的诗意</div>
+                    <div class="detail-text">摄影作品精选，作为整个艺术叙事长轴的结尾彩蛋。</div>
                 </a>
             </div>
-            <p style="text-align: center; margin-top: 50px; font-size: 10px; color: #333; letter-spacing: 2px;">↓ 点击任意板块，进入我的创作宇宙</p>
+            <div class="scroll-indicator">↓ 点击任意板块，进入我的创作宇宙</div>
         </div>
     </section>
 
-    <section id="ch1-start">
-        <div class="project-hero-bg" style="background-image: url('image_43f020.jpg');"></div>
+    <section id="ch1-core">
+        <div class="project-hero-bg" style="background-image: url('./images/storyboard_bg.jpg'), url('image_43f020.jpg');"></div>
+        
         <div class="container" style="height: 100%;">
             <div class="glass-info-box">
-                <h2 style="font-size: 24px; margin-bottom: 10px;">AI短片分镜：《寻找微光》</h2>
-                <p style="font-size: 14px; color: #ccc; margin-bottom: 20px;">治愈系AI概念短片分镜设计。从文本到动态分镜的AI工作流，通过 Midjourney 锁定视觉基调，SD进行细节修复，借助 DeepSeek 优化叙事逻辑，最终由即梦实现动态预览。</p>
+                <span class="chapter-number" style="color:var(--neon-blue);">CORE CASE // AI GENERATION</span>
+                <h2 style="font-family: var(--font-title); font-size: 1.8rem; font-weight:700; line-height:1.3; margin-bottom: 12px;">AI短片分镜：《寻找微光 (Looking for the Light) — 治愈系AI概念短片分镜设计》</h2>
+                <p style="font-size: 13px; color: rgba(255,255,255,0.6); line-height: 1.8; font-weight:300;">从文本到动态分镜的AI工作流，通过 Midjourney 锁定离散视觉基调，融入 Stable Diffusion 进行多阶图生图精准校塑，在 DeepSeek 生成的叙事结构框架下，最终借由即梦平滑生成视听动态流。</p>
                 <div class="tag-container">
                     <span class="tag">#分镜</span><span class="tag">#提示词工程</span><span class="tag">#图生视频</span>
                 </div>
@@ -290,80 +333,85 @@
         </div>
     </section>
 
-    <section id="storyboard-matrix" style="background: #000;">
+    <section id="storyboard-matrix" style="background: #020203;">
         <div class="container">
-            <span class="chapter-label" style="color:var(--neon-blue)">[ AI短片分镜全览 · 39帧叙事流 ]</span>
+            <span class="chapter-number" style="color:var(--neon-blue); margin-bottom: 30px;">[AI短片分镜全览 · 39帧叙事流]</span>
             
-            <div class="gallery-container">
-                <div class="scroll-row">
-                    <div class="frame-item"><img src="1.jpg"><span>#01</span></div>
-                    <div class="frame-item"><img src="2.jpg"><span>#02</span></div>
-                    <div class="frame-item"><img src="3.jpg"><span>#03</span></div>
-                    <div class="frame-item"><img src="4.jpg"><span>#04</span></div>
-                    <div class="frame-item"><img src="5.jpg"><span>#05</span></div>
-                    <div class="frame-item"><img src="6.jpg"><span>#06</span></div>
-                    <div class="frame-item"><img src="7.jpg"><span>#07</span></div>
-                    <div class="frame-item"><img src="8.jpg"><span>#08</span></div>
-                    <div class="frame-item"><img src="9.jpg"><span>#09</span></div>
-                    <div class="frame-item"><img src="1.jpg"><span>#10</span></div>
-                    <div class="frame-item"><img src="2.jpg"><span>#11</span></div>
-                    <div class="frame-item"><img src="3.jpg"><span>#12</span></div>
-                    <div class="frame-item"><img src="4.jpg"><span>#13</span></div>
+            <div class="gallery-zone">
+                <div class="scroll-row-wrapper">
+                    <div class="scroll-row">
+                        <div class="frame-item"><img src="1.jpg"><span>#01 (Scene: Open)</span></div>
+                        <div class="frame-item"><img src="2.jpg"><span>#02</span></div>
+                        <div class="frame-item"><img src="3.jpg"><span>#03</span></div>
+                        <div class="frame-item"><img src="4.jpg"><span>#04</span></div>
+                        <div class="frame-item"><img src="5.jpg"><span>#05</span></div>
+                        <div class="frame-item"><img src="6.jpg"><span>#06</span></div>
+                        <div class="frame-item"><img src="7.jpg"><span>#07</span></div>
+                        <div class="frame-item"><img src="8.jpg"><span>#08</span></div>
+                        <div class="frame-item"><img src="9.jpg"><span>#09</span></div>
+                        <div class="frame-item"><img src="1.jpg"><span>#10</span></div>
+                        <div class="frame-item"><img src="2.jpg"><span>#11</span></div>
+                        <div class="frame-item"><img src="3.jpg"><span>#12</span></div>
+                        <div class="frame-item"><img src="4.jpg"><span>#13</span></div>
+                    </div>
                 </div>
 
-                <div class="scroll-row">
-                    <div class="frame-item"><img src="5.jpg"><span>#14</span></div>
-                    <div class="frame-item"><img src="6.jpg"><span>#15</span></div>
-                    <div class="frame-item"><img src="7.jpg"><span>#16</span></div>
-                    <div class="frame-item"><img src="8.jpg"><span>#17</span></div>
-                    <div class="frame-item"><img src="9.jpg"><span>#18</span></div>
-                    <div class="frame-item"><img src="1.jpg"><span>#19</span></div>
-                    <div class="frame-item"><img src="2.jpg"><span>#20</span></div>
-                    <div class="frame-item"><img src="3.jpg"><span>#21</span></div>
-                    <div class="frame-item"><img src="4.jpg"><span>#22</span></div>
-                    <div class="frame-item"><img src="5.jpg"><span>#23</span></div>
-                    <div class="frame-item"><img src="6.jpg"><span>#24</span></div>
-                    <div class="frame-item"><img src="7.jpg"><span>#25</span></div>
-                    <div class="frame-item"><img src="8.jpg"><span>#26</span></div>
+                <div class="scroll-row-wrapper">
+                    <div class="scroll-row">
+                        <div class="frame-item"><img src="5.jpg"><span>#14 (Scene: Progress)</span></div>
+                        <div class="frame-item"><img src="6.jpg"><span>#15</span></div>
+                        <div class="frame-item"><img src="7.jpg"><span>#16</span></div>
+                        <div class="frame-item"><img src="8.jpg"><span>#17</span></div>
+                        <div class="frame-item"><img src="9.jpg"><span>#18</span></div>
+                        <div class="frame-item"><img src="1.jpg"><span>#19</span></div>
+                        <div class="frame-item"><img src="2.jpg"><span>#20</span></div>
+                        <div class="frame-item"><img src="3.jpg"><span>#21</span></div>
+                        <div class="frame-item"><img src="4.jpg"><span>#22</span></div>
+                        <div class="frame-item"><img src="5.jpg"><span>#23</span></div>
+                        <div class="frame-item"><img src="6.jpg"><span>#24</span></div>
+                        <div class="frame-item"><img src="7.jpg"><span>#25</span></div>
+                        <div class="frame-item"><img src="8.jpg"><span>#26</span></div>
+                    </div>
                 </div>
 
-                <div class="scroll-row">
-                    <div class="frame-item"><img src="9.jpg"><span>#27</span></div>
-                    <div class="frame-item"><img src="35.jpg"><span>#28</span></div>
-                    <div class="frame-item"><img src="1.jpg"><span>#29</span></div>
-                    <div class="frame-item"><img src="2.jpg"><span>#30</span></div>
-                    <div class="frame-item"><img src="3.jpg"><span>#31</span></div>
-                    <div class="frame-item"><img src="4.jpg"><span>#32</span></div>
-                    <div class="frame-item"><img src="5.jpg"><span>#33</span></div>
-                    <div class="frame-item"><img src="6.jpg"><span>#34</span></div>
-                    <div class="frame-item"><img src="7.jpg"><span>#35</span></div>
-                    <div class="frame-item"><img src="8.jpg"><span>#36</span></div>
-                    <div class="frame-item"><img src="9.jpg"><span>#37</span></div>
-                    <div class="frame-item"><img src="1.jpg"><span>#38</span></div>
-                    <div class="frame-item"><img src="2.jpg"><span>#39</span></div>
+                <div class="scroll-row-wrapper">
+                    <div class="scroll-row">
+                        <div class="frame-item"><img src="9.jpg"><span>#27 (Scene: Climax)</span></div>
+                        <div class="frame-item"><img src="35.jpg"><span>#28</span></div>
+                        <div class="frame-item"><img src="1.jpg"><span>#29</span></div>
+                        <div class="frame-item"><img src="2.jpg"><span>#30</span></div>
+                        <div class="frame-item"><img src="3.jpg"><span>#31</span></div>
+                        <div class="frame-item"><img src="4.jpg"><span>#32</span></div>
+                        <div class="frame-item"><img src="5.jpg"><span>#33</span></div>
+                        <div class="frame-item"><img src="6.jpg"><span>#34</span></div>
+                        <div class="frame-item"><img src="7.jpg"><span>#35</span></div>
+                        <div class="frame-item"><img src="8.jpg"><span>#36</span></div>
+                        <div class="frame-item"><img src="9.jpg"><span>#37</span></div>
+                        <div class="frame-item"><img src="1.jpg"><span>#38</span></div>
+                        <div class="frame-item"><img src="2.jpg"><span>#39</span></div>
+                    </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <section id="ch2-start" style="background:#050507"><h2 class="chrome-title">交互装置</h2></section>
-    <section id="ch3-start" style="background:#050507"><h2 class="chrome-title">综合材料</h2></section>
-    <section id="epilogue" style="background:#050507"><h2 class="chrome-title">摄影作品</h2></section>
+    <section id="ch2-placeholder" style="background:#030305;"><h1 class="chrome-title" style="opacity:0.1;">CHAPTER 2</h1></section>
+    <section id="ch3-placeholder" style="background:#030305;"><h1 class="chrome-title" style="opacity:0.1;">CHAPTER 3</h1></section>
+    <section id="epi-placeholder" style="background:#030305;"><h1 class="chrome-title" style="opacity:0.1;">EPILOGUE</h1></section>
 
     <script>
-        // 平滑滚动
         function scrollToSec(id) {
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // 目录卡片淡入动画观察器
-        const observerOptions = { threshold: 0.2 };
+        // 目录网格淡入动画观察器
+        const observerOptions = { threshold: 0.15 };
         const observer = new IntersectionObserver((entries) => {
             entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     const cards = entry.target.querySelectorAll('.index-card');
                     cards.forEach((card, index) => {
-                        card.style.animation = `staggeredFadeUp 0.6s ${index * 0.15}s forwards`;
+                        card.style.animation = `staggeredFadeUp 0.8s ${index * 0.1}s cubic-bezier(0.16, 1, 0.3, 1) forwards`;
                         card.classList.add('visible');
                     });
                 }
@@ -372,18 +420,18 @@
 
         observer.observe(document.querySelector('#directory'));
 
-        // 处理横向滚动：Shift + 滚轮转换
+        // 高流畅度鼠标滚轮方向转换
         const scrollRows = document.querySelectorAll('.scroll-row');
         scrollRows.forEach(row => {
             row.addEventListener('wheel', (e) => {
                 if (e.deltaY !== 0) {
                     e.preventDefault();
-                    row.scrollLeft += e.deltaY;
+                    row.scrollLeft += e.deltaY * 1.2;
                 }
             });
         });
 
-        // 导航高亮监听
+        // 顶层导航栏与点导多状态精细联动
         window.addEventListener('scroll', () => {
             const sections = document.querySelectorAll('section');
             const navLinks = document.querySelectorAll('.top-nav a');
@@ -392,14 +440,16 @@
             let current = "";
             sections.forEach(section => {
                 const sectionTop = section.offsetTop;
-                if (pageYOffset >= sectionTop - 200) {
+                if (pageYOffset >= sectionTop - 300) {
                     current = section.getAttribute('id');
                 }
             });
 
             navLinks.forEach(link => {
                 link.classList.remove('active');
-                if (link.getAttribute('href').includes(current.split('-')[0])) {
+                if (current === 'cover' || current === 'directory' || current === 'ch1-core' || current === 'storyboard-matrix') {
+                    if(link.getAttribute('href') === '#cover') link.classList.add('active');
+                } else if (link.getAttribute('href').includes(current.split('-')[0])) {
                     link.classList.add('active');
                 }
             });
@@ -412,13 +462,5 @@
             });
         });
     </script>
-
-    <style>
-        /* 额外动效声明 */
-        @keyframes staggeredFadeUp {
-            from { opacity: 0; transform: translateY(30px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-    </style>
 </body>
 </html>
