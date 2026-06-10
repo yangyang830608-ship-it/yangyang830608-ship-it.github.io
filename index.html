@@ -1,101 +1,99 @@
-            "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"
-        ];
-
-        function makeFallback(index) {
-            return `<div class="fallback">Storyboard<br>#${String(index + 1).padStart(2, "0")}</div>`;
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LIAN | Liquid Metal Portfolio</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #050506;
+            --ink: #f6f8fb;
+            --blue: #00e8ff;
+            --pink: #ff4fc3;
+            --acid: #d8ff3d;
+            --orange: #ff8a35;
+            --line: rgba(255,255,255,0.12);
+            --font-title: "Unbounded", "Arial Black", sans-serif;
+            --font-body: "Space Grotesk", Arial, sans-serif;
         }
 
-        function initGallery() {
-            for (let rowNum = 1; rowNum <= 3; rowNum++) {
-                const rail = document.getElementById(`rail${rowNum}`);
-                const dots = document.getElementById(`dots${rowNum}`);
-                const start = (rowNum - 1) * 5;
-                const state = { offset: 0, direction: rowNum === 2 ? -1 : 1, paused: false, active: 0 };
-
-                for (let i = 0; i < 5; i++) {
-                    const index = start + i;
-                    const card = document.createElement("button");
-                    card.className = `frame-card ${i > 0 && i < 4 ? "is-mid" : ""}`;
-                    card.type = "button";
-                    card.innerHTML = `<img src="${images[index]}" alt="分镜 ${index + 1}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '${makeFallback(index)}')"><span>#${String(index + 1).padStart(2, "0")}</span>`;
-                    card.addEventListener("click", () => goToFrame(rail, dots, state, i));
-                    rail.appendChild(card);
-
-                    const dot = document.createElement("button");
-                    dot.className = `dot ${i === 0 ? "active" : ""}`;
-                    dot.type = "button";
-                    dot.setAttribute("aria-label", `移动到第 ${index + 1} 张分镜`);
-                    dot.addEventListener("click", () => goToFrame(rail, dots, state, i));
-                    dots.appendChild(dot);
-                }
-
-                rail.addEventListener("mouseenter", () => state.paused = true);
-                rail.addEventListener("mouseleave", () => state.paused = false);
-
-                function drift() {
-                    const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
-                    if (!state.paused && maxMove > 0) {
-                        state.offset += state.direction * 0.12;
-                        if (state.offset > 0 || Math.abs(state.offset) > maxMove) state.direction *= -1;
-                        state.offset = Math.max(-maxMove, Math.min(0, state.offset));
-                        rail.style.transform = `translateX(${state.offset}px)`;
-                        const step = maxMove / 4 || 1;
-                        state.active = Math.max(0, Math.min(4, Math.round(Math.abs(state.offset) / step)));
-                        setActiveDot(dots, state.active);
-                    }
-                    requestAnimationFrame(drift);
-                }
-                drift();
-            }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        html, body { background: var(--bg); color: var(--ink); font-family: var(--font-body); overflow-x: hidden; scroll-behavior: smooth; }
+        body::after {
+            content: "";
+            position: fixed;
+            inset: 0;
+            pointer-events: none;
+            z-index: 999;
+            background:
+                radial-gradient(circle at 20% 10%, rgba(0,232,255,0.07), transparent 24%),
+                radial-gradient(circle at 80% 90%, rgba(255,79,195,0.07), transparent 26%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.025) 0 1px, transparent 1px 5px);
+            mix-blend-mode: screen;
         }
 
-        function goToFrame(rail, dots, state, index) {
-            const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
-            state.offset = -(maxMove / 4) * index;
-            state.active = index;
-            rail.style.transform = `translateX(${state.offset}px)`;
-            setActiveDot(dots, index);
+        section {
+            position: relative;
+            min-height: 100vh;
+            width: 100vw;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        function setActiveDot(dots, index) {
-            dots.querySelectorAll(".dot").forEach((dot, i) => dot.classList.toggle("active", i === index));
+        .container { width: min(1440px, 100%); padding: 0 clamp(22px, 6vw, 84px); position: relative; z-index: 5; }
+        .global-grid {
+            position: fixed;
+            inset: 0;
+            z-index: 1;
+            pointer-events: none;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.055) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.055) 1px, transparent 1px);
+            background-size: 9vw 9vh;
+            mask-image: linear-gradient(90deg, transparent, black 18%, black 82%, transparent);
         }
 
-        function scrollToSec(id) {
-            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        .top-nav {
+            position: fixed;
+            top: 24px;
+            right: 24px;
+            display: flex;
+            gap: 18px;
+            z-index: 50;
+            padding: 10px 20px;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 999px;
+            background: rgba(8,8,10,0.72);
+            backdrop-filter: blur(18px);
         }
+        .top-nav a { color: rgba(255,255,255,0.45); text-decoration: none; font-size: 11px; font-weight: 700; transition: 0.3s; }
+        .top-nav a.active, .top-nav a:hover { color: white; text-shadow: 0 0 16px var(--blue); }
 
-        function adjustActiveStates() {
-            const sectionIds = ["cover", "directory", "hero-project", "storyboard"];
-            let current = "cover";
-            document.querySelectorAll("section").forEach(section => {
-                if (window.scrollY >= section.offsetTop - 320) current = section.id;
-            });
-            document.querySelectorAll(".top-nav a").forEach(link => {
-                link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
-            });
-            document.querySelectorAll(".dot-item").forEach((dot, i) => {
-                dot.classList.toggle("active", sectionIds[i] === current);
-            });
-            const bg = document.getElementById("storyBg");
-            if (bg) bg.style.transform = `translateY(${window.scrollY * 0.035}px)`;
+        .dot-nav { position: fixed; right: 28px; top: 50%; transform: translateY(-50%); display: grid; gap: 18px; z-index: 45; }
+        .dot-item { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); background: transparent; cursor: pointer; transition: 0.3s; }
+        .dot-item.active { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 14px var(--blue); transform: scale(1.35); }
+
+        .cover { background: radial-gradient(circle at 75% 42%, rgba(0,232,255,0.13), transparent 28%), #050506; }
+        .cover-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.75fr); gap: clamp(28px, 6vw, 86px); align-items: center; }
+        .eyebrow { color: var(--blue); font-size: 11px; font-weight: 700; margin-bottom: 22px; }
+        .liquid-title {
+            font-family: var(--font-title);
+            font-size: clamp(52px, 8vw, 132px);
+            line-height: 0.94;
+            text-transform: uppercase;
+            color: transparent;
+            background:
+                linear-gradient(115deg, #ffffff 0%, #8d96a3 18%, #ffffff 31%, #2b3138 45%, #d9f7ff 58%, #ffffff 72%, #68717d 88%, #ffffff 100%);
+            background-size: 260% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+            filter: url(#liquid-chrome) drop-shadow(0 18px 38px rgba(0,0,0,0.72));
+            animation: chromeFlow 7s ease-in-out infinite alternate;
         }
-
-        const cardObserver = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (!entry.isIntersecting) return;
-                entry.target.querySelectorAll(".index-card").forEach((card, index) => {
-                    setTimeout(() => card.classList.add("visible"), index * 120);
-                });
-            });
-        }, { threshold: 0.18 });
-
-        window.addEventListener("load", () => {
-            initGallery();
-            cardObserver.observe(document.querySelector("#directory"));
-            adjustActiveStates();
-        });
-        window.addEventListener("scroll", adjustActiveStates);
-    </script>
-</body>
-</html>
+        @keyframes chromeFlow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
+        .hero-sub { margin-top: 24px; max-width: 660px; color: rgba(255,255,255,0.54); font-size: clamp(13px, 1.4vw, 16px); line-height: 1.8; }
