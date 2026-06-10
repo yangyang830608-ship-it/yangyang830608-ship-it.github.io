@@ -1,399 +1,101 @@
-<!DOCTYPE html>
-<html lang="zh-CN">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LIAN | CORE PORTFOLIO v2.5</title>
-    
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500&family=Syne:wght@700;800&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
-    
-    <style>
-        /* --- 1. 全局高级材质引擎 --- */
-        :root {
-            --bg: #020204;
-            --neon-blue: #00f0ff;
-            --neon-pink: #ff44cc;
-            --font-t: 'Unbounded', 'Syne', sans-serif;
-            --font-b: 'Space Grotesk', sans-serif;
-            --border-alpha: rgba(255, 255, 255, 0.06);
+            "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"
+        ];
+
+        function makeFallback(index) {
+            return `<div class="fallback">Storyboard<br>#${String(index + 1).padStart(2, "0")}</div>`;
         }
 
-        * { margin: 0; padding: 0; box-sizing: border-box; user-select: none; }
-        body, html { background: var(--bg); color: #fff; font-family: var(--font-b); overflow-x: hidden; scroll-behavior: smooth; }
-
-        /* 隐藏原生廉价滚动条 */
-        *::-webkit-scrollbar { display: none !important; width: 0 !important; height: 0 !important; }
-        * { -ms-overflow-style: none !important; scrollbar-width: none !important; }
-
-        /* 消除廉价感的胶片噪点底噪 */
-        body::after {
-            content: ""; position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background: url("https://grainy-gradients.vercel.app/noise.svg");
-            opacity: 0.12; pointer-events: none; z-index: 9999; contrast: 120%;
-        }
-
-        /* 网页物理画廊网格辅助线 */
-        .global-grid {
-            position: fixed; top: 0; left: 0; width: 100vw; height: 100vh;
-            background-image: linear-gradient(var(--border-alpha) 1px, transparent 1px),
-                              linear-gradient(90deg, var(--border-alpha) 1px, transparent 1px);
-            background-size: 8vw 8vh; pointer-events: none; z-index: 5;
-        }
-
-        /* --- 2. 右上角固定精细导航栏 --- */
-        .top-nav {
-            position: fixed; top: 24px; right: 24px;
-            background: rgba(4, 4, 6, 0.85); backdrop-filter: blur(20px); -webkit-backdrop-filter: blur(20px);
-            border: 1px solid rgba(255, 255, 255, 0.08); padding: 10px 26px; border-radius: 40px;
-            display: flex; gap: 24px; z-index: 2000;
-        }
-        .top-nav a {
-            color: rgba(255,255,255,0.3); text-decoration: none; font-size: 11px; font-weight: 500;
-            letter-spacing: 0.2em; transition: 0.4s; position: relative; padding: 4px 0; text-transform: uppercase;
-        }
-        .top-nav a.active, .top-nav a:hover { color: #fff; text-shadow: 0 0 10px var(--neon-blue); }
-        .top-nav a.active::after {
-            content: ''; position: absolute; bottom: 0; left: 0; width: 100%; height: 1px;
-            background: var(--neon-blue); box-shadow: 0 0 8px var(--neon-blue);
-        }
-
-        /* 右侧悬浮点阵导航系统 */
-        .dot-nav {
-            position: fixed; right: 24px; top: 50%; transform: translateY(-50%);
-            display: flex; flex-direction: column; gap: 20px; z-index: 1999;
-        }
-        .dot-item {
-            width: 4px; height: 4px; border-radius: 50%; background: rgba(255,255,255,0.2);
-            cursor: pointer; position: relative; transition: 0.4s;
-        }
-        .dot-item.active { background: var(--neon-blue); transform: scale(1.8); box-shadow: 0 0 8px var(--neon-blue); }
-        .dot-label {
-            position: absolute; right: 24px; top: -5px; color: var(--neon-blue); font-size: 9px;
-            letter-spacing: 2px; opacity: 0; transition: 0.3s; white-space: nowrap; pointer-events: none;
-        }
-        .dot-item:hover .dot-label { opacity: 1; }
-
-        /* --- 3. 页面标准结构 --- */
-        section { position: relative; width: 100vw; height: 100vh; overflow: hidden; display: flex; align-items: center; justify-content: center; }
-        .container { width: 100%; max-width: 1440px; padding: 0 80px; z-index: 10; position: relative; }
-
-        /* --- 4. Chapter 1 Cover 封面艺术页 --- */
-        .chrome-hero-text {
-            font-family: var(--font-t); font-size: 6.2vw; font-weight: 900; line-height: 0.95;
-            color: #fff; letter-spacing: -0.04em; text-transform: uppercase;
-            filter: url(#liquid-chrome);
-        }
-        .hero-sub { font-size: 13px; letter-spacing: 0.5em; color: #444; margin-top: 25px; text-transform: uppercase; }
-        
-        .liquid-orb {
-            position: absolute; top: 15%; right: 5%; width: 550px; height: 550px;
-            background: radial-gradient(circle, #151932 0%, transparent 70%);
-            filter: blur(80px); animation: orbFloat 16s infinite alternate ease-in-out; z-index: 1;
-        }
-        @keyframes orbFloat { 0% { transform: scale(1) translate(0,0); } 100% { transform: scale(1.25) translate(40px, 20px); } }
-
-        /* --- 5. Chapter 1 Catalog 异构非对称目录页 --- */
-        .index-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; width: 100%; }
-        .index-card {
-            background: rgba(255,255,255,0.01); border: 1px solid rgba(255,255,255,0.06); border-radius: 24px;
-            padding: 45px; text-decoration: none; color: #fff; display: block;
-            transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-            opacity: 0; transform: translateY(50px);
-        }
-        /* 酸性排版错位高度差 */
-        .index-card:nth-child(even) { margin-top: 40px; }
-        .index-card.visible { opacity: 1; transform: translateY(0); }
-        
-        .index-card:hover {
-            background: rgba(255,255,255,0.03); transform: translateY(-6px);
-        }
-        .index-card:nth-child(odd):hover { border-color: var(--neon-blue); box-shadow: 0 20px 50px rgba(0, 240, 255, 0.03); }
-        .index-card:nth-child(even):hover { border-color: var(--neon-pink); box-shadow: 0 20px 50px rgba(255, 68, 204, 0.03); }
-
-        .index-card h3 { font-family: var(--font-t); font-size: 2.2rem; font-weight: 700; margin-bottom: 12px; display: flex; align-items: center; gap: 15px; letter-spacing: -1px; }
-        .index-card .card-sub { font-size: 14px; color: rgba(255,255,255,0.4); font-weight: 300; margin-bottom: 20px; letter-spacing: 1px; }
-        .index-card .card-detail { font-size: 12px; color: rgba(255,255,255,0.2); line-height: 1.7; font-weight: 300; }
-
-        /* --- 6. Chapter 1 Case 深度单项巨幕视差页 --- */
-        .full-bg-wrap { position: absolute; top:0; left:0; width:100%; height:100%; z-index:1; overflow:hidden; }
-        .full-bg-img {
-            width:100%; height:100%;
-            background-image: url('image_43f020.jpg'); /* 优先读取上传的大图文件 */
-            background-size: cover; background-position: center;
-            transform: scale(1.15); filter: brightness(0.25) saturate(1.1);
-            background-color: #020204; /* 兜底纯黑防白屏 */
-        }
-        .bg-overlay { position: absolute; top:0; left:0; width:100%; height:100%; background: linear-gradient(135deg, rgba(2,2,4,0.95) 40%, transparent 100%); }
-        .glass-card {
-            background: rgba(8, 8, 12, 0.65); backdrop-filter: blur(30px); -webkit-backdrop-filter: blur(30px);
-            border: 1px solid rgba(255,255,255,0.08); padding: 50px; border-radius: 16px;
-            max-width: 680px; position: relative; z-index: 10;
-        }
-
-        /* --- 7. Chapter 1 Matrix 39帧往复动态画廊页 --- */
-        .gallery-wrapper { display: flex; flex-direction: column; gap: 35px; width: 100%; }
-        .moving-track { display: flex; gap: 20px; overflow: hidden; width: 100%; padding: 25px 0; align-items: center; position: relative; }
-        .inner-rail { display: flex; gap: 24px; will-change: transform; }
-        
-        .frame-card {
-            flex: 0 0 320px; aspect-ratio: 16/9; background: #060609;
-            border: 1px solid rgba(255,255,255,0.07); border-radius: 4px;
-            transition: 0.6s cubic-bezier(0.16, 1, 0.3, 1); position: relative; cursor: pointer;
-        }
-        .frame-card img { width: 100%; height: 100%; object-fit: cover; opacity: 0.5; transition: 0.4s; border-radius: 3px; }
-        
-        /* 强力悬停：硬件加速级别缩放，绝对不影响周围元素布局 */
-        .frame-card:hover {
-            transform: scale(1.22) translateZ(0); z-index: 1000 !important;
-            border-color: var(--neon-blue); box-shadow: 0 30px 70px rgba(0,0,0,0.9), 0 0 15px rgba(0,240,255,0.2);
-        }
-        .frame-card:hover img { opacity: 1; }
-        .frame-card span { position: absolute; bottom: -28px; left: 0; font-size: 10px; color: #333; letter-spacing: 2px; transition: 0.3s; }
-        .frame-card:hover span { color: var(--neon-blue); }
-
-        /* 点阵位置跟随指示条 */
-        .dots-row { display: flex; justify-content: center; gap: 10px; margin-top: 8px; }
-        .dot { width: 3px; height: 3px; background: rgba(255,255,255,0.12); border-radius: 50%; transition: 0.4s; }
-        .dot.active { background: var(--neon-blue); transform: scale(2.5); box-shadow: 0 0 8px var(--neon-blue); }
-
-        /* 降级响应式 */
-        @media (max-width: 992px) {
-            .index-grid { grid-template-columns: 1fr; gap: 20px; }
-            .index-card:nth-child(even) { margin-top: 0; }
-            .chrome-hero-text { font-size: 10vw; }
-        }
-    </style>
-</head>
-<body>
-
-    <svg style="position: absolute; width: 0; height: 0;">
-        <filter id="liquid-chrome">
-            <feTurbulence type="fractalNoise" baseFrequency="0.015 0.04" numOctaves="3" result="noise" />
-            <feDisplacementMap in="SourceGraphic" in2="noise" scale="6" />
-            <feGaussianBlur in="SourceGraphic" stdDeviation="0.4" result="blur" />
-            <feSpecularLighting in="blur" surfaceScale="4" specularConstant="1.1" specularExponent="38" lighting-color="#00f0ff" result="light">
-                <feDistantLight azimuth="230" elevation="55" />
-            </feSpecularLighting>
-            <feComposite in="light" in2="SourceGraphic" operator="in" />
-        </filter>
-    </svg>
-
-    <div class="global-grid"></div>
-
-    <nav class="top-nav">
-        <a href="#cover" class="active" onclick="setTimeout(adjustActiveStates, 200)">AI生成</a>
-        <a href="#ch2">交互装置</a>
-        <a href="#ch3">综合材料</a>
-        <a href="#photo">摄影</a>
-    </nav>
-
-    <div class="dot-nav">
-        <div class="dot-item active" onclick="scrollToSec('cover')"><span class="dot-label">// COVER</span></div>
-        <div class="dot-item" onclick="scrollToSec('directory')"><span class="dot-label">// INDEX</span></div>
-        <div class="dot-item" onclick="scrollToSec('hero-project')"><span class="dot-label">// CASE</span></div>
-        <div class="dot-item" onclick="scrollToSec('storyboard')"><span class="dot-label">// 39 FRAMES</span></div>
-    </div>
-
-    <section id="cover">
-        <div class="liquid-orb"></div>
-        <div class="container">
-            <p style="color:var(--neon-blue); letter-spacing: 0.6em; font-size: 11px; margin-bottom: 24px; font-weight:500;">CHAPTER 1 / 3</p>
-            <div class="chrome-hero-text">AI 创意与<br>叙事生成</div>
-            <p class="hero-sub">Storyboard · 3D Modeling · Conceptual Installation</p>
-        </div>
-    </section>
-
-    <section id="directory">
-        <div class="container">
-            <div class="index-grid">
-                <a href="#cover" class="index-card">
-                    <h3>✦ AI 生成</h3>
-                    <div class="card-sub">分镜 · 3D模型 · 概念装置</div>
-                    <div class="card-detail">从文本到动态分镜的AI全链路深度探索，有力验证AI叙事及生成掌控力。作品囊括AI概念短片分镜流、中草药异构3D模型及前沿AI概念装置。</div>
-                </a>
-                <a href="#ch2" class="index-card">
-                    <h3>◈ 交互装置</h3>
-                    <div class="card-sub">粒子 · 投影 · MG动画</div>
-                    <div class="card-detail">动态视听语言、实时感知捕捉系统与实验性后期剪辑，为AI漫剧动效提供前沿技术供给及极具张力的实体交互现场。</div>
-                </a>
-                <a href="#ch3" class="index-card">
-                    <h3>✦ 综合材料</h3>
-                    <div class="card-sub">玻璃 · 装置 · 空间叙事</div>
-                    <div class="card-detail">依托实体宏观材质改性与顶级感官审美融合，精细表达光影折射、物理质心与特定三维空间的综合感知场域。</div>
-                </a>
-                <a href="#photo" class="index-card">
-                    <h3>◇ 摄影</h3>
-                    <div class="card-sub">现实的诗意捕捉</div>
-                    <div class="card-detail">对日常物质切片的宏观微距审视与镜头光学实验，作为个人全链路前沿艺术图谱画卷的压轴彩蛋。</div>
-                </a>
-            </div>
-            <p style="text-align: center; margin-top: 45px; font-size: 9px; color: rgba(255,255,255,0.15); letter-spacing: 3px;">↓ 点击任意板块 进入我的创作宇宙</p>
-        </div>
-    </section>
-
-    <section id="hero-project">
-        <div class="full-bg-wrap">
-            <div class="full-bg-img" id="heroBg"></div>
-            <div class="bg-overlay"></div>
-        </div>
-        <div class="container">
-            <div class="glass-card">
-                <span style="font-size:10px; color:var(--neon-blue); letter-spacing:4px; font-weight:bold;">CORE PROJECT</span>
-                <h2 style="font-family: var(--font-t); font-size: 2.2rem; margin: 20px 0; line-height:1.2; letter-spacing: -1px;">寻找微光 /<br>Looking for the Light</h2>
-                <p style="color: rgba(255,255,255,0.5); line-height: 1.9; font-size: 13.5px; font-weight:300;">治愈系AI概念短片分镜设计。打通文本至多段时序画面序列的闭环模型管线。依托 Midjourney 固化宏观世界观基础，调用 Stable Diffusion 算力锚定离散帧中特定角色的面部权重分配，配合 DeepSeek 拆解复杂情感演进曲线，最终借助即梦引擎输出高还原度的全链路39帧动态概念分镜。</p>
-                <div style="display:flex; gap:10px; margin-top:35px;">
-                    <span style="font-size:9px; border:1px solid rgba(255,255,255,0.12); padding:6px 16px; color:rgba(255,255,255,0.4);">#提示词工程</span>
-                    <span style="font-size:9px; border:1px solid rgba(255,255,255,0.12); padding:6px 16px; color:rgba(255,255,255,0.4);">#图生视频</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="storyboard" style="background:#000;">
-        <div class="container">
-            <p style="color:var(--neon-blue); font-size:10px; letter-spacing:5px; margin-bottom:40px; text-transform:uppercase; font-weight:bold;">[ AI短片分镜全览 · 39帧叙事流 ]</p>
-            
-            <div class="gallery-wrapper">
-                <div class="moving-track">
-                    <div class="inner-rail" id="rail1"></div>
-                </div>
-                <div class="dots-row" id="dots1"></div>
-
-                <div class="moving-track">
-                    <div class="inner-rail" id="rail2"></div>
-                </div>
-                <div class="dots-row" id="dots2"></div>
-
-                <div class="moving-track">
-                    <div class="inner-rail" id="rail3"></div>
-                </div>
-                <div class="dots-row" id="dots3"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="ch2"><h1 class="chrome-hero-text" style="opacity:0.04; font-size:3rem;">CHAPTER 2</h1></section>
-    <section id="ch3"><h1 class="chrome-hero-text" style="opacity:0.04; font-size:3rem;">CHAPTER 3</h1></section>
-    <section id="photo"><h1 class="chrome-hero-text" style="opacity:0.04; font-size:3rem;">EPILOGUE</h1></section>
-
-    <script>
-        // 39张图片阵列定义
-        const images = ["1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","35.jpg","1.jpg","2.jpg","3.jpg",
-                        "4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg","35.jpg","1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg",
-                        "7.jpg","8.jpg","9.jpg","35.jpg","1.jpg","2.jpg","3.jpg","4.jpg","5.jpg","6.jpg","7.jpg","8.jpg","9.jpg"];
-
-        function initAdvancedGallery() {
-            for(let rowNum = 1; rowNum <= 3; rowNum++) {
+        function initGallery() {
+            for (let rowNum = 1; rowNum <= 3; rowNum++) {
                 const rail = document.getElementById(`rail${rowNum}`);
-                const dotBox = document.getElementById(`dots${rowNum}`);
-                const startIdx = (rowNum - 1) * 13;
+                const dots = document.getElementById(`dots${rowNum}`);
+                const start = (rowNum - 1) * 5;
+                const state = { offset: 0, direction: rowNum === 2 ? -1 : 1, paused: false, active: 0 };
 
-                // 生成对应的卡片与定位点
-                for(let i = 0; i < 13; i++) {
-                    const card = document.createElement('div');
-                    card.className = 'frame-card';
-                    card.innerHTML = `<img src="${images[startIdx + i]}"><span>#${(startIdx + i + 1).toString().padStart(2, '0')}</span>`;
+                for (let i = 0; i < 5; i++) {
+                    const index = start + i;
+                    const card = document.createElement("button");
+                    card.className = `frame-card ${i > 0 && i < 4 ? "is-mid" : ""}`;
+                    card.type = "button";
+                    card.innerHTML = `<img src="${images[index]}" alt="分镜 ${index + 1}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '${makeFallback(index)}')"><span>#${String(index + 1).padStart(2, "0")}</span>`;
+                    card.addEventListener("click", () => goToFrame(rail, dots, state, i));
                     rail.appendChild(card);
 
-                    const d = document.createElement('div');
-                    d.className = 'dot';
-                    if(i === 0) d.classList.add('active');
-                    dotBox.appendChild(d);
+                    const dot = document.createElement("button");
+                    dot.className = `dot ${i === 0 ? "active" : ""}`;
+                    dot.type = "button";
+                    dot.setAttribute("aria-label", `移动到第 ${index + 1} 张分镜`);
+                    dot.addEventListener("click", () => goToFrame(rail, dots, state, i));
+                    dots.appendChild(dot);
                 }
 
-                // 核心控制参数：自动异向往复滑动逻辑
-                let currentOffset = 0;
-                let moveDirection = (rowNum % 2 === 0) ? -1 : 1; // 奇偶行反向对流
-                let driftSpeed = 0.35 + (Math.random() * 0.25); // 非同步频率，防止机械化重复
-                let hoverState = false;
+                rail.addEventListener("mouseenter", () => state.paused = true);
+                rail.addEventListener("mouseleave", () => state.paused = false);
 
-                function playDrift() {
-                    if(!hoverState) {
-                        currentOffset += driftSpeed * moveDirection;
-                        const edgeBound = rail.scrollWidth - window.innerWidth + 120;
-                        
-                        // 边缘反弹往复流动
-                        if(currentOffset > 0 || currentOffset < -edgeBound) {
-                            moveDirection *= -1;
-                        }
-                        rail.style.transform = `translateX(${currentOffset}px)`;
-
-                        // 依据实时坐标动态照亮点阵
-                        const currentActiveIdx = Math.min(12, Math.floor(Math.abs(currentOffset) / 344));
-                        const dots = dotBox.querySelectorAll('.dot');
-                        dots.forEach((dotEle, dIdx) => {
-                            dotEle.classList.toggle('active', dIdx === currentActiveIdx);
-                        });
+                function drift() {
+                    const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
+                    if (!state.paused && maxMove > 0) {
+                        state.offset += state.direction * 0.12;
+                        if (state.offset > 0 || Math.abs(state.offset) > maxMove) state.direction *= -1;
+                        state.offset = Math.max(-maxMove, Math.min(0, state.offset));
+                        rail.style.transform = `translateX(${state.offset}px)`;
+                        const step = maxMove / 4 || 1;
+                        state.active = Math.max(0, Math.min(4, Math.round(Math.abs(state.offset) / step)));
+                        setActiveDot(dots, state.active);
                     }
-                    requestAnimationFrame(playDrift);
+                    requestAnimationFrame(drift);
                 }
-                playDrift();
-
-                // 鼠标移入停止滑动，移出继续
-                rail.addEventListener('mouseenter', () => hoverState = true);
-                rail.addEventListener('mouseleave', () => hoverState = false);
-
-                // 物理鼠标滚轮横向干预映射
-                rail.parentElement.addEventListener('wheel', (event) => {
-                    event.preventDefault();
-                    currentOffset -= event.deltaY * 1.2;
-                    const maxBound = rail.scrollWidth - window.innerWidth + 120;
-                    currentOffset = Math.max(-maxBound, Math.min(0, currentOffset));
-                    rail.style.transform = `translateX(${currentOffset}px)`;
-                }, { passive: false });
+                drift();
             }
         }
 
-        // 阶梯淡入目录动画控制
-        const cardObserver = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.querySelectorAll('.index-card').forEach((card, index) => {
-                        setTimeout(() => { card.classList.add('visible'); }, index * 120);
-                    });
-                }
-            });
-        }, { threshold: 0.1 });
+        function goToFrame(rail, dots, state, index) {
+            const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
+            state.offset = -(maxMove / 4) * index;
+            state.active = index;
+            rail.style.transform = `translateX(${state.offset}px)`;
+            setActiveDot(dots, index);
+        }
 
-        window.onload = () => {
-            initAdvancedGallery();
-            cardObserver.observe(document.querySelector('#directory'));
+        function setActiveDot(dots, index) {
+            dots.querySelectorAll(".dot").forEach((dot, i) => dot.classList.toggle("active", i === index));
+        }
 
-            // 第三页巨幕背景视差位移计算
-            window.addEventListener('scroll', () => {
-                const heroImage = document.getElementById('heroBg');
-                const scrollPos = window.pageYOffset;
-                heroImage.style.transform = `scale(1.15) translateY(${scrollPos * 0.15}px)`;
-                adjustActiveStates();
-            });
-        };
-
-        // 统一导航高亮联动逻辑
-        function scrollToSec(id) { document.getElementById(id).scrollIntoView({ behavior: 'smooth' }); }
+        function scrollToSec(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        }
 
         function adjustActiveStates() {
-            const sections = document.querySelectorAll('section');
-            const navLinks = document.querySelectorAll('.top-nav a');
-            const dotItems = document.querySelectorAll('.dot-item');
-            let currentSec = "";
-
-            sections.forEach(s => { if (pageYOffset >= s.offsetTop - 350) currentSec = s.getAttribute('id'); });
-
-            navLinks.forEach(link => {
-                const targetHref = link.getAttribute('href').replace('#', '');
-                if (['cover', 'directory', 'hero-project', 'storyboard'].includes(currentSec)) {
-                    link.classList.toggle('active', targetHref === 'cover');
-                } else {
-                    link.classList.toggle('active', currentSec.includes(targetHref));
-                }
+            const sectionIds = ["cover", "directory", "hero-project", "storyboard"];
+            let current = "cover";
+            document.querySelectorAll("section").forEach(section => {
+                if (window.scrollY >= section.offsetTop - 320) current = section.id;
             });
-
-            dotItems.forEach(dot => {
-                dot.classList.toggle('active', dot.getAttribute('onclick').includes(currentSec));
+            document.querySelectorAll(".top-nav a").forEach(link => {
+                link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
             });
+            document.querySelectorAll(".dot-item").forEach((dot, i) => {
+                dot.classList.toggle("active", sectionIds[i] === current);
+            });
+            const bg = document.getElementById("storyBg");
+            if (bg) bg.style.transform = `translateY(${window.scrollY * 0.035}px)`;
         }
+
+        const cardObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.querySelectorAll(".index-card").forEach((card, index) => {
+                    setTimeout(() => card.classList.add("visible"), index * 120);
+                });
+            });
+        }, { threshold: 0.18 });
+
+        window.addEventListener("load", () => {
+            initGallery();
+            cardObserver.observe(document.querySelector("#directory"));
+            adjustActiveStates();
+        });
+        window.addEventListener("scroll", adjustActiveStates);
     </script>
 </body>
 </html>
