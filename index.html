@@ -300,6 +300,80 @@
         .dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.36); background: transparent; cursor: pointer; transition: 0.3s; }
         .dot.active, .dot:hover { background: var(--blue); border-color: var(--blue); transform: scale(1.28); box-shadow: 0 0 12px var(--blue); }
 
+        .cursor-paint {
+            position: fixed;
+            inset: 0;
+            z-index: 48;
+            pointer-events: none;
+            mix-blend-mode: screen;
+        }
+
+        .story-modal {
+            position: fixed;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            z-index: 80;
+            padding: 24px;
+            background: rgba(2,2,4,0.62);
+            backdrop-filter: blur(18px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.35s ease;
+        }
+        .story-modal.is-open { opacity: 1; pointer-events: auto; }
+        .story-card {
+            width: min(920px, 92vw);
+            max-height: 88vh;
+            overflow: hidden;
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.2);
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.16), rgba(255,255,255,0.04)),
+                rgba(8,10,13,0.86);
+            box-shadow: 0 38px 110px rgba(0,0,0,0.68), 0 0 40px rgba(0,232,255,0.14);
+            transform: translateY(18px) scale(0.96);
+            transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+        .story-modal.is-open .story-card { transform: translateY(0) scale(1); }
+        .story-card-media {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            background:
+                linear-gradient(135deg, rgba(0,232,255,0.18), transparent 48%),
+                linear-gradient(315deg, rgba(255,79,195,0.18), transparent 52%),
+                #111318;
+        }
+        .story-card-media img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .story-card-close {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 38px;
+            height: 38px;
+            border: 1px solid rgba(255,255,255,0.24);
+            border-radius: 50%;
+            background: rgba(0,0,0,0.42);
+            color: white;
+            cursor: pointer;
+            font-size: 22px;
+            line-height: 1;
+            backdrop-filter: blur(12px);
+        }
+        .story-card-body { padding: clamp(20px, 3vw, 34px); }
+        .story-card-body span { color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: 0.18em; }
+        .story-card-body h3 { margin: 10px 0 16px; font-family: var(--font-title); font-size: clamp(24px, 3vw, 40px); }
+        .prompt-box {
+            min-height: 92px;
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 18px;
+            padding: 16px 18px;
+            color: rgba(255,255,255,0.66);
+            background: rgba(255,255,255,0.04);
+            line-height: 1.75;
+            font-size: 13px;
+        }
+
         .chapter-placeholder { background: #090a0d; }
         .chapter-placeholder h1 { font-family: var(--font-title); color: rgba(255,255,255,0.08); font-size: clamp(44px, 8vw, 112px); }
 
@@ -435,12 +509,32 @@
     <section id="ch3" class="chapter-placeholder"><h1>CHAPTER 3</h1></section>
     <section id="photo" class="chapter-placeholder"><h1>PHOTO</h1></section>
 
+    <canvas class="cursor-paint" id="cursorPaint" aria-hidden="true"></canvas>
+
+    <div class="story-modal" id="storyModal" aria-hidden="true">
+        <article class="story-card">
+            <div class="story-card-media">
+                <img id="modalImage" src="" alt="&#x5206;&#x955C;&#x5927;&#x56FE;">
+                <button class="story-card-close" id="modalClose" type="button" aria-label="&#x5173;&#x95ED;">&#xD7;</button>
+            </div>
+            <div class="story-card-body">
+                <span id="modalIndex">STORYBOARD #01</span>
+                <h3>&#x5206;&#x955C;&#x63D0;&#x793A;&#x8BCD;</h3>
+                <div class="prompt-box" id="modalPrompt">&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x653E;&#x8FD9;&#x4E00;&#x5F20;&#x5206;&#x955C;&#x56FE;&#x7684;&#x63D0;&#x793A;&#x8BCD;&#x3001;&#x753B;&#x9762;&#x63CF;&#x8FF0;&#x3001;&#x955C;&#x5934;&#x8BED;&#x8A00;&#x6216;&#x751F;&#x6210;&#x53C2;&#x6570;&#x3002;</div>
+            </div>
+        </article>
+    </div>
+
     <script>
         const images = [
             "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "35.jpg", "1.jpg", "2.jpg", "3.jpg",
             "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "35.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg",
             "7.jpg", "8.jpg", "9.jpg", "35.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"
         ];
+
+        const storyboardPrompts = Array.from({ length: 39 }, (_, index) =>
+            `&#x63D0;&#x793A;&#x8BCD;&#x4F4D;&#x7F6E;&#xFF1A;&#x5728;&#x8FD9;&#x91CC;&#x586B;&#x5199;&#x7B2C; ${String(index + 1).padStart(2, "0")} &#x5F20;&#x5206;&#x955C;&#x7684; prompt&#x3001;&#x753B;&#x9762;&#x63CF;&#x8FF0;&#x3001;&#x955C;&#x5934;&#x8BED;&#x8A00;&#x3001;&#x89D2;&#x8272;&#x52A8;&#x4F5C;&#x3001;&#x5149;&#x5F71;&#x6C1B;&#x56F4;&#x6216;&#x751F;&#x6210;&#x53C2;&#x6570;&#x3002;`
+        );
 
         function addFallback(card, index) {
             const fallback = document.createElement("div");
@@ -457,7 +551,7 @@
                 const start = (rowNum - 1) * rowLength;
                 const state = {
                     offset: 0,
-                    velocity: rowNum === 2 ? 0.22 : -0.22,
+                    velocity: rowNum === 2 ? 0.08 : -0.08,
                     active: 0,
                     wheelBoost: 0
                 };
@@ -481,7 +575,10 @@
 
                     card.appendChild(img);
                     card.appendChild(number);
-                    card.addEventListener("click", () => goToFrame(rail, dots, state, i));
+                    card.addEventListener("click", () => {
+                        goToFrame(rail, dots, state, i);
+                        openStoryModal(index);
+                    });
                     rail.appendChild(card);
 
                     const dot = document.createElement("button");
@@ -504,8 +601,8 @@
                     const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
                     const maxMove = getMaxMove(rail);
                     if (maxMove <= 0) return;
-                    state.offset = clamp(state.offset - delta * 0.85, -maxMove, 0);
-                    state.wheelBoost = clamp(state.wheelBoost - delta * 0.006, -1.2, 1.2);
+                    state.offset = clamp(state.offset - delta * 0.56, -maxMove, 0);
+                    state.wheelBoost = clamp(state.wheelBoost - delta * 0.0035, -0.72, 0.72);
                     applyRailState(rail, dots, state);
                 }, { passive: false });
 
@@ -576,6 +673,25 @@
             window.setTimeout(() => rail.style.transition = "", 820);
         }
 
+        function openStoryModal(index) {
+            const modal = document.getElementById("storyModal");
+            const modalImage = document.getElementById("modalImage");
+            const modalIndex = document.getElementById("modalIndex");
+            const modalPrompt = document.getElementById("modalPrompt");
+            modalImage.src = images[index];
+            modalImage.alt = `&#x5206;&#x955C;&#x5927;&#x56FE; ${index + 1}`;
+            modalIndex.textContent = `STORYBOARD #${String(index + 1).padStart(2, "0")}`;
+            modalPrompt.textContent = storyboardPrompts[index];
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+        }
+
+        function closeStoryModal() {
+            const modal = document.getElementById("storyModal");
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+        }
+
         function setActiveDot(dots, index) {
             dots.querySelectorAll(".dot").forEach((dot, i) => dot.classList.toggle("active", i === index));
         }
@@ -611,8 +727,98 @@
             });
         }, { threshold: 0.18 });
 
+        function initModalControls() {
+            const modal = document.getElementById("storyModal");
+            document.getElementById("modalClose").addEventListener("click", closeStoryModal);
+            modal.addEventListener("click", event => {
+                if (event.target === modal) closeStoryModal();
+            });
+            window.addEventListener("keydown", event => {
+                if (event.key === "Escape") closeStoryModal();
+            });
+        }
+
+        function initCursorPaint() {
+            const canvas = document.getElementById("cursorPaint");
+            const ctx = canvas.getContext("2d");
+            const strokes = [];
+            const colors = ["#00e8ff", "#ff4fc3", "#d8ff3d", "#ff8a35", "#ffffff"];
+            let last = null;
+            let hueStep = 0;
+
+            function resize() {
+                const dpr = window.devicePixelRatio || 1;
+                canvas.width = Math.floor(window.innerWidth * dpr);
+                canvas.height = Math.floor(window.innerHeight * dpr);
+                canvas.style.width = `${window.innerWidth}px`;
+                canvas.style.height = `${window.innerHeight}px`;
+                ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+            }
+
+            window.addEventListener("resize", resize);
+            resize();
+
+            window.addEventListener("pointermove", event => {
+                const point = { x: event.clientX, y: event.clientY };
+                if (last) {
+                    const dx = point.x - last.x;
+                    const dy = point.y - last.y;
+                    const distance = Math.hypot(dx, dy);
+                    if (distance > 2) {
+                        strokes.push({
+                            x1: last.x,
+                            y1: last.y,
+                            x2: point.x,
+                            y2: point.y,
+                            life: 1,
+                            width: 8 + Math.min(distance * 0.18, 10),
+                            color: colors[hueStep % colors.length],
+                            spin: (hueStep % 2 ? 1 : -1) * Math.min(distance * 0.04, 1.4)
+                        });
+                        hueStep++;
+                    }
+                }
+                last = point;
+            }, { passive: true });
+
+            window.addEventListener("pointerleave", () => {
+                last = null;
+            });
+
+            function draw() {
+                ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
+                for (let i = strokes.length - 1; i >= 0; i--) {
+                    const s = strokes[i];
+                    s.life -= 0.022;
+                    if (s.life <= 0) {
+                        strokes.splice(i, 1);
+                        continue;
+                    }
+                    ctx.save();
+                    ctx.globalAlpha = Math.max(0, s.life) * 0.72;
+                    ctx.lineCap = "round";
+                    ctx.lineJoin = "round";
+                    ctx.strokeStyle = s.color;
+                    ctx.shadowColor = s.color;
+                    ctx.shadowBlur = 18 * s.life;
+                    ctx.lineWidth = s.width * s.life;
+                    const cx = (s.x1 + s.x2) / 2 + Math.sin(s.life * Math.PI) * 18 * s.spin;
+                    const cy = (s.y1 + s.y2) / 2 + Math.cos(s.life * Math.PI) * 12 * s.spin;
+                    ctx.beginPath();
+                    ctx.moveTo(s.x1, s.y1);
+                    ctx.quadraticCurveTo(cx, cy, s.x2, s.y2);
+                    ctx.stroke();
+                    ctx.restore();
+                }
+                requestAnimationFrame(draw);
+            }
+            draw();
+        }
+
         window.addEventListener("load", () => {
             initGallery();
+            initModalControls();
+            initCursorPaint();
             cardObserver.observe(document.querySelector("#directory"));
             adjustActiveStates();
         });
