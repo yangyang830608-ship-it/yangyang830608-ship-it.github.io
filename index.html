@@ -169,6 +169,15 @@
 
         .directory { background: linear-gradient(180deg, #070709, #101115); }
         .section-kicker { color: var(--blue); font-size: 11px; font-weight: 800; margin-bottom: 28px; }
+        .section-title {
+            font-family: var(--font-title);
+            font-size: clamp(34px, 4.8vw, 72px);
+            line-height: 0.98;
+            letter-spacing: -0.04em;
+            text-transform: uppercase;
+            margin-bottom: 16px;
+        }
+        .section-copy { max-width: 880px; color: rgba(255,255,255,0.62); line-height: 1.8; font-size: 14px; margin-bottom: 30px; }
         .index-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
         .index-card {
             min-height: 520px;
@@ -360,6 +369,25 @@
             line-height: 1;
             backdrop-filter: blur(12px);
         }
+        .story-step {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            width: 52px;
+            height: 52px;
+            border: 1px solid rgba(255,255,255,0.22);
+            border-radius: 50%;
+            background: rgba(0,0,0,0.44);
+            color: white;
+            font-size: 24px;
+            line-height: 1;
+            cursor: pointer;
+            backdrop-filter: blur(12px);
+            display: grid;
+            place-items: center;
+        }
+        .story-step.prev { left: 16px; }
+        .story-step.next { right: 16px; }
         .story-card-body { padding: clamp(20px, 3vw, 34px); }
         .story-card-body span { color: var(--blue); font-size: 11px; font-weight: 900; letter-spacing: 0.18em; }
         .story-card-body h3 { margin: 10px 0 16px; font-family: var(--font-title); font-size: clamp(24px, 3vw, 40px); }
@@ -374,22 +402,188 @@
             font-size: 13px;
         }
 
-        .chapter-placeholder { background: #090a0d; }
-        .chapter-placeholder h1 { font-family: var(--font-title); color: rgba(255,255,255,0.08); font-size: clamp(44px, 8vw, 112px); }
+        .workflow-page { background: radial-gradient(circle at 50% 0%, rgba(0,232,255,0.12), transparent 24%), #090a0d; }
+        .workflow-grid {
+            display: grid;
+            grid-template-columns: repeat(6, minmax(0, 1fr));
+            gap: 16px;
+            width: 100%;
+        }
+        .workflow-card {
+            position: relative;
+            min-height: 320px;
+            padding: 22px;
+            border-radius: 12px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)),
+                rgba(10,12,16,0.92);
+            overflow: hidden;
+        }
+        .workflow-card::after {
+            content: "";
+            position: absolute;
+            inset: 12px;
+            border-radius: 10px;
+            border: 1px dashed rgba(255,255,255,0.08);
+            pointer-events: none;
+        }
+        .workflow-num { color: var(--blue); font-size: 11px; font-weight: 800; letter-spacing: 0.16em; margin-bottom: 12px; }
+        .workflow-card h3 { font-family: var(--font-title); font-size: clamp(20px, 2vw, 30px); line-height: 1.1; margin-bottom: 14px; }
+        .workflow-card p { color: rgba(255,255,255,0.66); font-size: 13px; line-height: 1.8; }
+        .workflow-flow {
+            position: absolute;
+            right: 16px;
+            bottom: 16px;
+            font-size: 42px;
+            color: rgba(255,255,255,0.12);
+            font-family: var(--font-title);
+        }
+
+        .final-page { background: radial-gradient(circle at 20% 20%, rgba(255,79,195,0.15), transparent 22%), #06070a; }
+        .tv-stage {
+            width: min(1240px, 100%);
+            display: grid;
+            grid-template-columns: minmax(0, 1.2fr) minmax(260px, 0.7fr);
+            gap: 24px;
+            align-items: center;
+        }
+        .tv-shell {
+            position: relative;
+            padding: 26px;
+            border-radius: 42px;
+            background:
+                linear-gradient(145deg, rgba(255,255,255,0.14), rgba(255,255,255,0.04)),
+                rgba(10,12,16,0.94);
+            border: 1px solid rgba(255,255,255,0.18);
+            box-shadow: 0 50px 150px rgba(0,0,0,0.7);
+        }
+        .tv-shell::before {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            border-radius: 28px;
+            border: 2px solid rgba(255,255,255,0.06);
+            pointer-events: none;
+        }
+        .tv-screen {
+            position: relative;
+            aspect-ratio: 16 / 9;
+            border-radius: 28px;
+            overflow: hidden;
+            background: #111;
+            border: 1px solid rgba(255,255,255,0.12);
+        }
+        .tv-screen video, .tv-screen img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .tv-badge {
+            position: absolute;
+            left: 24px;
+            top: 24px;
+            padding: 8px 12px;
+            border-radius: 999px;
+            background: rgba(0,0,0,0.4);
+            border: 1px solid rgba(255,255,255,0.15);
+            color: white;
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            backdrop-filter: blur(10px);
+        }
+        .tv-controls {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-top: 14px;
+            color: rgba(255,255,255,0.6);
+            font-size: 11px;
+            letter-spacing: 0.2em;
+        }
+        .tv-note {
+            position: relative;
+            min-height: 520px;
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background:
+                radial-gradient(circle at 28% 18%, rgba(0,232,255,0.16), transparent 20%),
+                radial-gradient(circle at 70% 72%, rgba(255,79,195,0.14), transparent 22%),
+                rgba(10,12,16,0.88);
+            padding: 26px;
+            overflow: hidden;
+        }
+        .tv-note::before {
+            content: "";
+            position: absolute;
+            inset: 18px;
+            border-radius: 22px;
+            border: 1px dashed rgba(255,255,255,0.1);
+        }
+        .tv-note h2 { position: relative; font-family: var(--font-title); font-size: clamp(28px, 3vw, 46px); line-height: 1.05; margin-bottom: 18px; }
+        .tv-note p { position: relative; color: rgba(255,255,255,0.68); line-height: 1.9; font-size: 14px; max-width: 28ch; }
+        .tv-doodle {
+            position: absolute;
+            right: 18px;
+            bottom: 18px;
+            font-family: var(--font-title);
+            font-size: clamp(54px, 8vw, 120px);
+            color: rgba(255,255,255,0.1);
+            transform: rotate(-14deg);
+        }
+
+        .storyboard-band {
+            width: 100%;
+            display: grid;
+            gap: 18px;
+            margin-bottom: 20px;
+        }
+
+        .storyboard-hero {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(250px, 0.9fr);
+            gap: 24px;
+            align-items: end;
+        }
+
+        .storyboard-note {
+            border-left: 1px solid rgba(255,255,255,0.12);
+            padding-left: 18px;
+            color: rgba(255,255,255,0.62);
+            line-height: 1.85;
+            font-size: 14px;
+        }
+
+        .storyboard-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            justify-content: flex-start;
+        }
+
+        .storyboard-meta span {
+            border: 1px solid rgba(255,255,255,0.14);
+            border-radius: 999px;
+            padding: 8px 12px;
+            font-size: 11px;
+            color: rgba(255,255,255,0.68);
+            background: rgba(255,255,255,0.03);
+        }
 
         @media (max-width: 980px) {
             .cover-layout { grid-template-columns: 1fr; padding-top: 86px; padding-bottom: 50px; }
             .portrait-stage { min-height: 390px; }
             .index-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
             .index-card { min-height: 390px; }
+            .workflow-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .tv-stage { grid-template-columns: 1fr; }
             .dot-nav { display: none; }
         }
         @media (max-width: 640px) {
             .profile-brand { top: 72px; left: 18px; font-size: 22px; }
             .top-nav { left: 12px; right: 12px; justify-content: flex-start; gap: 10px; overflow-x: auto; }
             .index-grid { grid-template-columns: 1fr; }
+            .workflow-grid { grid-template-columns: 1fr; }
             .container { padding: 0 18px; }
             .moving-track { overflow: hidden; }
+            .storyboard-hero { grid-template-columns: 1fr; }
+            .story-step { width: 44px; height: 44px; font-size: 20px; }
         }
     </style>
 </head>
@@ -412,8 +606,9 @@
         <a href="#cover" class="active">&#x5173;&#x4E8E;&#x6211;</a>
         <a href="#directory">&#x76EE;&#x5F55;</a>
         <a href="#hero-project">AI&#x751F;&#x6210;</a>
-        <a href="#ch2">&#x4EA4;&#x4E92;&#x88C5;&#x7F6E;</a>
-        <a href="#ch3">&#x7EFC;&#x5408;&#x6750;&#x6599;</a>
+        <a href="#storyboard">&#x5206;&#x955C;</a>
+        <a href="#ch2">&#x6D41;&#x7A0B;</a>
+        <a href="#ch3">&#x6210;&#x7247;</a>
         <a href="#photo">&#x5F71;&#x50CF;</a>
     </nav>
     <div class="dot-nav">
@@ -493,7 +688,23 @@
 
     <section id="storyboard" class="storyboard">
         <div class="container">
-            <p class="section-kicker">STORYBOARD MATRIX / &#x4E09;&#x6392;&#x5341;&#x4E09;&#x5F20;&#x5206;&#x955C;&#x6162;&#x901F;&#x6D41;&#x52A8;</p>
+            <div class="storyboard-band">
+                <div class="storyboard-hero">
+                    <div>
+                        <p class="section-kicker">AI SHORT FILM STORYBOARD / &#x5206;&#x955C;&#x603B;&#x89C8;</p>
+                        <h2 class="section-title">AI &#x77ED;&#x7247;&#x9879;&#x76EE;&#x5206;&#x955C;&#x56FE;</h2>
+                    </div>
+                    <div class="storyboard-note">
+                        &#x8FD9;&#x4E00;&#x9875;&#x662F;&#x6574;&#x652F; AI &#x77ED;&#x7247;&#x7684;&#x5206;&#x955C;&#x4E3B;&#x573A;&#xFF0C;&#x6309;&#x4E09;&#x6392;&#x957F;&#x8F68;&#x9053;&#x5C55;&#x5F00;&#x3002;&#x6BCF;&#x5F20;&#x56FE;&#x90FD;&#x53EF;&#x4EE5;&#x70B9;&#x5F00;&#x6210;&#x5927;&#x56FE;&#x67E5;&#x770B;&#xFF0C;&#x9002;&#x5408;&#x6D4F;&#x89C8;&#x955C;&#x5934;&#x8BBE;&#x8BA1;&#x3001;&#x8282;&#x594F;&#x5B89;&#x6392;&#x548C;&#x753B;&#x9762;&#x6F14;&#x8FDB;&#x3002;
+                    </div>
+                </div>
+                <div class="storyboard-meta">
+                    <span>39 FRAMES</span>
+                    <span>3 ROWS</span>
+                    <span>CLICK TO VIEW</span>
+                    <span>WHEEL TO SCROLL</span>
+                </div>
+            </div>
             <div class="gallery-wrapper">
                 <div class="moving-track"><div class="inner-rail" id="rail1"></div></div>
                 <div class="dots-row" id="dots1"></div>
@@ -505,8 +716,73 @@
         </div>
     </section>
 
-    <section id="ch2" class="chapter-placeholder"><h1>CHAPTER 2</h1></section>
-    <section id="ch3" class="chapter-placeholder"><h1>CHAPTER 3</h1></section>
+    <section id="ch2" class="workflow-page">
+        <div class="container">
+            <p class="section-kicker">WORKFLOW / &#x5236;&#x4F5C;&#x6D41;&#x7A0B;</p>
+            <h2 class="section-title">&#x4ECE;&#x63D0;&#x793A;&#x8BCD;&#x5230;&#x6210;&#x7247;</h2>
+            <p class="section-copy">&#x8FD9;&#x4E00;&#x9875;&#x5148;&#x6309;&#x4F60;&#x8BF4;&#x7684;&#x65B9;&#x5411;&#x505A;&#x6210;&#x6D41;&#x7A0B;&#x578B;&#x9875;&#x9762;&#xFF0C;&#x540E;&#x9762;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x66F4;&#x5DE5;&#x4E1A;&#x4E00;&#x70B9;&#x6216;&#x66F4;&#x827A;&#x672F;&#x4E00;&#x70B9;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x5FAE;&#x8C03;&#x7248;&#x5F0F;&#x3002;&#x73B0;&#x5728;&#x91CD;&#x70B9;&#x662F;&#x8BA9;&#x8BFB;&#x8005;&#x4E00;&#x773C;&#x770B;&#x5230;&#x6574;&#x4E2A; AI &#x77ED;&#x7247;&#x7684;&#x5236;&#x4F5C;&#x94FE;&#x8DEF;&#x3002;</p>
+            <div class="workflow-grid">
+                <div class="workflow-card">
+                    <div class="workflow-num">01</div>
+                    <h3>&#x63D0;&#x793A;&#x8BCD;&#x64B0;&#x5199;</h3>
+                    <p>&#x628A;&#x521B;&#x610F;&#x76EE;&#x6807;&#x3001;&#x60C5;&#x7EEA;&#x5173;&#x952E;&#x8BCD;&#x3001;&#x955C;&#x5934;&#x9650;&#x5236;&#x548C;&#x753B;&#x9762;&#x9700;&#x6C42;&#x62C6;&#x6210;&#x53EF;&#x6267;&#x884C;&#x7684; prompt&#xFF0C;&#x5148;&#x5B9A;&#x65B9;&#x5411;&#xFF0C;&#x518D;&#x5B9A;&#x753B;&#x9762;&#x3002;</p>
+                    <div class="workflow-flow">&#x2192;</div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">02</div>
+                    <h3>&#x98CE;&#x683C;&#x56FA;&#x5B9A;</h3>
+                    <p>&#x7EDF;&#x4E00;&#x8272;&#x5F69;&#x3001;&#x6750;&#x8D28;&#x3001;&#x5149;&#x611F;&#x548C;&#x6784;&#x56FE;&#x8BED;&#x8A00;&#xFF0C;&#x8BA9;&#x4E0D;&#x540C;&#x753B;&#x9762;&#x5728;&#x89C6;&#x89C9;&#x4E0A;&#x4FDD;&#x6301;&#x540C;&#x4E00;&#x6761;&#x5BA1;&#x7F8E;&#x7EBF;&#x3002;</p>
+                    <div class="workflow-flow">&#x2192;</div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">03</div>
+                    <h3>&#x4EBA;&#x7269;&#x56FA;&#x5B9A;</h3>
+                    <p>&#x9501;&#x5B9A;&#x89D2;&#x8272;&#x4E94;&#x5B98;&#x3001;&#x53D1;&#x578B;&#x3001;&#x670D;&#x9970;&#x548C;&#x8EAB;&#x4EFD;&#x7279;&#x5F81;&#xFF0C;&#x4FDD;&#x8BC1;&#x955C;&#x5934;&#x4E4B;&#x95F4;&#x7684;&#x4EBA;&#x7269;&#x8FDE;&#x7EED;&#x6027;&#x3002;</p>
+                    <div class="workflow-flow">&#x2192;</div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">04</div>
+                    <h3>&#x5206;&#x955C;&#x751F;&#x6210;</h3>
+                    <p>&#x5C06;&#x53D9;&#x4E8B;&#x62C6;&#x5206;&#x4E3A;&#x8FDE;&#x7EED;&#x753B;&#x9762;&#xFF0C;&#x63A7;&#x5236;&#x955C;&#x5934;&#x8FD0;&#x52A8;&#x3001;&#x5207;&#x6362;&#x8282;&#x594F;&#x548C;&#x573A;&#x666F;&#x9012;&#x8FDB;&#x3002;</p>
+                    <div class="workflow-flow">&#x2192;</div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">05</div>
+                    <h3>&#x9996;&#x5C3E;&#x5E27;&#x6210;&#x89C6;&#x9891;</h3>
+                    <p>&#x628A;&#x8D77;&#x59CB;&#x5E27;&#x548C;&#x7ED3;&#x675F;&#x5E27;&#x8FDE;&#x63A5;&#x6210;&#x8FD0;&#x52A8;&#x533A;&#x95F4;&#xFF0C;&#x63A8;&#x8FDB;&#x955C;&#x5934;&#x53D8;&#x5316;&#xFF0C;&#x8BA9;&#x9759;&#x6001;&#x56FE;&#x50CF;&#x5F00;&#x59CB;&#x201C;&#x547C;&#x5438;&#x201D;&#x3002;</p>
+                    <div class="workflow-flow">&#x2192;</div>
+                </div>
+                <div class="workflow-card">
+                    <div class="workflow-num">06</div>
+                    <h3>&#x526A;&#x8F91;&#x6210;&#x7247;</h3>
+                    <p>&#x914D;&#x5408;&#x8282;&#x594F;&#x3001;&#x97F3;&#x4E50;&#x3001;&#x97F3;&#x6548;&#x548C;&#x8F6C;&#x573A;&#xFF0C;&#x628A;&#x524D;&#x9762;&#x7684;&#x751F;&#x6210;&#x6750;&#x6599;&#x6574;&#x5408;&#x6210;&#x6700;&#x7EC8;&#x77ED;&#x7247;&#x3002;</p>
+                    <div class="workflow-flow">END</div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ch3" class="final-page">
+        <div class="container tv-stage">
+            <div class="tv-shell">
+                <div class="tv-screen">
+                    <span class="tv-badge">FINAL CUT / &#x6210;&#x7247;&#x653E;&#x6620;</span>
+                    <video id="finalVideo" controls autoplay muted loop playsinline poster="35.jpg" src="final-cut.mp4"></video>
+                </div>
+                <div class="tv-controls">
+                    <span>PLAYBACK</span>
+                    <span>AI SHORT FILM</span>
+                    <span>HD</span>
+                </div>
+            </div>
+            <aside class="tv-note">
+                <h2>&#x50CF;&#x7535;&#x89C6;&#x673A;&#x4E00;&#x6837;&#x653E;&#x6620;&#x7684;&#x6210;&#x7247;&#x9875;</h2>
+                <p>&#x8FD9;&#x4E00;&#x9875;&#x4E0D;&#x505A;&#x5E72;&#x5DF4;&#x5DF4;&#x7684;&#x5355;&#x5361;&#x7247;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x89C6;&#x9891;&#x653E;&#x8FDB;&#x4E00;&#x4E2A;&#x5E26;&#x6D82;&#x9E26;&#x611F;&#x548C;&#x5706;&#x89D2;&#x5916;&#x58F3;&#x7684;&#x653E;&#x6620;&#x88C5;&#x7F6E;&#x91CC;&#x3002;&#x65C1;&#x8FB9;&#x4FDD;&#x7559;&#x4E00;&#x4E9B;&#x8F7B;&#x677E;&#x7684;&#x624B;&#x7ED8;&#x611F;&#x5143;&#x7D20;&#xFF0C;&#x8BA9;&#x9875;&#x9762;&#x548C;&#x5C01;&#x9762;&#x547C;&#x5E94;&#x8D77;&#x6765;&#x3002;</p>
+                <div class="tv-doodle">TV</div>
+            </aside>
+        </div>
+    </section>
+
     <section id="photo" class="chapter-placeholder"><h1>PHOTO</h1></section>
 
     <canvas class="cursor-paint" id="cursorPaint" aria-hidden="true"></canvas>
@@ -515,6 +791,8 @@
         <article class="story-card">
             <div class="story-card-media">
                 <img id="modalImage" src="" alt="&#x5206;&#x955C;&#x5927;&#x56FE;">
+                <button class="story-step prev" id="modalPrev" type="button" aria-label="&#x4E0A;&#x4E00;&#x5F20;">&lt;</button>
+                <button class="story-step next" id="modalNext" type="button" aria-label="&#x4E0B;&#x4E00;&#x5F20;">&gt;</button>
                 <button class="story-card-close" id="modalClose" type="button" aria-label="&#x5173;&#x95ED;">&#xD7;</button>
             </div>
             <div class="story-card-body">
@@ -535,6 +813,7 @@
         const storyboardPrompts = Array.from({ length: 39 }, (_, index) =>
             `&#x63D0;&#x793A;&#x8BCD;&#x4F4D;&#x7F6E;&#xFF1A;&#x5728;&#x8FD9;&#x91CC;&#x586B;&#x5199;&#x7B2C; ${String(index + 1).padStart(2, "0")} &#x5F20;&#x5206;&#x955C;&#x7684; prompt&#x3001;&#x753B;&#x9762;&#x63CF;&#x8FF0;&#x3001;&#x955C;&#x5934;&#x8BED;&#x8A00;&#x3001;&#x89D2;&#x8272;&#x52A8;&#x4F5C;&#x3001;&#x5149;&#x5F71;&#x6C1B;&#x56F4;&#x6216;&#x751F;&#x6210;&#x53C2;&#x6570;&#x3002;`
         );
+        let currentModalIndex = 0;
 
         function addFallback(card, index) {
             const fallback = document.createElement("div");
@@ -675,15 +954,25 @@
 
         function openStoryModal(index) {
             const modal = document.getElementById("storyModal");
+            currentModalIndex = clamp(index, 0, images.length - 1);
+            renderStoryModal();
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+        }
+
+        function renderStoryModal() {
             const modalImage = document.getElementById("modalImage");
             const modalIndex = document.getElementById("modalIndex");
             const modalPrompt = document.getElementById("modalPrompt");
-            modalImage.src = images[index];
-            modalImage.alt = `&#x5206;&#x955C;&#x5927;&#x56FE; ${index + 1}`;
-            modalIndex.textContent = `STORYBOARD #${String(index + 1).padStart(2, "0")}`;
-            modalPrompt.textContent = storyboardPrompts[index];
-            modal.classList.add("is-open");
-            modal.setAttribute("aria-hidden", "false");
+            modalImage.src = images[currentModalIndex];
+            modalImage.alt = `&#x5206;&#x955C;&#x5927;&#x56FE; ${currentModalIndex + 1}`;
+            modalIndex.textContent = `STORYBOARD #${String(currentModalIndex + 1).padStart(2, "0")}`;
+            modalPrompt.textContent = storyboardPrompts[currentModalIndex];
+        }
+
+        function stepStoryModal(delta) {
+            currentModalIndex = (currentModalIndex + delta + images.length) % images.length;
+            renderStoryModal();
         }
 
         function closeStoryModal() {
@@ -708,8 +997,7 @@
             });
             document.querySelectorAll(".top-nav a").forEach(link => {
                 const target = link.getAttribute("href");
-                const mappedCurrent = current === "storyboard" ? "hero-project" : current;
-                link.classList.toggle("active", target === `#${mappedCurrent}`);
+                link.classList.toggle("active", target === `#${current}`);
             });
             document.querySelectorAll(".dot-item").forEach((dot, i) => {
                 dot.classList.toggle("active", sectionIds[i] === current);
@@ -730,11 +1018,22 @@
         function initModalControls() {
             const modal = document.getElementById("storyModal");
             document.getElementById("modalClose").addEventListener("click", closeStoryModal);
+            document.getElementById("modalPrev").addEventListener("click", () => stepStoryModal(-1));
+            document.getElementById("modalNext").addEventListener("click", () => stepStoryModal(1));
             modal.addEventListener("click", event => {
                 if (event.target === modal) closeStoryModal();
             });
+            modal.addEventListener("wheel", event => {
+                if (!modal.classList.contains("is-open")) return;
+                event.preventDefault();
+                const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+                stepStoryModal(delta > 0 ? 1 : -1);
+            }, { passive: false });
             window.addEventListener("keydown", event => {
                 if (event.key === "Escape") closeStoryModal();
+                if (!modal.classList.contains("is-open")) return;
+                if (event.key === "ArrowLeft") stepStoryModal(-1);
+                if (event.key === "ArrowRight") stepStoryModal(1);
             });
         }
 
