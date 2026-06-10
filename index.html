@@ -247,11 +247,19 @@
         .tag-row span { border: 1px solid rgba(255,255,255,0.18); padding: 7px 14px; color: rgba(255,255,255,0.68); font-size: 11px; }
 
         .storyboard { background: radial-gradient(circle at 50% 10%, rgba(0,232,255,0.12), transparent 28%), #08090b; }
-        .gallery-wrapper { display: grid; gap: 24px; }
-        .moving-track { overflow: visible; width: 100%; padding: 18px 0 30px; }
-        .inner-rail { display: flex; gap: 18px; align-items: center; will-change: transform; }
+        .gallery-wrapper { display: grid; gap: 16px; width: 100%; align-items: center; }
+        .moving-track {
+            --frame-w: clamp(138px, 15vw, 220px);
+            --frame-gap: clamp(12px, 1.2vw, 18px);
+            width: min(100%, calc((var(--frame-w) * 5) + (var(--frame-gap) * 4)));
+            margin: 0 auto;
+            overflow: hidden;
+            padding: 20px 0 34px;
+            cursor: ew-resize;
+        }
+        .inner-rail { display: flex; gap: var(--frame-gap); align-items: center; will-change: transform; }
         .frame-card {
-            flex: 0 0 clamp(150px, 17vw, 245px);
+            flex: 0 0 var(--frame-w);
             aspect-ratio: 16 / 9;
             position: relative;
             border: 1px solid rgba(255,255,255,0.12);
@@ -259,13 +267,14 @@
             overflow: hidden;
             background: linear-gradient(135deg, #24272b, #090a0c);
             cursor: pointer;
-            transform: scale(0.82);
+            transform: scale(0.74);
             transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s, opacity 0.35s;
-            opacity: 0.62;
+            opacity: 0.5;
         }
-        .frame-card.is-mid { flex-basis: clamp(190px, 21vw, 315px); transform: scale(1); opacity: 0.86; }
+        .frame-card.is-side { transform: scale(0.78); opacity: 0.58; }
+        .frame-card.is-mid { transform: scale(1); opacity: 0.9; }
         .frame-card:hover {
-            transform: scale(1.18);
+            transform: scale(1.2);
             z-index: 20;
             opacity: 1;
             border-color: var(--blue);
@@ -288,7 +297,7 @@
         }
         .frame-card span { position: absolute; left: 10px; bottom: 8px; color: white; font-size: 11px; font-weight: 700; text-shadow: 0 1px 10px black; }
         .dots-row { display: flex; justify-content: center; gap: 12px; margin-top: -10px; }
-        .dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.36); background: transparent; cursor: pointer; transition: 0.3s; }
+        .dot { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.36); background: transparent; cursor: pointer; transition: 0.3s; }
         .dot.active, .dot:hover { background: var(--blue); border-color: var(--blue); transform: scale(1.28); box-shadow: 0 0 12px var(--blue); }
 
         .chapter-placeholder { background: #090a0d; }
@@ -410,7 +419,7 @@
 
     <section id="storyboard" class="storyboard">
         <div class="container">
-            <p class="section-kicker">STORYBOARD MATRIX / &#x4E09;&#x6392;&#x4E94;&#x5F20;&#x6162;&#x901F;&#x6D41;&#x52A8;</p>
+            <p class="section-kicker">STORYBOARD MATRIX / &#x4E09;&#x6392;&#x5341;&#x4E09;&#x5F20;&#x5206;&#x955C;&#x6162;&#x901F;&#x6D41;&#x52A8;</p>
             <div class="gallery-wrapper">
                 <div class="moving-track"><div class="inner-rail" id="rail1"></div></div>
                 <div class="dots-row" id="dots1"></div>
@@ -428,28 +437,50 @@
 
     <script>
         const images = [
-            "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg",
-            "6.jpg", "7.jpg", "8.jpg", "9.jpg", "35.jpg",
-            "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"
+            "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "35.jpg", "1.jpg", "2.jpg", "3.jpg",
+            "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "35.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg",
+            "7.jpg", "8.jpg", "9.jpg", "35.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"
         ];
 
-        function makeFallback(index) {
-            return `<div class="fallback">Storyboard<br>#${String(index + 1).padStart(2, "0")}</div>`;
+        function addFallback(card, index) {
+            const fallback = document.createElement("div");
+            fallback.className = "fallback";
+            fallback.innerHTML = `Storyboard<br>#${String(index + 1).padStart(2, "0")}`;
+            card.appendChild(fallback);
         }
 
         function initGallery() {
+            const rowLength = 13;
             for (let rowNum = 1; rowNum <= 3; rowNum++) {
                 const rail = document.getElementById(`rail${rowNum}`);
                 const dots = document.getElementById(`dots${rowNum}`);
-                const start = (rowNum - 1) * 5;
-                const state = { offset: 0, direction: rowNum === 2 ? -1 : 1, paused: false, active: 0 };
+                const start = (rowNum - 1) * rowLength;
+                const state = {
+                    offset: 0,
+                    velocity: rowNum === 2 ? 0.22 : -0.22,
+                    active: 0,
+                    wheelBoost: 0
+                };
 
-                for (let i = 0; i < 5; i++) {
+                for (let i = 0; i < rowLength; i++) {
                     const index = start + i;
                     const card = document.createElement("button");
-                    card.className = `frame-card ${i > 0 && i < 4 ? "is-mid" : ""}`;
+                    card.className = "frame-card";
                     card.type = "button";
-                    card.innerHTML = `<img src="${images[index]}" alt="&#x5206;&#x955C; ${index + 1}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '${makeFallback(index)}')"><span>#${String(index + 1).padStart(2, "0")}</span>`;
+
+                    const img = document.createElement("img");
+                    img.src = images[index];
+                    img.alt = `&#x5206;&#x955C; ${index + 1}`;
+                    img.addEventListener("error", () => {
+                        img.remove();
+                        addFallback(card, index);
+                    }, { once: true });
+
+                    const number = document.createElement("span");
+                    number.textContent = `#${String(index + 1).padStart(2, "0")}`;
+
+                    card.appendChild(img);
+                    card.appendChild(number);
                     card.addEventListener("click", () => goToFrame(rail, dots, state, i));
                     rail.appendChild(card);
 
@@ -461,33 +492,37 @@
                     dots.appendChild(dot);
                 }
 
-                rail.addEventListener("mouseenter", () => state.paused = true);
-                rail.addEventListener("mouseleave", () => state.paused = false);
+                requestAnimationFrame(() => {
+                    const maxMove = getMaxMove(rail);
+                    if (rowNum === 2) state.offset = -maxMove;
+                    if (rowNum === 3) state.offset = -maxMove * 0.45;
+                    applyRailState(rail, dots, state);
+                });
+
                 rail.parentElement.addEventListener("wheel", event => {
                     event.preventDefault();
-                    const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
+                    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+                    const maxMove = getMaxMove(rail);
                     if (maxMove <= 0) return;
-                    state.paused = true;
-                    state.offset -= (event.deltaY || event.deltaX) * 0.9;
-                    state.offset = Math.max(-maxMove, Math.min(0, state.offset));
-                    rail.style.transform = `translateX(${state.offset}px)`;
-                    const step = maxMove / 4 || 1;
-                    state.active = Math.max(0, Math.min(4, Math.round(Math.abs(state.offset) / step)));
-                    setActiveDot(dots, state.active);
-                    window.clearTimeout(state.resumeTimer);
-                    state.resumeTimer = window.setTimeout(() => state.paused = false, 900);
+                    state.offset = clamp(state.offset - delta * 0.85, -maxMove, 0);
+                    state.wheelBoost = clamp(state.wheelBoost - delta * 0.006, -1.2, 1.2);
+                    applyRailState(rail, dots, state);
                 }, { passive: false });
 
                 function drift() {
-                    const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
-                    if (!state.paused && maxMove > 0) {
-                        state.offset += state.direction * 0.18;
-                        if (state.offset > 0 || Math.abs(state.offset) > maxMove) state.direction *= -1;
-                        state.offset = Math.max(-maxMove, Math.min(0, state.offset));
-                        rail.style.transform = `translateX(${state.offset}px)`;
-                        const step = maxMove / 4 || 1;
-                        state.active = Math.max(0, Math.min(4, Math.round(Math.abs(state.offset) / step)));
-                        setActiveDot(dots, state.active);
+                    const maxMove = getMaxMove(rail);
+                    if (maxMove > 0) {
+                        state.offset += state.velocity + state.wheelBoost;
+                        state.wheelBoost *= 0.92;
+                        if (state.offset >= 0) {
+                            state.offset = 0;
+                            state.velocity = -Math.abs(state.velocity);
+                        }
+                        if (state.offset <= -maxMove) {
+                            state.offset = -maxMove;
+                            state.velocity = Math.abs(state.velocity);
+                        }
+                        applyRailState(rail, dots, state);
                     }
                     requestAnimationFrame(drift);
                 }
@@ -495,14 +530,50 @@
             }
         }
 
-        function goToFrame(rail, dots, state, index) {
-            const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
-            state.offset = -(maxMove / 4) * index;
-            state.active = index;
-            rail.style.transition = "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+        function getMaxMove(rail) {
+            return Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
+        }
+
+        function clamp(value, min, max) {
+            return Math.max(min, Math.min(max, value));
+        }
+
+        function applyRailState(rail, dots, state) {
             rail.style.transform = `translateX(${state.offset}px)`;
+            updateFrameDepth(rail, dots, state);
+        }
+
+        function updateFrameDepth(rail, dots, state) {
+            const trackRect = rail.parentElement.getBoundingClientRect();
+            const centerX = trackRect.left + trackRect.width / 2;
+            const ranked = [...rail.querySelectorAll(".frame-card")].map((card, index) => {
+                const rect = card.getBoundingClientRect();
+                return { card, index, distance: Math.abs((rect.left + rect.width / 2) - centerX) };
+            }).sort((a, b) => a.distance - b.distance);
+
+            const midIndexes = new Set(ranked.slice(0, 3).map(item => item.index));
+            const sideIndexes = new Set(ranked.slice(3, 5).map(item => item.index));
+            ranked.forEach(({ card, index }) => {
+                card.classList.toggle("is-mid", midIndexes.has(index));
+                card.classList.toggle("is-side", sideIndexes.has(index));
+            });
+
+            state.active = ranked[0] ? ranked[0].index : 0;
+            setActiveDot(dots, state.active);
+        }
+
+        function goToFrame(rail, dots, state, index) {
+            const cards = rail.querySelectorAll(".frame-card");
+            const target = cards[index];
+            if (!target) return;
+            const maxMove = getMaxMove(rail);
+            const targetCenter = target.offsetLeft + target.offsetWidth / 2;
+            state.offset = clamp((rail.parentElement.clientWidth / 2) - targetCenter, -maxMove, 0);
+            state.active = index;
+            state.wheelBoost = 0;
+            rail.style.transition = "transform 0.8s cubic-bezier(0.16, 1, 0.3, 1)";
+            applyRailState(rail, dots, state);
             window.setTimeout(() => rail.style.transition = "", 820);
-            setActiveDot(dots, index);
         }
 
         function setActiveDot(dots, index) {
