@@ -97,3 +97,405 @@
         }
         @keyframes chromeFlow { from { background-position: 0% 50%; } to { background-position: 100% 50%; } }
         .hero-sub { margin-top: 24px; max-width: 660px; color: rgba(255,255,255,0.54); font-size: clamp(13px, 1.4vw, 16px); line-height: 1.8; }
+
+        .portrait-stage { position: relative; min-height: 520px; display: grid; place-items: center; }
+        .photo-blob {
+            width: min(420px, 76vw);
+            aspect-ratio: 1;
+            position: relative;
+            border-radius: 44% 56% 48% 52% / 52% 42% 58% 48%;
+            padding: 14px;
+            background:
+                linear-gradient(135deg, rgba(255,255,255,0.92), rgba(111,126,139,0.72) 22%, rgba(255,255,255,0.92) 44%, rgba(0,232,255,0.9) 64%, rgba(255,79,195,0.86) 100%);
+            box-shadow: inset 0 0 34px rgba(255,255,255,0.5), 0 36px 120px rgba(0,232,255,0.2);
+            animation: blobPulse 8s ease-in-out infinite alternate;
+        }
+        .photo-blob::before {
+            content: "";
+            position: absolute;
+            inset: -18px;
+            border-radius: inherit;
+            border: 1px solid rgba(255,255,255,0.2);
+            filter: blur(1px);
+        }
+        .photo-hole {
+            width: 100%;
+            height: 100%;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            border-radius: 42% 58% 50% 50% / 48% 46% 54% 52%;
+            background:
+                linear-gradient(150deg, rgba(12,14,18,0.82), rgba(60,70,80,0.4)),
+                url("portrait.jpg") center/cover;
+            color: rgba(255,255,255,0.56);
+            font-size: 12px;
+            text-align: center;
+            letter-spacing: 0.08em;
+        }
+        .photo-hole span { max-width: 160px; line-height: 1.7; }
+        .burst { position: absolute; pointer-events: none; font-family: var(--font-title); font-weight: 900; }
+        .burst.star { color: var(--acid); font-size: 78px; left: 3%; top: 18%; transform: rotate(-15deg); text-shadow: 0 0 22px rgba(216,255,61,0.48); }
+        .burst.zap { color: var(--pink); font-size: 54px; right: 4%; top: 12%; transform: rotate(17deg); }
+        .burst.ring { width: 92px; height: 92px; border: 10px solid var(--orange); border-radius: 50%; left: 12%; bottom: 15%; transform: rotate(-10deg); }
+        .burst.stroke { width: 170px; height: 18px; background: var(--blue); border-radius: 999px; right: 0; bottom: 22%; transform: rotate(-19deg); box-shadow: 0 18px 0 var(--pink), 0 -18px 0 var(--acid); }
+        @keyframes blobPulse {
+            from { border-radius: 44% 56% 48% 52% / 52% 42% 58% 48%; transform: translateY(0) rotate(-2deg); }
+            to { border-radius: 55% 45% 57% 43% / 43% 56% 44% 57%; transform: translateY(-16px) rotate(3deg); }
+        }
+
+        .directory { background: linear-gradient(180deg, #070709, #101115); }
+        .section-kicker { color: var(--blue); font-size: 11px; font-weight: 800; margin-bottom: 28px; }
+        .index-grid { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 18px; }
+        .index-card {
+            min-height: 520px;
+            display: flex;
+            flex-direction: column;
+            justify-content: flex-end;
+            position: relative;
+            overflow: hidden;
+            padding: 24px;
+            color: white;
+            text-decoration: none;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 8px;
+            background: #111;
+            transform: translateY(44px);
+            opacity: 0;
+            transition: transform 0.75s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.75s, border-color 0.35s;
+        }
+        .index-card.visible { transform: translateY(0); opacity: 1; }
+        .index-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--project-img) center/cover, linear-gradient(140deg, #222, #08080a);
+            filter: saturate(1.1) contrast(1.06);
+            transition: 0.55s;
+        }
+        .index-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 18%, rgba(0,0,0,0.28) 50%, rgba(0,0,0,0.9));
+        }
+        .index-card:hover { border-color: var(--blue); transform: translateY(-8px); }
+        .index-card:hover::before { transform: scale(1.08); filter: saturate(1.28) contrast(1.12); }
+        .index-card h3, .index-card p, .index-card span { position: relative; z-index: 2; }
+        .index-card span { color: var(--acid); font-size: 12px; font-weight: 700; }
+        .index-card h3 { margin: 12px 0 10px; font-family: var(--font-title); font-size: clamp(20px, 2vw, 32px); line-height: 1.2; }
+        .index-card p { color: rgba(255,255,255,0.68); font-size: 13px; line-height: 1.8; }
+
+        .case-page { background: #121316; }
+        .story-bg { position: absolute; inset: 0; z-index: 1; }
+        .story-bg::before {
+            content: "";
+            position: absolute;
+            inset: -3%;
+            background:
+                linear-gradient(90deg, rgba(5,5,6,0.86), rgba(5,5,6,0.28) 52%, rgba(5,5,6,0.7)),
+                url("image_43f020.jpg") center/cover,
+                url("1.jpg") center/cover;
+            filter: saturate(1.15) brightness(0.78);
+            transform: scale(1.04);
+        }
+        .story-bg::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                linear-gradient(rgba(255,255,255,0.13) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.13) 1px, transparent 1px);
+            background-size: 25% 33.33%;
+            opacity: 0.28;
+        }
+        .glass-card {
+            width: min(680px, 100%);
+            padding: clamp(28px, 4vw, 54px);
+            border: 1px solid rgba(255,255,255,0.18);
+            border-radius: 8px;
+            background: rgba(8,10,12,0.56);
+            backdrop-filter: blur(18px);
+            box-shadow: 0 40px 120px rgba(0,0,0,0.34);
+        }
+        .glass-card h2 { font-family: var(--font-title); font-size: clamp(32px, 4vw, 58px); line-height: 1.16; margin: 18px 0; }
+        .glass-card p { color: rgba(255,255,255,0.72); line-height: 1.9; font-size: 14px; }
+        .tag-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 28px; }
+        .tag-row span { border: 1px solid rgba(255,255,255,0.18); padding: 7px 14px; color: rgba(255,255,255,0.68); font-size: 11px; }
+
+        .storyboard { background: radial-gradient(circle at 50% 10%, rgba(0,232,255,0.12), transparent 28%), #08090b; }
+        .gallery-wrapper { display: grid; gap: 24px; }
+        .moving-track { overflow: visible; width: 100%; padding: 18px 0 30px; }
+        .inner-rail { display: flex; gap: 18px; align-items: center; will-change: transform; transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1); }
+        .frame-card {
+            flex: 0 0 clamp(150px, 17vw, 245px);
+            aspect-ratio: 16 / 9;
+            position: relative;
+            border: 1px solid rgba(255,255,255,0.12);
+            border-radius: 6px;
+            overflow: hidden;
+            background: linear-gradient(135deg, #24272b, #090a0c);
+            cursor: pointer;
+            transform: scale(0.82);
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.35s, box-shadow 0.35s, opacity 0.35s;
+            opacity: 0.62;
+        }
+        .frame-card.is-mid { flex-basis: clamp(190px, 21vw, 315px); transform: scale(1); opacity: 0.86; }
+        .frame-card:hover {
+            transform: scale(1.18);
+            z-index: 20;
+            opacity: 1;
+            border-color: var(--blue);
+            box-shadow: 0 28px 70px rgba(0,0,0,0.62), 0 0 22px rgba(0,232,255,0.26);
+        }
+        .frame-card img { width: 100%; height: 100%; object-fit: cover; display: block; }
+        .frame-card .fallback {
+            position: absolute;
+            inset: 0;
+            display: grid;
+            place-items: center;
+            padding: 16px;
+            text-align: center;
+            color: rgba(255,255,255,0.62);
+            background:
+                linear-gradient(135deg, rgba(0,232,255,0.18), transparent 48%),
+                linear-gradient(315deg, rgba(255,79,195,0.18), transparent 52%),
+                #15171b;
+            font-size: 11px;
+        }
+        .frame-card span { position: absolute; left: 10px; bottom: 8px; color: white; font-size: 11px; font-weight: 700; text-shadow: 0 1px 10px black; }
+        .dots-row { display: flex; justify-content: center; gap: 12px; margin-top: -10px; }
+        .dot { width: 9px; height: 9px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.36); background: transparent; cursor: pointer; transition: 0.3s; }
+        .dot.active, .dot:hover { background: var(--blue); border-color: var(--blue); transform: scale(1.28); box-shadow: 0 0 12px var(--blue); }
+
+        .chapter-placeholder { background: #090a0d; }
+        .chapter-placeholder h1 { font-family: var(--font-title); color: rgba(255,255,255,0.08); font-size: clamp(44px, 8vw, 112px); }
+
+        @media (max-width: 980px) {
+            .cover-layout { grid-template-columns: 1fr; padding-top: 86px; padding-bottom: 50px; }
+            .portrait-stage { min-height: 390px; }
+            .index-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+            .index-card { min-height: 390px; }
+            .dot-nav { display: none; }
+        }
+        @media (max-width: 640px) {
+            .top-nav { left: 12px; right: 12px; justify-content: center; gap: 10px; overflow-x: auto; }
+            .index-grid { grid-template-columns: 1fr; }
+            .container { padding: 0 18px; }
+            .moving-track { overflow: hidden; }
+        }
+    </style>
+</head>
+<body>
+    <svg style="position:absolute;width:0;height:0" aria-hidden="true">
+        <filter id="liquid-chrome">
+            <feTurbulence type="fractalNoise" baseFrequency="0.018 0.04" numOctaves="3" seed="7" result="noise"/>
+            <feDisplacementMap in="SourceGraphic" in2="noise" scale="7"/>
+            <feGaussianBlur stdDeviation="0.35" result="soft"/>
+            <feSpecularLighting in="soft" surfaceScale="5" specularConstant="1.15" specularExponent="42" lighting-color="#ffffff" result="shine">
+                <feDistantLight azimuth="230" elevation="58"/>
+            </feSpecularLighting>
+            <feComposite in="shine" in2="SourceGraphic" operator="in"/>
+        </filter>
+    </svg>
+
+    <div class="global-grid"></div>
+    <nav class="top-nav">
+        <a href="#cover" class="active">灏侀潰</a>
+        <a href="#directory">鐩綍</a>
+        <a href="#hero-project">椤圭洰</a>
+        <a href="#storyboard">鍒嗛暅</a>
+    </nav>
+    <div class="dot-nav">
+        <button class="dot-item active" onclick="scrollToSec('cover')" aria-label="灏侀潰"></button>
+        <button class="dot-item" onclick="scrollToSec('directory')" aria-label="鐩綍"></button>
+        <button class="dot-item" onclick="scrollToSec('hero-project')" aria-label="椤圭洰"></button>
+        <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="鍒嗛暅"></button>
+    </div>
+
+    <section id="cover" class="cover">
+        <div class="container cover-layout">
+            <div>
+                <p class="eyebrow">CHAPTER 1 / AI NARRATIVE</p>
+                <h1 class="liquid-title">Liquid<br>Metal<br>Vision</h1>
+                <p class="hero-sub">AI 鍒涙剰鍙欎簨鐢熸垚銆佸垎闀溿€?D 寤烘ā涓庢蹇佃缃綔鍝侀泦銆傛爣棰橀噰鐢ㄦ祦鍔ㄩ摤闈㈣川鎰燂紝鍙充晶淇濈暀鍙浛鎹釜浜虹収鐗囩殑娑叉€佽繎鍦嗗舰鐢绘銆?/p>
+            </div>
+            <div class="portrait-stage" aria-label="涓汉鐓х墖鍖哄煙">
+                <div class="burst star">*</div>
+                <div class="burst zap">ZAP</div>
+                <div class="burst ring"></div>
+                <div class="burst stroke"></div>
+                <div class="photo-blob">
+                    <div class="photo-hole"><span>灏嗕釜浜虹収鐗囧懡鍚嶄负 portrait.jpg 鏀惧湪鏈?HTML 鍚岀洰褰?/span></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="directory" class="directory">
+        <div class="container">
+            <p class="section-kicker">PROJECT DIRECTORY / 甯﹀浘鐩綍</p>
+            <div class="index-grid">
+                <a href="#hero-project" class="index-card" style="--project-img:url('1.jpg')">
+                    <span>01 / AI GENERATION</span>
+                    <h3>AI 鐢熸垚鍙欎簨</h3>
+                    <p>鍒嗛暅銆佹蹇电煭鐗囥€佸浘鐢熻棰戜笌杩炵画鐢婚潰鎺у埗銆?/p>
+                </a>
+                <a href="#storyboard" class="index-card" style="--project-img:url('4.jpg')">
+                    <span>02 / STORYBOARD</span>
+                    <h3>鍒嗛暅椤圭洰灞曠ず</h3>
+                    <p>浠ラ」鐩浘鐗囦綔涓虹洰褰曞叆鍙ｏ紝蹇€熻繘鍏ュ畬鏁村垎闀滄祦銆?/p>
+                </a>
+                <a href="#ch2" class="index-card" style="--project-img:url('7.jpg')">
+                    <span>03 / INSTALLATION</span>
+                    <h3>浜や簰瑁呯疆</h3>
+                    <p>绮掑瓙銆佹姇褰便€丮G 鍔ㄧ敾涓庡疄浣撲氦浜掔幇鍦恒€?/p>
+                </a>
+                <a href="#photo" class="index-card" style="--project-img:url('35.jpg')">
+                    <span>04 / PHOTO</span>
+                    <h3>褰卞儚涓庢憚褰?/h3>
+                    <p>鐜板疄鍒囩墖銆侀暅澶村疄楠屼笌鍥惧儚姘旇川褰掓。銆?/p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <section id="hero-project" class="case-page">
+        <div class="story-bg" id="storyBg"></div>
+        <div class="container">
+            <article class="glass-card">
+                <p class="section-kicker">CORE PROJECT</p>
+                <h2>瀵绘壘寰厜 / Looking for the Light</h2>
+                <p>杩欎竴椤电殑榛戣壊鑳屾櫙宸叉浛鎹负鍒嗛暅鍥惧～鍏呰儗鏅紝骞朵繚鐣欐殫鑹茬幓鐠冧俊鎭眰锛屾柟渚垮墠鏅枃瀛楅槄璇汇€傝儗鏅粯璁よ鍙?image_43f020.jpg锛屼篃浼氱户缁皾璇曞悓鐩綍涓嬬殑鍒嗛暅鍥剧墖銆?/p>
+                <div class="tag-row">
+                    <span>#鎻愮ず璇嶅伐绋?/span>
+                    <span>#鍒嗛暅鍥捐儗鏅?/span>
+                    <span>#鍥剧敓瑙嗛</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+    <section id="storyboard" class="storyboard">
+        <div class="container">
+            <p class="section-kicker">STORYBOARD MATRIX / 涓夋帓浜斿紶鎱㈤€熸祦鍔?/p>
+            <div class="gallery-wrapper">
+                <div class="moving-track"><div class="inner-rail" id="rail1"></div></div>
+                <div class="dots-row" id="dots1"></div>
+                <div class="moving-track"><div class="inner-rail" id="rail2"></div></div>
+                <div class="dots-row" id="dots2"></div>
+                <div class="moving-track"><div class="inner-rail" id="rail3"></div></div>
+                <div class="dots-row" id="dots3"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="ch2" class="chapter-placeholder"><h1>CHAPTER 2</h1></section>
+    <section id="ch3" class="chapter-placeholder"><h1>CHAPTER 3</h1></section>
+    <section id="photo" class="chapter-placeholder"><h1>PHOTO</h1></section>
+
+    <script>
+        const images = [
+            "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg",
+            "6.jpg", "7.jpg", "8.jpg", "9.jpg", "35.jpg",
+            "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg"
+        ];
+
+        function makeFallback(index) {
+            return `<div class="fallback">Storyboard<br>#${String(index + 1).padStart(2, "0")}</div>`;
+        }
+
+        function initGallery() {
+            for (let rowNum = 1; rowNum <= 3; rowNum++) {
+                const rail = document.getElementById(`rail${rowNum}`);
+                const dots = document.getElementById(`dots${rowNum}`);
+                const start = (rowNum - 1) * 5;
+                const state = { offset: 0, direction: rowNum === 2 ? -1 : 1, paused: false, active: 0 };
+
+                for (let i = 0; i < 5; i++) {
+                    const index = start + i;
+                    const card = document.createElement("button");
+                    card.className = `frame-card ${i > 0 && i < 4 ? "is-mid" : ""}`;
+                    card.type = "button";
+                    card.innerHTML = `<img src="${images[index]}" alt="鍒嗛暅 ${index + 1}" onerror="this.style.display='none'; this.insertAdjacentHTML('afterend', '${makeFallback(index)}')"><span>#${String(index + 1).padStart(2, "0")}</span>`;
+                    card.addEventListener("click", () => goToFrame(rail, dots, state, i));
+                    rail.appendChild(card);
+
+                    const dot = document.createElement("button");
+                    dot.className = `dot ${i === 0 ? "active" : ""}`;
+                    dot.type = "button";
+                    dot.setAttribute("aria-label", `绉诲姩鍒扮 ${index + 1} 寮犲垎闀渀);
+                    dot.addEventListener("click", () => goToFrame(rail, dots, state, i));
+                    dots.appendChild(dot);
+                }
+
+                rail.addEventListener("mouseenter", () => state.paused = true);
+                rail.addEventListener("mouseleave", () => state.paused = false);
+
+                function drift() {
+                    const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
+                    if (!state.paused && maxMove > 0) {
+                        state.offset += state.direction * 0.12;
+                        if (state.offset > 0 || Math.abs(state.offset) > maxMove) state.direction *= -1;
+                        state.offset = Math.max(-maxMove, Math.min(0, state.offset));
+                        rail.style.transform = `translateX(${state.offset}px)`;
+                        const step = maxMove / 4 || 1;
+                        state.active = Math.max(0, Math.min(4, Math.round(Math.abs(state.offset) / step)));
+                        setActiveDot(dots, state.active);
+                    }
+                    requestAnimationFrame(drift);
+                }
+                drift();
+            }
+        }
+
+        function goToFrame(rail, dots, state, index) {
+            const maxMove = Math.max(0, rail.scrollWidth - rail.parentElement.clientWidth);
+            state.offset = -(maxMove / 4) * index;
+            state.active = index;
+            rail.style.transform = `translateX(${state.offset}px)`;
+            setActiveDot(dots, index);
+        }
+
+        function setActiveDot(dots, index) {
+            dots.querySelectorAll(".dot").forEach((dot, i) => dot.classList.toggle("active", i === index));
+        }
+
+        function scrollToSec(id) {
+            document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+        }
+
+        function adjustActiveStates() {
+            const sectionIds = ["cover", "directory", "hero-project", "storyboard"];
+            let current = "cover";
+            document.querySelectorAll("section").forEach(section => {
+                if (window.scrollY >= section.offsetTop - 320) current = section.id;
+            });
+            document.querySelectorAll(".top-nav a").forEach(link => {
+                link.classList.toggle("active", link.getAttribute("href") === `#${current}`);
+            });
+            document.querySelectorAll(".dot-item").forEach((dot, i) => {
+                dot.classList.toggle("active", sectionIds[i] === current);
+            });
+            const bg = document.getElementById("storyBg");
+            if (bg) bg.style.transform = `translateY(${window.scrollY * 0.035}px)`;
+        }
+
+        const cardObserver = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (!entry.isIntersecting) return;
+                entry.target.querySelectorAll(".index-card").forEach((card, index) => {
+                    setTimeout(() => card.classList.add("visible"), index * 120);
+                });
+            });
+        }, { threshold: 0.18 });
+
+        window.addEventListener("load", () => {
+            initGallery();
+            cardObserver.observe(document.querySelector("#directory"));
+            adjustActiveStates();
+        });
+        window.addEventListener("scroll", adjustActiveStates);
+    </script>
+</body>
+</html>
