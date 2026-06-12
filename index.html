@@ -768,6 +768,136 @@
             text-shadow: 0 0 22px rgba(255,255,255,0.28);
         }
 
+        .chapter-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: #07080b;
+        }
+        .chapter-layout {
+            width: 100%;
+            display: grid;
+            gap: 24px;
+        }
+        .chapter-layout-split {
+            grid-template-columns: minmax(280px, 0.9fr) minmax(0, 1.1fr);
+            align-items: stretch;
+        }
+        .chapter-layout-grid {
+            grid-template-columns: minmax(280px, 0.84fr) minmax(0, 1.16fr);
+            align-items: start;
+        }
+        .chapter-copy .section-title {
+            margin: 8px 0 14px;
+            font-size: clamp(42px, 5.5vw, 80px);
+        }
+        .chapter-copy .section-copy {
+            max-width: 620px;
+            color: rgba(255,255,255,0.7);
+            line-height: 1.95;
+        }
+        .chapter-cards-vertical {
+            display: grid;
+            gap: 16px;
+        }
+        .chapter-panel,
+        .material-card,
+        .image-portfolio-card {
+            position: relative;
+            overflow: hidden;
+            border-radius: 18px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
+                #111318;
+            box-shadow: 0 20px 54px rgba(0,0,0,0.28);
+        }
+        .chapter-panel::before,
+        .material-card::before,
+        .image-portfolio-card::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--panel-img, var(--mat-img, var(--img))) center/cover no-repeat;
+            transform: scale(1.04);
+            filter: saturate(1.03) brightness(0.72);
+        }
+        .chapter-panel::after,
+        .material-card::after,
+        .image-portfolio-card::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, transparent 16%, rgba(3,4,6,0.18) 55%, rgba(3,4,6,0.84) 100%);
+        }
+        .chapter-panel { min-height: 240px; }
+        .chapter-panel-large { min-height: 360px; }
+        .chapter-panel-small { min-height: 220px; }
+        .chapter-panel-copy,
+        .image-card-copy,
+        .material-card > div {
+            position: relative;
+            z-index: 1;
+            padding: 22px;
+            max-width: 76%;
+        }
+        .chapter-panel-copy span,
+        .image-card-copy span,
+        .material-card span {
+            display: inline-block;
+            color: var(--blue);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+            margin-bottom: 10px;
+        }
+        .chapter-panel-copy h3,
+        .image-card-copy h3,
+        .material-card h3 {
+            font-family: var(--font-title);
+            font-size: clamp(24px, 2.8vw, 42px);
+            line-height: 1.05;
+            margin-bottom: 12px;
+        }
+        .chapter-panel-copy p,
+        .image-card-copy p,
+        .material-card p {
+            color: rgba(255,255,255,0.72);
+            line-height: 1.75;
+            font-size: 13px;
+        }
+        .chapter-material-grid,
+        .image-portfolio-grid {
+            display: grid;
+            gap: 16px;
+        }
+        .chapter-material-grid {
+            grid-template-columns: minmax(0, 1.25fr) minmax(260px, 0.75fr);
+        }
+        .material-card {
+            min-height: 300px;
+            display: flex;
+            align-items: flex-end;
+        }
+        .material-card-wide {
+            min-height: 420px;
+        }
+        .image-portfolio-grid {
+            grid-template-columns: minmax(0, 1fr) minmax(0, 0.95fr) minmax(0, 1.2fr);
+            grid-auto-rows: 220px;
+        }
+        .image-portfolio-card {
+            min-height: 100%;
+            display: flex;
+            align-items: flex-end;
+        }
+        .image-portfolio-card.tall { grid-row: span 2; }
+        .image-portfolio-card.wide { grid-column: span 2; }
+        .image-portfolio-card::before { transition: transform 0.45s ease, filter 0.45s ease; }
+        .image-portfolio-card:hover::before { transform: scale(1.1); filter: saturate(1.08) brightness(0.82); }
+        .chapter-panel:hover::before,
+        .material-card:hover::before { transform: scale(1.08); filter: saturate(1.05) brightness(0.8); }
+
         .project-detail-page {
             min-height: 100vh;
             display: flex;
@@ -1042,6 +1172,18 @@
             .workflow-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: 120px; }
             .workflow-card.size-lg, .workflow-card.size-md, .workflow-card.size-sm { grid-column: span 6; grid-row: span 1; }
             .ai-cases { grid-template-columns: 1fr; }
+            .chapter-layout-split,
+            .chapter-layout-grid,
+            .chapter-material-grid,
+            .image-portfolio-grid { grid-template-columns: 1fr; }
+            .image-portfolio-card.tall,
+            .image-portfolio-card.wide { grid-column: auto; grid-row: auto; }
+            .chapter-panel,
+            .chapter-panel-large,
+            .chapter-panel-small,
+            .material-card,
+            .material-card-wide,
+            .image-portfolio-card { min-height: 260px; }
             .project-detail-layout { grid-template-columns: 1fr; }
             .process-grid { grid-template-columns: 1fr; }
             .viewer-layout { grid-template-columns: 1fr; }
@@ -1061,6 +1203,9 @@
             .story-frame { padding: 0 52px; }
             .story-step.prev { left: 6px; }
             .story-step.next { right: 6px; }
+            .chapter-panel-copy,
+            .image-card-copy,
+            .material-card > div { max-width: 100%; padding: 18px; }
             .project-detail-media { grid-template-columns: 1fr; }
             .project-media-tile.tall { grid-row: auto; min-height: 220px; }
             .process-grid { grid-template-columns: 1fr; }
@@ -1086,9 +1231,9 @@
     <nav class="top-nav">
         <a href="#cover" class="active">&#20851;&#20110;&#25105;</a>
         <a href="#directory">&#30446;&#24405;</a>
-        <a href="#ai-generation">AI&#29983;&#25104;</a>
-        <a href="#ch2">&#20132;&#20114;&#35013;&#32622;</a>
-        <a href="#ch3">&#32508;&#21512;&#26448;&#26009;</a>
+        <a href="#hero-project">AI&#29983;&#25104;</a>
+        <a href="#chapter-interactive">&#20132;&#20114;&#35013;&#32622;</a>
+        <a href="#chapter-materials">&#32508;&#21512;&#26448;&#26009;</a>
         <a href="#photo">&#24433;&#20687;</a>
     </nav>
     <div class="dot-nav">
@@ -1126,17 +1271,17 @@
         <div class="container">
             <p class="section-kicker">PROJECT DIRECTORY / &#20316;&#21697;&#31456;&#33410;&#30446;&#24405;</p>
             <div class="index-grid">
-                <a href="#ai-generation" class="index-card" style="--project-img:url('1.jpg')">
+                <a href="#hero-project" class="index-card" style="--project-img:url('1.jpg')">
                     <span>01 / AI GENERATION</span>
                     <h3>AI &#29983;&#25104;</h3>
                     <p>&#22260;&#32469;&#25991;&#26412;&#29983;&#25104;&#22270;&#20687;&#12289;&#36830;&#32493;&#20998;&#38236;&#12289;&#22270;&#29983;&#35270;&#39057;&#19982; 3D &#36741;&#21161;&#24314;&#27169;&#65292;&#23637;&#31034;&#25105;&#23545; AI &#24037;&#20855;&#38142;&#12289;&#30011;&#38754;&#25511;&#21046;&#21644;&#21465;&#20107;&#33410;&#22863;&#30340;&#32508;&#21512;&#36816;&#29992;&#12290;</p>
                 </a>
-                <a href="#ch2" class="index-card" style="--project-img:url('4.jpg')">
+                <a href="#chapter-interactive" class="index-card" style="--project-img:url('4.jpg')">
                     <span>02 / INTERACTIVE INSTALLATION</span>
                     <h3>&#20132;&#20114;&#35013;&#32622;</h3>
                     <p>&#32467;&#21512; TouchDesigner&#12289;&#25237;&#24433;&#12289;&#31890;&#23376;&#35270;&#35273;&#21644;&#23454;&#26102;&#24863;&#24212;&#36923;&#36753;&#65292;&#25506;&#32034;&#35266;&#20247;&#34892;&#20026;&#19982;&#21160;&#24577;&#24433;&#20687;&#20043;&#38388;&#30340;&#20851;&#31995;&#12290;</p>
                 </a>
-                <a href="#ch3" class="index-card" style="--project-img:url('7.jpg')">
+                <a href="#chapter-materials" class="index-card" style="--project-img:url('7.jpg')">
                     <span>03 / MIXED MATERIALS</span>
                     <h3>&#32508;&#21512;&#26448;&#26009;</h3>
                     <p>&#20174;&#29627;&#29827;&#12289;&#35013;&#32622;&#12289;&#31354;&#38388;&#32467;&#26500;&#21040;&#26448;&#26009;&#32908;&#29702;&#65292;&#21576;&#29616;&#25105;&#23545;&#29289;&#29702;&#36136;&#24863;&#12289;&#20809;&#24433;&#21464;&#21270;&#21644;&#31354;&#38388;&#21465;&#20107;&#30340;&#23454;&#39564;&#12290;</p>
@@ -1166,7 +1311,7 @@
         </div>
     </section>
 
-    <section id="ai-generation" class="project-hero-page" style="--project-bg: url('1.jpg')">
+<section id="ai-generation" class="project-hero-page" style="--project-bg: url('1.jpg')">
         <div class="container project-hero-copy">
             <p class="section-kicker">AI GENERATION / &#22823;&#31456;&#33410;</p>
             <h2>AI &#29983;&#25104;</h2>
@@ -1206,117 +1351,7 @@
         <div class="project-arrow">&#8595;</div>
     </section>
 
-    <section id="nj-wall" class="project-hero-page" style="--project-bg: url('1.jpg')">
-        <div class="container project-hero-copy">
-            <p class="section-kicker">PROJECT 01 / INSTALLATION</p>
-            <h2>&#21335;&#20140;&#22478;&#22681;&#27185;&#33457;&#35013;&#32622;&#35774;&#35745;</h2>
-            <p class="section-copy">&#22260;&#32469;&#21382;&#21490;&#22478;&#22681;&#19982;&#26149;&#26085;&#27185;&#33457;&#27675;&#22260;&#20570;&#35270;&#35273;&#35013;&#32622;&#29983;&#25104;&#65292;&#24378;&#35843;&#23610;&#24230;&#12289;&#33410;&#22863;&#21644;&#31354;&#38388;&#21253;&#35065;&#24863;&#65292;&#35753;&#30011;&#38754;&#20687;&#19968;&#24352;&#21487;&#20197;&#36208;&#36827;&#21435;&#30340;&#33402;&#26415;&#28023;&#25253;&#12290;</p>
-            <div class="project-meta">
-                <span>2026</span><span>&#21335;&#20140;</span><span>&#35013;&#32622;</span><span>&#27185;&#33457;</span><span>&#20844;&#20849;&#31354;&#38388;</span>
-            </div>
-        </div>
-        <div class="project-arrow">&#8595;</div>
-    </section>
-
-    <section id="nj-wall-detail" class="project-detail-page">
-        <div class="container project-detail-layout">
-            <div class="project-detail-copy">
-                <p class="section-kicker">DETAILS / CONCEPT</p>
-                <h3>&#22478;&#22681;&#30340;&#21382;&#21490;&#24863;&#21644;&#27185;&#33457;&#30340;&#36731;&#30408;&#24863;&#65292;&#34987;&#25918;&#22312;&#21516;&#19968;&#20010;&#35270;&#35273;&#35821;&#27861;&#37324;&#12290;</h3>
-                <p>&#36825;&#19968;&#39029;&#29992;&#26497;&#31616;&#25991;&#23383;&#35762;&#28165;&#26970;&#35774;&#35745;&#27010;&#24565;&#65292;&#20877;&#34917;&#19978; AI &#24037;&#20316;&#27969;&#12290;&#27604;&#22914;&#20808;&#29992; Midjourney &#29983;&#25104;&#33394;&#24425;&#26041;&#21521;&#65292;&#20877;&#29992; ComfyUI / SD &#20570;&#32441;&#29702;&#21644;&#26448;&#36136;&#25910;&#25947;&#65292;&#26368;&#21518;&#25226;&#35013;&#32622;&#22330;&#26223;&#25340;&#25104;&#32479;&#19968;&#30011;&#38754;&#12290;</p>
-                <div class="detail-list">
-                    <span>Midjourney / &#33394;&#24425;&#26041;&#26696;</span>
-                    <span>SD / &#26448;&#36136;&#19982;&#32441;&#29702;</span>
-                    <span>&#35013;&#32622;&#33853;&#22320; / &#22330;&#26223;&#25511;&#21046;</span>
-                </div>
-            </div>
-            <div class="project-detail-media">
-                <div class="project-media-tile tall" style="--img:url('4.jpg')"></div>
-                <div class="project-media-tile" style="--img:url('7.jpg')"></div>
-                <div class="project-media-tile" style="--img:url('35.jpg')"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="phoenix-bookstore" class="project-hero-page" style="--project-bg: url('4.jpg')">
-        <div class="container project-hero-copy">
-            <p class="section-kicker">PROJECT 02 / INSTALLATION</p>
-            <h2>&#21335;&#20140;&#20964;&#20976;&#20070;&#24215;&#35013;&#32622;&#35774;&#35745;</h2>
-            <p class="section-copy">&#36825;&#19968;&#32452;&#26356;&#20559;&#21521;&#23460;&#20869;&#31354;&#38388;&#21644;&#38405;&#35835;&#27668;&#36136;&#65292;&#25226;&#20070;&#24215;&#12289;&#35013;&#32622;&#21644;&#22270;&#20687;&#27675;&#22260;&#36830;&#25104;&#19968;&#20010;&#23433;&#38745;&#20294;&#26377;&#23618;&#27425;&#30340;&#35270;&#35273;&#22330;&#26223;&#12290;</p>
-            <div class="project-meta">
-                <span>2026</span><span>&#21335;&#20140;</span><span>&#20070;&#24215;</span><span>&#35013;&#32622;</span><span>&#23460;&#20869;&#31354;&#38388;</span>
-            </div>
-        </div>
-        <div class="project-arrow">&#8595;</div>
-    </section>
-
-    <section id="phoenix-bookstore-detail" class="project-detail-page">
-        <div class="container project-detail-layout">
-            <div class="project-detail-copy">
-                <p class="section-kicker">DETAILS / LAYOUT</p>
-                <h3>&#20070;&#24215;&#30340;&#28201;&#24230;&#12289;&#38405;&#35835;&#30340;&#33410;&#22863;&#21644;&#35013;&#32622;&#30340;&#20809;&#24863;&#65292;&#34987;&#25972;&#29702;&#25104;&#19968;&#20010;&#23433;&#38745;&#30340;&#22330;&#22495;&#12290;</h3>
-                <p>&#36825;&#19968;&#32452;&#21487;&#20197;&#29992;&#26356;&#26580;&#21644;&#30340;&#20809;&#24433;&#21644;&#26356;&#24178;&#20928;&#30340;&#26500;&#22270;&#65292;&#31361;&#20986;&#20070;&#24215;&#31354;&#38388;&#37324;&#30340;&#20572;&#30041;&#24863;&#12290;&#24038;&#20391;&#30041;&#35774;&#35745;&#35828;&#26126;&#65292;&#21491;&#20391;&#25918; 2 &#21040; 3 &#24352;&#32454;&#33410;&#22270;&#65292;&#25972;&#20307;&#20687;&#19968;&#26412;&#35270;&#35273;&#30011;&#20876;&#12290;</p>
-                <div class="detail-list">
-                    <span>&#31354;&#38388;&#21465;&#20107;</span>
-                    <span>&#23460;&#20869;&#20809;&#24433;</span>
-                    <span>&#38405;&#35835;&#22330;&#26223;</span>
-                </div>
-            </div>
-            <div class="project-detail-media">
-                <div class="project-media-tile tall" style="--img:url('1.jpg')"></div>
-                <div class="project-media-tile" style="--img:url('35.jpg')"></div>
-                <div class="project-media-tile" style="--img:url('7.jpg')"></div>
-            </div>
-        </div>
-    </section>
-
-    <section id="herbal-3d" class="process-page">
-        <div class="container">
-            <p class="section-kicker">PROJECT 03 / 3D GENERATION</p>
-            <h2 class="section-title">&#20013;&#33609;&#33647; AI &#27169;&#22411;&#29983;&#25104;</h2>
-            <p class="section-copy">&#36825;&#32452;&#24378;&#35843;&#20174;&#21442;&#32771;&#22270;&#21644;&#25552;&#31034;&#35789;&#65292;&#21040; AI &#29983;&#25104;&#21644; 3D &#36755;&#20986;&#30340;&#23436;&#25972;&#36716;&#25442;&#38142;&#36335;&#65292;&#29992;&#26356;&#25216;&#26415;&#24863;&#30340;&#26041;&#24335;&#35762;&#28165;&#26970;&#8220;&#36755;&#20837; &#8594; &#36807;&#31243; &#8594; &#36755;&#20986;&#8221;&#12290;</p>
-            <div class="process-grid">
-                <div class="process-card primary">
-                    <div class="accent-ring"></div>
-                    <div class="step">01</div>
-                    <h3>&#25968;&#25454; / &#25552;&#31034;&#35789;&#36755;&#20837;</h3>
-                    <p>&#25918;&#20837;&#20013;&#33609;&#33647;&#21442;&#32771;&#22270;&#12289;&#26448;&#36136;&#20851;&#38190;&#35789;&#21644;&#36896;&#22411;&#35201;&#27714;&#65292;&#20808;&#30830;&#23450;&#27169;&#22411;&#29983;&#25104;&#30340;&#26041;&#21521;&#21644;&#39118;&#26684;&#33539;&#22260;&#12290;</p>
-                </div>
-                <div class="process-card">
-                    <div class="step">02</div>
-                    <h3>AI &#29983;&#25104;&#36807;&#31243;</h3>
-                    <p>&#20351;&#29992; Meshy&#12289;Tripo3D &#25110;&#31867;&#20284;&#24037;&#20855;&#23436;&#25104;&#21021;&#27493;&#32593;&#26684;&#12289;&#24418;&#20307;&#21644;&#36148;&#22270;&#29983;&#25104;&#65292;&#20877;&#36827;&#34892;&#32467;&#26500;&#20248;&#21270;&#12290;</p>
-                </div>
-                <div class="process-card">
-                    <div class="step">03</div>
-                    <h3>&#26368;&#32456;&#28210;&#26579;&#36755;&#20986;</h3>
-                    <p>&#23558;&#27169;&#22411;&#25972;&#29702;&#25104;&#22810;&#35282;&#24230;&#39640;&#36136;&#37327;&#28210;&#26579;&#65292;&#29992;&#20110;&#31185;&#26222;&#12289;&#21160;&#30011;&#36164;&#20135;&#25110;&#35270;&#35273;&#23637;&#31034;&#12290;</p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="herbal-3d-detail" class="viewer-page">
-        <div class="container viewer-layout">
-            <div class="viewer-shell">
-                <div class="viewer-stage">
-                    <img src="7.jpg" alt="&#20013;&#33609;&#33647; 3D &#27169;&#22411;&#23637;&#31034;">
-                </div>
-            </div>
-            <div class="viewer-info">
-                <p class="section-kicker">VIEWER / MODEL</p>
-                <h3>&#27169;&#22411;&#23637;&#31034;&#19982;&#20132;&#20114;</h3>
-                <p>&#36825;&#37324;&#21487;&#20197;&#25918; 3D &#27169;&#22411;&#26597;&#30475;&#22120;&#65307;&#22914;&#26524;&#21518;&#38754;&#20320;&#26377; Sketchfab &#38142;&#25509;&#25110; Three.js &#27169;&#22411;&#65292;&#25105;&#20877;&#30452;&#25509;&#25509;&#36827;&#21435;&#12290;&#29616;&#22312;&#20808;&#29992;&#19968;&#20010;&#24102;&#20809;&#26197;&#30340;&#23637;&#31034;&#20301;&#25226;&#32467;&#26500;&#21344;&#20303;&#12290;</p>
-                <div class="info-chip">Blender / Meshy / Tripo3D</div>
-                <div class="tiny-list">
-                    <span>&#38754;&#25968;&#12289;&#36148;&#22270;&#12289;&#26448;&#36136;&#21442;&#25968;&#21487;&#34917;&#25104;&#25216;&#26415;&#32454;&#33410;&#12290;</span>
-                    <span>&#19979;&#26041;&#20063;&#33021;&#25509;&#24212;&#29992;&#22330;&#26223;&#35828;&#26126;&#65292;&#27604;&#22914; AR &#31185;&#26222;&#25110;&#21160;&#30011;&#36164;&#20135;&#12290;</span>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <section id="storyboard" class="storyboard">
+<section id="storyboard" class="storyboard">
         <div class="container">
             <div class="storyboard-band">
                 <div class="storyboard-hero">
@@ -1346,7 +1381,7 @@
         </div>
     </section>
 
-    <section id="ch2" class="workflow-page">
+<section id="ch2" class="workflow-page">
         <div class="container">
             <p class="section-kicker">WORKFLOW / &#21046;&#20316;&#27969;&#31243;</p>
             <h2 class="section-title">&#20174;&#25552;&#31034;&#35789;&#21040;&#25104;&#29255;</h2>
@@ -1410,7 +1445,7 @@
         </div>
     </section>
 
-    <section id="ch3" class="final-page">
+<section id="ch3" class="final-page">
         <div class="container tv-stage">
             <div class="tv-showcase">
                 <div class="tv-launch">
@@ -1426,7 +1461,206 @@
         </div>
     </section>
 
-    <section id="photo" class="chapter-placeholder"><h1>PHOTO</h1></section>
+<section id="nj-wall" class="project-hero-page" style="--project-bg: url('1.jpg')">
+        <div class="container project-hero-copy">
+            <p class="section-kicker">PROJECT 01 / INSTALLATION</p>
+            <h2>&#21335;&#20140;&#22478;&#22681;&#27185;&#33457;&#35013;&#32622;&#35774;&#35745;</h2>
+            <p class="section-copy">&#22260;&#32469;&#21382;&#21490;&#22478;&#22681;&#19982;&#26149;&#26085;&#27185;&#33457;&#27675;&#22260;&#20570;&#35270;&#35273;&#35013;&#32622;&#29983;&#25104;&#65292;&#24378;&#35843;&#23610;&#24230;&#12289;&#33410;&#22863;&#21644;&#31354;&#38388;&#21253;&#35065;&#24863;&#65292;&#35753;&#30011;&#38754;&#20687;&#19968;&#24352;&#21487;&#20197;&#36208;&#36827;&#21435;&#30340;&#33402;&#26415;&#28023;&#25253;&#12290;</p>
+            <div class="project-meta">
+                <span>2026</span><span>&#21335;&#20140;</span><span>&#35013;&#32622;</span><span>&#27185;&#33457;</span><span>&#20844;&#20849;&#31354;&#38388;</span>
+            </div>
+        </div>
+        <div class="project-arrow">&#8595;</div>
+    </section>
+
+<section id="nj-wall-detail" class="project-detail-page">
+        <div class="container project-detail-layout">
+            <div class="project-detail-copy">
+                <p class="section-kicker">DETAILS / CONCEPT</p>
+                <h3>&#22478;&#22681;&#30340;&#21382;&#21490;&#24863;&#21644;&#27185;&#33457;&#30340;&#36731;&#30408;&#24863;&#65292;&#34987;&#25918;&#22312;&#21516;&#19968;&#20010;&#35270;&#35273;&#35821;&#27861;&#37324;&#12290;</h3>
+                <p>&#36825;&#19968;&#39029;&#29992;&#26497;&#31616;&#25991;&#23383;&#35762;&#28165;&#26970;&#35774;&#35745;&#27010;&#24565;&#65292;&#20877;&#34917;&#19978; AI &#24037;&#20316;&#27969;&#12290;&#27604;&#22914;&#20808;&#29992; Midjourney &#29983;&#25104;&#33394;&#24425;&#26041;&#21521;&#65292;&#20877;&#29992; ComfyUI / SD &#20570;&#32441;&#29702;&#21644;&#26448;&#36136;&#25910;&#25947;&#65292;&#26368;&#21518;&#25226;&#35013;&#32622;&#22330;&#26223;&#25340;&#25104;&#32479;&#19968;&#30011;&#38754;&#12290;</p>
+                <div class="detail-list">
+                    <span>Midjourney / &#33394;&#24425;&#26041;&#26696;</span>
+                    <span>SD / &#26448;&#36136;&#19982;&#32441;&#29702;</span>
+                    <span>&#35013;&#32622;&#33853;&#22320; / &#22330;&#26223;&#25511;&#21046;</span>
+                </div>
+            </div>
+            <div class="project-detail-media">
+                <div class="project-media-tile tall" style="--img:url('4.jpg')"></div>
+                <div class="project-media-tile" style="--img:url('7.jpg')"></div>
+                <div class="project-media-tile" style="--img:url('35.jpg')"></div>
+            </div>
+        </div>
+    </section>
+
+<section id="phoenix-bookstore" class="project-hero-page" style="--project-bg: url('4.jpg')">
+        <div class="container project-hero-copy">
+            <p class="section-kicker">PROJECT 02 / INSTALLATION</p>
+            <h2>&#21335;&#20140;&#20964;&#20976;&#20070;&#24215;&#35013;&#32622;&#35774;&#35745;</h2>
+            <p class="section-copy">&#36825;&#19968;&#32452;&#26356;&#20559;&#21521;&#23460;&#20869;&#31354;&#38388;&#21644;&#38405;&#35835;&#27668;&#36136;&#65292;&#25226;&#20070;&#24215;&#12289;&#35013;&#32622;&#21644;&#22270;&#20687;&#27675;&#22260;&#36830;&#25104;&#19968;&#20010;&#23433;&#38745;&#20294;&#26377;&#23618;&#27425;&#30340;&#35270;&#35273;&#22330;&#26223;&#12290;</p>
+            <div class="project-meta">
+                <span>2026</span><span>&#21335;&#20140;</span><span>&#20070;&#24215;</span><span>&#35013;&#32622;</span><span>&#23460;&#20869;&#31354;&#38388;</span>
+            </div>
+        </div>
+        <div class="project-arrow">&#8595;</div>
+    </section>
+
+<section id="phoenix-bookstore-detail" class="project-detail-page">
+        <div class="container project-detail-layout">
+            <div class="project-detail-copy">
+                <p class="section-kicker">DETAILS / LAYOUT</p>
+                <h3>&#20070;&#24215;&#30340;&#28201;&#24230;&#12289;&#38405;&#35835;&#30340;&#33410;&#22863;&#21644;&#35013;&#32622;&#30340;&#20809;&#24863;&#65292;&#34987;&#25972;&#29702;&#25104;&#19968;&#20010;&#23433;&#38745;&#30340;&#22330;&#22495;&#12290;</h3>
+                <p>&#36825;&#19968;&#32452;&#21487;&#20197;&#29992;&#26356;&#26580;&#21644;&#30340;&#20809;&#24433;&#21644;&#26356;&#24178;&#20928;&#30340;&#26500;&#22270;&#65292;&#31361;&#20986;&#20070;&#24215;&#31354;&#38388;&#37324;&#30340;&#20572;&#30041;&#24863;&#12290;&#24038;&#20391;&#30041;&#35774;&#35745;&#35828;&#26126;&#65292;&#21491;&#20391;&#25918; 2 &#21040; 3 &#24352;&#32454;&#33410;&#22270;&#65292;&#25972;&#20307;&#20687;&#19968;&#26412;&#35270;&#35273;&#30011;&#20876;&#12290;</p>
+                <div class="detail-list">
+                    <span>&#31354;&#38388;&#21465;&#20107;</span>
+                    <span>&#23460;&#20869;&#20809;&#24433;</span>
+                    <span>&#38405;&#35835;&#22330;&#26223;</span>
+                </div>
+            </div>
+            <div class="project-detail-media">
+                <div class="project-media-tile tall" style="--img:url('1.jpg')"></div>
+                <div class="project-media-tile" style="--img:url('35.jpg')"></div>
+                <div class="project-media-tile" style="--img:url('7.jpg')"></div>
+            </div>
+        </div>
+    </section>
+
+<section id="herbal-3d" class="process-page">
+        <div class="container">
+            <p class="section-kicker">PROJECT 03 / 3D GENERATION</p>
+            <h2 class="section-title">&#20013;&#33609;&#33647; AI &#27169;&#22411;&#29983;&#25104;</h2>
+            <p class="section-copy">&#36825;&#32452;&#24378;&#35843;&#20174;&#21442;&#32771;&#22270;&#21644;&#25552;&#31034;&#35789;&#65292;&#21040; AI &#29983;&#25104;&#21644; 3D &#36755;&#20986;&#30340;&#23436;&#25972;&#36716;&#25442;&#38142;&#36335;&#65292;&#29992;&#26356;&#25216;&#26415;&#24863;&#30340;&#26041;&#24335;&#35762;&#28165;&#26970;&#8220;&#36755;&#20837; &#8594; &#36807;&#31243; &#8594; &#36755;&#20986;&#8221;&#12290;</p>
+            <div class="process-grid">
+                <div class="process-card primary">
+                    <div class="accent-ring"></div>
+                    <div class="step">01</div>
+                    <h3>&#25968;&#25454; / &#25552;&#31034;&#35789;&#36755;&#20837;</h3>
+                    <p>&#25918;&#20837;&#20013;&#33609;&#33647;&#21442;&#32771;&#22270;&#12289;&#26448;&#36136;&#20851;&#38190;&#35789;&#21644;&#36896;&#22411;&#35201;&#27714;&#65292;&#20808;&#30830;&#23450;&#27169;&#22411;&#29983;&#25104;&#30340;&#26041;&#21521;&#21644;&#39118;&#26684;&#33539;&#22260;&#12290;</p>
+                </div>
+                <div class="process-card">
+                    <div class="step">02</div>
+                    <h3>AI &#29983;&#25104;&#36807;&#31243;</h3>
+                    <p>&#20351;&#29992; Meshy&#12289;Tripo3D &#25110;&#31867;&#20284;&#24037;&#20855;&#23436;&#25104;&#21021;&#27493;&#32593;&#26684;&#12289;&#24418;&#20307;&#21644;&#36148;&#22270;&#29983;&#25104;&#65292;&#20877;&#36827;&#34892;&#32467;&#26500;&#20248;&#21270;&#12290;</p>
+                </div>
+                <div class="process-card">
+                    <div class="step">03</div>
+                    <h3>&#26368;&#32456;&#28210;&#26579;&#36755;&#20986;</h3>
+                    <p>&#23558;&#27169;&#22411;&#25972;&#29702;&#25104;&#22810;&#35282;&#24230;&#39640;&#36136;&#37327;&#28210;&#26579;&#65292;&#29992;&#20110;&#31185;&#26222;&#12289;&#21160;&#30011;&#36164;&#20135;&#25110;&#35270;&#35273;&#23637;&#31034;&#12290;</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="herbal-3d-detail" class="viewer-page">
+        <div class="container viewer-layout">
+            <div class="viewer-shell">
+                <div class="viewer-stage">
+                    <img src="7.jpg" alt="&#20013;&#33609;&#33647; 3D &#27169;&#22411;&#23637;&#31034;">
+                </div>
+            </div>
+            <div class="viewer-info">
+                <p class="section-kicker">VIEWER / MODEL</p>
+                <h3>&#27169;&#22411;&#23637;&#31034;&#19982;&#20132;&#20114;</h3>
+                <p>&#36825;&#37324;&#21487;&#20197;&#25918; 3D &#27169;&#22411;&#26597;&#30475;&#22120;&#65307;&#22914;&#26524;&#21518;&#38754;&#20320;&#26377; Sketchfab &#38142;&#25509;&#25110; Three.js &#27169;&#22411;&#65292;&#25105;&#20877;&#30452;&#25509;&#25509;&#36827;&#21435;&#12290;&#29616;&#22312;&#20808;&#29992;&#19968;&#20010;&#24102;&#20809;&#26197;&#30340;&#23637;&#31034;&#20301;&#25226;&#32467;&#26500;&#21344;&#20303;&#12290;</p>
+                <div class="info-chip">Blender / Meshy / Tripo3D</div>
+                <div class="tiny-list">
+                    <span>&#38754;&#25968;&#12289;&#36148;&#22270;&#12289;&#26448;&#36136;&#21442;&#25968;&#21487;&#34917;&#25104;&#25216;&#26415;&#32454;&#33410;&#12290;</span>
+                    <span>&#19979;&#26041;&#20063;&#33021;&#25509;&#24212;&#29992;&#22330;&#26223;&#35828;&#26126;&#65292;&#27604;&#22914; AR &#31185;&#26222;&#25110;&#21160;&#30011;&#36164;&#20135;&#12290;</span>
+                </div>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="chapter-interactive" class="chapter-page chapter-interactive">
+        <div class="container chapter-layout chapter-layout-split">
+            <div class="chapter-copy">
+                <p class="section-kicker">CHAPTER 02 / INTERACTIVE INSTALLATION</p>
+                <h2 class="section-title">&#20132;&#20114;&#35013;&#32622;</h2>
+                <p class="section-copy">&#36825;&#19968;&#31456;&#20445;&#30041;&#20004;&#32452;&#35013;&#32622;&#20316;&#21697;&#30340;&#23436;&#25972;&#23637;&#31034;&#36923;&#36753;&#65292;&#29992;&#26356;&#23433;&#38745;&#30340;&#29256;&#24335;&#21435;&#25215;&#36733;&#20809;&#12289;&#36816;&#21160;&#21644;&#23454;&#26102;&#21453;&#39304;&#65292;&#35753;&#35266;&#20247;&#26356;&#23481;&#26131;&#30475;&#35265;&#20132;&#20114;&#26412;&#36523;&#12290;</p>
+                <div class="project-meta">
+                    <span>&#26495;&#40542;&#39118;&#31581; TD &#20132;&#20114;&#20316;&#21697;</span>
+                    <span>&#38236;&#29983;&#19975;&#35937;&#20132;&#20114;&#35013;&#32622;</span>
+                    <span>&#23454;&#26102;&#24863;&#24212;</span>
+                    <span>&#25237;&#24433;&#19982;&#35302;&#21457;</span>
+                </div>
+            </div>
+            <div class="chapter-cards chapter-cards-vertical">
+                <article class="chapter-panel chapter-panel-large" style="--panel-img:url('4.jpg')">
+                    <div class="chapter-panel-copy">
+                        <span>01 / TD INTERACTION</span>
+                        <h3>&#26495;&#40542;&#39118;&#31581; TD &#20132;&#20114;&#20316;&#21697;</h3>
+                        <p>&#20197;&#20256;&#32479;&#26495;&#40542;&#39118;&#31581;&#20026;&#26680;&#24515;&#35270;&#35273;&#65292;&#23558;&#24748;&#25346;&#12289;&#39118;&#24863;&#21644;&#23454;&#26102;&#20114;&#21160;&#21512;&#25104;&#19968;&#22871;&#21487;&#34987;&#35266;&#30475;&#21644;&#35302;&#21457;&#30340;&#31354;&#38388;&#35013;&#32622;&#12290;</p>
+                    </div>
+                </article>
+                <article class="chapter-panel chapter-panel-small" style="--panel-img:url('7.jpg')">
+                    <div class="chapter-panel-copy">
+                        <span>02 / MIRROR SCENE</span>
+                        <h3>&#38236;&#29983;&#19975;&#35937;&#20132;&#20114;&#35013;&#32622;</h3>
+                        <p>&#20511;&#30001;&#38236;&#38754;&#12289;&#21160;&#24577;&#25237;&#24433;&#21644;&#35266;&#20247;&#20301;&#32622;&#21464;&#21270;&#65292;&#24418;&#25104;&#20250;&#38543;&#20154;&#31227;&#21160;&#32780;&#21457;&#29983;&#21464;&#21270;&#30340;&#30011;&#38754;&#21453;&#39304;&#12290;</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="chapter-materials" class="chapter-page chapter-materials">
+        <div class="container chapter-layout chapter-layout-grid">
+            <div class="chapter-copy">
+                <p class="section-kicker">CHAPTER 03 / MIXED MATERIALS</p>
+                <h2 class="section-title">&#32508;&#21512;&#26448;&#26009;</h2>
+                <p class="section-copy">&#36825;&#19968;&#31456;&#20197;&#26448;&#26009;&#12289;&#35302;&#24863;&#21644;&#24037;&#33402;&#20026;&#20027;&#65292;&#23637;&#31034;&#35013;&#32622;&#19982;&#39318;&#39280;&#20043;&#38388;&#26356;&#25509;&#36817;&#23454;&#20307;&#30340;&#34920;&#36798;&#26041;&#24335;&#65292;&#30011;&#38754;&#20250;&#26356;&#20687;&#19968;&#39029;&#39029;&#26448;&#26009;&#26723;&#26696;&#12290;</p>
+            </div>
+            <div class="chapter-material-grid">
+                <article class="material-card material-card-wide" style="--mat-img:url('1.jpg')">
+                    <div>
+                        <span>01 / INSTALLATION</span>
+                        <h3>&#32508;&#21512;&#26448;&#26009;&#35013;&#32622;</h3>
+                        <p>&#25226;&#29627;&#29827;&#12289;&#37329;&#23646;&#12289;&#32440;&#24352;&#21644;&#32467;&#26500;&#20214;&#32452;&#21512;&#25104;&#19968;&#20010;&#20860;&#20855;&#23454;&#39564;&#24863;&#19982;&#23436;&#25104;&#24230;&#30340;&#31354;&#38388;&#20316;&#21697;&#12290;</p>
+                    </div>
+                </article>
+                <article class="material-card" style="--mat-img:url('35.jpg')">
+                    <div>
+                        <span>02 / JEWELRY</span>
+                        <h3>&#28023;&#30707;&#33457;&#29627;&#29827;&#39318;&#39280;</h3>
+                        <p>&#20197;&#36879;&#26126;&#24230;&#12289;&#25240;&#23556;&#21644;&#24494;&#22937;&#30340;&#20307;&#31215;&#24046;&#24322;&#65292;&#21435;&#24314;&#31435;&#26356;&#32454;&#23567;&#30340;&#20329;&#25140;&#29289;&#21465;&#20107;&#12290;</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+
+    <section id="photo" class="chapter-page chapter-image">
+        <div class="container chapter-layout">
+            <div class="chapter-copy">
+                <p class="section-kicker">CHAPTER 04 / IMAGE & MOTION</p>
+                <h2 class="section-title">&#24433;&#20687;</h2>
+                <p class="section-copy">&#36825;&#19968;&#31456;&#25226; MG &#21160;&#30011;&#12289;&#25668;&#24433;&#20316;&#21697;&#21644;&#24433;&#20687;&#25490;&#29256;&#25918;&#22312;&#21516;&#19968;&#20010;&#35270;&#35273;&#31995;&#32479;&#37324;&#65292;&#20559;&#21521;&#26356;&#36731;&#24555;&#12289;&#26356;&#20415;&#20110;&#27983;&#35272;&#30340;&#20316;&#21697;&#22681;&#32467;&#26500;&#12290;</p>
+            </div>
+            <div class="image-portfolio-grid">
+                <article class="image-portfolio-card tall" style="--img:url('7.jpg')">
+                    <div class="image-card-copy">
+                        <span>MG 01</span>
+                        <h3>MG &#21160;&#30011; 1</h3>
+                    </div>
+                </article>
+                <article class="image-portfolio-card" style="--img:url('4.jpg')">
+                    <div class="image-card-copy">
+                        <span>MG 02</span>
+                        <h3>MG &#21160;&#30011; 2</h3>
+                    </div>
+                </article>
+                <article class="image-portfolio-card wide" style="--img:url('35.jpg')">
+                    <div class="image-card-copy">
+                        <span>PHOTO</span>
+                        <h3>&#25668;&#24433;&#20316;&#21697;</h3>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
 
     <canvas class="cursor-paint" id="cursorPaint" aria-hidden="true"></canvas>
 
@@ -1640,8 +1874,8 @@
             document.querySelectorAll("section").forEach(section => {
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
             });
-            const aiSections = new Set(["ai-generation", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "herbal-3d", "herbal-3d-detail"]);
-            const navTarget = aiSections.has(current) ? "ai-generation" : current;
+            const aiSections = new Set(["hero-project", "ai-generation", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "herbal-3d", "herbal-3d-detail"]);
+            const navTarget = aiSections.has(current) ? "hero-project" : current;
             document.querySelectorAll(".top-nav a").forEach(link => {
                 const target = link.getAttribute("href");
                 link.classList.toggle("active", target === `#${navTarget}`);
