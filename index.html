@@ -1231,7 +1231,7 @@
     <nav class="top-nav">
         <a href="#cover" class="active">&#20851;&#20110;&#25105;</a>
         <a href="#directory">&#30446;&#24405;</a>
-        <a href="#hero-project">AI&#29983;&#25104;</a>
+        <a href="#ai-generation">AI&#29983;&#25104;</a>
         <a href="#chapter-interactive">&#20132;&#20114;&#35013;&#32622;</a>
         <a href="#chapter-materials">&#32508;&#21512;&#26448;&#26009;</a>
         <a href="#photo">&#24433;&#20687;</a>
@@ -1239,7 +1239,7 @@
     <div class="dot-nav">
         <button class="dot-item active" onclick="scrollToSec('cover')" aria-label="&#23553;&#38754;"></button>
         <button class="dot-item" onclick="scrollToSec('directory')" aria-label="&#30446;&#24405;"></button>
-        <button class="dot-item" onclick="scrollToSec('hero-project')" aria-label="&#39033;&#30446;"></button>
+        <button class="dot-item" onclick="scrollToSec('ai-generation')" aria-label="&#39033;&#30446;"></button>
         <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="&#20998;&#38236;"></button>
     </div>
 
@@ -1295,23 +1295,7 @@
         </div>
     </section>
 
-    <section id="hero-project" class="case-page">
-        <div class="story-bg" id="storyBg"></div>
-        <div class="container">
-            <article class="glass-card">
-                <p class="section-kicker">CORE PROJECT</p>
-                <h2>&#23547;&#25214;&#24494;&#20809; / Looking for the Light</h2>
-                <p>&#36825;&#19968;&#39029;&#30340;&#40657;&#33394;&#32972;&#26223;&#24050;&#26367;&#25442;&#20026;&#20998;&#38236;&#22270;&#22635;&#20805;&#32972;&#26223;&#65292;&#24182;&#20445;&#30041;&#26263;&#33394;&#29627;&#29827;&#20449;&#24687;&#23618;&#65292;&#26041;&#20415;&#21069;&#26223;&#25991;&#23383;&#38405;&#35835;&#12290;&#32972;&#26223;&#40664;&#35748;&#35835;&#21462; image_43f020.jpg&#65292;&#20063;&#20250;&#32487;&#32493;&#23581;&#35797;&#21516;&#30446;&#24405;&#19979;&#30340;&#20998;&#38236;&#22270;&#29255;&#12290;</p>
-                <div class="tag-row">
-                    <span>#&#25552;&#31034;&#35789;&#24037;&#31243;</span>
-                    <span>#&#20998;&#38236;&#22270;&#32972;&#26223;</span>
-                    <span>#&#22270;&#29983;&#35270;&#39057;</span>
-                </div>
-            </article>
-        </div>
-    </section>
-
-<section id="ai-generation" class="project-hero-page" style="--project-bg: url('1.jpg')">
+    <section id="ai-generation" class="project-hero-page" style="--project-bg: url('1.jpg')">
         <div class="container project-hero-copy">
             <p class="section-kicker">AI GENERATION / &#22823;&#31456;&#33410;</p>
             <h2>AI &#29983;&#25104;</h2>
@@ -1349,6 +1333,22 @@
             </div>
         </div>
         <div class="project-arrow">&#8595;</div>
+    </section>
+
+<section id="hero-project" class="case-page">
+        <div class="story-bg" id="storyBg"></div>
+        <div class="container">
+            <article class="glass-card">
+                <p class="section-kicker">CORE PROJECT</p>
+                <h2>&#23547;&#25214;&#24494;&#20809; / Looking for the Light</h2>
+                <p>&#36825;&#19968;&#39029;&#30340;&#40657;&#33394;&#32972;&#26223;&#24050;&#26367;&#25442;&#20026;&#20998;&#38236;&#22270;&#22635;&#20805;&#32972;&#26223;&#65292;&#24182;&#20445;&#30041;&#26263;&#33394;&#29627;&#29827;&#20449;&#24687;&#23618;&#65292;&#26041;&#20415;&#21069;&#26223;&#25991;&#23383;&#38405;&#35835;&#12290;&#32972;&#26223;&#40664;&#35748;&#35835;&#21462; image_43f020.jpg&#65292;&#20063;&#20250;&#32487;&#32493;&#23581;&#35797;&#21516;&#30446;&#24405;&#19979;&#30340;&#20998;&#38236;&#22270;&#29255;&#12290;</p>
+                <div class="tag-row">
+                    <span>#&#25552;&#31034;&#35789;&#24037;&#31243;</span>
+                    <span>#&#20998;&#38236;&#22270;&#32972;&#26223;</span>
+                    <span>#&#22270;&#29983;&#35270;&#39057;</span>
+                </div>
+            </article>
+        </div>
     </section>
 
 <section id="storyboard" class="storyboard">
@@ -1869,18 +1869,18 @@
         }
 
         function adjustActiveStates() {
-            const sectionIds = ["cover", "directory", "hero-project", "storyboard"];
+            const sectionIds = ["cover", "directory", "ai-generation", "hero-project"];
             let current = "cover";
             document.querySelectorAll("section").forEach(section => {
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
             });
-            const aiSections = new Set(["hero-project", "ai-generation", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "herbal-3d", "herbal-3d-detail"]);
-            const navTarget = aiSections.has(current) ? "hero-project" : current;
+            const aiSections = new Set(["ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "herbal-3d", "herbal-3d-detail"]);
+            const navTarget = aiSections.has(current) ? "ai-generation" : current;
             document.querySelectorAll(".top-nav a").forEach(link => {
                 const target = link.getAttribute("href");
                 link.classList.toggle("active", target === `#${navTarget}`);
             });
-            const dotTarget = aiSections.has(current) ? "hero-project" : current;
+            const dotTarget = aiSections.has(current) ? "ai-generation" : current;
             document.querySelectorAll(".dot-item").forEach((dot, i) => {
                 dot.classList.toggle("active", sectionIds[i] === dotTarget);
             });
