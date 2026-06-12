@@ -510,19 +510,18 @@
         .tv-stage {
             width: min(1360px, 100%);
             display: grid;
-            grid-template-columns: minmax(0, 1.28fr) minmax(280px, 0.58fr);
-            gap: 24px;
-            align-items: center;
+            grid-template-columns: 1fr;
+            justify-items: center;
         }
         .tv-showcase {
             position: relative;
-            width: min(100%, 920px);
+            width: min(100%, 980px);
             margin-inline: auto;
         }
         .tv-launch {
             position: relative;
             width: 100%;
-            aspect-ratio: 16 / 11;
+            aspect-ratio: 736 / 536;
             display: grid;
             place-items: center;
         }
@@ -545,17 +544,9 @@
             animation: tvIntroBoot 2.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
         }
         .tv-shell {
-            position: relative;
-            width: 100%;
-            height: 100%;
-            padding: 22px;
-            border-radius: 42px;
-            background:
-                radial-gradient(circle at 50% 40%, rgba(255,255,255,0.06), transparent 42%),
-                linear-gradient(145deg, rgba(255,255,255,0.12), rgba(255,255,255,0.035)),
-                rgba(10,12,16,0.94);
-            border: 1px solid rgba(255,255,255,0.18);
-            box-shadow: 0 50px 150px rgba(0,0,0,0.7);
+            position: absolute;
+            inset: 0;
+            padding: 0;
             transform-origin: center center;
             opacity: 0;
             transform: scale(0.18) translateY(24px);
@@ -566,19 +557,20 @@
         .tv-shell::before {
             content: "";
             position: absolute;
-            inset: 14px;
-            border-radius: 28px;
-            border: 2px solid rgba(255,255,255,0.06);
+            inset: 0;
             pointer-events: none;
         }
         .tv-screen {
-            position: relative;
-            aspect-ratio: 16 / 9;
-            border-radius: 28px;
+            position: absolute;
+            left: 8.6%;
+            top: 13.2%;
+            width: 56.8%;
+            height: 46.2%;
+            border-radius: 8% / 12%;
             overflow: hidden;
             background:
                 linear-gradient(135deg, rgba(255,255,255,0.08), rgba(255,255,255,0.02)),
-                url("&#x7535;&#x89C6;&#x673A;&#x5C4F;&#x5E55;.png") center/cover no-repeat,
+                url("&#30005;&#35270;&#26426;&#23631;&#24149;.png") center/cover no-repeat,
                 #111;
             border: 1px solid rgba(255,255,255,0.12);
         }
@@ -630,46 +622,6 @@
             letter-spacing: 0.16em;
             backdrop-filter: blur(10px);
         }
-        .tv-controls {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-top: 14px;
-            color: rgba(255,255,255,0.6);
-            font-size: 11px;
-            letter-spacing: 0.2em;
-        }
-        .tv-note {
-            position: relative;
-            min-height: 520px;
-            border-radius: 28px;
-            border: 1px solid rgba(255,255,255,0.12);
-            background:
-                radial-gradient(circle at 28% 18%, rgba(0,232,255,0.16), transparent 20%),
-                radial-gradient(circle at 70% 72%, rgba(255,79,195,0.14), transparent 22%),
-                rgba(10,12,16,0.88);
-            padding: 26px;
-            overflow: hidden;
-        }
-        .tv-note::before {
-            content: "";
-            position: absolute;
-            inset: 18px;
-            border-radius: 22px;
-            border: 1px dashed rgba(255,255,255,0.1);
-        }
-        .tv-note h2 { position: relative; font-family: var(--font-title); font-size: clamp(28px, 3vw, 46px); line-height: 1.05; margin-bottom: 18px; }
-        .tv-note p { position: relative; color: rgba(255,255,255,0.68); line-height: 1.9; font-size: 14px; max-width: 28ch; }
-        .tv-doodle {
-            position: absolute;
-            right: 18px;
-            bottom: 18px;
-            font-family: var(--font-title);
-            font-size: clamp(54px, 8vw, 120px);
-            color: rgba(255,255,255,0.1);
-            transform: rotate(-14deg);
-        }
-
         .storyboard-band {
             width: 100%;
             display: grid;
@@ -761,6 +713,293 @@
             letter-spacing: 0.14em;
         }
 
+        .project-hero-page {
+            position: relative;
+            min-height: 100vh;
+            display: flex;
+            align-items: flex-end;
+            overflow: hidden;
+            background: #050506;
+        }
+        .project-hero-page::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: var(--project-bg) center/cover no-repeat;
+            transform: scale(1.08);
+            filter: saturate(1.08) brightness(0.72);
+            animation: projectKenBurns 16s ease-in-out infinite alternate;
+        }
+        .project-hero-page::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(180deg, rgba(5,5,6,0.18) 0%, rgba(5,5,6,0.58) 58%, rgba(5,5,6,0.9) 100%);
+        }
+        .project-hero-copy {
+            position: relative;
+            z-index: 2;
+            width: 100%;
+            padding-bottom: 78px;
+            max-width: 920px;
+        }
+        .project-hero-copy h2 {
+            font-family: var(--font-title);
+            font-size: clamp(42px, 6vw, 96px);
+            line-height: 0.94;
+            letter-spacing: -0.05em;
+            margin: 12px 0 16px;
+            text-transform: uppercase;
+        }
+        .project-meta {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+        .project-meta span {
+            padding: 7px 11px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.16);
+            background: rgba(255,255,255,0.04);
+            color: rgba(255,255,255,0.74);
+            font-size: 11px;
+            letter-spacing: 0.14em;
+        }
+        .project-arrow {
+            position: absolute;
+            right: 28px;
+            bottom: 28px;
+            z-index: 2;
+            color: rgba(255,255,255,0.8);
+            font-family: var(--font-title);
+            font-size: 40px;
+            text-shadow: 0 0 22px rgba(255,255,255,0.28);
+        }
+
+        .project-detail-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: linear-gradient(180deg, #07080b 0%, #0d1015 100%);
+        }
+        .project-detail-layout {
+            width: 100%;
+            display: grid;
+            grid-template-columns: minmax(0, 0.42fr) minmax(0, 0.58fr);
+            gap: 24px;
+            align-items: start;
+        }
+        .project-detail-copy {
+            position: relative;
+            padding-right: 10px;
+        }
+        .project-detail-copy h3 {
+            font-family: var(--font-title);
+            font-size: clamp(28px, 3vw, 48px);
+            line-height: 1.05;
+            margin: 10px 0 16px;
+        }
+        .project-detail-copy p {
+            color: rgba(255,255,255,0.7);
+            line-height: 1.9;
+            font-size: 14px;
+        }
+        .project-detail-copy .detail-list {
+            display: grid;
+            gap: 10px;
+            margin-top: 22px;
+        }
+        .project-detail-copy .detail-list span {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            width: fit-content;
+            padding: 7px 10px;
+            border-radius: 999px;
+            background: rgba(255,255,255,0.03);
+            border: 1px solid rgba(255,255,255,0.12);
+            color: rgba(255,255,255,0.68);
+            font-size: 11px;
+            letter-spacing: 0.12em;
+        }
+        .project-detail-media {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        .project-media-tile {
+            position: relative;
+            aspect-ratio: 4 / 3;
+            border-radius: 18px;
+            overflow: hidden;
+            border: 1px solid rgba(255,255,255,0.12);
+            background: #101216;
+            box-shadow: 0 18px 44px rgba(0,0,0,0.24);
+            background-image: var(--img);
+            background-size: cover;
+            background-position: center;
+            transition: transform 0.45s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.35s;
+        }
+        .project-media-tile:hover {
+            transform: scale(1.03);
+            box-shadow: 0 24px 60px rgba(0,0,0,0.34);
+        }
+        .project-media-tile.tall {
+            grid-row: span 2;
+            aspect-ratio: auto;
+            min-height: 100%;
+        }
+
+        .process-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 50% 0%, rgba(0,232,255,0.12), transparent 24%), #090a0d;
+        }
+        .process-grid {
+            display: grid;
+            grid-template-columns: repeat(3, minmax(0, 1fr));
+            gap: 16px;
+            margin-top: 28px;
+        }
+        .process-card {
+            position: relative;
+            min-height: 280px;
+            padding: 22px;
+            border-radius: 18px;
+            background: linear-gradient(180deg, rgba(255,255,255,0.08), rgba(255,255,255,0.03)), rgba(10,12,16,0.94);
+            border: 1px solid rgba(255,255,255,0.12);
+            overflow: hidden;
+        }
+        .process-card::before {
+            content: "";
+            position: absolute;
+            inset: auto -34px -34px auto;
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            border: 2px dashed rgba(255,255,255,0.16);
+            opacity: 0.8;
+            transform: rotate(-12deg);
+        }
+        .process-card .step {
+            color: var(--blue);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.16em;
+        }
+        .process-card h3 {
+            font-family: var(--font-title);
+            font-size: clamp(20px, 2.3vw, 32px);
+            line-height: 1.05;
+            margin: 12px 0 12px;
+        }
+        .process-card p {
+            color: rgba(255,255,255,0.68);
+            line-height: 1.8;
+            font-size: 13px;
+        }
+        .process-card.primary { min-height: 340px; }
+        .process-card.primary .accent-ring {
+            position: absolute;
+            top: 16px;
+            right: 16px;
+            width: 36px;
+            height: 36px;
+            border-radius: 50%;
+            border: 2px solid rgba(0,232,255,0.65);
+            box-shadow: 0 0 18px rgba(0,232,255,0.22);
+        }
+
+        .viewer-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            background: radial-gradient(circle at 20% 20%, rgba(255,79,195,0.12), transparent 22%), #06070a;
+        }
+        .viewer-layout {
+            display: grid;
+            grid-template-columns: minmax(0, 1.1fr) minmax(280px, 0.6fr);
+            gap: 24px;
+            align-items: center;
+            width: 100%;
+        }
+        .viewer-shell {
+            position: relative;
+            border-radius: 28px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background:
+                radial-gradient(circle at 50% 45%, rgba(0,232,255,0.12), transparent 34%),
+                rgba(9,10,13,0.92);
+            padding: 22px;
+            box-shadow: 0 24px 70px rgba(0,0,0,0.4);
+            overflow: hidden;
+        }
+        .viewer-stage {
+            min-height: 520px;
+            border-radius: 22px;
+            border: 1px solid rgba(255,255,255,0.12);
+            background:
+                linear-gradient(135deg, rgba(0,232,255,0.12), transparent 40%),
+                linear-gradient(315deg, rgba(255,79,195,0.12), transparent 45%),
+                #111318;
+            display: grid;
+            place-items: center;
+            overflow: hidden;
+            position: relative;
+        }
+        .viewer-stage img {
+            width: 88%;
+            height: auto;
+            display: block;
+            filter: drop-shadow(0 22px 42px rgba(0,0,0,0.38));
+            transform: rotate(-1deg);
+        }
+        .viewer-stage::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.05) 0 1px, transparent 1px 3px);
+            opacity: 0.18;
+            pointer-events: none;
+        }
+        .viewer-info {
+            display: grid;
+            gap: 14px;
+        }
+        .viewer-info h3 {
+            font-family: var(--font-title);
+            font-size: clamp(28px, 3vw, 44px);
+            line-height: 1.05;
+        }
+        .viewer-info p {
+            color: rgba(255,255,255,0.68);
+            line-height: 1.9;
+            font-size: 14px;
+        }
+        .viewer-info .info-chip {
+            display: inline-flex;
+            width: fit-content;
+            padding: 7px 10px;
+            border-radius: 999px;
+            border: 1px solid rgba(255,255,255,0.14);
+            background: rgba(255,255,255,0.03);
+            color: rgba(255,255,255,0.7);
+            font-size: 11px;
+            letter-spacing: 0.14em;
+        }
+        .viewer-info .tiny-list {
+            display: grid;
+            gap: 8px;
+            margin-top: 10px;
+        }
+        .viewer-info .tiny-list span {
+            color: rgba(255,255,255,0.62);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
         @keyframes tvBoot {
             0% { opacity: 0; transform: scale(0.12) translateY(26px); filter: brightness(0.7) saturate(0.8); }
             14% { opacity: 1; transform: scale(0.16) translateY(20px); }
@@ -800,6 +1039,10 @@
             34% { opacity: 0.45; }
             100% { opacity: 0.3; }
         }
+        @keyframes projectKenBurns {
+            from { transform: scale(1.08) translateY(0); }
+            to { transform: scale(1.16) translateY(-8px); }
+        }
 
         @media (max-width: 980px) {
             .cover-layout { grid-template-columns: 1fr; padding-top: 86px; padding-bottom: 50px; }
@@ -809,6 +1052,10 @@
             .workflow-grid { grid-template-columns: repeat(6, minmax(0, 1fr)); grid-auto-rows: 120px; }
             .workflow-card.size-lg, .workflow-card.size-md, .workflow-card.size-sm { grid-column: span 6; grid-row: span 1; }
             .ai-cases { grid-template-columns: 1fr; }
+            .project-detail-layout { grid-template-columns: 1fr; }
+            .process-grid { grid-template-columns: 1fr; }
+            .viewer-layout { grid-template-columns: 1fr; }
+            .project-hero-copy { padding-bottom: 56px; }
             .tv-stage { grid-template-columns: 1fr; }
             .dot-nav { display: none; }
         }
@@ -824,6 +1071,10 @@
             .story-frame { padding: 0 52px; }
             .story-step.prev { left: 6px; }
             .story-step.next { right: 6px; }
+            .project-detail-media { grid-template-columns: 1fr; }
+            .project-media-tile.tall { grid-row: auto; min-height: 220px; }
+            .process-grid { grid-template-columns: 1fr; }
+            .viewer-stage { min-height: 340px; }
         }
     </style>
 </head>
@@ -843,33 +1094,33 @@
     <div class="global-grid"></div>
     <div class="profile-brand">profile</div>
     <nav class="top-nav">
-        <a href="#cover" class="active">&#x5173;&#x4E8E;&#x6211;</a>
-        <a href="#directory">&#x76EE;&#x5F55;</a>
-        <a href="#hero-project">AI&#x751F;&#x6210;</a>
-        <a href="#ch2">&#x4EA4;&#x4E92;&#x88C5;&#x7F6E;</a>
-        <a href="#ch3">&#x7EFC;&#x5408;&#x6750;&#x6599;</a>
-        <a href="#photo">&#x5F71;&#x50CF;</a>
+        <a href="#cover" class="active">&#20851;&#20110;&#25105;</a>
+        <a href="#directory">&#30446;&#24405;</a>
+        <a href="#ai-generation">AI&#29983;&#25104;</a>
+        <a href="#ch2">&#20132;&#20114;&#35013;&#32622;</a>
+        <a href="#ch3">&#32508;&#21512;&#26448;&#26009;</a>
+        <a href="#photo">&#24433;&#20687;</a>
     </nav>
     <div class="dot-nav">
-        <button class="dot-item active" onclick="scrollToSec('cover')" aria-label="&#x5C01;&#x9762;"></button>
-        <button class="dot-item" onclick="scrollToSec('directory')" aria-label="&#x76EE;&#x5F55;"></button>
-        <button class="dot-item" onclick="scrollToSec('hero-project')" aria-label="&#x9879;&#x76EE;"></button>
-        <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="&#x5206;&#x955C;"></button>
+        <button class="dot-item active" onclick="scrollToSec('cover')" aria-label="&#23553;&#38754;"></button>
+        <button class="dot-item" onclick="scrollToSec('directory')" aria-label="&#30446;&#24405;"></button>
+        <button class="dot-item" onclick="scrollToSec('hero-project')" aria-label="&#39033;&#30446;"></button>
+        <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="&#20998;&#38236;"></button>
     </div>
 
     <section id="cover" class="cover">
         <div class="container cover-layout">
             <div>
                 <p class="eyebrow">YANG LIAN / CREATIVE PORTFOLIO</p>
-                <h1 class="liquid-title">&#x6768;&#x83B2;<br>&#x4F5C;&#x54C1;&#x96C6;</h1>
-                <p class="hero-sub">&#x6211;&#x5E0C;&#x671B;&#x8FD9;&#x4EFD;&#x4F5C;&#x54C1;&#x96C6;&#x5448;&#x73B0;&#x7684;&#x662F;&#xFF1A;&#x4ECE;&#x60F3;&#x6CD5;&#x3001;&#x56FE;&#x50CF;&#x3001;&#x52A8;&#x6001;&#x5230;&#x7A7A;&#x95F4;&#x88C5;&#x7F6E;&#x7684;&#x5B8C;&#x6574;&#x521B;&#x4F5C;&#x80FD;&#x529B;&#x3002;&#x5B83;&#x4E0D;&#x662F;&#x5355;&#x4E00;&#x8F6F;&#x4EF6;&#x6280;&#x80FD;&#x7684;&#x9648;&#x5217;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x89C6;&#x89C9;&#x53D9;&#x4E8B;&#x3001;AI &#x751F;&#x6210;&#x3001;&#x4EA4;&#x4E92;&#x5B9E;&#x9A8C;&#x4E0E;&#x6750;&#x6599;&#x8868;&#x8FBE;&#x8FDE;&#x63A5;&#x8D77;&#x6765;&#x7684;&#x4E2A;&#x4EBA;&#x521B;&#x4F5C;&#x6863;&#x6848;&#x3002;</p>
-                <div class="skill-cloud" aria-label="&#x8F6F;&#x4EF6;&#x4E0E;&#x5DE5;&#x5177;">
+                <h1 class="liquid-title">&#26472;&#33714;<br>&#20316;&#21697;&#38598;</h1>
+                <p class="hero-sub">&#25105;&#24076;&#26395;&#36825;&#20221;&#20316;&#21697;&#38598;&#21576;&#29616;&#30340;&#26159;&#65306;&#20174;&#24819;&#27861;&#12289;&#22270;&#20687;&#12289;&#21160;&#24577;&#21040;&#31354;&#38388;&#35013;&#32622;&#30340;&#23436;&#25972;&#21019;&#20316;&#33021;&#21147;&#12290;&#23427;&#19981;&#26159;&#21333;&#19968;&#36719;&#20214;&#25216;&#33021;&#30340;&#38472;&#21015;&#65292;&#32780;&#26159;&#25226;&#35270;&#35273;&#21465;&#20107;&#12289;AI &#29983;&#25104;&#12289;&#20132;&#20114;&#23454;&#39564;&#19982;&#26448;&#26009;&#34920;&#36798;&#36830;&#25509;&#36215;&#26469;&#30340;&#20010;&#20154;&#21019;&#20316;&#26723;&#26696;&#12290;</p>
+                <div class="skill-cloud" aria-label="&#36719;&#20214;&#19982;&#24037;&#20855;">
                     <span>PS</span><span>AI</span><span>AE</span><span>TD</span>
                     <span>DeepSeek</span><span>ChatGPT</span><span>Gemini</span><span>Stable Diffusion</span>
-                    <span>Midjourney</span><span>&#x5373;&#x68A6;</span><span>Tripo3D</span>
+                    <span>Midjourney</span><span>&#21363;&#26790;</span><span>Tripo3D</span>
                 </div>
             </div>
-            <div class="portrait-stage" aria-label="&#x4E2A;&#x4EBA;&#x7167;&#x7247;&#x533A;&#x57DF;">
+            <div class="portrait-stage" aria-label="&#20010;&#20154;&#29031;&#29255;&#21306;&#22495;">
                 <div class="burst star">*</div>
                 <div class="burst zap">ZAP</div>
                 <div class="burst ring"></div>
@@ -883,27 +1134,27 @@
 
     <section id="directory" class="directory">
         <div class="container">
-            <p class="section-kicker">PROJECT DIRECTORY / &#x4F5C;&#x54C1;&#x7AE0;&#x8282;&#x76EE;&#x5F55;</p>
+            <p class="section-kicker">PROJECT DIRECTORY / &#20316;&#21697;&#31456;&#33410;&#30446;&#24405;</p>
             <div class="index-grid">
-                <a href="#hero-project" class="index-card" style="--project-img:url('1.jpg')">
+                <a href="#ai-generation" class="index-card" style="--project-img:url('1.jpg')">
                     <span>01 / AI GENERATION</span>
-                    <h3>AI &#x751F;&#x6210;</h3>
-                    <p>&#x56F4;&#x7ED5;&#x6587;&#x672C;&#x751F;&#x6210;&#x56FE;&#x50CF;&#x3001;&#x8FDE;&#x7EED;&#x5206;&#x955C;&#x3001;&#x56FE;&#x751F;&#x89C6;&#x9891;&#x4E0E; 3D &#x8F85;&#x52A9;&#x5EFA;&#x6A21;&#xFF0C;&#x5C55;&#x793A;&#x6211;&#x5BF9; AI &#x5DE5;&#x5177;&#x94FE;&#x3001;&#x753B;&#x9762;&#x63A7;&#x5236;&#x548C;&#x53D9;&#x4E8B;&#x8282;&#x594F;&#x7684;&#x7EFC;&#x5408;&#x8FD0;&#x7528;&#x3002;</p>
+                    <h3>AI &#29983;&#25104;</h3>
+                    <p>&#22260;&#32469;&#25991;&#26412;&#29983;&#25104;&#22270;&#20687;&#12289;&#36830;&#32493;&#20998;&#38236;&#12289;&#22270;&#29983;&#35270;&#39057;&#19982; 3D &#36741;&#21161;&#24314;&#27169;&#65292;&#23637;&#31034;&#25105;&#23545; AI &#24037;&#20855;&#38142;&#12289;&#30011;&#38754;&#25511;&#21046;&#21644;&#21465;&#20107;&#33410;&#22863;&#30340;&#32508;&#21512;&#36816;&#29992;&#12290;</p>
                 </a>
                 <a href="#ch2" class="index-card" style="--project-img:url('4.jpg')">
                     <span>02 / INTERACTIVE INSTALLATION</span>
-                    <h3>&#x4EA4;&#x4E92;&#x88C5;&#x7F6E;</h3>
-                    <p>&#x7ED3;&#x5408; TouchDesigner&#x3001;&#x6295;&#x5F71;&#x3001;&#x7C92;&#x5B50;&#x89C6;&#x89C9;&#x548C;&#x5B9E;&#x65F6;&#x611F;&#x5E94;&#x903B;&#x8F91;&#xFF0C;&#x63A2;&#x7D22;&#x89C2;&#x4F17;&#x884C;&#x4E3A;&#x4E0E;&#x52A8;&#x6001;&#x5F71;&#x50CF;&#x4E4B;&#x95F4;&#x7684;&#x5173;&#x7CFB;&#x3002;</p>
+                    <h3>&#20132;&#20114;&#35013;&#32622;</h3>
+                    <p>&#32467;&#21512; TouchDesigner&#12289;&#25237;&#24433;&#12289;&#31890;&#23376;&#35270;&#35273;&#21644;&#23454;&#26102;&#24863;&#24212;&#36923;&#36753;&#65292;&#25506;&#32034;&#35266;&#20247;&#34892;&#20026;&#19982;&#21160;&#24577;&#24433;&#20687;&#20043;&#38388;&#30340;&#20851;&#31995;&#12290;</p>
                 </a>
                 <a href="#ch3" class="index-card" style="--project-img:url('7.jpg')">
                     <span>03 / MIXED MATERIALS</span>
-                    <h3>&#x7EFC;&#x5408;&#x6750;&#x6599;</h3>
-                    <p>&#x4ECE;&#x73BB;&#x7483;&#x3001;&#x88C5;&#x7F6E;&#x3001;&#x7A7A;&#x95F4;&#x7ED3;&#x6784;&#x5230;&#x6750;&#x6599;&#x808C;&#x7406;&#xFF0C;&#x5448;&#x73B0;&#x6211;&#x5BF9;&#x7269;&#x7406;&#x8D28;&#x611F;&#x3001;&#x5149;&#x5F71;&#x53D8;&#x5316;&#x548C;&#x7A7A;&#x95F4;&#x53D9;&#x4E8B;&#x7684;&#x5B9E;&#x9A8C;&#x3002;</p>
+                    <h3>&#32508;&#21512;&#26448;&#26009;</h3>
+                    <p>&#20174;&#29627;&#29827;&#12289;&#35013;&#32622;&#12289;&#31354;&#38388;&#32467;&#26500;&#21040;&#26448;&#26009;&#32908;&#29702;&#65292;&#21576;&#29616;&#25105;&#23545;&#29289;&#29702;&#36136;&#24863;&#12289;&#20809;&#24433;&#21464;&#21270;&#21644;&#31354;&#38388;&#21465;&#20107;&#30340;&#23454;&#39564;&#12290;</p>
                 </a>
                 <a href="#photo" class="index-card" style="--project-img:url('35.jpg')">
                     <span>04 / IMAGE</span>
-                    <h3>&#x5F71;&#x50CF;</h3>
-                    <p>&#x901A;&#x8FC7;&#x6444;&#x5F71;&#x3001;&#x540E;&#x671F;&#x3001;&#x52A8;&#x6001;&#x56FE;&#x50CF;&#x4E0E;&#x753B;&#x9762;&#x6574;&#x7406;&#xFF0C;&#x8BB0;&#x5F55;&#x6211;&#x5BF9;&#x73B0;&#x5B9E;&#x7EC6;&#x8282;&#x3001;&#x8272;&#x5F69;&#x6C1B;&#x56F4;&#x548C;&#x89C6;&#x89C9;&#x79E9;&#x5E8F;&#x7684;&#x89C2;&#x5BDF;&#x3002;</p>
+                    <h3>&#24433;&#20687;</h3>
+                    <p>&#36890;&#36807;&#25668;&#24433;&#12289;&#21518;&#26399;&#12289;&#21160;&#24577;&#22270;&#20687;&#19982;&#30011;&#38754;&#25972;&#29702;&#65292;&#35760;&#24405;&#25105;&#23545;&#29616;&#23454;&#32454;&#33410;&#12289;&#33394;&#24425;&#27675;&#22260;&#21644;&#35270;&#35273;&#31209;&#24207;&#30340;&#35266;&#23519;&#12290;</p>
                 </a>
             </div>
         </div>
@@ -914,39 +1165,163 @@
         <div class="container">
             <article class="glass-card">
                 <p class="section-kicker">CORE PROJECT</p>
-                <h2>&#x5BFB;&#x627E;&#x5FAE;&#x5149; / Looking for the Light</h2>
-                <p>&#x8FD9;&#x4E00;&#x9875;&#x7684;&#x9ED1;&#x8272;&#x80CC;&#x666F;&#x5DF2;&#x66FF;&#x6362;&#x4E3A;&#x5206;&#x955C;&#x56FE;&#x586B;&#x5145;&#x80CC;&#x666F;&#xFF0C;&#x5E76;&#x4FDD;&#x7559;&#x6697;&#x8272;&#x73BB;&#x7483;&#x4FE1;&#x606F;&#x5C42;&#xFF0C;&#x65B9;&#x4FBF;&#x524D;&#x666F;&#x6587;&#x5B57;&#x9605;&#x8BFB;&#x3002;&#x80CC;&#x666F;&#x9ED8;&#x8BA4;&#x8BFB;&#x53D6; image_43f020.jpg&#xFF0C;&#x4E5F;&#x4F1A;&#x7EE7;&#x7EED;&#x5C1D;&#x8BD5;&#x540C;&#x76EE;&#x5F55;&#x4E0B;&#x7684;&#x5206;&#x955C;&#x56FE;&#x7247;&#x3002;</p>
+                <h2>&#23547;&#25214;&#24494;&#20809; / Looking for the Light</h2>
+                <p>&#36825;&#19968;&#39029;&#30340;&#40657;&#33394;&#32972;&#26223;&#24050;&#26367;&#25442;&#20026;&#20998;&#38236;&#22270;&#22635;&#20805;&#32972;&#26223;&#65292;&#24182;&#20445;&#30041;&#26263;&#33394;&#29627;&#29827;&#20449;&#24687;&#23618;&#65292;&#26041;&#20415;&#21069;&#26223;&#25991;&#23383;&#38405;&#35835;&#12290;&#32972;&#26223;&#40664;&#35748;&#35835;&#21462; image_43f020.jpg&#65292;&#20063;&#20250;&#32487;&#32493;&#23581;&#35797;&#21516;&#30446;&#24405;&#19979;&#30340;&#20998;&#38236;&#22270;&#29255;&#12290;</p>
                 <div class="tag-row">
-                    <span>#&#x63D0;&#x793A;&#x8BCD;&#x5DE5;&#x7A0B;</span>
-                    <span>#&#x5206;&#x955C;&#x56FE;&#x80CC;&#x666F;</span>
-                    <span>#&#x56FE;&#x751F;&#x89C6;&#x9891;</span>
+                    <span>#&#25552;&#31034;&#35789;&#24037;&#31243;</span>
+                    <span>#&#20998;&#38236;&#22270;&#32972;&#26223;</span>
+                    <span>#&#22270;&#29983;&#35270;&#39057;</span>
                 </div>
             </article>
+        </div>
+    </section>
+
+    <section id="ai-generation" class="project-hero-page" style="--project-bg: url('1.jpg')">
+        <div class="container project-hero-copy">
+            <p class="section-kicker">AI GENERATION / &#22823;&#31456;&#33410;</p>
+            <h2>AI &#29983;&#25104;</h2>
+            <p class="section-copy">&#36825;&#19968;&#31456;&#25226;&#20320;&#21518;&#32493;&#30340; AI &#39033;&#30446;&#21333;&#29420;&#25910;&#36215;&#26469;&#65292;&#21644;&#8220;&#24494;&#20809;&#8221;&#20998;&#24320;&#12290;&#20320;&#21518;&#38754;&#35201;&#25918;&#30340;&#35013;&#32622;&#35774;&#35745;&#12289;&#20070;&#24215;&#35774;&#35745;&#21644;&#20013;&#33609;&#33647; AI &#27169;&#22411;&#37117;&#20174;&#36825;&#37324;&#36827;&#20837;&#65292;&#19981;&#20877;&#25346;&#22312;&#21069;&#19968;&#20010;&#39033;&#30446;&#39029;&#37324;&#12290;</p>
+            <div class="project-meta">
+                <span>&#21335;&#20140;&#22478;&#22681;&#27185;&#33457;&#35013;&#32622;&#35774;&#35745;</span>
+                <span>&#21335;&#20140;&#20964;&#20976;&#20070;&#24215;&#35013;&#32622;&#35774;&#35745;</span>
+                <span>&#20013;&#33609;&#33647; AI &#27169;&#22411;&#29983;&#25104;</span>
+            </div>
             <div class="ai-cases">
-                <a href="#storyboard" class="ai-case" style="--ai-img:url('1.jpg')">
+                <a href="#nj-wall" class="ai-case" style="--ai-img:url('1.jpg')">
                     <div class="ai-case-body">
                         <span>01 / Nanjing City Wall</span>
-                        <h3>&#x5357;&#x4EAC;&#x57CE;&#x5899;&#x6A31;&#x82B1;&#x88C5;&#x7F6E;&#x751F;&#x6210;</h3>
-                        <p>&#x628A;&#x5386;&#x53F2;&#x7A7A;&#x95F4;&#x3001;&#x6625;&#x65E5;&#x82B1;&#x610F;&#x548C;&#x516C;&#x5171;&#x88C5;&#x7F6E;&#x611F;&#x653E;&#x5230;&#x4E00;&#x8D77;&#xFF0C;&#x5F3A;&#x8C03;&#x573A;&#x666F;&#x6C1B;&#x56F4;&#x4E0E;&#x7A7A;&#x95F4;&#x5C3A;&#x5EA6;&#x3002;</p>
+                        <h3>&#21335;&#20140;&#22478;&#22681;&#27185;&#33457;&#35013;&#32622;&#35774;&#35745;</h3>
+                        <p>&#25226;&#21382;&#21490;&#31354;&#38388;&#12289;&#26149;&#26085;&#33457;&#24847;&#21644;&#20844;&#20849;&#35013;&#32622;&#24863;&#25918;&#21040;&#19968;&#36215;&#65292;&#24378;&#35843;&#22330;&#26223;&#27675;&#22260;&#19982;&#31354;&#38388;&#23610;&#24230;&#12290;</p>
                         <div class="ai-case-tag">INSTALLATION / CITY SPACE</div>
                     </div>
                 </a>
-                <a href="#storyboard" class="ai-case" style="--ai-img:url('4.jpg')">
+                <a href="#phoenix-bookstore" class="ai-case" style="--ai-img:url('4.jpg')">
                     <div class="ai-case-body">
                         <span>02 / Phoenix Bookstore</span>
-                        <h3>&#x5357;&#x4EAC;&#x51E4;&#x51F0;&#x4E66;&#x5E97;&#x88C5;&#x7F6E;&#x751F;&#x6210;</h3>
-                        <p>&#x56F4;&#x7ED5;&#x4E66;&#x5E97;&#x7684;&#x9605;&#x8BFB;&#x6C14;&#x8D28;&#x3001;&#x57CE;&#x5E02;&#x6587;&#x5316;&#x548C;&#x89C6;&#x89C9;&#x88C5;&#x7F6E;&#xFF0C;&#x505A;&#x66F4;&#x504F;&#x5BA4;&#x5185;&#x6C1B;&#x56F4;&#x7684;&#x751F;&#x6210;&#x5C1D;&#x8BD5;&#x3002;</p>
+                        <h3>&#21335;&#20140;&#20964;&#20976;&#20070;&#24215;&#35013;&#32622;&#35774;&#35745;</h3>
+                        <p>&#22260;&#32469;&#20070;&#24215;&#30340;&#38405;&#35835;&#27668;&#36136;&#12289;&#22478;&#24066;&#25991;&#21270;&#21644;&#35270;&#35273;&#35013;&#32622;&#65292;&#20570;&#26356;&#20559;&#23460;&#20869;&#27675;&#22260;&#30340;&#29983;&#25104;&#23581;&#35797;&#12290;</p>
                         <div class="ai-case-tag">INTERIOR / CULTURE</div>
                     </div>
                 </a>
-                <a href="#storyboard" class="ai-case" style="--ai-img:url('7.jpg')">
+                <a href="#herbal-3d" class="ai-case" style="--ai-img:url('7.jpg')">
                     <div class="ai-case-body">
                         <span>03 / 3D HERBAL</span>
-                        <h3>&#x4E2D;&#x8349;&#x836F; 3D</h3>
-                        <p>&#x4EE5;&#x690D;&#x7269;&#x3001;&#x5668;&#x76BF;&#x548C;&#x6750;&#x8D28;&#x8868;&#x73B0;&#x4E2D;&#x836F;&#x89C6;&#x89C9;&#xFF0C;&#x9002;&#x5408;&#x505A;&#x4E09;&#x7EF4;&#x751F;&#x957F;&#x3001;&#x6446;&#x4EF6;&#x4E0E;&#x4EA7;&#x54C1;&#x5316;&#x5C55;&#x793A;&#x3002;</p>
+                        <h3>&#20013;&#33609;&#33647; AI &#27169;&#22411;&#29983;&#25104;</h3>
+                        <p>&#20197;&#26893;&#29289;&#12289;&#22120;&#30399;&#21644;&#26448;&#36136;&#34920;&#29616;&#20013;&#33647;&#35270;&#35273;&#65292;&#36866;&#21512;&#20570;&#19977;&#32500;&#29983;&#38271;&#12289;&#25670;&#20214;&#19982;&#20135;&#21697;&#21270;&#23637;&#31034;&#12290;</p>
                         <div class="ai-case-tag">3D / OBJECT STUDY</div>
                     </div>
                 </a>
+            </div>
+        </div>
+        <div class="project-arrow">&#8595;</div>
+    </section>
+
+    <section id="nj-wall" class="project-hero-page" style="--project-bg: url('1.jpg')">
+        <div class="container project-hero-copy">
+            <p class="section-kicker">PROJECT 01 / INSTALLATION</p>
+            <h2>&#21335;&#20140;&#22478;&#22681;&#27185;&#33457;&#35013;&#32622;&#35774;&#35745;</h2>
+            <p class="section-copy">&#22260;&#32469;&#21382;&#21490;&#22478;&#22681;&#19982;&#26149;&#26085;&#27185;&#33457;&#27675;&#22260;&#20570;&#35270;&#35273;&#35013;&#32622;&#29983;&#25104;&#65292;&#24378;&#35843;&#23610;&#24230;&#12289;&#33410;&#22863;&#21644;&#31354;&#38388;&#21253;&#35065;&#24863;&#65292;&#35753;&#30011;&#38754;&#20687;&#19968;&#24352;&#21487;&#20197;&#36208;&#36827;&#21435;&#30340;&#33402;&#26415;&#28023;&#25253;&#12290;</p>
+            <div class="project-meta">
+                <span>2026</span><span>&#21335;&#20140;</span><span>&#35013;&#32622;</span><span>&#27185;&#33457;</span><span>&#20844;&#20849;&#31354;&#38388;</span>
+            </div>
+        </div>
+        <div class="project-arrow">&#8595;</div>
+    </section>
+
+    <section id="nj-wall-detail" class="project-detail-page">
+        <div class="container project-detail-layout">
+            <div class="project-detail-copy">
+                <p class="section-kicker">DETAILS / CONCEPT</p>
+                <h3>&#22478;&#22681;&#30340;&#21382;&#21490;&#24863;&#21644;&#27185;&#33457;&#30340;&#36731;&#30408;&#24863;&#65292;&#34987;&#25918;&#22312;&#21516;&#19968;&#20010;&#35270;&#35273;&#35821;&#27861;&#37324;&#12290;</h3>
+                <p>&#36825;&#19968;&#39029;&#29992;&#26497;&#31616;&#25991;&#23383;&#35762;&#28165;&#26970;&#35774;&#35745;&#27010;&#24565;&#65292;&#20877;&#34917;&#19978; AI &#24037;&#20316;&#27969;&#12290;&#27604;&#22914;&#20808;&#29992; Midjourney &#29983;&#25104;&#33394;&#24425;&#26041;&#21521;&#65292;&#20877;&#29992; ComfyUI / SD &#20570;&#32441;&#29702;&#21644;&#26448;&#36136;&#25910;&#25947;&#65292;&#26368;&#21518;&#25226;&#35013;&#32622;&#22330;&#26223;&#25340;&#25104;&#32479;&#19968;&#30011;&#38754;&#12290;</p>
+                <div class="detail-list">
+                    <span>Midjourney / &#33394;&#24425;&#26041;&#26696;</span>
+                    <span>SD / &#26448;&#36136;&#19982;&#32441;&#29702;</span>
+                    <span>&#35013;&#32622;&#33853;&#22320; / &#22330;&#26223;&#25511;&#21046;</span>
+                </div>
+            </div>
+            <div class="project-detail-media">
+                <div class="project-media-tile tall" style="--img:url('4.jpg')"></div>
+                <div class="project-media-tile" style="--img:url('7.jpg')"></div>
+                <div class="project-media-tile" style="--img:url('35.jpg')"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="phoenix-bookstore" class="project-hero-page" style="--project-bg: url('4.jpg')">
+        <div class="container project-hero-copy">
+            <p class="section-kicker">PROJECT 02 / INSTALLATION</p>
+            <h2>&#21335;&#20140;&#20964;&#20976;&#20070;&#24215;&#35013;&#32622;&#35774;&#35745;</h2>
+            <p class="section-copy">&#36825;&#19968;&#32452;&#26356;&#20559;&#21521;&#23460;&#20869;&#31354;&#38388;&#21644;&#38405;&#35835;&#27668;&#36136;&#65292;&#25226;&#20070;&#24215;&#12289;&#35013;&#32622;&#21644;&#22270;&#20687;&#27675;&#22260;&#36830;&#25104;&#19968;&#20010;&#23433;&#38745;&#20294;&#26377;&#23618;&#27425;&#30340;&#35270;&#35273;&#22330;&#26223;&#12290;</p>
+            <div class="project-meta">
+                <span>2026</span><span>&#21335;&#20140;</span><span>&#20070;&#24215;</span><span>&#35013;&#32622;</span><span>&#23460;&#20869;&#31354;&#38388;</span>
+            </div>
+        </div>
+        <div class="project-arrow">&#8595;</div>
+    </section>
+
+    <section id="phoenix-bookstore-detail" class="project-detail-page">
+        <div class="container project-detail-layout">
+            <div class="project-detail-copy">
+                <p class="section-kicker">DETAILS / LAYOUT</p>
+                <h3>&#20070;&#24215;&#30340;&#28201;&#24230;&#12289;&#38405;&#35835;&#30340;&#33410;&#22863;&#21644;&#35013;&#32622;&#30340;&#20809;&#24863;&#65292;&#34987;&#25972;&#29702;&#25104;&#19968;&#20010;&#23433;&#38745;&#30340;&#22330;&#22495;&#12290;</h3>
+                <p>&#36825;&#19968;&#32452;&#21487;&#20197;&#29992;&#26356;&#26580;&#21644;&#30340;&#20809;&#24433;&#21644;&#26356;&#24178;&#20928;&#30340;&#26500;&#22270;&#65292;&#31361;&#20986;&#20070;&#24215;&#31354;&#38388;&#37324;&#30340;&#20572;&#30041;&#24863;&#12290;&#24038;&#20391;&#30041;&#35774;&#35745;&#35828;&#26126;&#65292;&#21491;&#20391;&#25918; 2 &#21040; 3 &#24352;&#32454;&#33410;&#22270;&#65292;&#25972;&#20307;&#20687;&#19968;&#26412;&#35270;&#35273;&#30011;&#20876;&#12290;</p>
+                <div class="detail-list">
+                    <span>&#31354;&#38388;&#21465;&#20107;</span>
+                    <span>&#23460;&#20869;&#20809;&#24433;</span>
+                    <span>&#38405;&#35835;&#22330;&#26223;</span>
+                </div>
+            </div>
+            <div class="project-detail-media">
+                <div class="project-media-tile tall" style="--img:url('1.jpg')"></div>
+                <div class="project-media-tile" style="--img:url('35.jpg')"></div>
+                <div class="project-media-tile" style="--img:url('7.jpg')"></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="herbal-3d" class="process-page">
+        <div class="container">
+            <p class="section-kicker">PROJECT 03 / 3D GENERATION</p>
+            <h2 class="section-title">&#20013;&#33609;&#33647; AI &#27169;&#22411;&#29983;&#25104;</h2>
+            <p class="section-copy">&#36825;&#32452;&#24378;&#35843;&#20174;&#21442;&#32771;&#22270;&#21644;&#25552;&#31034;&#35789;&#65292;&#21040; AI &#29983;&#25104;&#21644; 3D &#36755;&#20986;&#30340;&#23436;&#25972;&#36716;&#25442;&#38142;&#36335;&#65292;&#29992;&#26356;&#25216;&#26415;&#24863;&#30340;&#26041;&#24335;&#35762;&#28165;&#26970;&#8220;&#36755;&#20837; &#8594; &#36807;&#31243; &#8594; &#36755;&#20986;&#8221;&#12290;</p>
+            <div class="process-grid">
+                <div class="process-card primary">
+                    <div class="accent-ring"></div>
+                    <div class="step">01</div>
+                    <h3>&#25968;&#25454; / &#25552;&#31034;&#35789;&#36755;&#20837;</h3>
+                    <p>&#25918;&#20837;&#20013;&#33609;&#33647;&#21442;&#32771;&#22270;&#12289;&#26448;&#36136;&#20851;&#38190;&#35789;&#21644;&#36896;&#22411;&#35201;&#27714;&#65292;&#20808;&#30830;&#23450;&#27169;&#22411;&#29983;&#25104;&#30340;&#26041;&#21521;&#21644;&#39118;&#26684;&#33539;&#22260;&#12290;</p>
+                </div>
+                <div class="process-card">
+                    <div class="step">02</div>
+                    <h3>AI &#29983;&#25104;&#36807;&#31243;</h3>
+                    <p>&#20351;&#29992; Meshy&#12289;Tripo3D &#25110;&#31867;&#20284;&#24037;&#20855;&#23436;&#25104;&#21021;&#27493;&#32593;&#26684;&#12289;&#24418;&#20307;&#21644;&#36148;&#22270;&#29983;&#25104;&#65292;&#20877;&#36827;&#34892;&#32467;&#26500;&#20248;&#21270;&#12290;</p>
+                </div>
+                <div class="process-card">
+                    <div class="step">03</div>
+                    <h3>&#26368;&#32456;&#28210;&#26579;&#36755;&#20986;</h3>
+                    <p>&#23558;&#27169;&#22411;&#25972;&#29702;&#25104;&#22810;&#35282;&#24230;&#39640;&#36136;&#37327;&#28210;&#26579;&#65292;&#29992;&#20110;&#31185;&#26222;&#12289;&#21160;&#30011;&#36164;&#20135;&#25110;&#35270;&#35273;&#23637;&#31034;&#12290;</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="herbal-3d-detail" class="viewer-page">
+        <div class="container viewer-layout">
+            <div class="viewer-shell">
+                <div class="viewer-stage">
+                    <img src="7.jpg" alt="&#20013;&#33609;&#33647; 3D &#27169;&#22411;&#23637;&#31034;">
+                </div>
+            </div>
+            <div class="viewer-info">
+                <p class="section-kicker">VIEWER / MODEL</p>
+                <h3>&#27169;&#22411;&#23637;&#31034;&#19982;&#20132;&#20114;</h3>
+                <p>&#36825;&#37324;&#21487;&#20197;&#25918; 3D &#27169;&#22411;&#26597;&#30475;&#22120;&#65307;&#22914;&#26524;&#21518;&#38754;&#20320;&#26377; Sketchfab &#38142;&#25509;&#25110; Three.js &#27169;&#22411;&#65292;&#25105;&#20877;&#30452;&#25509;&#25509;&#36827;&#21435;&#12290;&#29616;&#22312;&#20808;&#29992;&#19968;&#20010;&#24102;&#20809;&#26197;&#30340;&#23637;&#31034;&#20301;&#25226;&#32467;&#26500;&#21344;&#20303;&#12290;</p>
+                <div class="info-chip">Blender / Meshy / Tripo3D</div>
+                <div class="tiny-list">
+                    <span>&#38754;&#25968;&#12289;&#36148;&#22270;&#12289;&#26448;&#36136;&#21442;&#25968;&#21487;&#34917;&#25104;&#25216;&#26415;&#32454;&#33410;&#12290;</span>
+                    <span>&#19979;&#26041;&#20063;&#33021;&#25509;&#24212;&#29992;&#22330;&#26223;&#35828;&#26126;&#65292;&#27604;&#22914; AR &#31185;&#26222;&#25110;&#21160;&#30011;&#36164;&#20135;&#12290;</span>
+                </div>
             </div>
         </div>
     </section>
@@ -956,11 +1331,11 @@
             <div class="storyboard-band">
                 <div class="storyboard-hero">
                     <div>
-                        <p class="section-kicker">AI SHORT FILM STORYBOARD / &#x5206;&#x955C;&#x603B;&#x89C8;</p>
-                        <h2 class="section-title">AI &#x77ED;&#x7247;&#x9879;&#x76EE;&#x5206;&#x955C;&#x56FE;</h2>
+                        <p class="section-kicker">AI SHORT FILM STORYBOARD / &#20998;&#38236;&#24635;&#35272;</p>
+                        <h2 class="section-title">AI &#30701;&#29255;&#39033;&#30446;&#20998;&#38236;&#22270;</h2>
                     </div>
                     <div class="storyboard-note">
-                        &#x8FD9;&#x4E00;&#x9875;&#x662F;&#x6574;&#x652F; AI &#x77ED;&#x7247;&#x7684;&#x5206;&#x955C;&#x4E3B;&#x573A;&#xFF0C;&#x6309;&#x4E09;&#x6392;&#x957F;&#x8F68;&#x9053;&#x5C55;&#x5F00;&#x3002;&#x6BCF;&#x5F20;&#x56FE;&#x90FD;&#x53EF;&#x4EE5;&#x70B9;&#x5F00;&#x6210;&#x5927;&#x56FE;&#x67E5;&#x770B;&#xFF0C;&#x9002;&#x5408;&#x6D4F;&#x89C8;&#x955C;&#x5934;&#x8BBE;&#x8BA1;&#x3001;&#x8282;&#x594F;&#x5B89;&#x6392;&#x548C;&#x753B;&#x9762;&#x6F14;&#x8FDB;&#x3002;
+                        &#36825;&#19968;&#39029;&#26159;&#25972;&#25903; AI &#30701;&#29255;&#30340;&#20998;&#38236;&#20027;&#22330;&#65292;&#25353;&#19977;&#25490;&#38271;&#36712;&#36947;&#23637;&#24320;&#12290;&#27599;&#24352;&#22270;&#37117;&#21487;&#20197;&#28857;&#24320;&#25104;&#22823;&#22270;&#26597;&#30475;&#65292;&#36866;&#21512;&#27983;&#35272;&#38236;&#22836;&#35774;&#35745;&#12289;&#33410;&#22863;&#23433;&#25490;&#21644;&#30011;&#38754;&#28436;&#36827;&#12290;
                     </div>
                 </div>
                 <div class="storyboard-meta">
@@ -983,61 +1358,61 @@
 
     <section id="ch2" class="workflow-page">
         <div class="container">
-            <p class="section-kicker">WORKFLOW / &#x5236;&#x4F5C;&#x6D41;&#x7A0B;</p>
-            <h2 class="section-title">&#x4ECE;&#x63D0;&#x793A;&#x8BCD;&#x5230;&#x6210;&#x7247;</h2>
-            <p class="section-copy">&#x8FD9;&#x4E00;&#x9875;&#x5148;&#x6309;&#x4F60;&#x8BF4;&#x7684;&#x65B9;&#x5411;&#x505A;&#x6210;&#x6D41;&#x7A0B;&#x578B;&#x9875;&#x9762;&#xFF0C;&#x540E;&#x9762;&#x5982;&#x679C;&#x4F60;&#x60F3;&#x66F4;&#x5DE5;&#x4E1A;&#x4E00;&#x70B9;&#x6216;&#x66F4;&#x827A;&#x672F;&#x4E00;&#x70B9;&#xFF0C;&#x6211;&#x4EEC;&#x518D;&#x5FAE;&#x8C03;&#x7248;&#x5F0F;&#x3002;&#x73B0;&#x5728;&#x91CD;&#x70B9;&#x662F;&#x8BA9;&#x8BFB;&#x8005;&#x4E00;&#x773C;&#x770B;&#x5230;&#x6574;&#x4E2A; AI &#x77ED;&#x7247;&#x7684;&#x5236;&#x4F5C;&#x94FE;&#x8DEF;&#x3002;</p>
+            <p class="section-kicker">WORKFLOW / &#21046;&#20316;&#27969;&#31243;</p>
+            <h2 class="section-title">&#20174;&#25552;&#31034;&#35789;&#21040;&#25104;&#29255;</h2>
+            <p class="section-copy">&#36825;&#19968;&#39029;&#20808;&#25353;&#20320;&#35828;&#30340;&#26041;&#21521;&#20570;&#25104;&#27969;&#31243;&#22411;&#39029;&#38754;&#65292;&#21518;&#38754;&#22914;&#26524;&#20320;&#24819;&#26356;&#24037;&#19994;&#19968;&#28857;&#25110;&#26356;&#33402;&#26415;&#19968;&#28857;&#65292;&#25105;&#20204;&#20877;&#24494;&#35843;&#29256;&#24335;&#12290;&#29616;&#22312;&#37325;&#28857;&#26159;&#35753;&#35835;&#32773;&#19968;&#30524;&#30475;&#21040;&#25972;&#20010; AI &#30701;&#29255;&#30340;&#21046;&#20316;&#38142;&#36335;&#12290;</p>
             <div class="workflow-grid">
                 <div class="workflow-card size-lg accent-a">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">01</div>
-                    <h3>&#x63D0;&#x793A;&#x8BCD;&#x64B0;&#x5199;</h3>
-                    <p>&#x628A;&#x521B;&#x610F;&#x76EE;&#x6807;&#x3001;&#x60C5;&#x7EEA;&#x5173;&#x952E;&#x8BCD;&#x3001;&#x955C;&#x5934;&#x9650;&#x5236;&#x548C;&#x753B;&#x9762;&#x9700;&#x6C42;&#x62C6;&#x6210;&#x53EF;&#x6267;&#x884C;&#x7684; prompt&#xFF0C;&#x5148;&#x5B9A;&#x65B9;&#x5411;&#xFF0C;&#x518D;&#x5B9A;&#x753B;&#x9762;&#x3002;</p>
+                    <h3>&#25552;&#31034;&#35789;&#25776;&#20889;</h3>
+                    <p>&#25226;&#21019;&#24847;&#30446;&#26631;&#12289;&#24773;&#32490;&#20851;&#38190;&#35789;&#12289;&#38236;&#22836;&#38480;&#21046;&#21644;&#30011;&#38754;&#38656;&#27714;&#25286;&#25104;&#21487;&#25191;&#34892;&#30340; prompt&#65292;&#20808;&#23450;&#26041;&#21521;&#65292;&#20877;&#23450;&#30011;&#38754;&#12290;</p>
                     <div class="workflow-chip">PROMPT / DIRECTION / MOOD</div>
-                    <div class="workflow-flow">&#x2192;</div>
+                    <div class="workflow-flow">&#8594;</div>
                 </div>
                 <div class="workflow-card size-sm accent-b">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">02</div>
-                    <h3>&#x98CE;&#x683C;&#x56FA;&#x5B9A;</h3>
-                    <p>&#x7EDF;&#x4E00;&#x8272;&#x5F69;&#x3001;&#x6750;&#x8D28;&#x3001;&#x5149;&#x611F;&#x548C;&#x6784;&#x56FE;&#x8BED;&#x8A00;&#xFF0C;&#x8BA9;&#x4E0D;&#x540C;&#x753B;&#x9762;&#x5728;&#x89C6;&#x89C9;&#x4E0A;&#x4FDD;&#x6301;&#x540C;&#x4E00;&#x6761;&#x5BA1;&#x7F8E;&#x7EBF;&#x3002;</p>
+                    <h3>&#39118;&#26684;&#22266;&#23450;</h3>
+                    <p>&#32479;&#19968;&#33394;&#24425;&#12289;&#26448;&#36136;&#12289;&#20809;&#24863;&#21644;&#26500;&#22270;&#35821;&#35328;&#65292;&#35753;&#19981;&#21516;&#30011;&#38754;&#22312;&#35270;&#35273;&#19978;&#20445;&#25345;&#21516;&#19968;&#26465;&#23457;&#32654;&#32447;&#12290;</p>
                     <div class="workflow-chip">STYLE LOCK</div>
-                    <div class="workflow-flow">&#x2192;</div>
+                    <div class="workflow-flow">&#8594;</div>
                 </div>
                 <div class="workflow-card size-sm accent-c">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">03</div>
-                    <h3>&#x4EBA;&#x7269;&#x56FA;&#x5B9A;</h3>
-                    <p>&#x9501;&#x5B9A;&#x89D2;&#x8272;&#x4E94;&#x5B98;&#x3001;&#x53D1;&#x578B;&#x3001;&#x670D;&#x9970;&#x548C;&#x8EAB;&#x4EFD;&#x7279;&#x5F81;&#xFF0C;&#x4FDD;&#x8BC1;&#x955C;&#x5934;&#x4E4B;&#x95F4;&#x7684;&#x4EBA;&#x7269;&#x8FDE;&#x7EED;&#x6027;&#x3002;</p>
+                    <h3>&#20154;&#29289;&#22266;&#23450;</h3>
+                    <p>&#38145;&#23450;&#35282;&#33394;&#20116;&#23448;&#12289;&#21457;&#22411;&#12289;&#26381;&#39280;&#21644;&#36523;&#20221;&#29305;&#24449;&#65292;&#20445;&#35777;&#38236;&#22836;&#20043;&#38388;&#30340;&#20154;&#29289;&#36830;&#32493;&#24615;&#12290;</p>
                     <div class="workflow-chip">CHARACTER ID</div>
-                    <div class="workflow-flow">&#x2192;</div>
+                    <div class="workflow-flow">&#8594;</div>
                 </div>
                 <div class="workflow-card size-md accent-d">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">04</div>
-                    <h3>&#x5206;&#x955C;&#x751F;&#x6210;</h3>
-                    <p>&#x5C06;&#x53D9;&#x4E8B;&#x62C6;&#x5206;&#x4E3A;&#x8FDE;&#x7EED;&#x753B;&#x9762;&#xFF0C;&#x63A7;&#x5236;&#x955C;&#x5934;&#x8FD0;&#x52A8;&#x3001;&#x5207;&#x6362;&#x8282;&#x594F;&#x548C;&#x573A;&#x666F;&#x9012;&#x8FDB;&#x3002;</p>
+                    <h3>&#20998;&#38236;&#29983;&#25104;</h3>
+                    <p>&#23558;&#21465;&#20107;&#25286;&#20998;&#20026;&#36830;&#32493;&#30011;&#38754;&#65292;&#25511;&#21046;&#38236;&#22836;&#36816;&#21160;&#12289;&#20999;&#25442;&#33410;&#22863;&#21644;&#22330;&#26223;&#36882;&#36827;&#12290;</p>
                     <div class="workflow-chip">BOARD / RHYTHM</div>
-                    <div class="workflow-flow">&#x2192;</div>
+                    <div class="workflow-flow">&#8594;</div>
                 </div>
                 <div class="workflow-card size-sm accent-a">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">05</div>
-                    <h3>&#x9996;&#x5C3E;&#x5E27;&#x6210;&#x89C6;&#x9891;</h3>
-                    <p>&#x628A;&#x8D77;&#x59CB;&#x5E27;&#x548C;&#x7ED3;&#x675F;&#x5E27;&#x8FDE;&#x63A5;&#x6210;&#x8FD0;&#x52A8;&#x533A;&#x95F4;&#xFF0C;&#x63A8;&#x8FDB;&#x955C;&#x5934;&#x53D8;&#x5316;&#xFF0C;&#x8BA9;&#x9759;&#x6001;&#x56FE;&#x50CF;&#x5F00;&#x59CB;&#x201C;&#x547C;&#x5438;&#x201D;&#x3002;</p>
+                    <h3>&#39318;&#23614;&#24103;&#25104;&#35270;&#39057;</h3>
+                    <p>&#25226;&#36215;&#22987;&#24103;&#21644;&#32467;&#26463;&#24103;&#36830;&#25509;&#25104;&#36816;&#21160;&#21306;&#38388;&#65292;&#25512;&#36827;&#38236;&#22836;&#21464;&#21270;&#65292;&#35753;&#38745;&#24577;&#22270;&#20687;&#24320;&#22987;&#8220;&#21628;&#21560;&#8221;&#12290;</p>
                     <div class="workflow-chip">KEYFRAME MOTION</div>
-                    <div class="workflow-flow">&#x2192;</div>
+                    <div class="workflow-flow">&#8594;</div>
                 </div>
                 <div class="workflow-card size-sm accent-b">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">06</div>
-                    <h3>&#x526A;&#x8F91;&#x6210;&#x7247;</h3>
-                    <p>&#x914D;&#x5408;&#x8282;&#x594F;&#x3001;&#x97F3;&#x4E50;&#x3001;&#x97F3;&#x6548;&#x548C;&#x8F6C;&#x573A;&#xFF0C;&#x628A;&#x524D;&#x9762;&#x7684;&#x751F;&#x6210;&#x6750;&#x6599;&#x6574;&#x5408;&#x6210;&#x6700;&#x7EC8;&#x77ED;&#x7247;&#x3002;</p>
+                    <h3>&#21098;&#36753;&#25104;&#29255;</h3>
+                    <p>&#37197;&#21512;&#33410;&#22863;&#12289;&#38899;&#20048;&#12289;&#38899;&#25928;&#21644;&#36716;&#22330;&#65292;&#25226;&#21069;&#38754;&#30340;&#29983;&#25104;&#26448;&#26009;&#25972;&#21512;&#25104;&#26368;&#32456;&#30701;&#29255;&#12290;</p>
                     <div class="workflow-chip">EDIT / FINISH</div>
                     <div class="workflow-flow">END</div>
                 </div>
@@ -1050,27 +1425,17 @@
             <div class="tv-showcase">
                 <div class="tv-launch">
                     <div class="tv-intro">
-                        <img src="&#x7535;&#x89C6;&#x673A;.png" alt="&#x7535;&#x89C6;&#x673A;&#x52A8;&#x753B;&#x9884;&#x89C8;">
+                        <img src="&#30005;&#35270;&#26426;.png" alt="&#30005;&#35270;&#26426;&#21160;&#30011;&#39044;&#35272;">
                     </div>
                     <div class="tv-shell">
                         <div class="tv-screen">
-                            <span class="tv-badge">FINAL CUT / &#x6210;&#x7247;&#x653E;&#x6620;</span>
+                            <span class="tv-badge">FINAL CUT / &#25104;&#29255;&#25918;&#26144;</span>
                             <video id="finalVideo" controls autoplay muted loop playsinline poster="35.jpg" src="final-cut.mp4"></video>
                         </div>
-                        <div class="tv-controls">
-                            <span>PLAYBACK</span>
-                            <span>AI SHORT FILM</span>
-                            <span>HD</span>
-                        </div>
                     </div>
-                    <img class="tv-frame" src="&#x7535;&#x89C6;&#x673A;&#x5916;&#x6846;.png" alt="" aria-hidden="true">
+                    <img class="tv-frame" src="&#30005;&#35270;&#26426;&#22806;&#26694;.png" alt="" aria-hidden="true">
                 </div>
             </div>
-            <aside class="tv-note">
-                <h2>&#x50CF;&#x7535;&#x89C6;&#x673A;&#x4E00;&#x6837;&#x653E;&#x6620;&#x7684;&#x6210;&#x7247;&#x9875;</h2>
-                <p>&#x8FD9;&#x4E00;&#x9875;&#x4E0D;&#x505A;&#x5E72;&#x5DF4;&#x5DF4;&#x7684;&#x5355;&#x5361;&#x7247;&#xFF0C;&#x800C;&#x662F;&#x628A;&#x89C6;&#x9891;&#x653E;&#x8FDB;&#x4E00;&#x4E2A;&#x5E26;&#x6D82;&#x9E26;&#x611F;&#x548C;&#x5706;&#x89D2;&#x5916;&#x58F3;&#x7684;&#x653E;&#x6620;&#x88C5;&#x7F6E;&#x91CC;&#x3002;&#x65C1;&#x8FB9;&#x4FDD;&#x7559;&#x4E00;&#x4E9B;&#x8F7B;&#x677E;&#x7684;&#x624B;&#x7ED8;&#x611F;&#x5143;&#x7D20;&#xFF0C;&#x8BA9;&#x9875;&#x9762;&#x548C;&#x5C01;&#x9762;&#x547C;&#x5E94;&#x8D77;&#x6765;&#x3002;</p>
-                <div class="tv-doodle">TV</div>
-            </aside>
         </div>
     </section>
 
@@ -1080,17 +1445,17 @@
 
     <div class="story-modal" id="storyModal" aria-hidden="true">
         <div class="story-frame">
-            <button class="story-step prev" id="modalPrev" type="button" aria-label="&#x4E0A;&#x4E00;&#x5F20;">&lt;</button>
-            <button class="story-step next" id="modalNext" type="button" aria-label="&#x4E0B;&#x4E00;&#x5F20;">&gt;</button>
+            <button class="story-step prev" id="modalPrev" type="button" aria-label="&#19978;&#19968;&#24352;">&lt;</button>
+            <button class="story-step next" id="modalNext" type="button" aria-label="&#19979;&#19968;&#24352;">&gt;</button>
             <article class="story-card">
                 <div class="story-card-media">
-                    <img id="modalImage" src="" alt="&#x5206;&#x955C;&#x5927;&#x56FE;">
-                    <button class="story-card-close" id="modalClose" type="button" aria-label="&#x5173;&#x95ED;">&#xD7;</button>
+                    <img id="modalImage" src="" alt="&#20998;&#38236;&#22823;&#22270;">
+                    <button class="story-card-close" id="modalClose" type="button" aria-label="&#20851;&#38381;">&#215;</button>
                 </div>
                 <div class="story-card-body">
                     <span id="modalIndex">STORYBOARD #01</span>
-                    <h3>&#x5206;&#x955C;&#x63D0;&#x793A;&#x8BCD;</h3>
-                    <div class="prompt-box" id="modalPrompt">&#x8FD9;&#x91CC;&#x53EF;&#x4EE5;&#x653E;&#x8FD9;&#x4E00;&#x5F20;&#x5206;&#x955C;&#x56FE;&#x7684;&#x63D0;&#x793A;&#x8BCD;&#x3001;&#x753B;&#x9762;&#x63CF;&#x8FF0;&#x3001;&#x955C;&#x5934;&#x8BED;&#x8A00;&#x6216;&#x751F;&#x6210;&#x53C2;&#x6570;&#x3002;</div>
+                    <h3>&#20998;&#38236;&#25552;&#31034;&#35789;</h3>
+                    <div class="prompt-box" id="modalPrompt">&#36825;&#37324;&#21487;&#20197;&#25918;&#36825;&#19968;&#24352;&#20998;&#38236;&#22270;&#30340;&#25552;&#31034;&#35789;&#12289;&#30011;&#38754;&#25551;&#36848;&#12289;&#38236;&#22836;&#35821;&#35328;&#25110;&#29983;&#25104;&#21442;&#25968;&#12290;</div>
                 </div>
             </article>
         </div>
@@ -1104,7 +1469,7 @@
         ];
 
         const storyboardPrompts = Array.from({ length: 39 }, (_, index) =>
-            `&#x63D0;&#x793A;&#x8BCD;&#x4F4D;&#x7F6E;&#xFF1A;&#x5728;&#x8FD9;&#x91CC;&#x586B;&#x5199;&#x7B2C; ${String(index + 1).padStart(2, "0")} &#x5F20;&#x5206;&#x955C;&#x7684; prompt&#x3001;&#x753B;&#x9762;&#x63CF;&#x8FF0;&#x3001;&#x955C;&#x5934;&#x8BED;&#x8A00;&#x3001;&#x89D2;&#x8272;&#x52A8;&#x4F5C;&#x3001;&#x5149;&#x5F71;&#x6C1B;&#x56F4;&#x6216;&#x751F;&#x6210;&#x53C2;&#x6570;&#x3002;`
+            `&#25552;&#31034;&#35789;&#20301;&#32622;&#65306;&#22312;&#36825;&#37324;&#22635;&#20889;&#31532; ${String(index + 1).padStart(2, "0")} &#24352;&#20998;&#38236;&#30340; prompt&#12289;&#30011;&#38754;&#25551;&#36848;&#12289;&#38236;&#22836;&#35821;&#35328;&#12289;&#35282;&#33394;&#21160;&#20316;&#12289;&#20809;&#24433;&#27675;&#22260;&#25110;&#29983;&#25104;&#21442;&#25968;&#12290;`
         );
         let currentModalIndex = 0;
 
@@ -1136,7 +1501,7 @@
 
                     const img = document.createElement("img");
                     img.src = images[index];
-                    img.alt = `&#x5206;&#x955C; ${index + 1}`;
+                    img.alt = `&#20998;&#38236; ${index + 1}`;
                     img.addEventListener("error", () => {
                         img.remove();
                         addFallback(card, index);
@@ -1156,7 +1521,7 @@
                     const dot = document.createElement("button");
                     dot.className = `dot ${i === 0 ? "active" : ""}`;
                     dot.type = "button";
-                    dot.setAttribute("aria-label", `&#x79FB;&#x52A8;&#x5230;&#x7B2C; ${index + 1} &#x5F20;&#x5206;&#x955C;`);
+                    dot.setAttribute("aria-label", `&#31227;&#21160;&#21040;&#31532; ${index + 1} &#24352;&#20998;&#38236;`);
                     dot.addEventListener("click", () => goToFrame(rail, dots, state, i));
                     dots.appendChild(dot);
                 }
@@ -1258,7 +1623,7 @@
             const modalIndex = document.getElementById("modalIndex");
             const modalPrompt = document.getElementById("modalPrompt");
             modalImage.src = images[currentModalIndex];
-            modalImage.alt = `&#x5206;&#x955C;&#x5927;&#x56FE; ${currentModalIndex + 1}`;
+            modalImage.alt = `&#20998;&#38236;&#22823;&#22270; ${currentModalIndex + 1}`;
             modalIndex.textContent = `STORYBOARD #${String(currentModalIndex + 1).padStart(2, "0")}`;
             modalPrompt.textContent = storyboardPrompts[currentModalIndex];
         }
@@ -1288,12 +1653,15 @@
             document.querySelectorAll("section").forEach(section => {
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
             });
+            const aiSections = new Set(["ai-generation", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "herbal-3d", "herbal-3d-detail"]);
+            const navTarget = aiSections.has(current) ? "ai-generation" : current;
             document.querySelectorAll(".top-nav a").forEach(link => {
                 const target = link.getAttribute("href");
-                link.classList.toggle("active", target === `#${current}`);
+                link.classList.toggle("active", target === `#${navTarget}`);
             });
+            const dotTarget = aiSections.has(current) ? "hero-project" : current;
             document.querySelectorAll(".dot-item").forEach((dot, i) => {
-                dot.classList.toggle("active", sectionIds[i] === current);
+                dot.classList.toggle("active", sectionIds[i] === dotTarget);
             });
             const bg = document.getElementById("storyBg");
             if (bg) bg.style.transform = `translateY(${window.scrollY * 0.035}px)`;
