@@ -546,10 +546,10 @@
         }
         .tv-screen {
             position: absolute;
-            left: 6.1%;
-            top: 12.1%;
-            width: 60.5%;
-            height: 49.0%;
+            left: 4.9%;
+            top: 10.9%;
+            width: 63.1%;
+            height: 52.2%;
             border-radius: 8% / 12%;
             overflow: hidden;
             background:
@@ -592,7 +592,14 @@
             object-fit: contain;
             pointer-events: none;
             z-index: 4;
-            opacity: 0.98;
+            opacity: 0;
+            transform: scale(0.14) translateY(24px);
+            transform-origin: center center;
+            filter: blur(5px) brightness(0.8) saturate(0.9);
+            will-change: transform, opacity, filter;
+        }
+        .final-page.is-visible .tv-frame {
+            animation: tvFrameReveal 3.1s cubic-bezier(0.18, 0.9, 0.2, 1.08) forwards;
         }
         .tv-badge {
             position: absolute;
@@ -996,6 +1003,16 @@
             92% { transform: scale(1.012) translateY(0); }
             100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0) brightness(1) saturate(1); }
         }
+        @keyframes tvFrameReveal {
+            0% { opacity: 0; transform: scale(0.14) translateY(24px); filter: blur(8px) brightness(0.8) saturate(0.9); }
+            18% { opacity: 0.14; }
+            36% { opacity: 0.72; transform: scale(0.34) translateY(14px); filter: blur(4px) brightness(0.9) saturate(0.95); }
+            58% { opacity: 1; transform: scale(0.7) translateY(4px); filter: blur(1.5px) brightness(1.03) saturate(1.02); }
+            74% { transform: scale(1.05) translateY(0); }
+            86% { transform: scale(0.985) translateY(0); }
+            96% { transform: scale(1.008) translateY(0); }
+            100% { opacity: 1; transform: scale(1) translateY(0); filter: blur(0) brightness(1) saturate(1); }
+        }
         @keyframes tvVideoReveal {
             0% { opacity: 0; filter: blur(6px) brightness(1.35) saturate(0.8); }
             20% { opacity: 0.65; }
@@ -1133,6 +1150,22 @@
         </div>
     </section>
 
+    <section id="hero-project" class="case-page">
+        <div class="story-bg" id="storyBg"></div>
+        <div class="container">
+            <article class="glass-card">
+                <p class="section-kicker">CORE PROJECT</p>
+                <h2>&#23547;&#25214;&#24494;&#20809; / Looking for the Light</h2>
+                <p>&#36825;&#19968;&#39029;&#30340;&#40657;&#33394;&#32972;&#26223;&#24050;&#26367;&#25442;&#20026;&#20998;&#38236;&#22270;&#22635;&#20805;&#32972;&#26223;&#65292;&#24182;&#20445;&#30041;&#26263;&#33394;&#29627;&#29827;&#20449;&#24687;&#23618;&#65292;&#26041;&#20415;&#21069;&#26223;&#25991;&#23383;&#38405;&#35835;&#12290;&#32972;&#26223;&#40664;&#35748;&#35835;&#21462; image_43f020.jpg&#65292;&#20063;&#20250;&#32487;&#32493;&#23581;&#35797;&#21516;&#30446;&#24405;&#19979;&#30340;&#20998;&#38236;&#22270;&#29255;&#12290;</p>
+                <div class="tag-row">
+                    <span>#&#25552;&#31034;&#35789;&#24037;&#31243;</span>
+                    <span>#&#20998;&#38236;&#22270;&#32972;&#26223;</span>
+                    <span>#&#22270;&#29983;&#35270;&#39057;</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
     <section id="ai-generation" class="project-hero-page" style="--project-bg: url('1.jpg')">
         <div class="container project-hero-copy">
             <p class="section-kicker">AI GENERATION / &#22823;&#31456;&#33410;</p>
@@ -1171,22 +1204,6 @@
             </div>
         </div>
         <div class="project-arrow">&#8595;</div>
-    </section>
-
-    <section id="hero-project" class="case-page">
-        <div class="story-bg" id="storyBg"></div>
-        <div class="container">
-            <article class="glass-card">
-                <p class="section-kicker">CORE PROJECT</p>
-                <h2>&#23547;&#25214;&#24494;&#20809; / Looking for the Light</h2>
-                <p>&#36825;&#19968;&#39029;&#30340;&#40657;&#33394;&#32972;&#26223;&#24050;&#26367;&#25442;&#20026;&#20998;&#38236;&#22270;&#22635;&#20805;&#32972;&#26223;&#65292;&#24182;&#20445;&#30041;&#26263;&#33394;&#29627;&#29827;&#20449;&#24687;&#23618;&#65292;&#26041;&#20415;&#21069;&#26223;&#25991;&#23383;&#38405;&#35835;&#12290;&#32972;&#26223;&#40664;&#35748;&#35835;&#21462; image_43f020.jpg&#65292;&#20063;&#20250;&#32487;&#32493;&#23581;&#35797;&#21516;&#30446;&#24405;&#19979;&#30340;&#20998;&#38236;&#22270;&#29255;&#12290;</p>
-                <div class="tag-row">
-                    <span>#&#25552;&#31034;&#35789;&#24037;&#31243;</span>
-                    <span>#&#20998;&#38236;&#22270;&#32972;&#26223;</span>
-                    <span>#&#22270;&#29983;&#35270;&#39057;</span>
-                </div>
-            </article>
-        </div>
     </section>
 
     <section id="nj-wall" class="project-hero-page" style="--project-bg: url('1.jpg')">
