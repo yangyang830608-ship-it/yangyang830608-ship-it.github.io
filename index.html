@@ -519,7 +519,7 @@
         .tv-showcase {
             position: relative;
             width: min(72vw, 1120px);
-            aspect-ratio: 736 / 536;
+            aspect-ratio: 3 / 2;
             display: grid;
             place-items: center;
             opacity: 0;
@@ -553,18 +553,20 @@
         .tv-screen {
             position: absolute;
             z-index: 2;
-            /*
-               IMPORTANT: Adjust these coordinates if your screen opening differs.
-               These percentages should be fine-tuned to match the provided TV assets.
-            */
-            left: 3.9%;
-            top: 11.5%;
-            width: 66.2%;
-            height: 49.1%;
+            inset: 0;
             overflow: hidden;
-            border-radius: 7.2% / 10.7%;
             background: #050505;
             isolation: isolate;
+            -webkit-mask-image: url("鐢佃鏈哄睆骞?png");
+            mask-image: url("鐢佃鏈哄睆骞?png");
+            -webkit-mask-repeat: no-repeat;
+            mask-repeat: no-repeat;
+            -webkit-mask-size: 100% 100%;
+            mask-size: 100% 100%;
+            -webkit-mask-position: center;
+            mask-position: center;
+            -webkit-mask-mode: alpha;
+            mask-mode: alpha;
         }
         .tv-video {
             position: absolute;
@@ -578,9 +580,6 @@
             transform: scale(1);
             background: #000;
             will-change: transform, opacity, filter;
-        }
-        .final-page.is-portrait-video .tv-video {
-            object-fit: contain;
         }
         .final-page.is-video-ready .tv-video {
             animation: tvVideoIn 0.45s ease forwards;
@@ -1942,12 +1941,6 @@
             video.currentTime = 0;
             video.load();
 
-            const updateVideoFit = () => {
-                const ratio = video.videoWidth && video.videoHeight ? video.videoWidth / video.videoHeight : 0;
-                section.classList.toggle("is-portrait-video", ratio > 0 && ratio < 1.15);
-            };
-            video.addEventListener("loadedmetadata", updateVideoFit, { passive: true });
-
             let active = false;
             let timers = [];
 
@@ -1959,7 +1952,7 @@
             const resetSequence = () => {
                 clearTimers();
                 screen.classList.remove("is-glitch");
-                section.classList.remove("is-visible", "is-video-ready", "is-portrait-video");
+                section.classList.remove("is-visible", "is-video-ready");
                 video.pause();
                 try {
                     video.currentTime = 0;
