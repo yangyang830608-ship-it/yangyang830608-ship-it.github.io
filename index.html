@@ -564,17 +564,23 @@
             overflow: hidden;
             border-radius: 7.5% / 11%;
             background: #050505;
+            isolation: isolate;
         }
         .tv-video {
+            position: absolute;
+            inset: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
+            object-position: center center;
             display: block;
             opacity: 0;
-            transform: scale(1.01);
+            transform: scale(1.06);
+            background: #000;
+            will-change: transform, opacity, filter;
         }
-        .final-page.is-visible .tv-video {
-            animation: tvVideoIn 0.45s ease forwards 1.98s;
+        .final-page.is-video-ready .tv-video {
+            animation: tvVideoIn 0.45s ease forwards;
         }
         .tv-screen::before {
             content: "";
@@ -1928,31 +1934,66 @@
             video.preload = "auto";
             video.muted = true;
             video.loop = true;
+            video.removeAttribute("controls");
             video.pause();
             video.currentTime = 0;
             video.load();
 
-            let started = false;
+            let active = false;
+            let timers = [];
+
+            const clearTimers = () => {
+                timers.forEach(timer => window.clearTimeout(timer));
+                timers = [];
+            };
+
+            const resetSequence = () => {
+                clearTimers();
+                screen.classList.remove("is-glitch");
+                section.classList.remove("is-visible", "is-video-ready");
+                video.pause();
+                try {
+                    video.currentTime = 0;
+                } catch (error) {
+                    /* Some browsers need metadata before rewinding. */
+                }
+            };
+
             const startSequence = () => {
-                if (started) return;
-                started = true;
+                if (active) return;
+                active = true;
+                resetSequence();
+                void showcase.offsetWidth;
+                video.load();
                 section.classList.add("is-visible");
 
-                window.setTimeout(() => {
+                timers.push(window.setTimeout(() => {
                     screen.classList.add("is-glitch");
-                    window.setTimeout(() => {
+                    timers.push(window.setTimeout(() => {
                         screen.classList.remove("is-glitch");
-                        const play = video.play();
-                        if (play && typeof play.catch === "function") {
-                            play.catch(() => {});
-                        }
-                    }, 200);
-                }, 1800);
+                        timers.push(window.setTimeout(() => {
+                            screen.classList.add("is-glitch");
+                            timers.push(window.setTimeout(() => {
+                                screen.classList.remove("is-glitch");
+                                section.classList.add("is-video-ready");
+                                const play = video.play();
+                                if (play && typeof play.catch === "function") {
+                                    play.catch(() => {});
+                                }
+                            }, 150));
+                        }, 120));
+                    }, 150));
+                }, 1550));
             };
 
             const io = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
-                    if (entry.isIntersecting) startSequence();
+                    if (entry.isIntersecting) {
+                        startSequence();
+                    } else if (active) {
+                        active = false;
+                        resetSequence();
+                    }
                 });
             }, { threshold: 0.45 });
 
