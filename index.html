@@ -557,12 +557,12 @@
                IMPORTANT: Adjust these coordinates if your screen opening differs.
                These percentages should be fine-tuned to match the provided TV assets.
             */
-            left: 5.7%;
+            left: 3.9%;
             top: 11.5%;
-            width: 61.8%;
-            height: 49.4%;
+            width: 66.2%;
+            height: 49.1%;
             overflow: hidden;
-            border-radius: 7.5% / 11%;
+            border-radius: 7.2% / 10.7%;
             background: #050505;
             isolation: isolate;
         }
@@ -575,9 +575,12 @@
             object-position: center center;
             display: block;
             opacity: 0;
-            transform: scale(1.06);
+            transform: scale(1);
             background: #000;
             will-change: transform, opacity, filter;
+        }
+        .final-page.is-portrait-video .tv-video {
+            object-fit: contain;
         }
         .final-page.is-video-ready .tv-video {
             animation: tvVideoIn 0.45s ease forwards;
@@ -1939,6 +1942,12 @@
             video.currentTime = 0;
             video.load();
 
+            const updateVideoFit = () => {
+                const ratio = video.videoWidth && video.videoHeight ? video.videoWidth / video.videoHeight : 0;
+                section.classList.toggle("is-portrait-video", ratio > 0 && ratio < 1.15);
+            };
+            video.addEventListener("loadedmetadata", updateVideoFit, { passive: true });
+
             let active = false;
             let timers = [];
 
@@ -1950,7 +1959,7 @@
             const resetSequence = () => {
                 clearTimers();
                 screen.classList.remove("is-glitch");
-                section.classList.remove("is-visible", "is-video-ready");
+                section.classList.remove("is-visible", "is-video-ready", "is-portrait-video");
                 video.pause();
                 try {
                     video.currentTime = 0;
