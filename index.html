@@ -557,16 +557,7 @@
             overflow: hidden;
             background: #050505;
             isolation: isolate;
-            -webkit-mask-image: url("鐢佃鏈哄睆骞?png");
-            mask-image: url("鐢佃鏈哄睆骞?png");
-            -webkit-mask-repeat: no-repeat;
-            mask-repeat: no-repeat;
-            -webkit-mask-size: 100% 100%;
-            mask-size: 100% 100%;
-            -webkit-mask-position: center;
-            mask-position: center;
-            -webkit-mask-mode: alpha;
-            mask-mode: alpha;
+            border-radius: 7.2% / 10.7%;
         }
         .tv-video {
             position: absolute;
@@ -597,6 +588,9 @@
         }
         .tv-screen.is-glitch::before {
             animation: glitchFlash 0.2s linear 1;
+        }
+        .tv-screen.is-glitch {
+            filter: brightness(1.65) contrast(1.15) saturate(1.1);
         }
         .tv-noise {
             position: absolute;
@@ -1680,8 +1674,9 @@
 
     <script>
         const ASSETS = {
-            tvCase: "\u7535\u89c6\u673a.png",
+            tvCase: "\u7535\u89c6\u673a\u5916\u6846.png",
             tvFrame: "\u7535\u89c6\u673a\u5916\u6846.png",
+            tvMask: "\u7535\u89c6\u673a\u5c4f\u5e55.png",
             tvVideo: "final-cut.mp4"
         };
 
@@ -1937,6 +1932,7 @@
             video.muted = true;
             video.loop = true;
             video.removeAttribute("controls");
+            frameImg.style.display = "none";
             video.pause();
             video.currentTime = 0;
             video.load();
@@ -1959,6 +1955,7 @@
                 } catch (error) {
                     /* Some browsers need metadata before rewinding. */
                 }
+                video.load();
             };
 
             const startSequence = () => {
