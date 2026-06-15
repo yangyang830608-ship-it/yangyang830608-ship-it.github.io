@@ -553,11 +553,14 @@
         .tv-screen {
             position: absolute;
             z-index: 2;
-            inset: 0;
+            left: 16.34%;
+            top: 13.77%;
+            width: 52.47%;
+            height: 56.84%;
             overflow: hidden;
             background: #050505;
             isolation: isolate;
-            border-radius: 7.2% / 10.7%;
+            border-radius: 8.5% / 10.5%;
         }
         .tv-video {
             position: absolute;
@@ -1932,7 +1935,6 @@
             video.muted = true;
             video.loop = true;
             video.removeAttribute("controls");
-            frameImg.style.display = "none";
             video.pause();
             video.currentTime = 0;
             video.load();
