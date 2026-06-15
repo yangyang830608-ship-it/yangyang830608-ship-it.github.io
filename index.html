@@ -535,6 +535,7 @@
             inset: 0;
         }
         .tv-case,
+        .tv-intro,
         .tv-frame {
             position: absolute;
             inset: 0;
@@ -549,6 +550,14 @@
         }
         .tv-frame {
             z-index: 3;
+        }
+        .tv-intro {
+            z-index: 4;
+            opacity: 1;
+            transition: opacity 0.22s ease;
+        }
+        .final-page.is-screen-open .tv-intro {
+            opacity: 0;
         }
         .tv-screen {
             position: absolute;
@@ -1443,6 +1452,7 @@
         <div class="container tv-stage">
             <div class="tv-showcase">
                 <div class="tv-stack">
+                    <img class="tv-intro" src="&#30005;&#35270;&#26426;.png" alt="" aria-hidden="true">
                     <img class="tv-case" src="&#30005;&#35270;&#26426;.png" alt="&#30005;&#35270;&#26426;&#22806;&#22771;">
                     <div class="tv-screen" id="tvScreen">
                         <video class="tv-video" id="finalVideo" muted loop playsinline preload="auto" poster="35.jpg" src="final-cut.mp4"></video>
@@ -1677,6 +1687,7 @@
 
     <script>
         const ASSETS = {
+            tvIntro: "\u7535\u89c6\u673a.png",
             tvCase: "\u7535\u89c6\u673a\u5916\u6846.png",
             tvFrame: "\u7535\u89c6\u673a\u5916\u6846.png",
             tvMask: "\u7535\u89c6\u673a\u5c4f\u5e55.png",
@@ -1924,10 +1935,12 @@
             const showcase = section?.querySelector(".tv-showcase");
             const screen = section?.querySelector("#tvScreen");
             const video = section?.querySelector("#finalVideo");
+            const introImg = section?.querySelector(".tv-intro");
             const caseImg = section?.querySelector(".tv-case");
             const frameImg = section?.querySelector(".tv-frame");
-            if (!section || !showcase || !screen || !video || !caseImg || !frameImg) return;
+            if (!section || !showcase || !screen || !video || !introImg || !caseImg || !frameImg) return;
 
+            introImg.src = ASSETS.tvIntro;
             caseImg.src = ASSETS.tvCase;
             frameImg.src = ASSETS.tvFrame;
             video.src = ASSETS.tvVideo;
@@ -1950,7 +1963,7 @@
             const resetSequence = () => {
                 clearTimers();
                 screen.classList.remove("is-glitch");
-                section.classList.remove("is-visible", "is-video-ready");
+                section.classList.remove("is-visible", "is-screen-open", "is-video-ready");
                 video.pause();
                 try {
                     video.currentTime = 0;
@@ -1969,21 +1982,24 @@
                 section.classList.add("is-visible");
 
                 timers.push(window.setTimeout(() => {
-                    screen.classList.add("is-glitch");
+                    section.classList.add("is-screen-open");
                     timers.push(window.setTimeout(() => {
-                        screen.classList.remove("is-glitch");
+                        screen.classList.add("is-glitch");
                         timers.push(window.setTimeout(() => {
-                            screen.classList.add("is-glitch");
+                            screen.classList.remove("is-glitch");
                             timers.push(window.setTimeout(() => {
-                                screen.classList.remove("is-glitch");
-                                section.classList.add("is-video-ready");
-                                const play = video.play();
-                                if (play && typeof play.catch === "function") {
-                                    play.catch(() => {});
-                                }
-                            }, 150));
-                        }, 120));
-                    }, 150));
+                                screen.classList.add("is-glitch");
+                                timers.push(window.setTimeout(() => {
+                                    screen.classList.remove("is-glitch");
+                                    section.classList.add("is-video-ready");
+                                    const play = video.play();
+                                    if (play && typeof play.catch === "function") {
+                                        play.catch(() => {});
+                                    }
+                                }, 180));
+                            }, 110));
+                        }, 180));
+                    }, 80));
                 }, 1550));
             };
 
