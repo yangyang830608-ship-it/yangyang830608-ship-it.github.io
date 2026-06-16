@@ -1218,6 +1218,16 @@
             transition: transform 0.95s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.95s ease;
             will-change: transform, opacity;
         }
+        .reveal-scale {
+            opacity: 0;
+            transform: scale(0.82);
+            transition: transform 1s cubic-bezier(0.22, 1, 0.36, 1), opacity 1s ease;
+            will-change: transform, opacity;
+        }
+        .reveal-scale.is-visible {
+            opacity: 1;
+            transform: scale(1);
+        }
 
         .kite-project-page {
             min-height: 100vh;
@@ -1322,6 +1332,102 @@
         .kite-process-copy.kite-copy-middle.reveal-left { transition-delay: 0.22s; }
         .kite-process-small.reveal-right { transition-delay: 0.16s; }
         .kite-process-large.reveal-up { transition-delay: 0.32s; }
+        .mirror-project-page,
+        .mirror-empty-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 110px 0 36px;
+            background: #020202;
+            color: #fff;
+            overflow: hidden;
+        }
+        .mirror-stage {
+            position: relative;
+            width: min(1480px, 100%, calc((100vh - 164px) * 16 / 9));
+            max-height: calc(100vh - 164px);
+            aspect-ratio: 16 / 9;
+            margin: 0 auto;
+            background: #020202;
+            overflow: hidden;
+        }
+        .mirror-stage::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                radial-gradient(circle at 52% 52%, rgba(108, 235, 255, 0.08), transparent 22%),
+                radial-gradient(circle at 18% 18%, rgba(255,255,255,0.04), transparent 18%);
+            pointer-events: none;
+        }
+        .mirror-layer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+        }
+        .mirror-heading {
+            z-index: 4;
+            filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.28));
+        }
+        .mirror-words {
+            z-index: 1;
+            opacity: 0.96;
+        }
+        .mirror-core {
+            z-index: 2;
+            filter: drop-shadow(0 0 38px rgba(135, 244, 255, 0.18));
+        }
+        .mirror-ring {
+            z-index: 3;
+            mix-blend-mode: screen;
+            opacity: 0.9;
+        }
+        .mirror-heading.reveal-left { transition-delay: 0.06s; }
+        .mirror-words.reveal-right { transition-delay: 0.18s; }
+        .mirror-core.reveal-up { transition-delay: 0.28s; }
+        .mirror-ring.reveal-scale { transition-delay: 0.38s; }
+        .mirror-stage::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.02), transparent 20%, transparent 80%, rgba(145, 235, 255, 0.05));
+            pointer-events: none;
+        }
+        .mirror-empty-shell {
+            width: min(1480px, calc(100% - 60px));
+            min-height: 78vh;
+            border-radius: 30px;
+            border: 1px dashed rgba(255,255,255,0.14);
+            background:
+                radial-gradient(circle at 24% 20%, rgba(255,255,255,0.03), transparent 18%),
+                rgba(255,255,255,0.01);
+            position: relative;
+        }
+        .mirror-empty-shell::before {
+            content: attr(data-page);
+            position: absolute;
+            top: 24px;
+            left: 28px;
+            color: rgba(255,255,255,0.24);
+            font-size: 12px;
+            letter-spacing: 0.24em;
+            font-weight: 800;
+        }
+        .mirror-empty-shell::after {
+            content: "闀滅敓涓囪薄 / 寰呰ˉ鍏呭唴瀹?;
+            position: absolute;
+            left: 28px;
+            bottom: 24px;
+            color: rgba(255,255,255,0.18);
+            font-size: 14px;
+            letter-spacing: 0.12em;
+        }
         .kite-stage::after {
             content: "";
             position: absolute;
@@ -1363,6 +1469,10 @@
                 max-height: calc(100vh - 168px);
                 aspect-ratio: 841.89 / 595.28;
             }
+            .mirror-stage {
+                width: min(100%, calc((100vh - 168px) * 16 / 9));
+                max-height: calc(100vh - 168px);
+            }
         }
         @media (max-width: 640px) {
             .profile-brand { top: 72px; left: 18px; font-size: 22px; }
@@ -1388,6 +1498,19 @@
             .kite-stage {
                 width: 100%;
                 max-height: none;
+            }
+            .mirror-project-page,
+            .mirror-empty-page {
+                padding-top: 92px;
+                padding-bottom: 36px;
+            }
+            .mirror-stage {
+                width: 100%;
+                max-height: none;
+            }
+            .mirror-empty-shell {
+                width: calc(100% - 36px);
+                min-height: 66vh;
             }
         }
     </style>
@@ -1828,6 +1951,29 @@
         </div>
     </section>
 
+    <section id="mirror-project-1" class="mirror-project-page" data-kite-replay="true">
+        <div class="container">
+            <div class="mirror-stage">
+                <img class="mirror-layer mirror-heading reveal-left" src="M-&#24038;&#19978;&#25991;&#23383;.png" alt="&#38236;&#28145;&#19975;&#35937;&#39033;&#30446;&#26631;&#39064;">
+                <img class="mirror-layer mirror-words reveal-right" src="M-P1&#25991;&#23383;.png" alt="&#38236;&#28145;&#19975;&#35937;&#22235;&#23383;&#25490;&#29256;">
+                <img class="mirror-layer mirror-core reveal-up" src="M-P1.png" alt="&#38236;&#28145;&#19975;&#35937;&#20027;&#35270;&#35273;">
+                <img class="mirror-layer mirror-ring reveal-scale" src="M-&#20013;&#38388;&#35013;&#39280;.png" alt="&#38236;&#38754;&#35013;&#39280;&#20809;&#29615;">
+            </div>
+        </div>
+    </section>
+
+    <section id="mirror-project-2" class="mirror-empty-page">
+        <div class="mirror-empty-shell" data-page="PAGE 02"></div>
+    </section>
+
+    <section id="mirror-project-3" class="mirror-empty-page">
+        <div class="mirror-empty-shell" data-page="PAGE 03"></div>
+    </section>
+
+    <section id="mirror-project-4" class="mirror-empty-page">
+        <div class="mirror-empty-shell" data-page="PAGE 04"></div>
+    </section>
+
 
     <section id="chapter-materials" class="chapter-page chapter-materials">
         <div class="container chapter-layout chapter-layout-grid">
@@ -2127,7 +2273,15 @@
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
             });
             const aiSections = new Set(["ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "herbal-3d", "herbal-3d-detail"]);
-            const interactiveSections = new Set(["chapter-interactive", "kite-project-1", "kite-project-2"]);
+            const interactiveSections = new Set([
+                "chapter-interactive",
+                "kite-project-1",
+                "kite-project-2",
+                "mirror-project-1",
+                "mirror-project-2",
+                "mirror-project-3",
+                "mirror-project-4"
+            ]);
             const materialSections = new Set(["chapter-materials"]);
             const imageSections = new Set(["photo"]);
             const navTarget = aiSections.has(current)
@@ -2165,7 +2319,7 @@
             if (!sections.length) return;
 
             sections.forEach(section => {
-                const targets = section.querySelectorAll(".reveal-left, .reveal-right, .reveal-up");
+                const targets = section.querySelectorAll(".reveal-left, .reveal-right, .reveal-up, .reveal-scale");
                 if (!targets.length) return;
 
                 let timers = [];
