@@ -1236,90 +1236,27 @@
                 radial-gradient(circle at 78% 32%, rgba(255, 255, 255, 0.05), transparent 20%);
             pointer-events: none;
         }
-        .kite-pills {
+        .kite-layer {
             position: absolute;
-            left: 4.3%;
-            top: 7.2%;
-            display: flex;
-            gap: 10px;
-            z-index: 3;
-        }
-        .kite-pill {
-            padding: 0.55vw 1.1vw;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.62);
-            color: #fff;
-            font-size: clamp(10px, 0.95vw, 13px);
-            line-height: 1;
-            letter-spacing: 0.08em;
-            background: rgba(255,255,255,0.02);
-        }
-        .kite-main {
-            position: absolute;
-            left: 3.2%;
-            top: 12%;
-            width: 53%;
-            z-index: 1;
-        }
-        .kite-main img {
-            width: 100%;
-            height: auto;
-            display: block;
-            object-fit: contain;
-            filter: drop-shadow(0 18px 40px rgba(0,0,0,0.3));
-        }
-        .kite-copy-top {
-            position: absolute;
-            left: 5.2%;
-            top: 18.2%;
-            width: 22%;
-            z-index: 2;
-        }
-        .kite-copy-bottom {
-            position: absolute;
-            left: 3.7%;
-            bottom: 6.8%;
-            width: 32%;
-            z-index: 2;
-        }
-        .kite-copy-top img,
-        .kite-copy-bottom img {
-            width: 100%;
-            height: auto;
-            display: block;
-        }
-        .kite-side {
-            position: absolute;
-            right: 6.3%;
-            top: 16%;
-            width: 25.5%;
-            z-index: 2;
-        }
-        .kite-thumb-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px 18px;
-        }
-        .kite-thumb {
-            position: relative;
-            aspect-ratio: 1 / 1;
-            display: grid;
-            place-items: center;
-            transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1), filter 0.36s ease;
-        }
-        .kite-thumb img {
+            inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: contain;
             display: block;
-            transition: transform 0.36s cubic-bezier(0.16, 1, 0.3, 1);
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
         }
-        .kite-thumb:hover {
-            transform: scale(1.08);
-            filter: drop-shadow(0 14px 24px rgba(230, 44, 129, 0.18));
+        .kite-main {
+            z-index: 1;
+            filter: drop-shadow(0 18px 40px rgba(0,0,0,0.24));
         }
-        .kite-thumb:hover img {
-            transform: scale(1.04);
+        .kite-copy-top,
+        .kite-copy-bottom {
+            z-index: 2;
+        }
+        .kite-thumb-layer {
+            z-index: 3;
+            transition: opacity 0.3s ease;
         }
 
         .kite-placeholder-page {
@@ -1375,11 +1312,7 @@
             .tv-stage { grid-template-columns: 1fr; }
             .tv-showcase { width: min(84vw, 980px); }
             .dot-nav { display: none; }
-            .kite-stage { aspect-ratio: auto; min-height: 1180px; }
-            .kite-main { left: 8%; top: 16%; width: 84%; }
-            .kite-copy-top { left: 8%; top: 8%; width: 34%; }
-            .kite-copy-bottom { left: 8%; bottom: 8%; width: 58%; }
-            .kite-side { right: 8%; top: 54%; width: 36%; }
+            .kite-stage { aspect-ratio: 841.89 / 595.28; }
         }
         @media (max-width: 640px) {
             .profile-brand { top: 72px; left: 18px; font-size: 22px; }
@@ -1402,14 +1335,6 @@
             .viewer-stage { min-height: 340px; }
             .tv-showcase { width: min(92vw, 920px); }
             .kite-project-page { padding-top: 92px; padding-bottom: 36px; }
-            .kite-stage { min-height: 980px; }
-            .kite-pills { left: 6%; top: 4%; gap: 8px; }
-            .kite-pill { padding: 7px 12px; font-size: 11px; }
-            .kite-main { left: 4%; top: 14%; width: 92%; }
-            .kite-copy-top { left: 6%; top: 7%; width: 44%; }
-            .kite-copy-bottom { left: 6%; bottom: 5%; width: 72%; }
-            .kite-side { left: 56%; right: auto; top: 53%; width: 38%; }
-            .kite-thumb-grid { gap: 10px 12px; }
             .kite-placeholder-shell { width: calc(100% - 36px); min-height: 66vh; }
         }
     </style>
@@ -1816,31 +1741,17 @@
     <section id="kite-project-1" class="kite-project-page">
         <div class="container">
             <div class="kite-stage">
-                <div class="kite-pills">
-                    <span class="kite-pill">&#25968;&#23383;&#33402;&#26415;</span>
-                    <span class="kite-pill">AI&#31639;&#27861;</span>
-                </div>
-                <div class="kite-main reveal-left">
-                    <img src="kite-0A.png" alt="&#26495;&#40542;&#39118;&#31581;&#20027;&#35270;&#35273;">
-                </div>
-                <div class="kite-copy-top reveal-right">
-                    <img src="kite-&#24038;&#19978;&#25991;&#23383;_&#30011;&#26495; 1 &#21103;&#26412; 9.png" alt="&#26495;&#40542;&#39118;&#31581;&#39033;&#30446;&#26631;&#39064;">
-                </div>
-                <div class="kite-copy-bottom reveal-right">
-                    <img src="kite-&#24038;&#19979;&#25991;&#23383;_&#30011;&#26495; 1 &#21103;&#26412; 9.png" alt="&#26495;&#40542;&#39118;&#31581;&#39033;&#30446;&#20171;&#32461;">
-                </div>
-                <div class="kite-side reveal-right">
-                    <div class="kite-thumb-grid">
-                        <div class="kite-thumb"><img src="kite-01.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 01"></div>
-                        <div class="kite-thumb"><img src="kite-02.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 02"></div>
-                        <div class="kite-thumb"><img src="kite-03.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 03"></div>
-                        <div class="kite-thumb"><img src="kite-04.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 04"></div>
-                        <div class="kite-thumb"><img src="kite-05.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 05"></div>
-                        <div class="kite-thumb"><img src="kite-06_.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 06"></div>
-                        <div class="kite-thumb"><img src="kite-07.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 07"></div>
-                        <div class="kite-thumb"><img src="kite-08.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 08"></div>
-                    </div>
-                </div>
+                <img class="kite-layer kite-main reveal-left" src="kite-0A.png" alt="&#26495;&#40542;&#39118;&#31581;&#20027;&#35270;&#35273;">
+                <img class="kite-layer kite-copy-top reveal-right" src="kite-&#24038;&#19978;&#25991;&#23383;_&#30011;&#26495; 1 &#21103;&#26412; 9.png" alt="&#26495;&#40542;&#39118;&#31581;&#39033;&#30446;&#26631;&#39064;">
+                <img class="kite-layer kite-copy-bottom reveal-right" src="kite-&#24038;&#19979;&#25991;&#23383;_&#30011;&#26495; 1 &#21103;&#26412; 9.png" alt="&#26495;&#40542;&#39118;&#31581;&#39033;&#30446;&#20171;&#32461;">
+                <img class="kite-layer kite-thumb-layer reveal-right" src="kite-01.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 01">
+                <img class="kite-layer kite-thumb-layer reveal-right" src="kite-02.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 02">
+                <img class="kite-layer kite-thumb-layer reveal-right" src="kite-03.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 03">
+                <img class="kite-layer kite-thumb-layer reveal-right" src="kite-04.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 04">
+                <img class="kite-layer kite-thumb-layer reveal-right" src="kite-05.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 05">
+                <img class="kite-layer kite-thumb-layer reveal-right" src="kite-06_.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 06">
+                <img class="kite-layer kite-thumb-layer reveal-right" src="kite-07.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 07">
+                <img class="kite-layer kite-thumb-layer reveal-right" src="kite-08.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 08">
             </div>
         </div>
     </section>
