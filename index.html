@@ -896,6 +896,39 @@
             display: flex;
             align-items: flex-end;
         }
+        .image-portfolio-card.has-embed::before,
+        .image-portfolio-card.has-embed::after {
+            display: none;
+        }
+        .image-portfolio-card.has-embed {
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.1), rgba(255,255,255,0.02)),
+                #090b10;
+        }
+        .media-embed {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            overflow: hidden;
+        }
+        .media-embed iframe {
+            width: 100%;
+            height: 100%;
+            border: 0;
+            display: block;
+            background: #000;
+        }
+        .embed-shade {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            pointer-events: none;
+            background: linear-gradient(180deg, rgba(3,4,6,0.06) 8%, rgba(3,4,6,0.16) 50%, rgba(3,4,6,0.84) 100%);
+        }
+        .image-portfolio-card.has-embed .image-card-copy {
+            max-width: 82%;
+            pointer-events: none;
+        }
         .image-portfolio-card.tall { grid-row: span 2; }
         .image-portfolio-card.wide { grid-column: span 2; }
         .image-portfolio-card::before { transition: transform 0.45s ease, filter 0.45s ease; }
@@ -1301,11 +1334,11 @@
                 <span>&#20013;&#33609;&#33647; AI &#27169;&#22411;&#29983;&#25104;</span>
             </div>
             <div class="ai-cases">
-                                <a href="#hero-project" class="ai-case" style="--ai-img:url('35.jpg')">
+                <a href="#hero-project" class="ai-case" style="--ai-img:url('35.jpg')">
                     <div class="ai-case-body">
                         <span>00 / AI SHORT FILM</span>
-                        <h3>&#23547;&#25214;&#24494;&#20809;</h3>
-                        <p>&#36825;&#26159;&#36825;&#19968;&#31456;&#30340;&#24320;&#31687;&#30701;&#29255;&#39033;&#30446;&#65292;&#21253;&#21547;&#20998;&#38236;&#12289;&#24037;&#20316;&#27969;&#19982;&#25104;&#29255;&#23637;&#31034;&#65292;&#20316;&#20026; AI &#29983;&#25104;&#31456;&#33410;&#30340;&#35270;&#35273;&#20837;&#21475;&#12290;</p>
+                        <h3>&#24425;&#34425;&#35806;&#29983;&#30340;&#25151;&#38388;</h3>
+                        <p>&#36825;&#26159;&#36825;&#19968;&#31456;&#30340;&#24320;&#31687; AI &#30701;&#29255;&#39033;&#30446;&#65292;&#21253;&#21547;&#20998;&#38236;&#12289;&#24037;&#20316;&#27969;&#19982;&#25104;&#29255;&#23637;&#31034;&#65292;&#20316;&#20026; AI &#29983;&#25104;&#31456;&#33410;&#30340;&#35270;&#35273;&#20837;&#21475;&#12290;</p>
                         <div class="ai-case-tag">STORYBOARD / WORKFLOW / FILM</div>
                     </div>
                 </a>
@@ -1343,7 +1376,7 @@
         <div class="container">
             <article class="glass-card">
                 <p class="section-kicker">CORE PROJECT</p>
-                <h2>&#23547;&#25214;&#24494;&#20809; / Looking for the Light</h2>
+                <h2>&#24425;&#34425;&#35806;&#29983;&#30340;&#25151;&#38388; / Rainbow Room</h2>
                 <p>&#36825;&#19968;&#39029;&#30340;&#40657;&#33394;&#32972;&#26223;&#24050;&#26367;&#25442;&#20026;&#20998;&#38236;&#22270;&#22635;&#20805;&#32972;&#26223;&#65292;&#24182;&#20445;&#30041;&#26263;&#33394;&#29627;&#29827;&#20449;&#24687;&#23618;&#65292;&#26041;&#20415;&#21069;&#26223;&#25991;&#23383;&#38405;&#35835;&#12290;&#32972;&#26223;&#40664;&#35748;&#35835;&#21462; image_43f020.jpg&#65292;&#20063;&#20250;&#32487;&#32493;&#23581;&#35797;&#21516;&#30446;&#24405;&#19979;&#30340;&#20998;&#38236;&#22270;&#29255;&#12290;</p>
                 <div class="tag-row">
                     <span>#&#25552;&#31034;&#35789;&#24037;&#31243;</span>
@@ -1643,16 +1676,36 @@
                 <p class="section-copy">&#36825;&#19968;&#31456;&#25226; MG &#21160;&#30011;&#12289;&#25668;&#24433;&#20316;&#21697;&#21644;&#24433;&#20687;&#25490;&#29256;&#25918;&#22312;&#21516;&#19968;&#20010;&#35270;&#35273;&#31995;&#32479;&#37324;&#65292;&#20559;&#21521;&#26356;&#36731;&#24555;&#12289;&#26356;&#20415;&#20110;&#27983;&#35272;&#30340;&#20316;&#21697;&#22681;&#32467;&#26500;&#12290;</p>
             </div>
             <div class="image-portfolio-grid">
-                <article class="image-portfolio-card tall" style="--img:url('7.jpg')">
+                <article class="image-portfolio-card tall has-embed">
+                    <div class="media-embed">
+                        <iframe
+                            src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1wj421D7PS&p=1&danmaku=0"
+                            title="&#19981;&#24517;&#25104;&#20026;&#38754;&#38754;&#20465;&#22278;&#30340;&#20154; &#21160;&#24577;&#28023;&#25253;"
+                            scrolling="no"
+                            allow="autoplay; fullscreen"
+                            allowfullscreen="true"></iframe>
+                    </div>
+                    <div class="embed-shade" aria-hidden="true"></div>
                     <div class="image-card-copy">
                         <span>MG 01</span>
-                        <h3>MG &#21160;&#30011; 1</h3>
+                        <h3>&#19981;&#24517;&#25104;&#20026;&#38754;&#38754;&#20465;&#22278;&#30340;&#20154; &#21160;&#24577;&#28023;&#25253;</h3>
+                        <p>Bilibili / BV1wj421D7PS</p>
                     </div>
                 </article>
-                <article class="image-portfolio-card" style="--img:url('4.jpg')">
+                <article class="image-portfolio-card has-embed">
+                    <div class="media-embed">
+                        <iframe
+                            src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1Nu4m1P7Cm&p=1&danmaku=0"
+                            title="MG &#23567;&#21160;&#30011;"
+                            scrolling="no"
+                            allow="autoplay; fullscreen"
+                            allowfullscreen="true"></iframe>
+                    </div>
+                    <div class="embed-shade" aria-hidden="true"></div>
                     <div class="image-card-copy">
                         <span>MG 02</span>
-                        <h3>MG &#21160;&#30011; 2</h3>
+                        <h3>MG &#23567;&#21160;&#30011;</h3>
+                        <p>Bilibili / BV1Nu4m1P7Cm</p>
                     </div>
                 </article>
                 <article class="image-portfolio-card wide" style="--img:url('35.jpg')">
