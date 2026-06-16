@@ -1344,21 +1344,12 @@
         }
         .mirror-stage {
             position: relative;
-            width: min(1480px, 100%, calc((100vh - 164px) * 16 / 9));
+            width: min(1320px, 100%, calc((100vh - 172px) * 841.89 / 595.28));
             max-height: calc(100vh - 164px);
-            aspect-ratio: 16 / 9;
+            aspect-ratio: 841.89 / 595.28;
             margin: 0 auto;
             background: #020202;
             overflow: hidden;
-        }
-        .mirror-stage::before {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(circle at 52% 52%, rgba(108, 235, 255, 0.08), transparent 22%),
-                radial-gradient(circle at 18% 18%, rgba(255,255,255,0.04), transparent 18%);
-            pointer-events: none;
         }
         .mirror-layer {
             position: absolute;
@@ -1371,19 +1362,21 @@
             user-select: none;
         }
         .mirror-heading {
-            z-index: 4;
+            z-index: 5;
             filter: drop-shadow(0 12px 28px rgba(0, 0, 0, 0.28));
         }
         .mirror-words {
-            z-index: 1;
-            opacity: 0.96;
+            z-index: 2;
+            mix-blend-mode: screen;
+            opacity: 0.98;
         }
         .mirror-core {
-            z-index: 2;
-            filter: drop-shadow(0 0 38px rgba(135, 244, 255, 0.18));
+            z-index: 3;
+            mix-blend-mode: screen;
+            filter: drop-shadow(0 0 44px rgba(135, 244, 255, 0.18));
         }
         .mirror-ring {
-            z-index: 3;
+            z-index: 4;
             mix-blend-mode: screen;
             opacity: 0.9;
         }
@@ -1391,14 +1384,6 @@
         .mirror-words.reveal-right { transition-delay: 0.18s; }
         .mirror-core.reveal-up { transition-delay: 0.28s; }
         .mirror-ring.reveal-scale { transition-delay: 0.38s; }
-        .mirror-stage::after {
-            content: "";
-            position: absolute;
-            inset: 0;
-            background:
-                linear-gradient(180deg, rgba(255,255,255,0.02), transparent 20%, transparent 80%, rgba(145, 235, 255, 0.05));
-            pointer-events: none;
-        }
         .mirror-empty-shell {
             width: min(1480px, calc(100% - 60px));
             min-height: 78vh;
@@ -1470,7 +1455,7 @@
                 aspect-ratio: 841.89 / 595.28;
             }
             .mirror-stage {
-                width: min(100%, calc((100vh - 168px) * 16 / 9));
+                width: min(100%, calc((100vh - 168px) * 841.89 / 595.28));
                 max-height: calc(100vh - 168px);
             }
         }
@@ -2357,7 +2342,7 @@
                             resetReveal();
                         }
                     });
-                }, { threshold: 0.42 });
+                }, { threshold: 0.22, rootMargin: "0px 0px -8% 0px" });
 
                 observer.observe(section);
             });
