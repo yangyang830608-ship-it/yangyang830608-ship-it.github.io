@@ -2156,16 +2156,48 @@
         }, { threshold: 0.18 });
 
         function initKiteReveal() {
-            const targets = document.querySelectorAll(".reveal-left, .reveal-right");
-            if (!targets.length) return;
+            const section = document.getElementById("kite-project-1");
+            const targets = section?.querySelectorAll(".reveal-left, .reveal-right");
+            if (!section || !targets?.length) return;
+
+            let timers = [];
+            let hasPlayed = false;
+
+            const clearTimers = () => {
+                timers.forEach(timer => window.clearTimeout(timer));
+                timers = [];
+            };
+
+            const resetReveal = () => {
+                clearTimers();
+                targets.forEach(target => target.classList.remove("is-visible"));
+                hasPlayed = false;
+            };
+
+            const playReveal = () => {
+                clearTimers();
+                targets.forEach(target => target.classList.remove("is-visible"));
+                void section.offsetWidth;
+                targets.forEach((target, index) => {
+                    const timer = window.setTimeout(() => {
+                        target.classList.add("is-visible");
+                    }, index * 90);
+                    timers.push(timer);
+                });
+                hasPlayed = true;
+            };
+
             const observer = new IntersectionObserver(entries => {
                 entries.forEach(entry => {
                     if (entry.isIntersecting) {
-                        entry.target.classList.add("is-visible");
+                        if (!hasPlayed) playReveal();
+                    } else {
+                        resetReveal();
                     }
                 });
-            }, { threshold: 0.14, rootMargin: "0px 0px -10% 0px" });
-            targets.forEach(target => observer.observe(target));
+            }, { threshold: 0.42 });
+
+            observer.observe(section);
         }
 
         function initModalControls() {
