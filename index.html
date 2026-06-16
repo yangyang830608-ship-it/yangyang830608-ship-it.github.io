@@ -1262,30 +1262,6 @@
             transition: transform 0.42s cubic-bezier(0.22, 1, 0.36, 1), opacity 0.3s ease, filter 0.42s ease;
             will-change: transform, opacity, filter;
         }
-        .kite-tags {
-            position: absolute;
-            top: 14.2%;
-            left: 3.65%;
-            z-index: 4;
-            display: flex;
-            gap: 10px;
-            pointer-events: none;
-        }
-        .kite-tag {
-            min-width: 106px;
-            padding: 10px 18px;
-            border-radius: 999px;
-            border: 1px solid rgba(255,255,255,0.58);
-            background: rgba(8, 15, 16, 0.18);
-            color: rgba(255,255,255,0.96);
-            font-size: clamp(12px, 0.92vw, 14px);
-            font-weight: 700;
-            line-height: 1;
-            letter-spacing: 0.04em;
-            text-align: center;
-            text-shadow: 0 0 16px rgba(255,255,255,0.16);
-            box-shadow: inset 0 0 0 1px rgba(255,255,255,0.08);
-        }
         .kite-hotspot {
             position: absolute;
             z-index: 5;
@@ -1321,7 +1297,6 @@
         .kite-main.reveal-left { transition-delay: 0.06s; }
         .kite-copy-top.reveal-right { transition-delay: 0.18s; }
         .kite-copy-bottom.reveal-right { transition-delay: 0.28s; }
-        .kite-tags.reveal-right { transition-delay: 0.24s; }
         .kite-stage::after {
             content: "";
             position: absolute;
@@ -1414,16 +1389,6 @@
             .kite-stage {
                 width: 100%;
                 max-height: none;
-            }
-            .kite-tags {
-                gap: 6px;
-                top: 14%;
-                left: 3.8%;
-            }
-            .kite-tag {
-                min-width: 74px;
-                padding: 8px 12px;
-                font-size: 11px;
             }
             .kite-placeholder-shell { width: calc(100% - 36px); min-height: 66vh; }
         }
@@ -1834,10 +1799,6 @@
                 <img class="kite-layer kite-main reveal-left" src="kite-0A.png" alt="&#26495;&#40542;&#39118;&#31581;&#20027;&#35270;&#35273;">
                 <img class="kite-layer kite-copy-top reveal-right" src="kite-&#24038;&#19978;&#25991;&#23383;_&#30011;&#26495; 1 &#21103;&#26412; 9.png" alt="&#26495;&#40542;&#39118;&#31581;&#39033;&#30446;&#26631;&#39064;">
                 <img class="kite-layer kite-copy-bottom reveal-right" src="kite-&#24038;&#19979;&#25991;&#23383;_&#30011;&#26495; 1 &#21103;&#26412; 9.png" alt="&#26495;&#40542;&#39118;&#31581;&#39033;&#30446;&#20171;&#32461;">
-                <div class="kite-tags reveal-right" aria-hidden="true">
-                    <span class="kite-tag">鏁板瓧鑹烘湳</span>
-                    <span class="kite-tag">AI绠楁硶</span>
-                </div>
                 <img class="kite-layer kite-thumb-layer thumb-01 reveal-right" src="kite-01.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 01">
                 <img class="kite-layer kite-thumb-layer thumb-02 reveal-right" src="kite-02.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 02">
                 <img class="kite-layer kite-thumb-layer thumb-03 reveal-right" src="kite-03.png" alt="&#26495;&#40542;&#39118;&#31581;&#22270;&#20107; 03">
