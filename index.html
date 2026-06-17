@@ -1407,6 +1407,44 @@
         .mirror-p2-detail {
             z-index: 5;
         }
+        .mirror-p2-project-label {
+            z-index: 9;
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.22));
+        }
+        .mirror-p3-stage {
+            background:
+                radial-gradient(circle at 50% 54%, rgba(180, 255, 235, 0.08), transparent 34%),
+                #020202;
+        }
+        .mirror-p3-main {
+            z-index: 2;
+            mix-blend-mode: screen;
+            filter: saturate(1.08) contrast(1.04) drop-shadow(0 30px 62px rgba(65, 255, 232, 0.12));
+        }
+        .mirror-p3-title {
+            z-index: 6;
+            filter: drop-shadow(0 12px 24px rgba(0, 0, 0, 0.24));
+        }
+        .mirror-p3-copy {
+            z-index: 7;
+            filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.2));
+        }
+        .mirror-p3-main.is-visible {
+            animation: mirrorP3Float 8s ease-in-out infinite alternate;
+        }
+        .mirror-p3-title.reveal-left { transition-delay: 0.08s; }
+        .mirror-p3-main.reveal-scale { transition-delay: 0.2s; }
+        .mirror-p3-copy.reveal-up { transition-delay: 0.34s; }
+        @keyframes mirrorP3Float {
+            from {
+                transform: translate3d(-0.8%, 0.7%, 0) scale(1.015);
+                filter: saturate(1.02) contrast(1.02) drop-shadow(0 26px 56px rgba(65, 255, 232, 0.1));
+            }
+            to {
+                transform: translate3d(0.9%, -0.8%, 0) scale(1.045);
+                filter: saturate(1.18) contrast(1.07) drop-shadow(0 34px 70px rgba(65, 255, 232, 0.18));
+            }
+        }
         .mirror-heading.reveal-left { transition-delay: 0.06s; }
         .mirror-words.reveal-right { transition-delay: 0.18s; }
         .mirror-core.reveal-up { transition-delay: 0.28s; }
@@ -1977,6 +2015,7 @@
     <section id="mirror-project-2" class="mirror-project-page" data-kite-replay="true">
         <div class="container">
             <div class="mirror-stage mirror-stage-detail">
+                <img class="mirror-layer mirror-p2-project-label reveal-left" src="&#38236;&#28145;&#19975;&#35937;/M-&#24038;&#19978;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-&#24038;&#19978;&#25991;&#23383;.png';" alt="&#20316;&#21697;&#38598;&#38236;&#28145;&#19975;&#35937;&#25237;&#24433;&#35013;&#32622;&#26631;&#39064;">
                 <img class="mirror-layer mirror-p2-heading reveal-left" src="&#38236;&#28145;&#19975;&#35937;/M-P2&#24038;&#19978;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-P2&#24038;&#19978;&#25991;&#23383;.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#20108;&#39029;&#26631;&#39064;">
                 <img class="mirror-layer mirror-p2-caption reveal-left" src="&#38236;&#28145;&#19975;&#35937;/M-P2&#24038;&#19979;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-P2&#24038;&#19979;&#25991;&#23383;.png';" alt="&#38236;&#28145;&#19975;&#35937;&#39033;&#30446;&#35828;&#26126;">
                 <img class="mirror-layer mirror-p2-main reveal-up" src="&#38236;&#28145;&#19975;&#35937;/M-P2-10.png" onerror="this.onerror=null;this.src='M-P2-10.png';" alt="&#38236;&#28145;&#19975;&#35937;&#32454;&#33410;&#32452;&#21512;&#22270;">
@@ -1997,8 +2036,14 @@
         </div>
     </section>
 
-    <section id="mirror-project-3" class="mirror-empty-page">
-        <div class="mirror-empty-shell" data-page="PAGE 03"></div>
+    <section id="mirror-project-3" class="mirror-project-page" data-kite-replay="true">
+        <div class="container">
+            <div class="mirror-stage mirror-stage-detail mirror-p3-stage">
+                <img class="mirror-layer mirror-p3-main reveal-scale" src="&#38236;&#28145;&#19975;&#35937;/M-P3-1_.png" onerror="this.onerror=null;this.src='M-P3-1_.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#19977;&#39029;&#26174;&#24494;&#23431;&#23449;&#20027;&#35270;&#35273;">
+                <img class="mirror-layer mirror-p3-title reveal-left" src="&#38236;&#28145;&#19975;&#35937;/M-P3-&#24038;&#19978;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-P3-&#24038;&#19978;&#25991;&#23383;.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#19977;&#39029;&#26631;&#39064;">
+                <img class="mirror-layer mirror-p3-copy reveal-up" src="&#38236;&#28145;&#19975;&#35937;/M-P3-&#19979;&#26041;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-P3-&#19979;&#26041;&#25991;&#23383;.png';" alt="&#26174;&#24494;&#38236;&#19979;&#30340;&#24494;&#23431;&#23449;&#20027;&#39064;&#35828;&#26126;">
+            </div>
+        </div>
     </section>
 
     <section id="mirror-project-4" class="mirror-empty-page">
