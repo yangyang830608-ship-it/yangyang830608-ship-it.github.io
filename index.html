@@ -1438,6 +1438,11 @@
             object-fit: contain;
             filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.2));
         }
+        .mirror-p3-project-label,
+        .mirror-p4-project-label {
+            z-index: 10;
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.22));
+        }
         .mirror-p3-main.is-visible {
             animation: mirrorP3Float 8s ease-in-out infinite alternate;
         }
@@ -1455,6 +1460,20 @@
                 filter: saturate(1.18) contrast(1.07);
             }
         }
+        .mirror-p4-stage {
+            background: #020202;
+        }
+        .mirror-p4-main {
+            z-index: 2;
+            filter: saturate(1.06) contrast(1.04) drop-shadow(0 34px 70px rgba(0, 0, 0, 0.26));
+        }
+        .mirror-p4-code {
+            z-index: 6;
+            filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.18));
+        }
+        .mirror-p4-main.reveal-scale { transition-delay: 0.16s; }
+        .mirror-p4-code.reveal-right { transition-delay: 0.28s; }
+        .mirror-p4-project-label.reveal-left { transition-delay: 0.08s; }
         .mirror-heading.reveal-left { transition-delay: 0.06s; }
         .mirror-words.reveal-right { transition-delay: 0.18s; }
         .mirror-core.reveal-up { transition-delay: 0.28s; }
@@ -2049,6 +2068,7 @@
     <section id="mirror-project-3" class="mirror-project-page" data-kite-replay="true">
         <div class="container">
             <div class="mirror-stage mirror-stage-detail mirror-p3-stage">
+                <img class="mirror-layer mirror-p3-project-label reveal-left" src="&#38236;&#28145;&#19975;&#35937;/M-&#24038;&#19978;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-&#24038;&#19978;&#25991;&#23383;.png';" alt="&#38236;&#28145;&#19975;&#35937;&#25237;&#24433;&#35013;&#32622;&#39033;&#30446;&#26631;&#39064;">
                 <img class="mirror-layer mirror-p3-main reveal-scale" src="&#38236;&#28145;&#19975;&#35937;/M-P3-1_.png" onerror="this.onerror=null;this.src='M-P3-1_.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#19977;&#39029;&#26174;&#24494;&#23431;&#23449;&#20027;&#35270;&#35273;">
                 <img class="mirror-layer mirror-p3-product reveal-scale" src="&#38236;&#28145;&#19975;&#35937;/M-P3-2.png" onerror="this.onerror=null;this.src='M-P3-2.png';" alt="&#38236;&#28145;&#19975;&#35937;&#29627;&#29827;&#22521;&#20859;&#30347;&#25104;&#21697;&#32452;&#21512;">
                 <img class="mirror-layer mirror-p3-title reveal-left" src="&#38236;&#28145;&#19975;&#35937;/M-P3-&#24038;&#19978;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-P3-&#24038;&#19978;&#25991;&#23383;.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#19977;&#39029;&#26631;&#39064;">
@@ -2057,8 +2077,14 @@
         </div>
     </section>
 
-    <section id="mirror-project-4" class="mirror-empty-page">
-        <div class="mirror-empty-shell" data-page="PAGE 04"></div>
+    <section id="mirror-project-4" class="mirror-project-page" data-kite-replay="true">
+        <div class="container">
+            <div class="mirror-stage mirror-stage-detail mirror-p4-stage">
+                <img class="mirror-layer mirror-p4-main reveal-scale" src="&#38236;&#28145;&#19975;&#35937;/M-P4-1.png" onerror="this.onerror=null;this.src='M-P4-1.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#22235;&#39029;&#25237;&#24433;&#35013;&#32622;&#20027;&#35270;&#35273;">
+                <img class="mirror-layer mirror-p4-project-label reveal-left" src="&#38236;&#28145;&#19975;&#35937;/M-&#24038;&#19978;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-&#24038;&#19978;&#25991;&#23383;.png';" alt="&#38236;&#28145;&#19975;&#35937;&#25237;&#24433;&#35013;&#32622;&#39033;&#30446;&#26631;&#39064;">
+                <img class="mirror-layer mirror-p4-code reveal-right" src="&#38236;&#28145;&#19975;&#35937;/M-P4&#21491;&#20391;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-P4&#21491;&#20391;&#25991;&#23383;.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#22235;&#39029;&#21491;&#20391;&#25991;&#23383;&#20449;&#24687;">
+            </div>
+        </div>
     </section>
 
 
