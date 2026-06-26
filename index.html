@@ -1418,8 +1418,13 @@
         }
         .mirror-p3-main {
             z-index: 2;
-            mix-blend-mode: screen;
-            filter: saturate(1.08) contrast(1.04) drop-shadow(0 30px 62px rgba(65, 255, 232, 0.12));
+            opacity: 0.44;
+            mix-blend-mode: hard-light;
+            filter: saturate(1.08) contrast(1.04);
+        }
+        .mirror-p3-product {
+            z-index: 4;
+            filter: drop-shadow(0 24px 46px rgba(0, 0, 0, 0.22));
         }
         .mirror-p3-title {
             z-index: 6;
@@ -1427,8 +1432,8 @@
         }
         .mirror-p3-copy {
             z-index: 7;
-            inset: auto auto 8.5% 7.2%;
-            width: 53%;
+            inset: 83.2% auto auto 25.3%;
+            width: 55%;
             height: auto;
             object-fit: contain;
             filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.2));
@@ -1437,16 +1442,17 @@
             animation: mirrorP3Float 8s ease-in-out infinite alternate;
         }
         .mirror-p3-title.reveal-left { transition-delay: 0.08s; }
-        .mirror-p3-main.reveal-scale { transition-delay: 0.2s; }
-        .mirror-p3-copy.reveal-up { transition-delay: 0.34s; }
+        .mirror-p3-main.reveal-scale { transition-delay: 0.16s; }
+        .mirror-p3-product.reveal-scale { transition-delay: 0.26s; }
+        .mirror-p3-copy.reveal-up { transition-delay: 0.38s; }
         @keyframes mirrorP3Float {
             from {
                 transform: translate3d(-0.8%, 0.7%, 0) scale(1.015);
-                filter: saturate(1.02) contrast(1.02) drop-shadow(0 26px 56px rgba(65, 255, 232, 0.1));
+                filter: saturate(1.02) contrast(1.02);
             }
             to {
                 transform: translate3d(0.9%, -0.8%, 0) scale(1.045);
-                filter: saturate(1.18) contrast(1.07) drop-shadow(0 34px 70px rgba(65, 255, 232, 0.18));
+                filter: saturate(1.18) contrast(1.07);
             }
         }
         .mirror-heading.reveal-left { transition-delay: 0.06s; }
@@ -2044,6 +2050,7 @@
         <div class="container">
             <div class="mirror-stage mirror-stage-detail mirror-p3-stage">
                 <img class="mirror-layer mirror-p3-main reveal-scale" src="&#38236;&#28145;&#19975;&#35937;/M-P3-1_.png" onerror="this.onerror=null;this.src='M-P3-1_.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#19977;&#39029;&#26174;&#24494;&#23431;&#23449;&#20027;&#35270;&#35273;">
+                <img class="mirror-layer mirror-p3-product reveal-scale" src="&#38236;&#28145;&#19975;&#35937;/M-P3-2.png" onerror="this.onerror=null;this.src='M-P3-2.png';" alt="&#38236;&#28145;&#19975;&#35937;&#29627;&#29827;&#22521;&#20859;&#30347;&#25104;&#21697;&#32452;&#21512;">
                 <img class="mirror-layer mirror-p3-title reveal-left" src="&#38236;&#28145;&#19975;&#35937;/M-P3-&#24038;&#19978;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-P3-&#24038;&#19978;&#25991;&#23383;.png';" alt="&#38236;&#28145;&#19975;&#35937;&#31532;&#19977;&#39029;&#26631;&#39064;">
                 <img class="mirror-layer mirror-p3-copy reveal-up" src="&#38236;&#28145;&#19975;&#35937;/M-P3-&#19979;&#26041;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='M-P3-&#19979;&#26041;&#25991;&#23383;.png';" alt="&#26174;&#24494;&#38236;&#19979;&#30340;&#24494;&#23431;&#23449;&#20027;&#39064;&#35828;&#26126;">
             </div>
