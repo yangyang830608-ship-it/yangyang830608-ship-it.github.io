@@ -1467,6 +1467,9 @@
             z-index: 2;
             filter: saturate(1.06) contrast(1.04) drop-shadow(0 34px 70px rgba(0, 0, 0, 0.26));
         }
+        .mirror-p4-main.is-visible {
+            animation: mirrorP4Breathe 9s ease-in-out infinite alternate;
+        }
         .mirror-p4-code {
             z-index: 6;
             filter: drop-shadow(0 10px 24px rgba(0, 0, 0, 0.18));
@@ -1474,6 +1477,174 @@
         .mirror-p4-main.reveal-scale { transition-delay: 0.16s; }
         .mirror-p4-code.reveal-right { transition-delay: 0.28s; }
         .mirror-p4-project-label.reveal-left { transition-delay: 0.08s; }
+        @keyframes mirrorP4Breathe {
+            from {
+                transform: translate3d(-0.35%, 0.28%, 0) scale(1.012);
+                filter: saturate(1.02) contrast(1.02) drop-shadow(0 30px 64px rgba(0, 0, 0, 0.24));
+            }
+            to {
+                transform: translate3d(0.42%, -0.34%, 0) scale(1.04);
+                filter: saturate(1.14) contrast(1.07) drop-shadow(0 38px 76px rgba(0, 0, 0, 0.3));
+            }
+        }
+        .flower-page,
+        .flower-empty-page {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            padding: 110px 0 36px;
+            background: #fbfaf7;
+            color: #171717;
+            overflow: hidden;
+        }
+        .flower-stage {
+            position: relative;
+            width: min(1480px, 100%, calc((100vh - 172px) * 3508 / 2481));
+            max-height: calc(100vh - 164px);
+            aspect-ratio: 3508 / 2481;
+            margin: 0 auto;
+            background: #fff;
+            overflow: hidden;
+        }
+        .flower-layer {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            display: block;
+            object-fit: contain;
+            pointer-events: none;
+            user-select: none;
+        }
+        .flower-bg {
+            z-index: 1;
+            opacity: 0.82;
+            mix-blend-mode: multiply;
+        }
+        .flower-title-left {
+            z-index: 8;
+            filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.08));
+        }
+        .flower-title-center {
+            z-index: 6;
+            opacity: 0.92;
+        }
+        .flower-piece-img {
+            z-index: 5;
+            transform-origin: var(--cx, 50%) var(--cy, 50%);
+            transition: transform 0.42s ease, filter 0.42s ease;
+        }
+        .flower-piece-img.is-hovered {
+            transform: scale(1.045);
+            filter: drop-shadow(0 14px 26px rgba(0, 0, 0, 0.16));
+        }
+        .flower-hotspot {
+            position: absolute;
+            z-index: 12;
+            left: var(--x);
+            top: var(--y);
+            width: var(--w);
+            height: var(--h);
+            border: 0;
+            padding: 0;
+            background: transparent;
+            cursor: zoom-in;
+        }
+        .flower-hotspot:focus-visible {
+            outline: 1px solid rgba(20, 20, 20, 0.3);
+            outline-offset: 4px;
+        }
+        .flower-empty-shell {
+            width: min(1480px, calc(100% - 60px));
+            min-height: 78vh;
+            margin: 0 auto;
+            border: 1px dashed rgba(0, 0, 0, 0.12);
+            background:
+                radial-gradient(circle at 50% 50%, rgba(0, 0, 0, 0.035), transparent 30%),
+                #fff;
+            position: relative;
+        }
+        .flower-empty-shell::before {
+            content: attr(data-page);
+            position: absolute;
+            top: 24px;
+            left: 28px;
+            color: rgba(0, 0, 0, 0.22);
+            font-size: 12px;
+            letter-spacing: 0.24em;
+            font-weight: 800;
+        }
+        .flower-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 80;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 34px 92px;
+            background: rgba(255, 255, 255, 0.82);
+            backdrop-filter: blur(16px);
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.28s ease;
+        }
+        .flower-modal.is-open {
+            opacity: 1;
+            pointer-events: auto;
+        }
+        .flower-modal-card {
+            position: relative;
+            width: min(1120px, 86vw);
+            aspect-ratio: 3508 / 2481;
+            margin: 0;
+            background: #fff;
+            box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
+            transform: translateY(16px) scale(0.98);
+            transition: transform 0.28s ease;
+        }
+        .flower-modal.is-open .flower-modal-card {
+            transform: translateY(0) scale(1);
+        }
+        .flower-modal-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: block;
+        }
+        .flower-modal-close,
+        .flower-modal-step {
+            border: 1px solid rgba(0, 0, 0, 0.12);
+            background: rgba(255, 255, 255, 0.86);
+            color: #111;
+            cursor: pointer;
+            box-shadow: 0 14px 34px rgba(0, 0, 0, 0.12);
+        }
+        .flower-modal-close {
+            position: absolute;
+            top: 14px;
+            right: 14px;
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            font-size: 24px;
+            line-height: 1;
+        }
+        .flower-modal-step {
+            position: absolute;
+            top: 50%;
+            width: 54px;
+            height: 54px;
+            border-radius: 50%;
+            transform: translateY(-50%);
+            font-size: 28px;
+            font-weight: 500;
+        }
+        .flower-modal-step.prev { left: 24px; }
+        .flower-modal-step.next { right: 24px; }
+        .flower-modal-close:hover,
+        .flower-modal-step:hover {
+            background: #fff;
+        }
         .mirror-heading.reveal-left { transition-delay: 0.06s; }
         .mirror-words.reveal-right { transition-delay: 0.18s; }
         .mirror-core.reveal-up { transition-delay: 0.28s; }
@@ -1552,6 +1723,10 @@
                 width: min(100%, calc((100vh - 168px) * 841.89 / 595.28));
                 max-height: calc(100vh - 168px);
             }
+            .flower-stage {
+                width: min(100%, calc((100vh - 168px) * 3508 / 2481));
+                max-height: calc(100vh - 168px);
+            }
         }
         @media (max-width: 640px) {
             .profile-brand { top: 72px; left: 18px; font-size: 22px; }
@@ -1591,6 +1766,29 @@
                 width: calc(100% - 36px);
                 min-height: 66vh;
             }
+            .flower-page,
+            .flower-empty-page {
+                padding-top: 92px;
+                padding-bottom: 36px;
+            }
+            .flower-stage {
+                width: 100%;
+                max-height: none;
+            }
+            .flower-empty-shell {
+                width: calc(100% - 36px);
+                min-height: 66vh;
+            }
+            .flower-modal {
+                padding: 24px 54px;
+            }
+            .flower-modal-step {
+                width: 44px;
+                height: 44px;
+                font-size: 22px;
+            }
+            .flower-modal-step.prev { left: 6px; }
+            .flower-modal-step.next { right: 6px; }
         }
     </style>
 </head>
@@ -2114,6 +2312,52 @@
         </div>
     </section>
 
+    <section id="flower-project-1" class="flower-page" data-kite-replay="true">
+        <div class="container">
+            <div class="flower-stage">
+                <img class="flower-layer flower-bg reveal-scale" src="&#28023;&#27744;&#33457;/F-P1&#32972;&#26223;&#24213;&#22270;.png" onerror="this.onerror=null;this.src='F-P1&#32972;&#26223;&#24213;&#22270;.png';" alt="&#28023;&#30707;&#33457;&#31532;&#19968;&#39029;&#32972;&#26223;&#24213;&#22270;">
+                <img class="flower-layer flower-title-left reveal-left" src="&#28023;&#27744;&#33457;/F-P1&#24038;&#19978;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='F-P1&#24038;&#19978;&#25991;&#23383;.png';" alt="&#28023;&#30707;&#33457;&#24038;&#19978;&#35282;&#39033;&#30446;&#26631;&#39064;">
+                <img class="flower-layer flower-title-center reveal-up" src="&#28023;&#27744;&#33457;/F-P1&#20013;&#38388;&#25991;&#23383;.png" onerror="this.onerror=null;this.src='F-P1&#20013;&#38388;&#25991;&#23383;.png';" alt="&#28023;&#30707;&#33457;&#20013;&#38388;&#25991;&#23383;">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="0" style="--cx:72.58%; --cy:35.83%;" src="&#28023;&#27744;&#33457;/F-P1-8.png" onerror="this.onerror=null;this.src='F-P1-8.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 8">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="1" style="--cx:83.15%; --cy:35.83%;" src="&#28023;&#27744;&#33457;/F-P1-9.png" onerror="this.onerror=null;this.src='F-P1-9.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 9">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="2" style="--cx:94.27%; --cy:35.71%;" src="&#28023;&#27744;&#33457;/F-P1-10.png" onerror="this.onerror=null;this.src='F-P1-10.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 10">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="3" style="--cx:4.90%; --cy:50.22%;" src="&#28023;&#27744;&#33457;/F-P1-11.png" onerror="this.onerror=null;this.src='F-P1-11.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 11">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="4" style="--cx:12.12%; --cy:50.30%;" src="&#28023;&#27744;&#33457;/F-P1-12.png" onerror="this.onerror=null;this.src='F-P1-12.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 12">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="5" style="--cx:21.84%; --cy:50.58%;" src="&#28023;&#27744;&#33457;/F-P1-13.png" onerror="this.onerror=null;this.src='F-P1-13.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 13">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="6" style="--cx:31.56%; --cy:52.28%;" src="&#28023;&#27744;&#33457;/F-P1-14.png" onerror="this.onerror=null;this.src='F-P1-14.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 14">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="7" style="--cx:41.11%; --cy:51.67%;" src="&#28023;&#27744;&#33457;/F-P1-15.png" onerror="this.onerror=null;this.src='F-P1-15.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 15">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="8" style="--cx:52.68%; --cy:52.24%;" src="&#28023;&#27744;&#33457;/F-P1-16.png" onerror="this.onerror=null;this.src='F-P1-16.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 16">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="9" style="--cx:63.43%; --cy:51.67%;" src="&#28023;&#27744;&#33457;/F-P1-17.png" onerror="this.onerror=null;this.src='F-P1-17.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 17">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="10" style="--cx:77.17%; --cy:50.95%;" src="&#28023;&#27744;&#33457;/F-P1-18.png" onerror="this.onerror=null;this.src='F-P1-18.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 18">
+                <img class="flower-layer flower-piece-img reveal-scale" data-flower-index="11" style="--cx:89.00%; --cy:50.58%;" src="&#28023;&#27744;&#33457;/F-P1-19.png" onerror="this.onerror=null;this.src='F-P1-19.png';" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 19">
+                <button class="flower-hotspot" data-flower-index="0" style="--x:67.90%; --y:26.44%; --w:9.35%; --h:18.78%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 8"></button>
+                <button class="flower-hotspot" data-flower-index="1" style="--x:78.73%; --y:26.28%; --w:8.84%; --h:19.11%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 9"></button>
+                <button class="flower-hotspot" data-flower-index="2" style="--x:90.08%; --y:26.52%; --w:8.38%; --h:18.38%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 10"></button>
+                <button class="flower-hotspot" data-flower-index="3" style="--x:1.65%; --y:44.74%; --w:6.50%; --h:10.96%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 11"></button>
+                <button class="flower-hotspot" data-flower-index="4" style="--x:8.27%; --y:44.90%; --w:7.70%; --h:10.80%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 12"></button>
+                <button class="flower-hotspot" data-flower-index="5" style="--x:16.70%; --y:42.72%; --w:10.26%; --h:15.72%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 13"></button>
+                <button class="flower-hotspot" data-flower-index="6" style="--x:26.57%; --y:47.00%; --w:9.98%; --h:10.56%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 14"></button>
+                <button class="flower-hotspot" data-flower-index="7" style="--x:35.75%; --y:42.89%; --w:10.72%; --h:17.57%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 15"></button>
+                <button class="flower-hotspot" data-flower-index="8" style="--x:48.18%; --y:44.90%; --w:9.01%; --h:14.67%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 16"></button>
+                <button class="flower-hotspot" data-flower-index="9" style="--x:58.95%; --y:45.47%; --w:8.95%; --h:12.41%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 17"></button>
+                <button class="flower-hotspot" data-flower-index="10" style="--x:73.55%; --y:42.81%; --w:7.24%; --h:16.28%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 18"></button>
+                <button class="flower-hotspot" data-flower-index="11" style="--x:85.40%; --y:41.76%; --w:7.18%; --h:17.65%;" type="button" aria-label="&#26597;&#30475;&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697; 19"></button>
+            </div>
+        </div>
+    </section>
+
+    <section id="flower-project-2" class="flower-empty-page">
+        <div class="flower-empty-shell" data-page="HAISHIHUA / PAGE 02"></div>
+    </section>
+
+    <section id="flower-project-3" class="flower-empty-page">
+        <div class="flower-empty-shell" data-page="HAISHIHUA / PAGE 03"></div>
+    </section>
+
+    <section id="flower-project-4" class="flower-empty-page">
+        <div class="flower-empty-shell" data-page="HAISHIHUA / PAGE 04"></div>
+    </section>
+
 
     <section id="photo" class="chapter-page chapter-image">
         <div class="container chapter-layout">
@@ -2185,6 +2429,15 @@
         </div>
     </div>
 
+    <div class="flower-modal" id="flowerModal" aria-hidden="true">
+        <button class="flower-modal-step prev" id="flowerModalPrev" type="button" aria-label="&#19978;&#19968;&#24352;">&lt;</button>
+        <figure class="flower-modal-card">
+            <img id="flowerModalImage" src="" alt="&#28023;&#30707;&#33457;&#29627;&#29827;&#20316;&#21697;&#22823;&#22270;">
+            <button class="flower-modal-close" id="flowerModalClose" type="button" aria-label="&#20851;&#38381;">&#215;</button>
+        </figure>
+        <button class="flower-modal-step next" id="flowerModalNext" type="button" aria-label="&#19979;&#19968;&#24352;">&gt;</button>
+    </div>
+
     <script>
         const ASSETS = {
             tvIntro: "\u7535\u89c6\u673a.png",
@@ -2199,6 +2452,21 @@
             "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg", "35.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg",
             "7.jpg", "8.jpg", "9.jpg", "35.jpg", "1.jpg", "2.jpg", "3.jpg", "4.jpg", "5.jpg", "6.jpg", "7.jpg", "8.jpg", "9.jpg"
         ];
+        const flowerImages = [
+            "\u6d77\u6c60\u82b1/F-P1-8.png",
+            "\u6d77\u6c60\u82b1/F-P1-9.png",
+            "\u6d77\u6c60\u82b1/F-P1-10.png",
+            "\u6d77\u6c60\u82b1/F-P1-11.png",
+            "\u6d77\u6c60\u82b1/F-P1-12.png",
+            "\u6d77\u6c60\u82b1/F-P1-13.png",
+            "\u6d77\u6c60\u82b1/F-P1-14.png",
+            "\u6d77\u6c60\u82b1/F-P1-15.png",
+            "\u6d77\u6c60\u82b1/F-P1-16.png",
+            "\u6d77\u6c60\u82b1/F-P1-17.png",
+            "\u6d77\u6c60\u82b1/F-P1-18.png",
+            "\u6d77\u6c60\u82b1/F-P1-19.png"
+        ];
+        let currentFlowerIndex = 0;
 
         const storyboardPrompts = Array.from({ length: 39 }, (_, index) =>
             `&#25552;&#31034;&#35789;&#20301;&#32622;&#65306;&#22312;&#36825;&#37324;&#22635;&#20889;&#31532; ${String(index + 1).padStart(2, "0")} &#24352;&#20998;&#38236;&#30340; prompt&#12289;&#30011;&#38754;&#25551;&#36848;&#12289;&#38236;&#22836;&#35821;&#35328;&#12289;&#35282;&#33394;&#21160;&#20316;&#12289;&#20809;&#24433;&#27675;&#22260;&#25110;&#29983;&#25104;&#21442;&#25968;&#12290;`
@@ -2395,7 +2663,7 @@
                 "mirror-project-3",
                 "mirror-project-4"
             ]);
-            const materialSections = new Set(["chapter-materials"]);
+            const materialSections = new Set(["chapter-materials", "flower-project-1", "flower-project-2", "flower-project-3", "flower-project-4"]);
             const imageSections = new Set(["photo"]);
             const navTarget = aiSections.has(current)
                 ? "ai-generation"
@@ -2495,6 +2763,67 @@
                 if (!modal.classList.contains("is-open")) return;
                 if (event.key === "ArrowLeft") stepStoryModal(-1);
                 if (event.key === "ArrowRight") stepStoryModal(1);
+            });
+        }
+
+        function renderFlowerModal() {
+            const image = document.getElementById("flowerModalImage");
+            image.src = flowerImages[currentFlowerIndex];
+            image.onerror = () => {
+                image.onerror = null;
+                image.src = flowerImages[currentFlowerIndex].split("/").pop();
+            };
+        }
+
+        function openFlowerModal(index) {
+            currentFlowerIndex = clamp(index, 0, flowerImages.length - 1);
+            renderFlowerModal();
+            const modal = document.getElementById("flowerModal");
+            modal.classList.add("is-open");
+            modal.setAttribute("aria-hidden", "false");
+            document.body.style.overflow = "hidden";
+        }
+
+        function closeFlowerModal() {
+            const modal = document.getElementById("flowerModal");
+            if (!modal.classList.contains("is-open")) return;
+            modal.classList.remove("is-open");
+            modal.setAttribute("aria-hidden", "true");
+            document.body.style.overflow = "";
+        }
+
+        function stepFlowerModal(direction) {
+            currentFlowerIndex = (currentFlowerIndex + direction + flowerImages.length) % flowerImages.length;
+            renderFlowerModal();
+        }
+
+        function initFlowerGallery() {
+            const modal = document.getElementById("flowerModal");
+            const pieces = Array.from(document.querySelectorAll(".flower-piece-img"));
+            const hotspots = Array.from(document.querySelectorAll(".flower-hotspot"));
+            if (!modal || !pieces.length || !hotspots.length) return;
+
+            hotspots.forEach(hotspot => {
+                const index = Number(hotspot.dataset.flowerIndex);
+                const piece = pieces.find(item => Number(item.dataset.flowerIndex) === index);
+                hotspot.addEventListener("pointerenter", () => piece?.classList.add("is-hovered"));
+                hotspot.addEventListener("pointerleave", () => piece?.classList.remove("is-hovered"));
+                hotspot.addEventListener("focus", () => piece?.classList.add("is-hovered"));
+                hotspot.addEventListener("blur", () => piece?.classList.remove("is-hovered"));
+                hotspot.addEventListener("click", () => openFlowerModal(index));
+            });
+
+            document.getElementById("flowerModalClose").addEventListener("click", closeFlowerModal);
+            document.getElementById("flowerModalPrev").addEventListener("click", () => stepFlowerModal(-1));
+            document.getElementById("flowerModalNext").addEventListener("click", () => stepFlowerModal(1));
+            modal.addEventListener("click", event => {
+                if (event.target === modal) closeFlowerModal();
+            });
+            window.addEventListener("keydown", event => {
+                if (!modal.classList.contains("is-open")) return;
+                if (event.key === "Escape") closeFlowerModal();
+                if (event.key === "ArrowLeft") stepFlowerModal(-1);
+                if (event.key === "ArrowRight") stepFlowerModal(1);
             });
         }
 
@@ -2672,6 +3001,7 @@
         window.addEventListener("load", () => {
             initGallery();
             initModalControls();
+            initFlowerGallery();
             initCursorPaint();
             cardObserver.observe(document.querySelector("#directory"));
             initTvOpening();
