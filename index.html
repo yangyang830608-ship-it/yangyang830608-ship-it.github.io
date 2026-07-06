@@ -2091,6 +2091,88 @@
             transform: translateY(-8px) scale(1.14);
         }
 
+        /* Stronger retro computer window treatment. */
+        .index-card,
+        .frame-card,
+        .ai-case,
+        .material-card,
+        .image-portfolio-card {
+            position: relative;
+            border: 4px solid #1b0b28;
+            outline: 3px solid #fff6ff;
+            border-radius: 0;
+            box-shadow:
+                6px 6px 0 #58d9ff,
+                11px 11px 0 #ff77c8,
+                0 0 26px rgba(255, 119, 200, 0.45),
+                0 0 34px rgba(88, 217, 255, 0.22);
+        }
+        .index-card::after,
+        .frame-card::after,
+        .ai-case::after,
+        .material-card::after,
+        .image-portfolio-card::after {
+            content: "PORTFOLIO.EXE";
+            position: absolute;
+            inset: 0;
+            z-index: 18;
+            pointer-events: none;
+            padding: 7px 86px 0 12px;
+            height: auto;
+            color: #1b0b28;
+            font-family: "Courier New", monospace;
+            font-size: 12px;
+            font-weight: 900;
+            line-height: 18px;
+            letter-spacing: 0.04em;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.36);
+            background:
+                linear-gradient(#ff77c8 0 0) calc(100% - 24px) 8px / 13px 13px no-repeat,
+                linear-gradient(#58d9ff 0 0) calc(100% - 43px) 8px / 13px 13px no-repeat,
+                linear-gradient(#7cffdc 0 0) calc(100% - 62px) 8px / 13px 13px no-repeat,
+                linear-gradient(#1b0b28 0 0) calc(100% - 26px) 10px / 13px 13px no-repeat,
+                linear-gradient(#1b0b28 0 0) calc(100% - 45px) 10px / 13px 13px no-repeat,
+                linear-gradient(#1b0b28 0 0) calc(100% - 64px) 10px / 13px 13px no-repeat,
+                linear-gradient(90deg, #ff8ed6 0%, #58d9ff 56%, #7cffdc 100%) 0 0 / 100% 31px no-repeat,
+                linear-gradient(#1b0b28 0 0) 0 31px / 100% 4px no-repeat,
+                linear-gradient(180deg, transparent 35px, transparent 50%, rgba(17, 6, 28, 0.86) 100%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 5px);
+        }
+        .frame-card::after {
+            content: "IMAGE.BMP";
+            font-size: 10px;
+            padding-top: 5px;
+            background:
+                linear-gradient(#ff77c8 0 0) calc(100% - 17px) 6px / 10px 10px no-repeat,
+                linear-gradient(#58d9ff 0 0) calc(100% - 32px) 6px / 10px 10px no-repeat,
+                linear-gradient(#7cffdc 0 0) calc(100% - 47px) 6px / 10px 10px no-repeat,
+                linear-gradient(90deg, #ff8ed6 0%, #58d9ff 58%, #7cffdc 100%) 0 0 / 100% 23px no-repeat,
+                linear-gradient(#1b0b28 0 0) 0 23px / 100% 3px no-repeat;
+        }
+        .index-card h3,
+        .index-card p,
+        .index-card span,
+        .image-card-copy,
+        .material-card > div {
+            z-index: 24;
+        }
+        .index-card:hover,
+        .ai-case:hover,
+        .material-card:hover,
+        .image-portfolio-card:hover {
+            transform: translate(-2px, -10px);
+            outline-color: #fff36d;
+            box-shadow:
+                8px 9px 0 #58d9ff,
+                14px 15px 0 #ff77c8,
+                0 0 34px rgba(255, 119, 200, 0.62),
+                0 0 38px rgba(88, 217, 255, 0.34);
+        }
+        .frame-card:hover {
+            transform: translate(-2px, -8px) scale(1.14);
+            outline-color: #fff36d;
+        }
+
         @media (max-width: 980px) {
             .cover-layout { grid-template-columns: 1fr; padding-top: 86px; padding-bottom: 50px; }
             .portrait-stage { min-height: 390px; }
