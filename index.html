@@ -91,6 +91,9 @@
         .dot-item { width: 7px; height: 7px; border-radius: 50%; border: 1px solid rgba(255,255,255,0.4); background: transparent; cursor: pointer; transition: 0.3s; }
         .dot-item.active { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 14px var(--blue); transform: scale(1.35); }
 
+        .cover-new {
+            background: #050506 url("%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E5%B0%81%E9%9D%A2.png") center center / cover no-repeat;
+        }
         .cover { background: radial-gradient(circle at 75% 42%, rgba(0,232,255,0.13), transparent 28%), #050506; }
         .cover-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.75fr); gap: clamp(28px, 6vw, 86px); align-items: center; }
         .eyebrow { color: var(--blue); font-size: 11px; font-weight: 700; margin-bottom: 22px; }
@@ -1894,11 +1897,14 @@
         <a href="#photo">&#24433;&#20687;</a>
     </nav>
     <div class="dot-nav">
-        <button class="dot-item active" onclick="scrollToSec('cover')" aria-label="&#23553;&#38754;"></button>
+        <button class="dot-item active" onclick="scrollToSec('cover-new')" aria-label="&#26032;&#23553;&#38754;"></button>
+        <button class="dot-item" onclick="scrollToSec('cover')" aria-label="&#23553;&#38754;"></button>
         <button class="dot-item" onclick="scrollToSec('directory')" aria-label="&#30446;&#24405;"></button>
         <button class="dot-item" onclick="scrollToSec('ai-generation')" aria-label="&#39033;&#30446;"></button>
         <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="&#20998;&#38236;"></button>
     </div>
+
+    <section id="cover-new" class="cover-new" aria-label="&#26032;&#23553;&#38754;"></section>
 
     <section id="cover" class="cover">
         <div class="container cover-layout">
@@ -2882,8 +2888,8 @@
         }
 
         function adjustActiveStates() {
-            const sectionIds = ["cover", "directory", "ai-generation", "hero-project"];
-            let current = "cover";
+            const sectionIds = ["cover-new", "cover", "directory", "ai-generation", "hero-project"];
+            let current = "cover-new";
             document.querySelectorAll("section").forEach(section => {
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
             });
