@@ -1594,13 +1594,17 @@
         }
         .flower-modal-card {
             position: relative;
-            width: min(1120px, 86vw);
-            aspect-ratio: 3508 / 2481;
+            width: min(720px, 74vw);
+            height: min(720px, 78vh);
             margin: 0;
             background: #fff;
             box-shadow: 0 30px 80px rgba(0, 0, 0, 0.18);
             transform: translateY(16px) scale(0.98);
             transition: transform 0.28s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: clamp(34px, 5vw, 74px);
         }
         .flower-modal.is-open .flower-modal-card {
             transform: translateY(0) scale(1);
@@ -1610,6 +1614,7 @@
             height: 100%;
             object-fit: contain;
             display: block;
+            filter: drop-shadow(0 18px 32px rgba(0, 0, 0, 0.16));
         }
         .flower-modal-close,
         .flower-modal-step {
@@ -2485,7 +2490,29 @@
             "%E6%B5%B7%E6%B1%A0%E8%8A%B1/F-P1-17.png",
             "%E6%B5%B7%E6%B1%A0%E8%8A%B1/F-P1-18.png",
             "%E6%B5%B7%E6%B1%A0%E8%8A%B1/F-P1-19.png"
-        ];        let currentFlowerIndex = 0;
+        ];
+        const flowerBounds = [
+            { x: 1.37, y: 26.92, w: 11.92, h: 16.61 },
+            { x: 13.97, y: 29.02, w: 10.32, h: 13.14 },
+            { x: 24.80, y: 26.04, w: 8.27, h: 15.80 },
+            { x: 31.13, y: 37.24, w: 6.39, h: 11.37 },
+            { x: 38.20, y: 29.02, w: 8.32, h: 16.12 },
+            { x: 49.03, y: 29.67, w: 7.58, h: 14.27 },
+            { x: 59.64, y: 29.42, w: 7.53, h: 14.19 },
+            { x: 67.90, y: 26.44, w: 9.35, h: 18.78 },
+            { x: 78.73, y: 26.28, w: 8.84, h: 19.11 },
+            { x: 90.08, y: 26.52, w: 8.38, h: 18.38 },
+            { x: 1.65, y: 44.74, w: 6.50, h: 10.96 },
+            { x: 8.27, y: 44.90, w: 7.70, h: 10.80 },
+            { x: 16.70, y: 42.72, w: 10.26, h: 15.72 },
+            { x: 26.57, y: 47.00, w: 9.98, h: 10.56 },
+            { x: 35.75, y: 42.89, w: 10.72, h: 17.57 },
+            { x: 48.18, y: 44.90, w: 9.01, h: 14.67 },
+            { x: 58.95, y: 45.47, w: 8.95, h: 12.41 },
+            { x: 73.55, y: 42.81, w: 7.24, h: 16.28 },
+            { x: 85.40, y: 41.76, w: 7.18, h: 17.65 }
+        ];
+        let currentFlowerIndex = 0;
 
         const storyboardPrompts = Array.from({ length: 39 }, (_, index) =>
             `&#25552;&#31034;&#35789;&#20301;&#32622;&#65306;&#22312;&#36825;&#37324;&#22635;&#20889;&#31532; ${String(index + 1).padStart(2, "0")} &#24352;&#20998;&#38236;&#30340; prompt&#12289;&#30011;&#38754;&#25551;&#36848;&#12289;&#38236;&#22836;&#35821;&#35328;&#12289;&#35282;&#33394;&#21160;&#20316;&#12289;&#20809;&#24433;&#27675;&#22260;&#25110;&#29983;&#25104;&#21442;&#25968;&#12290;`
@@ -2786,12 +2813,32 @@
         }
 
         function renderFlowerModal() {
-            const image = document.getElementById("flowerModalImage");
-            image.src = flowerImages[currentFlowerIndex];
-            image.onerror = () => {
-                image.onerror = null;
-                image.src = flowerImages[currentFlowerIndex].split("/").pop();
+            const modalImage = document.getElementById("flowerModalImage");
+            const sourcePath = flowerImages[currentFlowerIndex];
+            const bounds = flowerBounds[currentFlowerIndex];
+            const sourceImage = new Image();
+            modalImage.removeAttribute("src");
+
+            sourceImage.onload = () => {
+                const naturalWidth = sourceImage.naturalWidth;
+                const naturalHeight = sourceImage.naturalHeight;
+                const pad = Math.round(Math.max(naturalWidth, naturalHeight) * 0.012);
+                const sx = Math.max(0, Math.round(naturalWidth * bounds.x / 100) - pad);
+                const sy = Math.max(0, Math.round(naturalHeight * bounds.y / 100) - pad);
+                const sw = Math.min(naturalWidth - sx, Math.round(naturalWidth * bounds.w / 100) + pad * 2);
+                const sh = Math.min(naturalHeight - sy, Math.round(naturalHeight * bounds.h / 100) + pad * 2);
+                const canvas = document.createElement("canvas");
+                canvas.width = sw;
+                canvas.height = sh;
+                const ctx = canvas.getContext("2d");
+                ctx.drawImage(sourceImage, sx, sy, sw, sh, 0, 0, sw, sh);
+                modalImage.src = canvas.toDataURL("image/png");
             };
+
+            sourceImage.onerror = () => {
+                modalImage.src = sourcePath;
+            };
+            sourceImage.src = sourcePath;
         }
 
         function openFlowerModal(index) {
