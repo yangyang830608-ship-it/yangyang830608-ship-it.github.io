@@ -92,7 +92,15 @@
         .dot-item.active { background: var(--blue); border-color: var(--blue); box-shadow: 0 0 14px var(--blue); transform: scale(1.35); }
 
         .cover-new {
-            background: #050506 url("%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E5%B0%81%E9%9D%A2.png") center center / cover no-repeat;
+            background: #050506;
+        }
+        .cover-new-img {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
         }
         .cover { background: radial-gradient(circle at 75% 42%, rgba(0,232,255,0.13), transparent 28%), #050506; }
         .cover-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.75fr); gap: clamp(28px, 6vw, 86px); align-items: center; }
@@ -1904,7 +1912,9 @@
         <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="&#20998;&#38236;"></button>
     </div>
 
-    <section id="cover-new" class="cover-new" aria-label="&#26032;&#23553;&#38754;"></section>
+    <section id="cover-new" class="cover-new" aria-label="&#26032;&#23553;&#38754;">
+        <img class="cover-new-img" src="%E5%B0%81%E9%9D%A2.png" onerror="this.onerror=null;this.src='%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E5%B0%81%E9%9D%A2.png';" alt="&#26032;&#23553;&#38754;">
+    </section>
 
     <section id="cover" class="cover">
         <div class="container cover-layout">
