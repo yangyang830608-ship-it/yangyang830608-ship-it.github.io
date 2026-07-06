@@ -2173,6 +2173,143 @@
             outline-color: #fff36d;
         }
 
+        /* FINAL FORCE OVERRIDE: no glassmorphism, real Y2K pixel windows. */
+        .top-nav,
+        .index-card,
+        .frame-card,
+        .ai-case,
+        .material-card,
+        .image-portfolio-card,
+        .glass-card,
+        .story-card,
+        .workflow-card {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-radius: 0 !important;
+            border: 4px solid #180821 !important;
+            outline: 3px solid #fff6ff !important;
+            background-color: #24102f !important;
+            background-image:
+                linear-gradient(180deg, #ff8ed6 0 34px, #24102f 34px 100%) !important;
+            box-shadow:
+                6px 6px 0 #58d9ff,
+                12px 12px 0 #ff77c8,
+                0 0 0 2px rgba(255,255,255,0.18),
+                0 0 28px rgba(255, 119, 200, 0.45) !important;
+            overflow: hidden !important;
+        }
+        .index-card::before,
+        .ai-case::before,
+        .material-card::before,
+        .image-portfolio-card::before {
+            top: 34px !important;
+            height: calc(100% - 34px) !important;
+            opacity: 1 !important;
+            filter: saturate(1.08) contrast(1.02) brightness(0.9) !important;
+        }
+        .index-card::after,
+        .frame-card::after,
+        .ai-case::after,
+        .material-card::after,
+        .image-portfolio-card::after,
+        .glass-card::after,
+        .story-card::after,
+        .workflow-card::after {
+            content: "PORTFOLIO.EXE" !important;
+            position: absolute !important;
+            inset: 0 !important;
+            z-index: 60 !important;
+            display: block !important;
+            pointer-events: none !important;
+            box-sizing: border-box !important;
+            height: 34px !important;
+            padding: 7px 92px 0 12px !important;
+            overflow: visible !important;
+            color: #180821 !important;
+            font-family: "Courier New", monospace !important;
+            font-size: 12px !important;
+            font-weight: 900 !important;
+            line-height: 18px !important;
+            letter-spacing: 0.04em !important;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.45) !important;
+            border-bottom: 4px solid #180821 !important;
+            border-radius: 0 !important;
+            background-color: transparent !important;
+            background-image:
+                linear-gradient(#180821 0 0) calc(100% - 24px) 8px / 13px 13px no-repeat,
+                linear-gradient(#180821 0 0) calc(100% - 45px) 8px / 13px 13px no-repeat,
+                linear-gradient(#180821 0 0) calc(100% - 66px) 8px / 13px 13px no-repeat,
+                linear-gradient(#ff77c8 0 0) calc(100% - 27px) 5px / 13px 13px no-repeat,
+                linear-gradient(#58d9ff 0 0) calc(100% - 48px) 5px / 13px 13px no-repeat,
+                linear-gradient(#7cffdc 0 0) calc(100% - 69px) 5px / 13px 13px no-repeat,
+                linear-gradient(90deg, #ff8ed6 0%, #58d9ff 58%, #7cffdc 100%) !important;
+        }
+        .frame-card::after {
+            content: "IMAGE.BMP" !important;
+            height: 26px !important;
+            padding-top: 5px !important;
+            font-size: 10px !important;
+            border-bottom-width: 3px !important;
+        }
+        .index-card h3,
+        .index-card p,
+        .index-card span,
+        .image-card-copy,
+        .material-card > div,
+        .ai-case-copy,
+        .glass-card > *,
+        .workflow-card > * {
+            position: relative !important;
+            z-index: 70 !important;
+        }
+        .index-card:hover,
+        .frame-card:hover,
+        .ai-case:hover,
+        .material-card:hover,
+        .image-portfolio-card:hover,
+        .glass-card:hover,
+        .workflow-card:hover {
+            border-color: #180821 !important;
+            outline-color: #fff36d !important;
+            background-image:
+                linear-gradient(180deg, #fff36d 0 34px, #24102f 34px 100%) !important;
+            box-shadow:
+                8px 8px 0 #58d9ff,
+                15px 15px 0 #ff77c8,
+                0 0 34px rgba(255, 119, 200, 0.68),
+                0 0 26px rgba(88, 217, 255, 0.42) !important;
+        }
+        .index-card:hover,
+        .ai-case:hover,
+        .material-card:hover,
+        .image-portfolio-card:hover,
+        .glass-card:hover,
+        .workflow-card:hover {
+            transform: translate(-3px, -10px) !important;
+        }
+        .frame-card:hover {
+            transform: translate(-3px, -8px) scale(1.14) !important;
+        }
+        .top-nav {
+            background-color: #24102f !important;
+            background-image: none !important;
+            padding: 8px !important;
+            gap: 8px !important;
+        }
+        .top-nav a {
+            backdrop-filter: none !important;
+            -webkit-backdrop-filter: none !important;
+            border-radius: 0 !important;
+            border: 3px solid #180821 !important;
+            outline: 2px solid #fff6ff !important;
+            color: #180821 !important;
+            text-shadow: none !important;
+            box-shadow: inset -3px -3px 0 rgba(0,0,0,0.24), inset 3px 3px 0 rgba(255,255,255,0.38), 3px 3px 0 #58d9ff !important;
+        }
+        .top-nav a:nth-child(3n + 1) { background: #ff8ed6 !important; }
+        .top-nav a:nth-child(3n + 2) { background: #58d9ff !important; }
+        .top-nav a:nth-child(3n) { background: #7cffdc !important; }
+
         @media (max-width: 980px) {
             .cover-layout { grid-template-columns: 1fr; padding-top: 86px; padding-bottom: 50px; }
             .portrait-stage { min-height: 390px; }
