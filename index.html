@@ -9,15 +9,22 @@
     <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;700&family=Unbounded:wght@700;900&display=swap" rel="stylesheet">
     <style>
         :root {
-            --bg: #050506;
-            --ink: #f6f8fb;
-            --blue: #00e8ff;
-            --pink: #ff4fc3;
-            --acid: #d8ff3d;
-            --orange: #ff8a35;
-            --line: rgba(255,255,255,0.12);
+            --bg: #110817;
+            --ink: #fff6ff;
+            --blue: #58d9ff;
+            --pink: #ff77c8;
+            --acid: #fff36d;
+            --orange: #ff9bd6;
+            --violet: #8d6bff;
+            --mint: #7cffdc;
+            --panel: rgba(42, 18, 58, 0.66);
+            --panel-soft: rgba(255, 160, 224, 0.08);
+            --line: rgba(255, 205, 248, 0.22);
+            --glow-pink: 0 0 24px rgba(255, 119, 200, 0.46);
+            --glow-blue: 0 0 24px rgba(88, 217, 255, 0.42);
+            --shadow-dream: 0 22px 70px rgba(70, 20, 110, 0.42), 0 0 34px rgba(255, 119, 200, 0.16);
             --font-title: "Unbounded", "Arial Black", sans-serif;
-            --font-body: "Space Grotesk", Arial, sans-serif;
+            --font-body: "Space Grotesk", "Courier New", monospace, Arial, sans-serif;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -1774,6 +1781,197 @@
             background:
                 linear-gradient(180deg, rgba(255,255,255,0.04), transparent 18%, transparent 82%, rgba(255,30,130,0.05));
             pointer-events: none;
+        }
+
+        /* Visual refresh: dreamy pixel desktop / CRT mood. */
+        html,
+        body {
+            background:
+                radial-gradient(circle at 16% 14%, rgba(255, 119, 200, 0.22), transparent 30%),
+                radial-gradient(circle at 82% 22%, rgba(88, 217, 255, 0.18), transparent 28%),
+                radial-gradient(circle at 66% 84%, rgba(141, 107, 255, 0.24), transparent 34%),
+                var(--bg);
+        }
+        body::after {
+            background:
+                radial-gradient(circle at 18% 12%, rgba(255, 119, 200, 0.11), transparent 24%),
+                radial-gradient(circle at 84% 18%, rgba(88, 217, 255, 0.1), transparent 22%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 4px),
+                repeating-linear-gradient(90deg, rgba(255,119,200,0.018) 0 1px, transparent 1px 7px);
+            opacity: 0.9;
+            mix-blend-mode: screen;
+        }
+        .global-grid {
+            background-image:
+                linear-gradient(rgba(255, 183, 235, 0.09) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(92, 218, 255, 0.08) 1px, transparent 1px);
+            background-size: 90px 72px;
+            opacity: 0.7;
+        }
+        section:not(.flower-page):not(.flower-empty-page) {
+            background-color: var(--bg);
+        }
+        .cover,
+        .directory,
+        .case-page,
+        .storyboard,
+        .workflow-page,
+        .chapter-page,
+        .chapter-materials,
+        .chapter-image,
+        .ai-section,
+        .project-hero,
+        .mirror-project-page,
+        .kite-project-page {
+            background:
+                radial-gradient(circle at 12% 14%, rgba(255, 119, 200, 0.16), transparent 28%),
+                radial-gradient(circle at 84% 22%, rgba(88, 217, 255, 0.14), transparent 26%),
+                linear-gradient(180deg, #190b26 0%, #0d0718 52%, #14091f 100%);
+        }
+        .top-nav,
+        .skill-cloud span,
+        .tag-row span,
+        .workflow-meta span,
+        .project-tags span,
+        .ai-copy li,
+        .story-card-close,
+        .story-step,
+        .flower-modal-close,
+        .flower-modal-step {
+            border-color: var(--line);
+            background:
+                linear-gradient(180deg, rgba(255, 205, 248, 0.18), rgba(88, 217, 255, 0.06)),
+                rgba(31, 13, 45, 0.72);
+            box-shadow: var(--glow-pink), inset 0 0 0 1px rgba(255,255,255,0.06);
+            backdrop-filter: blur(18px) saturate(1.25);
+        }
+        .top-nav a,
+        .section-kicker,
+        .eyebrow,
+        .story-card-body span,
+        .image-card-copy span,
+        .material-card span,
+        .index-card span {
+            color: var(--acid);
+            letter-spacing: 0.12em;
+            text-shadow: 2px 0 rgba(88,217,255,0.28), -2px 0 rgba(255,119,200,0.28), 0 0 12px rgba(255,119,200,0.3);
+        }
+        .top-nav a.active,
+        .top-nav a:hover,
+        .dot.active,
+        .dot:hover,
+        .dot-item.active {
+            color: #fff;
+            border-color: var(--pink);
+            background: var(--pink);
+            box-shadow: 0 0 0 3px rgba(255,119,200,0.16), 0 0 22px rgba(255,119,200,0.72), 0 0 42px rgba(88,217,255,0.28);
+        }
+        .profile-brand,
+        .liquid-title,
+        .section-title,
+        .glass-card h2,
+        .story-card-body h3,
+        .workflow-card h3,
+        .image-card-copy h3,
+        .material-card h3 {
+            text-shadow:
+                3px 0 rgba(88,217,255,0.36),
+                -3px 0 rgba(255,119,200,0.34),
+                0 0 22px rgba(255,119,200,0.38);
+        }
+        .liquid-title {
+            background:
+                linear-gradient(115deg, #fff6ff 0%, #ff8ed6 24%, #58d9ff 48%, #fff36d 68%, #f9d6ff 100%);
+            background-size: 240% 100%;
+            -webkit-background-clip: text;
+            background-clip: text;
+        }
+        .hero-sub,
+        .section-copy,
+        .glass-card p,
+        .workflow-card p,
+        .image-card-copy p,
+        .material-card p,
+        .prompt-box {
+            color: rgba(255, 239, 252, 0.76);
+        }
+        .index-card,
+        .glass-card,
+        .frame-card,
+        .story-card,
+        .prompt-box,
+        .workflow-card,
+        .ai-case,
+        .material-card,
+        .image-portfolio-card,
+        .project-tags span,
+        .workflow-meta span {
+            border-color: var(--line);
+            background:
+                linear-gradient(135deg, rgba(255, 119, 200, 0.13), rgba(88, 217, 255, 0.07)),
+                rgba(31, 13, 45, 0.72);
+            box-shadow: var(--shadow-dream), inset 0 0 0 1px rgba(255,255,255,0.05);
+        }
+        .index-card::after,
+        .material-card::after,
+        .image-portfolio-card::after,
+        .ai-case::after {
+            background:
+                linear-gradient(180deg, transparent 12%, rgba(35, 11, 46, 0.26) 52%, rgba(17, 6, 28, 0.92) 100%),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.03) 0 1px, transparent 1px 5px);
+        }
+        .index-card:hover,
+        .frame-card:hover,
+        .workflow-card:hover,
+        .ai-case:hover,
+        .material-card:hover,
+        .image-portfolio-card:hover {
+            border-color: var(--pink);
+            box-shadow:
+                0 0 0 2px rgba(255, 119, 200, 0.22),
+                0 24px 80px rgba(92, 30, 120, 0.54),
+                0 0 46px rgba(88, 217, 255, 0.24),
+                0 0 36px rgba(255, 119, 200, 0.34);
+            filter: saturate(1.12) brightness(1.04);
+        }
+        .index-card:hover::before,
+        .material-card:hover::before,
+        .image-portfolio-card:hover::before,
+        .ai-case:hover::before {
+            filter: saturate(1.42) contrast(1.1) brightness(1.06);
+        }
+        .photo-blob {
+            background:
+                linear-gradient(135deg, #fff6ff 0%, #ff77c8 28%, #58d9ff 58%, #8d6bff 100%);
+            box-shadow: inset 0 0 34px rgba(255,255,255,0.42), 0 36px 120px rgba(255,119,200,0.28), 0 0 60px rgba(88,217,255,0.2);
+        }
+        .burst.ring {
+            border-color: var(--acid);
+            box-shadow: var(--glow-blue);
+        }
+        .burst.stroke {
+            background: var(--blue);
+            box-shadow: 0 18px 0 var(--pink), 0 -18px 0 var(--acid), 0 0 24px rgba(88,217,255,0.46);
+        }
+        .story-modal,
+        .flower-modal {
+            background:
+                radial-gradient(circle at 50% 42%, rgba(255, 119, 200, 0.22), transparent 35%),
+                rgba(15, 5, 24, 0.66);
+            backdrop-filter: blur(20px) saturate(1.25);
+        }
+        .flower-page,
+        .flower-empty-page {
+            background:
+                radial-gradient(circle at 18% 12%, rgba(255, 119, 200, 0.1), transparent 26%),
+                radial-gradient(circle at 82% 18%, rgba(88, 217, 255, 0.08), transparent 24%),
+                #fff7ff;
+        }
+        .flower-stage {
+            box-shadow: 0 24px 90px rgba(124, 63, 164, 0.18), 0 0 34px rgba(255,119,200,0.12);
+        }
+        .flower-hotspot:focus-visible {
+            outline-color: rgba(255,119,200,0.75);
         }
 
         @media (max-width: 980px) {
