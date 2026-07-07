@@ -109,6 +109,23 @@
             object-fit: cover;
             display: block;
         }
+        .cover-hotspot {
+            position: absolute;
+            z-index: 6;
+            left: var(--x);
+            top: var(--y);
+            width: var(--w);
+            height: var(--h);
+            display: block;
+            cursor: pointer;
+            background: transparent;
+            border: 0;
+            outline: 0;
+        }
+        .cover-hotspot:focus-visible {
+            outline: 3px solid rgba(255, 243, 109, 0.85);
+            outline-offset: 4px;
+        }
         .cover { background: radial-gradient(circle at 75% 42%, rgba(0,232,255,0.13), transparent 28%), #050506; }
         .cover-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.75fr); gap: clamp(28px, 6vw, 86px); align-items: center; }
         .eyebrow { color: var(--blue); font-size: 11px; font-weight: 700; margin-bottom: 22px; }
@@ -2448,6 +2465,9 @@
 
     <section id="cover-new" class="cover-new" aria-label="&#26032;&#23553;&#38754;">
         <img class="cover-new-img" src="%E5%B0%81%E9%9D%A2.png" onerror="this.onerror=null;this.src='%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E5%B0%81%E9%9D%A2.png';" alt="&#26032;&#23553;&#38754;">
+        <a class="cover-hotspot" href="#cover" style="--x:41.4%; --y:52.1%; --w:7.4%; --h:8.3%;" aria-label="About me"></a>
+        <a class="cover-hotspot" href="#directory" style="--x:49.1%; --y:52.0%; --w:7.5%; --h:8.5%;" aria-label="Works"></a>
+        <a class="cover-hotspot" href="#cover" style="--x:57.0%; --y:52.1%; --w:7.6%; --h:8.5%;" aria-label="Skills"></a>
     </section>
 
     <section id="cover" class="cover">
