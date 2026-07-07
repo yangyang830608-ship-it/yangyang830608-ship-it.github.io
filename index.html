@@ -141,6 +141,318 @@
         body.is-cover-transition .cursor-paint {
             display: none !important;
         }
+        .about-me-page {
+            min-height: 100vh;
+            background: #12071d;
+            color: #2b1639;
+            align-items: stretch;
+            justify-content: stretch;
+            isolation: isolate;
+        }
+        .about-bg {
+            position: absolute;
+            inset: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+            z-index: 0;
+        }
+        .about-me-page::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: 1;
+            background:
+                linear-gradient(90deg, rgba(24, 8, 34, 0.2), rgba(255, 170, 227, 0.07) 46%, rgba(18, 8, 38, 0.18)),
+                repeating-linear-gradient(0deg, rgba(255,255,255,0.035) 0 1px, transparent 1px 4px);
+            pointer-events: none;
+        }
+        .about-stage {
+            position: relative;
+            z-index: 2;
+            width: min(1440px, 100%);
+            height: 100vh;
+            min-height: 760px;
+            margin: 0 auto;
+            padding: clamp(86px, 8vh, 112px) clamp(42px, 5vw, 76px) clamp(34px, 4vh, 52px);
+            display: grid;
+            grid-template-columns: minmax(230px, 0.74fr) minmax(470px, 1.28fr) minmax(260px, 0.82fr);
+            grid-template-rows: auto 1fr auto;
+            gap: 18px;
+        }
+        .pixel-window {
+            position: relative;
+            border: 3px solid rgba(255, 236, 255, 0.9);
+            border-radius: 10px;
+            background:
+                linear-gradient(180deg, rgba(255, 239, 249, 0.91), rgba(255, 219, 241, 0.86));
+            box-shadow:
+                7px 7px 0 rgba(57, 218, 255, 0.62),
+                12px 12px 0 rgba(255, 82, 181, 0.48),
+                0 0 28px rgba(255, 128, 220, 0.48);
+            overflow: hidden;
+        }
+        .pixel-window::before {
+            content: attr(data-title);
+            display: flex;
+            align-items: center;
+            height: 30px;
+            padding: 0 76px 0 14px;
+            color: #fff9ff;
+            font-family: "Courier New", monospace;
+            font-size: 13px;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+            background: linear-gradient(90deg, #ff71bf, #7e66ff 52%, #51e6ff);
+            border-bottom: 2px solid rgba(82, 29, 92, 0.86);
+            text-shadow: 1px 1px 0 rgba(60, 18, 86, 0.82);
+        }
+        .pixel-window::after {
+            content: "";
+            position: absolute;
+            top: 8px;
+            right: 12px;
+            width: 48px;
+            height: 14px;
+            background:
+                linear-gradient(90deg, transparent 0 2px, #3b1a53 2px 13px, transparent 13px 18px, #3b1a53 18px 29px, transparent 29px 34px, #ff5dbc 34px 48px);
+            box-shadow: inset 0 0 0 2px rgba(255,255,255,0.3);
+        }
+        .about-main {
+            grid-column: 2;
+            grid-row: 1 / span 2;
+            align-self: center;
+            min-height: 500px;
+        }
+        .about-main-inner {
+            padding: 30px 34px 24px;
+        }
+        .about-kicker {
+            display: inline-block;
+            margin-bottom: 14px;
+            padding: 7px 14px;
+            border: 2px solid #cf4ba3;
+            border-radius: 6px;
+            background: linear-gradient(90deg, #ff94d3, #ffc4ea);
+            color: #402047;
+            font: 900 13px "Courier New", monospace;
+            letter-spacing: 0.08em;
+        }
+        .about-title {
+            margin: 0;
+            color: #fff7ff;
+            font-family: var(--font-title);
+            font-size: clamp(42px, 4.8vw, 72px);
+            line-height: 0.95;
+            letter-spacing: -0.04em;
+            text-shadow:
+                3px 3px 0 #ff6fc5,
+                6px 6px 0 #47dfff,
+                0 0 24px rgba(255, 129, 218, 0.7);
+        }
+        .about-subtitle {
+            margin-top: 16px;
+            color: #341b43;
+            font-weight: 900;
+            font-size: 19px;
+            line-height: 1.45;
+        }
+        .about-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin: 18px 0 22px;
+        }
+        .about-tags span,
+        .about-chip {
+            display: inline-flex;
+            align-items: center;
+            min-height: 26px;
+            padding: 5px 10px;
+            border: 2px solid rgba(72, 31, 88, 0.72);
+            border-radius: 6px;
+            background: linear-gradient(180deg, #fff4fb, #ffb8df);
+            color: #35173f;
+            font: 900 12px "Courier New", monospace;
+            box-shadow: 2px 2px 0 rgba(71, 223, 255, 0.55);
+        }
+        .about-intro {
+            margin: 0 0 18px;
+            color: #2d1838;
+            font-size: 15px;
+            line-height: 1.9;
+            font-weight: 700;
+        }
+        .about-info-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+        }
+        .about-mini-card {
+            padding: 13px 14px;
+            border: 2px solid rgba(88, 34, 105, 0.68);
+            border-radius: 8px;
+            background: rgba(255, 250, 255, 0.7);
+        }
+        .about-mini-card h4,
+        .about-side h4 {
+            margin: 0 0 8px;
+            color: #a91a79;
+            font: 900 13px "Courier New", monospace;
+            text-transform: uppercase;
+        }
+        .about-mini-card p,
+        .about-mini-card li,
+        .about-side p,
+        .about-side li {
+            color: #2f1739;
+            font-size: 13px;
+            line-height: 1.65;
+            font-weight: 700;
+        }
+        .about-mini-card ul,
+        .about-side ul {
+            list-style: none;
+        }
+        .about-left {
+            grid-column: 1;
+            grid-row: 1 / span 2;
+            align-self: center;
+        }
+        .about-left-inner {
+            padding: 24px 20px;
+        }
+        .about-menu-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 4px;
+            border-bottom: 1px solid rgba(79, 32, 92, 0.22);
+            color: #2d173c;
+            font-weight: 900;
+        }
+        .about-menu-icon {
+            width: 28px;
+            height: 28px;
+            display: grid;
+            place-items: center;
+            border: 2px solid #79317c;
+            border-radius: 8px;
+            background: #ffb7e1;
+            box-shadow: 2px 2px 0 #53e5ff;
+            color: #9d1772;
+        }
+        .about-photo-window {
+            grid-column: 3;
+            grid-row: 1 / span 2;
+            align-self: center;
+        }
+        .about-photo-inner {
+            padding: 18px;
+        }
+        .about-photo-card {
+            position: relative;
+            aspect-ratio: 4 / 5;
+            border: 3px solid #fff5ff;
+            border-radius: 10px;
+            overflow: hidden;
+            background: #ffd8ed;
+            box-shadow: inset 0 0 0 2px rgba(72, 25, 91, 0.45);
+        }
+        .about-photo-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: 52% 38%;
+            display: block;
+        }
+        .about-photo-caption {
+            margin-top: 12px;
+            padding: 10px 12px;
+            border-radius: 8px;
+            background: rgba(255, 246, 253, 0.7);
+            color: #32183d;
+            font-size: 13px;
+            line-height: 1.6;
+            font-weight: 800;
+        }
+        .about-side {
+            padding: 16px;
+        }
+        .about-side-small {
+            min-height: 148px;
+        }
+        .about-mood {
+            grid-column: 1;
+            grid-row: 3;
+        }
+        .about-music {
+            grid-column: 3;
+            grid-row: 3;
+        }
+        .about-bottom {
+            grid-column: 2;
+            grid-row: 3;
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 14px;
+        }
+        .mood-pixels {
+            display: grid;
+            grid-template-columns: repeat(7, 12px);
+            gap: 4px;
+            margin-top: 10px;
+            opacity: 0.75;
+        }
+        .mood-pixels span {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+            background: var(--pink);
+            box-shadow: 0 0 8px rgba(255, 119, 200, 0.55);
+        }
+        .mood-pixels span:nth-child(3n) { background: var(--blue); }
+        .mood-pixels span:nth-child(4n) { background: var(--mint); }
+        .music-bar {
+            height: 7px;
+            margin: 12px 0 8px;
+            border: 1px solid rgba(65, 24, 82, 0.55);
+            border-radius: 999px;
+            background: linear-gradient(90deg, #ff74c8 0 58%, rgba(255,255,255,0.55) 58%);
+            opacity: 0.75;
+        }
+        .about-footer-mask {
+            position: absolute;
+            left: 50%;
+            bottom: 0;
+            z-index: 3;
+            width: 420px;
+            height: 32px;
+            transform: translateX(-50%);
+            background: linear-gradient(180deg, rgba(67, 13, 50, 0.2), rgba(31, 8, 35, 0.82));
+            border-radius: 18px 18px 0 0;
+            backdrop-filter: blur(8px);
+        }
+        @media (max-width: 1100px) {
+            .about-stage {
+                height: auto;
+                min-height: 100vh;
+                grid-template-columns: 1fr;
+                grid-template-rows: auto;
+                padding-top: 96px;
+            }
+            .about-main,
+            .about-left,
+            .about-photo-window,
+            .about-mood,
+            .about-music,
+            .about-bottom {
+                grid-column: 1;
+                grid-row: auto;
+            }
+        }
         .cover { background: radial-gradient(circle at 75% 42%, rgba(0,232,255,0.13), transparent 28%), #050506; }
         .cover-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.75fr); gap: clamp(28px, 6vw, 86px); align-items: center; }
         .eyebrow { color: var(--blue); font-size: 11px; font-weight: 700; margin-bottom: 22px; }
@@ -2463,7 +2775,7 @@
     <div class="global-grid"></div>
     <div class="profile-brand">profile</div>
     <nav class="top-nav">
-        <a href="#cover" class="active">&#20851;&#20110;&#25105;</a>
+        <a href="#about-me" class="active">&#20851;&#20110;&#25105;</a>
         <a href="#directory">&#30446;&#24405;</a>
         <a href="#ai-generation">AI&#29983;&#25104;</a>
         <a href="#chapter-interactive">&#20132;&#20114;&#35013;&#32622;</a>
@@ -2472,6 +2784,7 @@
     </nav>
     <div class="dot-nav">
         <button class="dot-item active" onclick="scrollToSec('cover-new')" aria-label="&#26032;&#23553;&#38754;"></button>
+        <button class="dot-item" onclick="scrollToSec('about-me')" aria-label="About Me"></button>
         <button class="dot-item" onclick="scrollToSec('cover')" aria-label="&#23553;&#38754;"></button>
         <button class="dot-item" onclick="scrollToSec('directory')" aria-label="&#30446;&#24405;"></button>
         <button class="dot-item" onclick="scrollToSec('ai-generation')" aria-label="&#39033;&#30446;"></button>
@@ -2480,9 +2793,93 @@
 
     <section id="cover-new" class="cover-new" aria-label="&#26032;&#23553;&#38754;">
         <img class="cover-new-img" src="%E5%B0%81%E9%9D%A2.png" onerror="this.onerror=null;this.src='%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E5%B0%81%E9%9D%A2.png';" alt="&#26032;&#23553;&#38754;">
-        <a class="cover-hotspot" href="#cover" onclick="scrollToSec('cover'); return false;" style="--x:41.4%; --y:52.1%; --w:7.4%; --h:8.3%;" aria-label="About me"></a>
+        <a class="cover-hotspot" href="#about-me" onclick="scrollToSec('about-me'); return false;" style="--x:41.4%; --y:52.1%; --w:7.4%; --h:8.3%;" aria-label="About me"></a>
         <a class="cover-hotspot" href="#directory" onclick="scrollToSec('directory'); return false;" style="--x:49.1%; --y:52.0%; --w:7.5%; --h:8.5%;" aria-label="Works"></a>
-        <a class="cover-hotspot" href="#cover" onclick="scrollToSec('cover'); return false;" style="--x:57.0%; --y:52.1%; --w:7.6%; --h:8.5%;" aria-label="Skills"></a>
+        <a class="cover-hotspot" href="#about-me" onclick="scrollToSec('about-me'); return false;" style="--x:57.0%; --y:52.1%; --w:7.6%; --h:8.5%;" aria-label="Skills"></a>
+    </section>
+
+    <section id="about-me" class="about-me-page" aria-label="About Me">
+        <img class="about-bg" src="%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D.png" onerror="this.onerror=null;this.src='%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D.png';" alt="About Me background">
+        <div class="about-stage">
+            <aside class="pixel-window about-left" data-title="ABOUT ME.EXE">
+                <div class="about-left-inner">
+                    <div class="about-menu-item"><span class="about-menu-icon">*</span><span>基本信息</span></div>
+                    <div class="about-menu-item"><span class="about-menu-icon">ED</span><span>教育经历</span></div>
+                    <div class="about-menu-item"><span class="about-menu-icon">AI</span><span>AI 创作工具</span></div>
+                    <div class="about-menu-item"><span class="about-menu-icon">CT</span><span>核心技能</span></div>
+                    <div class="about-menu-item"><span class="about-menu-icon">@</span><span>联系方式</span></div>
+                </div>
+            </aside>
+
+            <article class="pixel-window about-main" data-title="BASIC INFO">
+                <div class="about-main-inner">
+                    <span class="about-kicker">AIGC DESIGNER</span>
+                    <h2 class="about-title">&#26472;&#33714; Yang Lian</h2>
+                    <p class="about-subtitle">AIGC&#35774;&#35745;&#24072;<br>AIGC Designer</p>
+                    <div class="about-tags" aria-label="&#26041;&#21521;&#26631;&#31614;">
+                        <span>AI</span>
+                        <span>&#20132;&#20114;&#20307;&#39564;</span>
+                        <span>&#32508;&#21512;&#26448;&#26009;</span>
+                    </div>
+                    <p class="about-intro">&#30446;&#21069;&#23601;&#35835;&#20110;&#21335;&#20140;&#33402;&#26415;&#23398;&#38498;&#35774;&#35745;&#23398;&#38498;&#65292;&#26234;&#33021;&#20132;&#20114;&#19982;&#23186;&#20171;&#21019;&#26032;&#19987;&#19994;&#65292;&#30740;&#20108;&#65288;2027&#23626;&#65289;&#12290;&#20851;&#27880; AIGC &#35270;&#35273;&#21465;&#20107;&#19982;&#20132;&#20114;&#20307;&#39564;&#65292;&#31215;&#26497;&#25506;&#32034; AI &#22312;&#35774;&#35745;&#27969;&#31243;&#20013;&#30340;&#21019;&#26032;&#24212;&#29992;&#12290;</p>
+                    <div class="about-info-grid">
+                        <div class="about-mini-card">
+                            <h4>&#25945;&#32946;&#32463;&#21382;</h4>
+                            <p>&#21335;&#20140;&#33402;&#26415;&#23398;&#38498;&#35774;&#35745;&#23398;&#38498;<br>&#26234;&#33021;&#20132;&#20114;&#19982;&#23186;&#20171;&#21019;&#26032;&#19987;&#19994;<br>&#30740;&#20108;&#65288;2027&#23626;&#65289;</p>
+                        </div>
+                        <div class="about-mini-card">
+                            <h4>&#22522;&#26412;&#20449;&#24687;</h4>
+                            <p>&#24494;&#20449;&#65306;lyxxxx23333<br>&#37038;&#31665;&#65306;yangyang830608@163.com<br>&#35774;&#35745;&#29702;&#24565;&#65306;&#20445;&#25345;&#22909;&#22855;&#65292;&#25345;&#32493;&#23581;&#35797;&#12290;</p>
+                        </div>
+                        <div class="about-mini-card">
+                            <h4>&#36719;&#20214;&#25216;&#33021;</h4>
+                            <p>PS / AI / &#21098;&#26144; / AE / TD / Procreate / ID</p>
+                        </div>
+                        <div class="about-mini-card">
+                            <h4>AI&#21019;&#20316;&#24037;&#20855;</h4>
+                            <p>Stable Diffusion / ComfyUI / Midjourney / &#21363;&#26790; / &#26143;&#27969; / Tripo3D / DeepSeek / ChatGPT / Claude / Gemini</p>
+                        </div>
+                    </div>
+                </div>
+            </article>
+
+            <aside class="pixel-window about-photo-window" data-title="PROFILE.JPG">
+                <div class="about-photo-inner">
+                    <div class="about-photo-card">
+                        <img src="%E4%B8%AA%E4%BA%BA%E7%85%A7%E7%89%87.jpg" onerror="this.onerror=null;this.src='%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E4%B8%AA%E4%BA%BA%E7%85%A7%E7%89%87.jpg';" alt="Yang Lian portrait">
+                    </div>
+                    <p class="about-photo-caption">AI × &#35270;&#35273;&#21465;&#20107; × &#20132;&#20114;&#20307;&#39564;<br>&#29992;&#26580;&#36719;&#30340;&#35270;&#35273;&#35821;&#35328;&#32452;&#32455;&#19987;&#19994;&#30340;&#35774;&#35745;&#27969;&#31243;&#12290;</p>
+                </div>
+            </aside>
+
+            <div class="pixel-window about-side about-mood about-side-small" data-title="MOOD TRACKER">
+                <h4>Mood Tracker</h4>
+                <p>&#20170;&#26085;&#27675;&#22260;&#65306;&#22909;&#22855; / &#19987;&#27880; / &#25345;&#32493;&#23581;&#35797;</p>
+                <div class="mood-pixels" aria-hidden="true">
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                    <span></span><span></span><span></span><span></span><span></span><span></span><span></span>
+                </div>
+            </div>
+
+            <div class="about-bottom">
+                <div class="pixel-window about-side about-side-small" data-title="CORE SKILLS">
+                    <h4>AI Design</h4>
+                    <p>AI &#22270;&#20687;&#29983;&#25104;&#65372;AI &#35270;&#39057;&#21019;&#20316;&#65372;AI &#35774;&#35745;&#24037;&#20316;&#27969;&#65372;Prompt Engineering</p>
+                </div>
+                <div class="pixel-window about-side about-side-small" data-title="CREATIVE TECH">
+                    <h4>Creative Technology</h4>
+                    <p>&#35270;&#35273;&#35774;&#35745;&#65372;&#25968;&#23383;&#33402;&#26415;&#65372;&#20132;&#20114;&#20307;&#39564;&#65372;AI &#36741;&#21161;&#32593;&#39029;&#24320;&#21457;</p>
+                </div>
+            </div>
+
+            <div class="pixel-window about-side about-music about-side-small" data-title="NOW PLAYING">
+                <h4>&#26368;&#36817;&#22312;&#21548;</h4>
+                <p>Dream Room Playlist<br><span class="about-chip">&#38477;&#20302;&#26435;&#37325;&#30340;&#38899;&#20048;&#23567;&#32452;&#20214;</span></p>
+                <div class="music-bar" aria-hidden="true"></div>
+                <p>&#35774;&#35745;&#20559;&#22909;&#65306;&#25554;&#30011; / &#22797;&#21476;&#35270;&#35273; / &#35270;&#35273;&#21465;&#20107;<br>&#28789;&#24863;&#65306;&#25668;&#24433; / &#38405;&#35835; / &#28216;&#25103; / &#26053;&#34892;</p>
+            </div>
+        </div>
+        <div class="about-footer-mask" aria-hidden="true"></div>
     </section>
 
     <section id="cover" class="cover">
@@ -3468,7 +3865,7 @@
         }
 
         function adjustActiveStates() {
-            const sectionIds = ["cover-new", "cover", "directory", "ai-generation", "hero-project"];
+            const sectionIds = ["cover-new", "about-me", "cover", "directory", "ai-generation", "hero-project"];
             let current = "cover-new";
             document.querySelectorAll("section").forEach(section => {
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
