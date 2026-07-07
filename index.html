@@ -126,6 +126,21 @@
             outline: 3px solid rgba(255, 243, 109, 0.85);
             outline-offset: 4px;
         }
+        .cover-new,
+        .cover {
+            contain: layout paint;
+            isolation: isolate;
+            transform: translate3d(0, 0, 0);
+            backface-visibility: hidden;
+        }
+        .cover-new-img {
+            transform: translate3d(0, 0, 0);
+        }
+        body.is-cover-transition::after,
+        body.is-cover-transition .global-grid,
+        body.is-cover-transition .cursor-paint {
+            display: none !important;
+        }
         .cover { background: radial-gradient(circle at 75% 42%, rgba(0,232,255,0.13), transparent 28%), #050506; }
         .cover-layout { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(320px, 0.75fr); gap: clamp(28px, 6vw, 86px); align-items: center; }
         .eyebrow { color: var(--blue); font-size: 11px; font-weight: 700; margin-bottom: 22px; }
@@ -3448,6 +3463,7 @@
         }
 
         function scrollToSec(id) {
+            updateCoverPerfMode();
             document.getElementById(id).scrollIntoView({ behavior: "smooth" });
         }
 
@@ -3822,6 +3838,37 @@
             draw();
         }
 
+        let activeStateTicking = false;
+        let coverPerfTimer = 0;
+
+        function updateCoverPerfMode() {
+            const nearCoverTransition = window.scrollY < window.innerHeight * 1.35;
+            document.body.classList.toggle("is-cover-transition", nearCoverTransition);
+
+            if (!nearCoverTransition) {
+                window.clearTimeout(coverPerfTimer);
+                document.body.classList.remove("is-cover-scrolling");
+                return;
+            }
+
+            document.body.classList.add("is-cover-scrolling");
+            window.clearTimeout(coverPerfTimer);
+            coverPerfTimer = window.setTimeout(() => {
+                document.body.classList.remove("is-cover-scrolling");
+            }, 220);
+        }
+
+        function handlePageScroll() {
+            updateCoverPerfMode();
+            if (activeStateTicking) return;
+            activeStateTicking = true;
+
+            window.requestAnimationFrame(() => {
+                adjustActiveStates();
+                activeStateTicking = false;
+            });
+        }
+
         window.addEventListener("load", () => {
             initGallery();
             initModalControls();
@@ -3830,9 +3877,10 @@
             cardObserver.observe(document.querySelector("#directory"));
             initTvOpening();
             initKiteReveal();
+            updateCoverPerfMode();
             adjustActiveStates();
         });
-        window.addEventListener("scroll", adjustActiveStates);
+        window.addEventListener("scroll", handlePageScroll, { passive: true });
     </script>
 </body>
 </html>
