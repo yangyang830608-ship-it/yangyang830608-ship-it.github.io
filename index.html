@@ -137,8 +137,7 @@
             transform: translate3d(0, 0, 0);
         }
         body.is-cover-transition::after,
-        body.is-cover-transition .global-grid,
-        body.is-cover-transition .cursor-paint {
+        body.is-cover-transition .global-grid {
             display: none !important;
         }
         .about-me-page {
@@ -722,9 +721,10 @@
         .cursor-paint {
             position: fixed;
             inset: 0;
-            z-index: 48;
+            z-index: 70;
             pointer-events: none;
             mix-blend-mode: screen;
+            opacity: 0.95;
         }
 
         .story-modal {
@@ -4144,7 +4144,7 @@
             const canvas = document.getElementById("cursorPaint");
             const ctx = canvas.getContext("2d");
             const strokes = [];
-            const colors = ["#00e8ff", "#ff4fc3", "#d8ff3d", "#ff8a35", "#ffffff"];
+            const colors = ["#58d9ff", "#ff7bd5", "#fff36d", "#8dffcf", "#b58cff"];
             let last = null;
             let hueStep = 0;
 
@@ -4166,17 +4166,32 @@
                     const dx = point.x - last.x;
                     const dy = point.y - last.y;
                     const distance = Math.hypot(dx, dy);
-                    if (distance > 2) {
+                    if (distance > 6) {
+                        const color = colors[hueStep % colors.length];
                         strokes.push({
                             x1: last.x,
                             y1: last.y,
                             x2: point.x,
                             y2: point.y,
                             life: 1,
-                            width: 8 + Math.min(distance * 0.18, 10),
-                            color: colors[hueStep % colors.length],
-                            spin: (hueStep % 2 ? 1 : -1) * Math.min(distance * 0.04, 1.4)
+                            width: 13 + Math.min(distance * 0.2, 18),
+                            color,
+                            glow: 28 + Math.min(distance * 0.55, 34),
+                            spin: (hueStep % 2 ? 1 : -1) * Math.min(distance * 0.035, 1.8)
                         });
+                        if (distance > 18) {
+                            strokes.push({
+                                x1: last.x + 4,
+                                y1: last.y - 4,
+                                x2: point.x + 4,
+                                y2: point.y - 4,
+                                life: 0.72,
+                                width: 5 + Math.min(distance * 0.08, 8),
+                                color: "#ffffff",
+                                glow: 18,
+                                spin: -0.7
+                            });
+                        }
                         hueStep++;
                     }
                 }
@@ -4191,24 +4206,29 @@
                 ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
                 for (let i = strokes.length - 1; i >= 0; i--) {
                     const s = strokes[i];
-                    s.life -= 0.022;
+                    s.life -= 0.015;
                     if (s.life <= 0) {
                         strokes.splice(i, 1);
                         continue;
                     }
                     ctx.save();
-                    ctx.globalAlpha = Math.max(0, s.life) * 0.72;
+                    ctx.globalAlpha = Math.max(0, s.life) * 0.9;
                     ctx.lineCap = "round";
                     ctx.lineJoin = "round";
                     ctx.strokeStyle = s.color;
                     ctx.shadowColor = s.color;
-                    ctx.shadowBlur = 18 * s.life;
+                    ctx.shadowBlur = s.glow * s.life;
                     ctx.lineWidth = s.width * s.life;
-                    const cx = (s.x1 + s.x2) / 2 + Math.sin(s.life * Math.PI) * 18 * s.spin;
-                    const cy = (s.y1 + s.y2) / 2 + Math.cos(s.life * Math.PI) * 12 * s.spin;
+                    const cx = (s.x1 + s.x2) / 2 + Math.sin(s.life * Math.PI) * 28 * s.spin;
+                    const cy = (s.y1 + s.y2) / 2 + Math.cos(s.life * Math.PI) * 18 * s.spin;
                     ctx.beginPath();
                     ctx.moveTo(s.x1, s.y1);
                     ctx.quadraticCurveTo(cx, cy, s.x2, s.y2);
+                    ctx.stroke();
+                    ctx.globalAlpha = Math.max(0, s.life) * 0.28;
+                    ctx.lineWidth = Math.max(2, s.width * s.life * 0.36);
+                    ctx.strokeStyle = "#ffffff";
+                    ctx.shadowBlur = 8 * s.life;
                     ctx.stroke();
                     ctx.restore();
                 }
