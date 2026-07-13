@@ -1429,6 +1429,7 @@
 
         .phoenix-page {
             position: relative;
+            isolation: isolate;
             min-height: 100vh;
             overflow: hidden;
             background:
@@ -1441,32 +1442,36 @@
             content: "";
             position: absolute;
             inset: 0;
+            z-index: 1;
             pointer-events: none;
             background:
-                linear-gradient(rgba(255,255,255,0.035) 1px, transparent 1px),
-                linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+                linear-gradient(rgba(255,255,255,0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255,255,255,0.016) 1px, transparent 1px);
             background-size: 28px 28px;
-            opacity: 0.22;
-            mix-blend-mode: screen;
+            opacity: 0.14;
+            mix-blend-mode: soft-light;
         }
         .phoenix-hero-bg {
             position: absolute;
             inset: 0;
+            z-index: 0;
             width: 100%;
             height: 100%;
             object-fit: cover;
-            filter: brightness(0.72) saturate(1.03);
+            filter: brightness(0.94) saturate(1.08);
         }
         .phoenix-shade {
             position: absolute;
             inset: 0;
+            z-index: 2;
+            pointer-events: none;
             background:
-                linear-gradient(90deg, rgba(5, 6, 10, 0.96) 0%, rgba(5, 6, 10, 0.72) 33%, rgba(5, 6, 10, 0.12) 72%),
-                linear-gradient(180deg, rgba(5, 6, 10, 0.14), rgba(5, 6, 10, 0.78));
+                linear-gradient(90deg, rgba(5, 6, 10, 0.68) 0%, rgba(5, 6, 10, 0.42) 28%, rgba(5, 6, 10, 0.08) 58%, rgba(5, 6, 10, 0) 82%),
+                linear-gradient(180deg, rgba(5, 6, 10, 0.06) 0%, rgba(5, 6, 10, 0.12) 58%, rgba(5, 6, 10, 0.28) 100%);
         }
         .phoenix-hero-layout {
             position: relative;
-            z-index: 2;
+            z-index: 3;
             min-height: 100vh;
             display: flex;
             align-items: center;
@@ -2495,6 +2500,12 @@
                 linear-gradient(90deg, rgba(92, 218, 255, 0.08) 1px, transparent 1px);
             background-size: 90px 72px;
             opacity: 0.7;
+        }
+        body.is-phoenix-project::after {
+            opacity: 0.18;
+        }
+        body.is-phoenix-project .global-grid {
+            opacity: 0.12;
         }
         section:not(.flower-page):not(.flower-empty-page) {
             background-color: var(--bg);
@@ -4205,6 +4216,7 @@
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
             });
             const aiSections = new Set(["ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery", "herbal-3d", "herbal-3d-detail"]);
+            const phoenixSections = new Set(["phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery"]);
             const interactiveSections = new Set([
                 "chapter-interactive",
                 "kite-project-1",
@@ -4225,6 +4237,7 @@
                         : imageSections.has(current)
                             ? "photo"
                             : current;
+            document.body.classList.toggle("is-phoenix-project", phoenixSections.has(current));
             document.querySelectorAll(".top-nav a").forEach(link => {
                 const target = link.getAttribute("href");
                 link.classList.toggle("active", target === `#${navTarget}`);
