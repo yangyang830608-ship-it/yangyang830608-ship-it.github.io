@@ -3078,6 +3078,129 @@
             font-size: 9px !important;
             letter-spacing: 0.09em !important;
         }
+
+        #directory {
+            min-height: 100vh !important;
+            align-items: center !important;
+        }
+        #directory .container {
+            padding-top: 88px !important;
+            padding-bottom: 42px !important;
+        }
+        #directory .section-kicker {
+            width: fit-content !important;
+            margin-bottom: 30px !important;
+            padding: 8px 14px 9px !important;
+            color: #fff36d !important;
+            border: 3px solid #180821 !important;
+            outline: 2px solid #fff6ff !important;
+            background: linear-gradient(90deg, #ff8ed6, #58d9ff 58%, #7cffdc) !important;
+            box-shadow: 5px 5px 0 #ff77c8, 0 0 24px rgba(88,217,255,0.34) !important;
+            font-family: "Courier New", monospace !important;
+            font-size: clamp(16px, 1.35vw, 22px) !important;
+            font-weight: 900 !important;
+            line-height: 1.15 !important;
+            letter-spacing: 0.05em !important;
+            text-shadow: 2px 2px 0 #180821 !important;
+        }
+        #directory .index-grid {
+            grid-template-columns: repeat(4, minmax(0, 1fr)) !important;
+            gap: 20px !important;
+            align-items: stretch !important;
+        }
+        #directory .index-card,
+        #ai-generation .ai-case {
+            display: flex !important;
+            flex-direction: column !important;
+            justify-content: flex-start !important;
+            padding: calc(34px + 44%) 18px 18px !important;
+            background:
+                linear-gradient(180deg, #ff8ed6 0 34px, transparent 34px),
+                linear-gradient(180deg, transparent 0 calc(34px + 44%), rgba(30, 12, 42, 0.98) calc(34px + 44%), rgba(18, 7, 30, 0.98) 100%) !important;
+        }
+        #directory .index-card {
+            min-height: clamp(360px, 48vh, 440px) !important;
+            transform: translateY(24px);
+        }
+        #directory .index-card.visible {
+            transform: translateY(0) !important;
+        }
+        #ai-generation .ai-case {
+            min-height: clamp(300px, 38vh, 380px) !important;
+        }
+        #directory .index-card::before,
+        #ai-generation .ai-case::before {
+            top: 34px !important;
+            height: 44% !important;
+            border-bottom: 4px solid #180821 !important;
+            filter: saturate(1.12) contrast(1.04) brightness(0.94) !important;
+        }
+        #directory .index-card::after,
+        #ai-generation .ai-case::after {
+            height: 34px !important;
+            background-image:
+                linear-gradient(#180821 0 0) calc(100% - 24px) 8px / 13px 13px no-repeat,
+                linear-gradient(#180821 0 0) calc(100% - 45px) 8px / 13px 13px no-repeat,
+                linear-gradient(#180821 0 0) calc(100% - 66px) 8px / 13px 13px no-repeat,
+                linear-gradient(#ff77c8 0 0) calc(100% - 27px) 5px / 13px 13px no-repeat,
+                linear-gradient(#58d9ff 0 0) calc(100% - 48px) 5px / 13px 13px no-repeat,
+                linear-gradient(#7cffdc 0 0) calc(100% - 69px) 5px / 13px 13px no-repeat,
+                linear-gradient(90deg, #ff8ed6 0%, #58d9ff 58%, #7cffdc 100%) !important;
+        }
+        #directory .index-card span,
+        #directory .index-card h3,
+        #directory .index-card p,
+        #ai-generation .ai-case-body,
+        #ai-generation .ai-case-body span,
+        #ai-generation .ai-case-body h3,
+        #ai-generation .ai-case-body p,
+        #ai-generation .ai-case-tag {
+            position: relative !important;
+            z-index: 70 !important;
+            text-shadow: none !important;
+        }
+        #directory .index-card span,
+        #ai-generation .ai-case-body span {
+            display: inline-flex !important;
+            width: fit-content !important;
+            margin-bottom: 8px !important;
+            padding: 4px 8px !important;
+            color: #180821 !important;
+            background: #fff36d !important;
+            border: 2px solid #180821 !important;
+            font-family: "Courier New", monospace !important;
+            font-weight: 900 !important;
+        }
+        #directory .index-card h3,
+        #ai-generation .ai-case-body h3 {
+            color: #fff6ff !important;
+            letter-spacing: 0 !important;
+            text-shadow: 2px 2px 0 #180821 !important;
+        }
+        #directory .index-card p,
+        #ai-generation .ai-case-body p {
+            color: rgba(255, 239, 252, 0.82) !important;
+        }
+        #directory .index-card p {
+            display: -webkit-box !important;
+            -webkit-box-orient: vertical !important;
+            -webkit-line-clamp: 4 !important;
+            overflow: hidden !important;
+            font-size: 12px !important;
+            line-height: 1.6 !important;
+        }
+        #ai-generation .ai-case-body {
+            position: relative !important;
+            inset: auto !important;
+            left: auto !important;
+            right: auto !important;
+            bottom: auto !important;
+        }
+        #ai-generation .ai-case-tag {
+            color: #fff6ff !important;
+            border-color: rgba(255, 246, 255, 0.38) !important;
+            background: rgba(255, 119, 200, 0.16) !important;
+        }
         .frame-card:hover {
             transform: translate(-3px, -8px) scale(1.14) !important;
         }
