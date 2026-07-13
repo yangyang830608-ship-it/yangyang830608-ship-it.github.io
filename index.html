@@ -1427,6 +1427,269 @@
             min-height: 100%;
         }
 
+        #nj-wall,
+        #nj-wall-detail,
+        #nj-wall-gallery {
+            min-height: 100vh;
+            align-items: center;
+            background:
+                radial-gradient(circle at 12% 18%, rgba(245, 171, 188, 0.16), transparent 26%),
+                linear-gradient(180deg, #fff9f8 0%, #fff5f5 100%);
+            color: #252033;
+        }
+        #nj-wall::before,
+        #nj-wall::after {
+            content: none;
+        }
+        .sakura-page {
+            position: relative;
+            isolation: isolate;
+            overflow: hidden;
+            border-top: 1px solid rgba(229, 150, 166, 0.28);
+            border-bottom: 1px solid rgba(229, 150, 166, 0.32);
+            box-shadow: inset 0 0 0 1px rgba(229, 150, 166, 0.12);
+        }
+        .sakura-page::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            z-index: -1;
+            pointer-events: none;
+            background:
+                radial-gradient(circle at 6% 44%, rgba(245, 171, 188, 0.12), transparent 18%),
+                linear-gradient(90deg, rgba(245, 171, 188, 0.08) 1px, transparent 1px),
+                linear-gradient(rgba(245, 171, 188, 0.06) 1px, transparent 1px);
+            background-size: auto, 88px 88px, 88px 88px;
+            opacity: 0.48;
+        }
+        .sakura-layout {
+            width: min(1440px, 100%);
+            min-height: 100vh;
+            display: grid;
+            grid-template-columns: minmax(260px, 0.34fr) minmax(0, 0.66fr);
+            gap: clamp(24px, 4vw, 58px);
+            align-items: center;
+            padding-top: 92px;
+            padding-bottom: 42px;
+        }
+        .sakura-copy {
+            position: relative;
+            z-index: 3;
+        }
+        .sakura-brand {
+            position: absolute;
+            top: 24px;
+            left: clamp(22px, 4vw, 54px);
+            color: #4d455d;
+            font-family: var(--font-title);
+            font-size: 24px;
+            letter-spacing: 0;
+        }
+        .sakura-nav {
+            position: absolute;
+            top: 28px;
+            right: clamp(22px, 4vw, 54px);
+            display: flex;
+            gap: 46px;
+            color: rgba(81, 72, 92, 0.62);
+            font-size: 12px;
+            letter-spacing: 0.05em;
+        }
+        .sakura-nav span {
+            position: relative;
+            white-space: nowrap;
+        }
+        .sakura-nav .active {
+            color: #d77f96;
+            font-weight: 800;
+        }
+        .sakura-nav .active::after {
+            content: "";
+            position: absolute;
+            left: 0;
+            right: 0;
+            bottom: -10px;
+            height: 2px;
+            background: #e99bad;
+        }
+        .sakura-number {
+            display: block;
+            margin-bottom: 16px;
+            color: #ef9aac;
+            font-family: Georgia, "Times New Roman", serif;
+            font-size: clamp(62px, 7vw, 104px);
+            line-height: 0.82;
+            font-weight: 700;
+            letter-spacing: 0.02em;
+        }
+        .sakura-copy h2,
+        .sakura-copy h3 {
+            margin: 0 0 12px;
+            color: #211a2c;
+            font-family: var(--font-body);
+            font-size: clamp(30px, 3.1vw, 50px);
+            line-height: 1.12;
+            letter-spacing: 0;
+            font-weight: 900;
+        }
+        .sakura-en {
+            margin: 0 0 24px;
+            color: #c4778d;
+            font-size: 14px;
+            line-height: 1.35;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+        .sakura-desc {
+            max-width: 410px;
+            color: rgba(39, 32, 50, 0.7);
+            font-size: 14px;
+            line-height: 1.9;
+        }
+        .sakura-tags,
+        .sakura-icon-row {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 12px;
+            margin-top: 28px;
+        }
+        .sakura-tags span,
+        .sakura-icon {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 30px;
+            padding: 7px 14px;
+            border: 1px solid rgba(217, 127, 150, 0.42);
+            border-radius: 999px;
+            color: rgba(39, 32, 50, 0.62);
+            background: rgba(255, 255, 255, 0.42);
+            font-size: 11px;
+        }
+        .sakura-hero-media {
+            position: relative;
+            min-height: 520px;
+            border-radius: 0;
+            overflow: hidden;
+            box-shadow: 0 18px 56px rgba(181, 111, 128, 0.22);
+            mask-image: linear-gradient(90deg, transparent 0%, black 12%, black 92%, transparent 100%);
+        }
+        .sakura-hero-media img,
+        .sakura-card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .sakura-hero-media::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            pointer-events: none;
+            background: linear-gradient(90deg, rgba(255,249,248,0.96) 0%, rgba(255,249,248,0.26) 24%, rgba(255,249,248,0) 46%, rgba(255,249,248,0.72) 100%);
+        }
+        .sakura-process-layout {
+            grid-template-columns: minmax(260px, 0.32fr) minmax(0, 0.68fr);
+        }
+        .sakura-process-grid {
+            display: grid;
+            grid-template-columns: repeat(4, minmax(0, 1fr));
+            gap: 18px;
+            align-items: stretch;
+        }
+        .sakura-card {
+            position: relative;
+            min-height: 300px;
+            overflow: hidden;
+            border: 1px solid rgba(217, 127, 150, 0.36);
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.58);
+            box-shadow: 0 16px 42px rgba(181, 111, 128, 0.14);
+        }
+        .sakura-card.empty {
+            display: grid;
+            place-items: center;
+            color: rgba(196, 119, 141, 0.62);
+            border-style: dashed;
+            background:
+                linear-gradient(135deg, rgba(245, 171, 188, 0.1), rgba(255, 255, 255, 0.56));
+        }
+        .sakura-card-label {
+            position: absolute;
+            left: 16px;
+            top: 14px;
+            z-index: 2;
+            color: #211a2c;
+            font-weight: 800;
+            font-size: 13px;
+        }
+        .sakura-card-label small {
+            display: block;
+            margin-top: 2px;
+            color: rgba(196, 119, 141, 0.82);
+            font-size: 9px;
+            font-weight: 700;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .sakura-gallery-layout {
+            grid-template-columns: minmax(220px, 0.24fr) minmax(0, 0.76fr);
+        }
+        .sakura-gallery {
+            display: grid;
+            grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) minmax(220px, 0.55fr);
+            gap: 18px;
+            align-items: stretch;
+        }
+        .sakura-gallery .sakura-card {
+            min-height: 390px;
+        }
+        .sakura-gallery-side {
+            display: grid;
+            gap: 18px;
+        }
+        .sakura-gallery-side .sakura-card {
+            min-height: 186px;
+        }
+        @media (max-width: 1100px) {
+            .sakura-layout,
+            .sakura-process-layout,
+            .sakura-gallery-layout {
+                grid-template-columns: 1fr;
+                gap: 24px;
+                padding-top: 108px;
+            }
+            .sakura-hero-media {
+                min-height: 420px;
+            }
+            .sakura-process-grid,
+            .sakura-gallery {
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+            .sakura-gallery-side {
+                grid-column: span 2;
+                grid-template-columns: repeat(2, minmax(0, 1fr));
+            }
+        }
+        @media (max-width: 640px) {
+            .sakura-nav {
+                display: none;
+            }
+            .sakura-process-grid,
+            .sakura-gallery,
+            .sakura-gallery-side {
+                grid-template-columns: 1fr;
+            }
+            .sakura-gallery-side {
+                grid-column: auto;
+            }
+            .sakura-card,
+            .sakura-gallery .sakura-card,
+            .sakura-gallery-side .sakura-card {
+                min-height: 260px;
+            }
+        }
+
         .phoenix-page {
             position: relative;
             isolation: isolate;
@@ -3574,34 +3837,71 @@
         </div>
     </section>
 
-<section id="nj-wall" class="project-hero-page" style="--project-bg: url('AI%E7%94%9F%E6%88%90/1.jpg')">
-        <div class="container project-hero-copy">
-            <p class="section-kicker">PROJECT 01 / INSTALLATION</p>
-            <h2>&#21335;&#20140;&#22478;&#22681;&#27185;&#33457;&#35013;&#32622;&#35774;&#35745;</h2>
-            <p class="section-copy">&#22260;&#32469;&#21382;&#21490;&#22478;&#22681;&#19982;&#26149;&#26085;&#27185;&#33457;&#27675;&#22260;&#20570;&#35270;&#35273;&#35013;&#32622;&#29983;&#25104;&#65292;&#24378;&#35843;&#23610;&#24230;&#12289;&#33410;&#22863;&#21644;&#31354;&#38388;&#21253;&#35065;&#24863;&#65292;&#35753;&#30011;&#38754;&#20687;&#19968;&#24352;&#21487;&#20197;&#36208;&#36827;&#21435;&#30340;&#33402;&#26415;&#28023;&#25253;&#12290;</p>
-            <div class="project-meta">
-                <span>2026</span><span>&#21335;&#20140;</span><span>&#35013;&#32622;</span><span>&#27185;&#33457;</span><span>&#20844;&#20849;&#31354;&#38388;</span>
+<section id="nj-wall" class="sakura-page">
+        <div class="sakura-brand">profile ✿</div>
+        <div class="sakura-nav"><span class="active">01 项目概述</span><span>02 AI生成过程</span><span>03 装置实景</span></div>
+        <div class="container sakura-layout">
+            <div class="sakura-copy">
+                <span class="sakura-number">01.</span>
+                <h2>南京城墙樱花装置设计</h2>
+                <p class="sakura-en">CHERRY BLOSSOM INSTALLATION<br>AT NANJING CITY WALL</p>
+                <p class="sakura-desc">围绕历史城墙与春日樱花氛围做视觉装置生成，强调尺度、节奏和空间包裹感，让画面像一张可以走进去的艺术海报。</p>
+                <div class="sakura-tags"><span>2026</span><span>南京</span><span>装置</span><span>樱花</span><span>公共空间</span></div>
+            </div>
+            <div class="sakura-hero-media">
+                <img src="%E5%9F%8E%E5%A2%99%E8%A3%85%E7%BD%AE/%E6%A8%B1%E8%8A%B1%E7%90%83%20%E5%A4%9C%E6%99%9A.png" alt="南京城墙樱花装置夜晚效果">
             </div>
         </div>
-        <div class="project-arrow">&#8595;</div>
     </section>
 
-<section id="nj-wall-detail" class="project-detail-page">
-        <div class="container project-detail-layout">
-            <div class="project-detail-copy">
-                <p class="section-kicker">DETAILS / CONCEPT</p>
-                <h3>&#22478;&#22681;&#30340;&#21382;&#21490;&#24863;&#21644;&#27185;&#33457;&#30340;&#36731;&#30408;&#24863;&#65292;&#34987;&#25918;&#22312;&#21516;&#19968;&#20010;&#35270;&#35273;&#35821;&#27861;&#37324;&#12290;</h3>
-                <p>&#36825;&#19968;&#39029;&#29992;&#26497;&#31616;&#25991;&#23383;&#35762;&#28165;&#26970;&#35774;&#35745;&#27010;&#24565;&#65292;&#20877;&#34917;&#19978; AI &#24037;&#20316;&#27969;&#12290;&#27604;&#22914;&#20808;&#29992; Midjourney &#29983;&#25104;&#33394;&#24425;&#26041;&#21521;&#65292;&#20877;&#29992; ComfyUI / SD &#20570;&#32441;&#29702;&#21644;&#26448;&#36136;&#25910;&#25947;&#65292;&#26368;&#21518;&#25226;&#35013;&#32622;&#22330;&#26223;&#25340;&#25104;&#32479;&#19968;&#30011;&#38754;&#12290;</p>
-                <div class="detail-list">
-                    <span>Midjourney / &#33394;&#24425;&#26041;&#26696;</span>
-                    <span>SD / &#26448;&#36136;&#19982;&#32441;&#29702;</span>
-                    <span>&#35013;&#32622;&#33853;&#22320; / &#22330;&#26223;&#25511;&#21046;</span>
+<section id="nj-wall-detail" class="sakura-page">
+        <div class="sakura-brand">profile ✿</div>
+        <div class="sakura-nav"><span>01 项目概述</span><span class="active">02 AI生成过程</span><span>03 装置实景</span></div>
+        <div class="container sakura-layout sakura-process-layout">
+            <div class="sakura-copy">
+                <span class="sakura-number">02.</span>
+                <h3>AI生成过程</h3>
+                <p class="sakura-en">AI GENERATIVE PROCESS</p>
+                <p class="sakura-desc">利用 AI 工具进行概念生成、造型推演、材质氛围模拟，并结合参数化设计优化结构与视觉效果。</p>
+                <div class="sakura-icon-row">
+                    <span class="sakura-icon">概念生成</span>
+                    <span class="sakura-icon">形态演化</span>
+                    <span class="sakura-icon">材质与光影</span>
+                    <span class="sakura-icon">细节优化</span>
                 </div>
             </div>
-            <div class="project-detail-media">
-                <div class="project-media-tile tall" style="--img:url('AI%E7%94%9F%E6%88%90/4.jpg')"></div>
-                <div class="project-media-tile" style="--img:url('AI%E7%94%9F%E6%88%90/7.jpg')"></div>
-                <div class="project-media-tile" style="--img:url('AI%E7%94%9F%E6%88%90/35.jpg')"></div>
+            <div class="sakura-process-grid">
+                <div class="sakura-card empty"><span class="sakura-card-label">01 概念草图<small>CONCEPT SKETCH</small></span>图片待补充</div>
+                <div class="sakura-card empty"><span class="sakura-card-label">02 AI形态生成<small>AI FORM GENERATION</small></span>图片待补充</div>
+                <div class="sakura-card"><span class="sakura-card-label">03 材质与光影测试<small>MATERIAL & LIGHT TEST</small></span><img src="%E5%9F%8E%E5%A2%99%E8%A3%85%E7%BD%AE/%E6%A8%B1%E8%8A%B1%E9%97%A8%20%E5%A4%9C%E6%99%9A.png" alt="樱花门夜晚材质测试"></div>
+                <div class="sakura-card"><span class="sakura-card-label">04 整体效果预览<small>FINAL PREVIEW</small></span><img src="%E5%9F%8E%E5%A2%99%E8%A3%85%E7%BD%AE/%E6%A8%B1%E8%8A%B1%E7%90%83%20%E5%A4%9C%E6%99%9A.png" alt="樱花球夜晚整体效果"></div>
+            </div>
+        </div>
+    </section>
+
+<section id="nj-wall-gallery" class="sakura-page">
+        <div class="sakura-brand">profile ✿</div>
+        <div class="sakura-nav"><span>01 项目概述</span><span>02 AI生成过程</span><span class="active">03 装置实景</span></div>
+        <div class="container sakura-layout sakura-gallery-layout">
+            <div class="sakura-copy">
+                <span class="sakura-number">03.</span>
+                <h3>装置实景效果</h3>
+                <p class="sakura-en">REALISTIC INSTALLATION EFFECT</p>
+                <p class="sakura-desc">日间与夜晚在南京城墙的真实场景呈现，展现装置在不同光照与环境下的氛围互动体验。</p>
+                <div class="sakura-icon-row">
+                    <span class="sakura-icon">日间效果</span>
+                    <span class="sakura-icon">夜晚效果</span>
+                    <span class="sakura-icon">互动体验</span>
+                    <span class="sakura-icon">花瓣光影</span>
+                </div>
+            </div>
+            <div class="sakura-gallery">
+                <div class="sakura-card"><img src="%E5%9F%8E%E5%A2%99%E8%A3%85%E7%BD%AE/%E6%A8%B1%E8%8A%B1%E9%97%A8%20%E5%A4%9C%E6%99%9A.png" alt="樱花门夜晚装置效果"></div>
+                <div class="sakura-card"><img src="%E5%9F%8E%E5%A2%99%E8%A3%85%E7%BD%AE/%E6%A8%B1%E8%8A%B1%E7%90%83%20%E5%A4%9C%E6%99%9A.png" alt="樱花球夜晚装置效果"></div>
+                <div class="sakura-gallery-side">
+                    <div class="sakura-card empty">细节图待补充</div>
+                    <div class="sakura-card empty">铭牌 / 灯光细节待补充</div>
+                </div>
             </div>
         </div>
     </section>
@@ -4430,7 +4730,7 @@
             document.querySelectorAll("section").forEach(section => {
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
             });
-            const aiSections = new Set(["ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery", "herbal-3d", "herbal-3d-detail"]);
+            const aiSections = new Set(["ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "nj-wall-gallery", "phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery", "herbal-3d", "herbal-3d-detail"]);
             const phoenixSections = new Set(["phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery"]);
             const interactiveSections = new Set([
                 "chapter-interactive",
