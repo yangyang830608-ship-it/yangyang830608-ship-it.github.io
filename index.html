@@ -158,6 +158,60 @@
             display: block;
             z-index: 0;
         }
+        .about-photo-zoom {
+            position: absolute;
+            z-index: 4;
+            left: 56.3%;
+            top: 22.2%;
+            width: 14.5%;
+            height: 28.5%;
+            border: 0;
+            border-radius: 8px;
+            background: transparent;
+            cursor: zoom-in;
+        }
+        .about-photo-zoom:focus-visible {
+            outline: 3px solid rgba(255, 243, 109, 0.9);
+            outline-offset: 4px;
+        }
+        .about-photo-modal {
+            position: fixed;
+            inset: 0;
+            z-index: 95;
+            display: none;
+            place-items: center;
+            padding: 32px;
+            background: rgba(8, 3, 14, 0.76);
+            backdrop-filter: blur(12px);
+        }
+        .about-photo-modal.is-open {
+            display: grid;
+        }
+        .about-photo-modal img {
+            max-width: min(82vw, 760px);
+            max-height: 86vh;
+            object-fit: contain;
+            border: 4px solid rgba(255, 236, 255, 0.95);
+            border-radius: 14px;
+            background: #fff;
+            box-shadow: 0 0 34px rgba(255, 119, 200, 0.45), 0 0 50px rgba(88, 217, 255, 0.34);
+        }
+        .about-photo-modal-close {
+            position: absolute;
+            top: 24px;
+            right: 28px;
+            width: 44px;
+            height: 44px;
+            border: 2px solid rgba(255, 236, 255, 0.9);
+            border-radius: 10px;
+            background: linear-gradient(135deg, #ff8ed6, #58d9ff);
+            color: #23122f;
+            font-size: 28px;
+            font-weight: 900;
+            line-height: 1;
+            cursor: pointer;
+            box-shadow: 4px 4px 0 rgba(255, 105, 205, 0.5);
+        }
         .about-me-page::before {
             content: "";
             position: absolute;
@@ -2786,7 +2840,6 @@
     <div class="dot-nav">
         <button class="dot-item active" onclick="scrollToSec('cover-new')" aria-label="&#26032;&#23553;&#38754;"></button>
         <button class="dot-item" onclick="scrollToSec('about-me')" aria-label="About Me"></button>
-        <button class="dot-item" onclick="scrollToSec('cover')" aria-label="&#23553;&#38754;"></button>
         <button class="dot-item" onclick="scrollToSec('directory')" aria-label="&#30446;&#24405;"></button>
         <button class="dot-item" onclick="scrollToSec('ai-generation')" aria-label="&#39033;&#30446;"></button>
         <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="&#20998;&#38236;"></button>
@@ -2801,30 +2854,7 @@
 
     <section id="about-me" class="about-me-page" aria-label="About Me">
         <img class="about-bg" src="%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D.png" onerror="this.onerror=null;this.src='%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E4%B8%AA%E4%BA%BA%E4%BB%8B%E7%BB%8D.png';" alt="About Me background">
-    </section>
-
-    <section id="cover" class="cover">
-        <div class="container cover-layout">
-            <div>
-                <p class="eyebrow">YANG LIAN / CREATIVE PORTFOLIO</p>
-                <h1 class="liquid-title">&#26472;&#33714;<br>&#20316;&#21697;&#38598;</h1>
-                <p class="hero-sub">&#25105;&#24076;&#26395;&#36825;&#20221;&#20316;&#21697;&#38598;&#21576;&#29616;&#30340;&#26159;&#65306;&#20174;&#24819;&#27861;&#12289;&#22270;&#20687;&#12289;&#21160;&#24577;&#21040;&#31354;&#38388;&#35013;&#32622;&#30340;&#23436;&#25972;&#21019;&#20316;&#33021;&#21147;&#12290;&#23427;&#19981;&#26159;&#21333;&#19968;&#36719;&#20214;&#25216;&#33021;&#30340;&#38472;&#21015;&#65292;&#32780;&#26159;&#25226;&#35270;&#35273;&#21465;&#20107;&#12289;AI &#29983;&#25104;&#12289;&#20132;&#20114;&#23454;&#39564;&#19982;&#26448;&#26009;&#34920;&#36798;&#36830;&#25509;&#36215;&#26469;&#30340;&#20010;&#20154;&#21019;&#20316;&#26723;&#26696;&#12290;</p>
-                <div class="skill-cloud" aria-label="&#36719;&#20214;&#19982;&#24037;&#20855;">
-                    <span>PS</span><span>AI</span><span>AE</span><span>TD</span>
-                    <span>DeepSeek</span><span>ChatGPT</span><span>Gemini</span><span>Stable Diffusion</span>
-                    <span>Midjourney</span><span>&#21363;&#26790;</span><span>Tripo3D</span>
-                </div>
-            </div>
-            <div class="portrait-stage" aria-label="&#20010;&#20154;&#29031;&#29255;&#21306;&#22495;">
-                <div class="burst star">*</div>
-                <div class="burst zap">ZAP</div>
-                <div class="burst ring"></div>
-                <div class="burst stroke"></div>
-                <div class="photo-blob">
-                    <div class="photo-hole"></div>
-                </div>
-            </div>
-        </div>
+        <button class="about-photo-zoom" type="button" aria-label="放大查看个人照片"></button>
     </section>
 
     <section id="directory" class="directory">
@@ -3502,6 +3532,10 @@
         </div>
     </div>
 
+    <div class="about-photo-modal" id="aboutPhotoModal" aria-hidden="true">
+        <button class="about-photo-modal-close" id="aboutPhotoModalClose" type="button" aria-label="关闭个人照片">&times;</button>
+        <img src="%E4%B8%AA%E4%BA%BA%E7%85%A7%E7%89%87.jpg" onerror="this.onerror=null;this.src='%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E4%B8%AA%E4%BA%BA%E7%85%A7%E7%89%87.jpg';" alt="杨莲个人照片">
+    </div>
     <div class="flower-modal" id="flowerModal" aria-hidden="true">
         <button class="flower-modal-step prev" id="flowerModalPrev" type="button" aria-label="&#19978;&#19968;&#24352;">&lt;</button>
         <figure class="flower-modal-card">
@@ -3780,13 +3814,40 @@
             dots.querySelectorAll(".dot").forEach((dot, i) => dot.classList.toggle("active", i === index));
         }
 
+        function initAboutPhotoZoom() {
+            const trigger = document.querySelector(".about-photo-zoom");
+            const modal = document.getElementById("aboutPhotoModal");
+            const close = document.getElementById("aboutPhotoModalClose");
+            if (!trigger || !modal || !close) return;
+
+            const open = () => {
+                modal.classList.add("is-open");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+            };
+            const closeModal = () => {
+                modal.classList.remove("is-open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            };
+
+            trigger.addEventListener("click", open);
+            close.addEventListener("click", closeModal);
+            modal.addEventListener("click", event => {
+                if (event.target === modal) closeModal();
+            });
+            window.addEventListener("keydown", event => {
+                if (event.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+            });
+        }
+
         function scrollToSec(id) {
             updateCoverPerfMode();
             document.getElementById(id).scrollIntoView({ behavior: "smooth" });
         }
 
         function adjustActiveStates() {
-            const sectionIds = ["cover-new", "about-me", "cover", "directory", "ai-generation", "hero-project"];
+            const sectionIds = ["cover-new", "about-me", "directory", "ai-generation", "hero-project"];
             let current = "cover-new";
             document.querySelectorAll("section").forEach(section => {
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
@@ -4191,6 +4252,7 @@
             initGallery();
             initModalControls();
             initFlowerGallery();
+            initAboutPhotoZoom();
             initCursorPaint();
             cardObserver.observe(document.querySelector("#directory"));
             initTvOpening();
