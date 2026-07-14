@@ -3464,6 +3464,105 @@
             border-color: rgba(255, 246, 255, 0.38) !important;
             background: rgba(255, 119, 200, 0.16) !important;
         }
+        #directory {
+            background:
+                radial-gradient(circle at 18% 10%, rgba(255, 142, 214, 0.2), transparent 28%),
+                radial-gradient(circle at 82% 18%, rgba(88, 217, 255, 0.16), transparent 24%),
+                linear-gradient(180deg, #241031 0%, #100719 100%) !important;
+        }
+        #directory .section-kicker {
+            color: #fff9ff !important;
+            border: 3px solid rgba(255, 236, 255, 0.92) !important;
+            outline: 0 !important;
+            border-radius: 10px !important;
+            background:
+                linear-gradient(90deg, #ff71bf, #7e66ff 52%, #51e6ff) !important;
+            box-shadow:
+                7px 7px 0 rgba(57, 218, 255, 0.54),
+                12px 12px 0 rgba(255, 82, 181, 0.36),
+                0 0 28px rgba(255, 128, 220, 0.42) !important;
+            font-family: "Courier New", monospace !important;
+            text-shadow: 1px 1px 0 rgba(60, 18, 86, 0.82) !important;
+        }
+        #directory .index-grid {
+            gap: 22px !important;
+        }
+        #directory .index-card {
+            min-height: clamp(390px, 50vh, 470px) !important;
+            padding: calc(30px + 48%) 20px 20px !important;
+            border: 3px solid rgba(255, 236, 255, 0.92) !important;
+            outline: 0 !important;
+            border-radius: 10px !important;
+            background:
+                linear-gradient(180deg, rgba(255, 239, 249, 0.96), rgba(255, 219, 241, 0.9)) !important;
+            box-shadow:
+                7px 7px 0 rgba(57, 218, 255, 0.58),
+                12px 12px 0 rgba(255, 82, 181, 0.44),
+                0 0 28px rgba(255, 128, 220, 0.42) !important;
+            color: #2f2140 !important;
+        }
+        #directory .index-card::before {
+            top: 30px !important;
+            left: 0 !important;
+            right: 0 !important;
+            height: 48% !important;
+            border-bottom: 2px solid rgba(82, 29, 92, 0.72) !important;
+            filter: saturate(1.08) contrast(1.04) brightness(1) !important;
+        }
+        #directory .index-card::after {
+            content: "PORTFOLIO.EXE" !important;
+            height: 30px !important;
+            padding: 0 76px 0 14px !important;
+            display: flex !important;
+            align-items: center !important;
+            color: #fff9ff !important;
+            font-family: "Courier New", monospace !important;
+            font-size: 13px !important;
+            font-weight: 900 !important;
+            line-height: 30px !important;
+            letter-spacing: 0.04em !important;
+            border-bottom: 2px solid rgba(82, 29, 92, 0.86) !important;
+            text-shadow: 1px 1px 0 rgba(60, 18, 86, 0.82) !important;
+            background:
+                linear-gradient(90deg, transparent 0 2px, #3b1a53 2px 13px, transparent 13px 18px, #3b1a53 18px 29px, transparent 29px 34px, #ff5dbc 34px 48px) calc(100% - 12px) 8px / 48px 14px no-repeat,
+                linear-gradient(90deg, #ff71bf, #7e66ff 52%, #51e6ff) !important;
+            box-shadow: inset 0 -1px 0 rgba(255,255,255,0.28) !important;
+        }
+        #directory .index-card span {
+            margin-bottom: 10px !important;
+            padding: 4px 9px !important;
+            color: #fff9ff !important;
+            background: linear-gradient(90deg, #ff71bf, #7e66ff) !important;
+            border: 1px solid rgba(82, 29, 92, 0.62) !important;
+            border-radius: 999px !important;
+            font-family: "Courier New", monospace !important;
+            font-size: 11px !important;
+            letter-spacing: 0.08em !important;
+            text-shadow: 1px 1px 0 rgba(60, 18, 86, 0.78) !important;
+        }
+        #directory .index-card h3 {
+            margin: 4px 0 10px !important;
+            color: #2e173e !important;
+            font-family: var(--font-title) !important;
+            font-size: clamp(23px, 2.2vw, 34px) !important;
+            line-height: 1.12 !important;
+            text-shadow: 1px 1px 0 rgba(255,255,255,0.72) !important;
+        }
+        #directory .index-card p {
+            color: rgba(55, 34, 72, 0.78) !important;
+            font-size: 13px !important;
+            line-height: 1.65 !important;
+            -webkit-line-clamp: 4 !important;
+        }
+        #directory .index-card:hover {
+            transform: translate(-2px, -9px) !important;
+            border-color: #fff9ff !important;
+            box-shadow:
+                9px 9px 0 rgba(57, 218, 255, 0.72),
+                15px 15px 0 rgba(255, 82, 181, 0.54),
+                0 0 34px rgba(255, 128, 220, 0.62),
+                0 0 36px rgba(81, 230, 255, 0.28) !important;
+        }
         .frame-card:hover {
             transform: translate(-3px, -8px) scale(1.14) !important;
         }
