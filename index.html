@@ -3563,6 +3563,47 @@
                 0 0 34px rgba(255, 128, 220, 0.62),
                 0 0 36px rgba(81, 230, 255, 0.28) !important;
         }
+        #directory .index-card {
+            min-height: clamp(360px, 46vh, 430px) !important;
+            padding: calc(30px + 43% + 20px) 20px 20px !important;
+            background:
+                linear-gradient(180deg, transparent 0 30px, rgba(255,255,255,0) 30px calc(30px + 43%), rgba(255, 255, 255, 0.96) calc(30px + 43%), #fff8fd 72%, #f7efff 100%) !important;
+        }
+        #directory .index-card::before {
+            height: 43% !important;
+            border-bottom: 3px solid rgba(255, 236, 255, 0.92) !important;
+            box-shadow:
+                0 2px 0 rgba(82, 29, 92, 0.46),
+                0 12px 18px rgba(255, 128, 220, 0.12) !important;
+        }
+        #directory .index-card span {
+            align-self: flex-start !important;
+            margin: 0 0 12px !important;
+            background: #fff9ff !important;
+            color: #7b3c86 !important;
+            border: 2px solid rgba(255, 128, 220, 0.82) !important;
+            box-shadow:
+                3px 3px 0 rgba(88, 217, 255, 0.48),
+                0 0 14px rgba(255, 128, 220, 0.22) !important;
+            text-shadow: none !important;
+        }
+        #directory .index-card h3 {
+            width: 100% !important;
+            margin: 0 0 12px !important;
+            padding-top: 12px !important;
+            border-top: 2px solid rgba(126, 102, 255, 0.55) !important;
+            color: #291338 !important;
+            text-shadow:
+                1px 1px 0 rgba(255,255,255,0.9),
+                2px 2px 0 rgba(88, 217, 255, 0.18) !important;
+        }
+        #directory .index-card p {
+            color: rgba(47, 33, 64, 0.76) !important;
+            background: rgba(255, 255, 255, 0.52) !important;
+            border: 1px solid rgba(255, 128, 220, 0.22) !important;
+            border-radius: 8px !important;
+            padding: 10px 12px !important;
+        }
         .frame-card:hover {
             transform: translate(-3px, -8px) scale(1.14) !important;
         }
