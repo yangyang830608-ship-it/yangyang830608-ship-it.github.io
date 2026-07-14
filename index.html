@@ -4010,6 +4010,16 @@
             position: relative !important;
             background: #fff8f8 !important;
         }
+        body.is-nj-wall-project::after {
+            content: none !important;
+            display: none !important;
+            background: none !important;
+        }
+        body.is-nj-wall-project .global-grid {
+            display: none !important;
+            opacity: 0 !important;
+            background: none !important;
+        }
         #nj-wall.sakura-page::before {
             content: none !important;
             display: none !important;
@@ -4022,7 +4032,7 @@
             inset: 0 !important;
             z-index: 1 !important;
             pointer-events: none !important;
-            background: linear-gradient(90deg, rgba(255,248,248,0.94) 0%, rgba(255,248,248,0.76) 19%, rgba(255,248,248,0.24) 34%, rgba(255,248,248,0.04) 48%, rgba(255,248,248,0) 100%) !important;
+            background: linear-gradient(90deg, rgba(255,248,248,0.98) 0%, rgba(255,248,248,0.9) 22%, rgba(255,248,248,0.48) 38%, rgba(255,248,248,0.12) 54%, rgba(255,248,248,0) 100%) !important;
         }
         #nj-wall .sakura-brand,
         #nj-wall-detail .sakura-brand,
@@ -4069,7 +4079,7 @@
             object-position: 58% center !important;
         }
         #nj-wall .sakura-hero-media::after {
-            background: linear-gradient(90deg, rgba(255,248,248,0.82) 0%, rgba(255,248,248,0.5) 18%, rgba(255,248,248,0.08) 34%, rgba(255,248,248,0) 46%, rgba(255,248,248,0) 100%) !important;
+            background: linear-gradient(90deg, rgba(255,248,248,0.9) 0%, rgba(255,248,248,0.68) 20%, rgba(255,248,248,0.24) 38%, rgba(255,248,248,0.04) 52%, rgba(255,248,248,0) 100%) !important;
         }
         #nj-wall-detail .sakura-process-layout {
             width: min(1640px, calc(100% - 76px)) !important;
@@ -5267,6 +5277,7 @@
                             ? "photo"
                             : current;
             document.body.classList.toggle("is-phoenix-project", phoenixSections.has(current));
+            document.body.classList.toggle("is-nj-wall-project", current === "nj-wall");
             document.querySelectorAll(".top-nav a").forEach(link => {
                 const target = link.getAttribute("href");
                 link.classList.toggle("active", target === `#${navTarget}`);
