@@ -3723,6 +3723,119 @@
                 0 0 34px rgba(255, 128, 220, 0.62),
                 0 0 36px rgba(81, 230, 255, 0.28) !important;
         }
+
+        #ai-generation .section-kicker {
+            display: inline-grid !important;
+            grid-template-columns: auto auto !important;
+            align-items: center !important;
+            gap: 0 !important;
+            width: fit-content !important;
+            margin: 0 0 12px !important;
+            padding: 0 !important;
+            color: #231235 !important;
+            background: transparent !important;
+            border: 0 !important;
+            text-shadow: none !important;
+            filter: drop-shadow(6px 6px 0 rgba(88, 217, 255, 0.64)) drop-shadow(12px 12px 0 rgba(255, 119, 200, 0.42)) !important;
+        }
+        #ai-generation .chapter-mark {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 116px !important;
+            height: 72px !important;
+            padding: 0 18px !important;
+            color: #231235 !important;
+            background: linear-gradient(180deg, #ff8ed6 0%, #ff69c3 100%) !important;
+            border: 3px solid #180821 !important;
+            outline: 2px solid #fff6ff !important;
+            font-size: clamp(46px, 5vw, 70px) !important;
+            line-height: 1 !important;
+            text-shadow:
+                2px 2px 0 #fff6ff,
+                -2px 0 0 #58d9ff !important;
+            box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.24), inset 4px 4px 0 rgba(255, 255, 255, 0.36) !important;
+        }
+        #ai-generation .section-kicker > span:last-child {
+            display: inline-flex !important;
+            align-items: center !important;
+            min-height: 54px !important;
+            padding: 0 18px !important;
+            color: #231235 !important;
+            background: linear-gradient(90deg, #fff36d 0%, #8bf4ff 54%, #7cffdc 100%) !important;
+            border: 3px solid #180821 !important;
+            border-left: 0 !important;
+            outline: 2px solid #fff6ff !important;
+            font-family: "Courier New", monospace !important;
+            font-size: clamp(16px, 1.5vw, 24px) !important;
+            font-weight: 900 !important;
+            letter-spacing: 0 !important;
+            text-shadow: 1px 1px 0 rgba(255, 255, 255, 0.8) !important;
+            box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.18), inset 3px 3px 0 rgba(255, 255, 255, 0.34) !important;
+        }
+        #ai-generation .project-hero-copy h2 {
+            margin-top: 2px !important;
+            text-shadow:
+                4px 4px 0 rgba(255, 119, 200, 0.52),
+                -3px 0 0 rgba(88, 217, 255, 0.46),
+                0 0 28px rgba(255, 255, 255, 0.22) !important;
+        }
+        #ai-generation .ai-cases {
+            gap: 18px !important;
+            align-items: stretch !important;
+        }
+        #ai-generation .ai-case {
+            min-height: clamp(386px, 42vh, 430px) !important;
+            padding: calc(30px + 36% + 24px) 18px 18px !important;
+            background:
+                linear-gradient(180deg, transparent 0 30px, rgba(255,255,255,0) 30px calc(30px + 36%), rgba(255, 255, 255, 0.98) calc(30px + 36%), #fffafe 74%, #f5efff 100%) !important;
+        }
+        #ai-generation .ai-case::before {
+            height: 36% !important;
+            background-position: center !important;
+            filter: saturate(1.08) contrast(1.04) brightness(1.02) !important;
+        }
+        #ai-generation .ai-case-body {
+            display: flex !important;
+            flex-direction: column !important;
+            min-height: 0 !important;
+        }
+        #ai-generation .ai-case-body span {
+            order: 1 !important;
+            margin-bottom: 10px !important;
+            background: linear-gradient(90deg, #fff36d 0%, #fff8ad 100%) !important;
+            color: #321444 !important;
+            border-color: rgba(126, 102, 255, 0.7) !important;
+            letter-spacing: 0 !important;
+        }
+        #ai-generation .ai-case-body h3 {
+            order: 2 !important;
+            margin: 0 0 10px !important;
+            padding-top: 10px !important;
+            min-height: 2.25em !important;
+            font-size: clamp(23px, 1.85vw, 31px) !important;
+            color: #21102f !important;
+        }
+        #ai-generation .ai-case-body p {
+            order: 3 !important;
+            display: block !important;
+            -webkit-line-clamp: unset !important;
+            min-height: 54px !important;
+            margin: 0 !important;
+            color: rgba(38, 24, 54, 0.82) !important;
+            background: rgba(255, 255, 255, 0.72) !important;
+            border: 1px solid rgba(255, 128, 220, 0.28) !important;
+            font-size: 12px !important;
+            line-height: 1.55 !important;
+        }
+        #ai-generation .ai-case-tag {
+            order: 4 !important;
+            align-self: flex-start !important;
+            max-width: 100% !important;
+            white-space: normal !important;
+            color: #7a3b86 !important;
+            background: #fff9ff !important;
+        }
         .frame-card:hover {
             transform: translate(-3px, -8px) scale(1.14) !important;
         }
@@ -3937,7 +4050,7 @@
                     <div class="ai-case-body">
                         <span>00 / AI SHORT FILM</span>
                         <h3>&#24425;&#34425;&#35806;&#29983;&#30340;&#25151;&#38388;</h3>
-                        <p>&#36825;&#26159;&#36825;&#19968;&#31456;&#30340;&#24320;&#31687; AI &#30701;&#29255;&#39033;&#30446;&#65292;&#21253;&#21547;&#20998;&#38236;&#12289;&#24037;&#20316;&#27969;&#19982;&#25104;&#29255;&#23637;&#31034;&#65292;&#20316;&#20026; AI &#29983;&#25104;&#31456;&#33410;&#30340;&#35270;&#35273;&#20837;&#21475;&#12290;</p>
+                        <p>&#36825;&#26159;&#20351;&#29992; AI &#29983;&#25104;&#30340;&#35270;&#35273;&#30701;&#29255;&#39033;&#30446;&#12290;</p>
                         <div class="ai-case-tag">STORYBOARD / WORKFLOW / FILM</div>
                     </div>
                 </a>
@@ -3945,7 +4058,7 @@
                     <div class="ai-case-body">
                         <span>01 / Nanjing City Wall</span>
                         <h3>&#21335;&#20140;&#22478;&#22681;&#27185;&#33457;&#35013;&#32622;&#35774;&#35745;</h3>
-                        <p>&#25226;&#21382;&#21490;&#31354;&#38388;&#12289;&#26149;&#26085;&#33457;&#24847;&#21644;&#20844;&#20849;&#35013;&#32622;&#24863;&#25918;&#21040;&#19968;&#36215;&#65292;&#24378;&#35843;&#22330;&#26223;&#27675;&#22260;&#19982;&#31354;&#38388;&#23610;&#24230;&#12290;</p>
+                        <p>&#36825;&#26159;&#20351;&#29992; AI &#29983;&#25104;&#30340;&#22478;&#24066;&#20844;&#20849;&#35013;&#32622;&#35774;&#35745;&#39033;&#30446;&#12290;</p>
                         <div class="ai-case-tag">INSTALLATION / CITY SPACE</div>
                     </div>
                 </a>
@@ -3953,7 +4066,7 @@
                     <div class="ai-case-body">
                         <span>02 / Phoenix Bookstore</span>
                         <h3>&#21335;&#20140;&#20964;&#20976;&#20070;&#24215;&#35013;&#32622;&#35774;&#35745;</h3>
-                        <p>&#22260;&#32469;&#20070;&#24215;&#30340;&#38405;&#35835;&#27668;&#36136;&#12289;&#22478;&#24066;&#25991;&#21270;&#21644;&#35270;&#35273;&#35013;&#32622;&#65292;&#20570;&#26356;&#20559;&#23460;&#20869;&#27675;&#22260;&#30340;&#29983;&#25104;&#23581;&#35797;&#12290;</p>
+                        <p>&#36825;&#26159;&#20351;&#29992; AI &#29983;&#25104;&#30340;&#20070;&#24215;&#31354;&#38388;&#35013;&#32622;&#35774;&#35745;&#39033;&#30446;&#12290;</p>
                         <div class="ai-case-tag">INTERIOR / CULTURE</div>
                     </div>
                 </a>
@@ -3961,7 +4074,7 @@
                     <div class="ai-case-body">
                         <span>03 / 3D HERBAL</span>
                         <h3>&#20013;&#33609;&#33647; AI &#27169;&#22411;&#29983;&#25104;</h3>
-                        <p>&#20197;&#26893;&#29289;&#12289;&#22120;&#30399;&#21644;&#26448;&#36136;&#34920;&#29616;&#20013;&#33647;&#35270;&#35273;&#65292;&#36866;&#21512;&#20570;&#19977;&#32500;&#29983;&#38271;&#12289;&#25670;&#20214;&#19982;&#20135;&#21697;&#21270;&#23637;&#31034;&#12290;</p>
+                        <p>&#36825;&#26159;&#20351;&#29992; AI &#29983;&#25104;&#30340;&#20013;&#33609;&#33647;&#19977;&#32500;&#27169;&#22411;&#35774;&#35745;&#39033;&#30446;&#12290;</p>
                         <div class="ai-case-tag">3D / OBJECT STUDY</div>
                     </div>
                 </a>
