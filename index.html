@@ -5881,6 +5881,165 @@
                 margin-right: 16px !important;
             }
         }
+        /* Restore global scale: nav, logo, directory cards, storyboard page, and full dot navigation */
+        .profile-brand {
+            top: 32px !important;
+            left: 28px !important;
+            font-size: clamp(38px, 3.2vw, 54px) !important;
+            line-height: 1 !important;
+            letter-spacing: 0 !important;
+        }
+        .top-nav {
+            top: 30px !important;
+            right: 28px !important;
+            gap: 10px !important;
+            padding: 10px !important;
+            border-width: 4px !important;
+            box-shadow: 7px 7px 0 rgba(88, 217, 255, 0.42), 0 0 30px rgba(255, 119, 200, 0.34) !important;
+        }
+        .top-nav a {
+            min-height: 38px !important;
+            padding: 9px 17px !important;
+            border-width: 3px !important;
+            font-size: 13px !important;
+            letter-spacing: 0.04em !important;
+        }
+        .dot-nav {
+            right: 27px !important;
+            gap: 8px !important;
+            max-height: 72vh !important;
+            overflow-y: auto !important;
+            padding: 4px 2px !important;
+            scrollbar-width: none !important;
+            z-index: 80 !important;
+        }
+        .dot-nav::-webkit-scrollbar {
+            display: none !important;
+        }
+        .dot-item {
+            width: 10px !important;
+            height: 10px !important;
+            min-width: 10px !important;
+            min-height: 10px !important;
+            border-radius: 3px !important;
+            border-width: 2px !important;
+            opacity: 0.88 !important;
+        }
+        .dot-item.active {
+            width: 14px !important;
+            height: 14px !important;
+            min-width: 14px !important;
+            min-height: 14px !important;
+            opacity: 1 !important;
+        }
+        #directory .container {
+            width: min(1500px, 88vw) !important;
+            max-width: none !important;
+        }
+        #directory .section-kicker {
+            font-size: clamp(18px, 1.35vw, 25px) !important;
+            padding: 14px 22px !important;
+            margin-bottom: 34px !important;
+        }
+        #directory .index-grid {
+            grid-template-columns: repeat(4, minmax(285px, 1fr)) !important;
+            gap: 30px !important;
+        }
+        #directory .index-card {
+            min-height: clamp(470px, 55vh, 560px) !important;
+            padding: calc(38px + 48%) 24px 24px !important;
+        }
+        #directory .index-card::after {
+            height: 36px !important;
+            line-height: 36px !important;
+            font-size: 15px !important;
+        }
+        #directory .index-card::before {
+            top: 36px !important;
+        }
+        #directory .index-card h3 {
+            font-size: clamp(32px, 2.7vw, 44px) !important;
+            line-height: 1.08 !important;
+        }
+        #directory .index-card p {
+            font-size: 15px !important;
+            line-height: 1.7 !important;
+        }
+        #storyboard .container {
+            width: min(1520px, 88vw) !important;
+            max-width: none !important;
+        }
+        #storyboard .storyboard-band {
+            gap: 24px !important;
+            margin-bottom: 30px !important;
+        }
+        #storyboard .section-title {
+            font-size: clamp(76px, 6.8vw, 128px) !important;
+            line-height: 0.95 !important;
+        }
+        #storyboard .section-kicker {
+            font-size: 13px !important;
+        }
+        #storyboard .storyboard-note {
+            font-size: 16px !important;
+            line-height: 1.95 !important;
+            max-width: 620px !important;
+        }
+        #storyboard .storyboard-meta span {
+            padding: 10px 16px !important;
+            font-size: 12px !important;
+        }
+        #storyboard .gallery-row {
+            --frame-w: clamp(260px, 17.5vw, 350px) !important;
+            --frame-gap: clamp(16px, 1.55vw, 26px) !important;
+            padding: 24px 0 42px !important;
+        }
+        #storyboard .frame-card {
+            border-width: 3px !important;
+            outline-width: 2px !important;
+        }
+        #storyboard .frame-card span {
+            font-size: 13px !important;
+            left: 13px !important;
+            bottom: 10px !important;
+        }
+        #storyboard .dots-row {
+            gap: 14px !important;
+            margin-top: -12px !important;
+        }
+        #storyboard .dot {
+            width: 11px !important;
+            height: 11px !important;
+        }
+        @media (max-width: 1180px) {
+            .top-nav {
+                left: 18px !important;
+                right: 18px !important;
+                overflow-x: auto !important;
+                justify-content: flex-start !important;
+            }
+            #directory .index-grid {
+                grid-template-columns: repeat(2, minmax(260px, 1fr)) !important;
+            }
+        }
+        @media (max-width: 680px) {
+            .profile-brand {
+                top: 74px !important;
+                left: 18px !important;
+                font-size: 28px !important;
+            }
+            .top-nav a {
+                min-height: 34px !important;
+                padding: 8px 13px !important;
+                font-size: 12px !important;
+            }
+            #directory .index-grid {
+                grid-template-columns: 1fr !important;
+            }
+            #storyboard .section-title {
+                font-size: clamp(46px, 15vw, 76px) !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -5907,11 +6066,32 @@
         <a href="#photo">&#24433;&#20687;</a>
     </nav>
     <div class="dot-nav">
-        <button class="dot-item active" onclick="scrollToSec('cover-new')" aria-label="&#26032;&#23553;&#38754;"></button>
-        <button class="dot-item" onclick="scrollToSec('about-me')" aria-label="About Me"></button>
-        <button class="dot-item" onclick="scrollToSec('directory')" aria-label="&#30446;&#24405;"></button>
-        <button class="dot-item" onclick="scrollToSec('ai-generation')" aria-label="&#39033;&#30446;"></button>
-        <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="&#20998;&#38236;"></button>
+        <button class="dot-item active" onclick="scrollToSec('cover-new')" aria-label="Cover"></button>
+        <button class="dot-item" onclick="scrollToSec('about-me')" aria-label="About"></button>
+        <button class="dot-item" onclick="scrollToSec('directory')" aria-label="Directory"></button>
+        <button class="dot-item" onclick="scrollToSec('ai-generation')" aria-label="AI Generation"></button>
+        <button class="dot-item" onclick="scrollToSec('hero-project')" aria-label="AI Film"></button>
+        <button class="dot-item" onclick="scrollToSec('storyboard')" aria-label="Storyboard"></button>
+        <button class="dot-item" onclick="scrollToSec('ch2')" aria-label="Workflow"></button>
+        <button class="dot-item" onclick="scrollToSec('ch3')" aria-label="Final Film"></button>
+        <button class="dot-item" onclick="scrollToSec('nj-wall')" aria-label="Nanjing Wall"></button>
+        <button class="dot-item" onclick="scrollToSec('nj-wall-detail')" aria-label="Wall Exploration"></button>
+        <button class="dot-item" onclick="scrollToSec('phoenix-bookstore')" aria-label="Phoenix Hero"></button>
+        <button class="dot-item" onclick="scrollToSec('phoenix-bookstore-detail')" aria-label="Phoenix Studies"></button>
+        <button class="dot-item" onclick="scrollToSec('chapter-interactive')" aria-label="Interactive"></button>
+        <button class="dot-item" onclick="scrollToSec('kite-project-1')" aria-label="Kite 01"></button>
+        <button class="dot-item" onclick="scrollToSec('kite-project-2')" aria-label="Kite 02"></button>
+        <button class="dot-item" onclick="scrollToSec('mirror-project-1')" aria-label="Mirror 01"></button>
+        <button class="dot-item" onclick="scrollToSec('mirror-project-2')" aria-label="Mirror 02"></button>
+        <button class="dot-item" onclick="scrollToSec('mirror-project-3')" aria-label="Mirror 03"></button>
+        <button class="dot-item" onclick="scrollToSec('mirror-project-4')" aria-label="Mirror 04"></button>
+        <button class="dot-item" onclick="scrollToSec('chapter-materials')" aria-label="Materials"></button>
+        <button class="dot-item" onclick="scrollToSec('flower-project-1')" aria-label="Flower 01"></button>
+        <button class="dot-item" onclick="scrollToSec('flower-project-2')" aria-label="Flower 02"></button>
+        <button class="dot-item" onclick="scrollToSec('flower-project-3')" aria-label="Flower 03"></button>
+        <button class="dot-item" onclick="scrollToSec('flower-project-4')" aria-label="Flower 04"></button>
+        <button class="dot-item" onclick="scrollToSec('photo')" aria-label="Image"></button>
+        <button class="dot-item" onclick="scrollToSec('thank-you')" aria-label="Thanks"></button>
     </div>
 
     <section id="cover-new" class="cover-new" aria-label="&#26032;&#23553;&#38754;">
@@ -7008,7 +7188,7 @@
         }
 
         function adjustActiveStates() {
-            const sectionIds = ["cover-new", "about-me", "directory", "ai-generation", "hero-project"];
+            const sectionIds = ["cover-new", "about-me", "directory", "ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "chapter-interactive", "kite-project-1", "kite-project-2", "mirror-project-1", "mirror-project-2", "mirror-project-3", "mirror-project-4", "chapter-materials", "flower-project-1", "flower-project-2", "flower-project-3", "flower-project-4", "photo", "thank-you"];
             let current = "cover-new";
             document.querySelectorAll("section").forEach(section => {
                 if (window.scrollY >= section.offsetTop - 320) current = section.id;
@@ -7041,7 +7221,7 @@
                 const target = link.getAttribute("href");
                 link.classList.toggle("active", target === `#${navTarget}`);
             });
-            const dotTarget = aiSections.has(current) ? "ai-generation" : current;
+            const dotTarget = current;
             document.querySelectorAll(".dot-item").forEach((dot, i) => {
                 dot.classList.toggle("active", sectionIds[i] === dotTarget);
             });
@@ -7516,6 +7696,7 @@
     </script>
 </body>
 </html>
+
 
 
 
