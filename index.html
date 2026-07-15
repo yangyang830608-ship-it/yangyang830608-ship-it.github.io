@@ -5789,6 +5789,98 @@
         .nj-explore-option p {
             line-height: 1.36 !important;
         }
+        /* Phoenix page alignment: move hero copy left and remove the offset-looking side band */
+        .phoenix-redesign-hero .phoenix-redesign-copy.container {
+            width: min(39vw, 680px) !important;
+            max-width: none !important;
+            margin-left: clamp(78px, 7vw, 138px) !important;
+            margin-right: auto !important;
+            padding-top: clamp(150px, 17vh, 210px) !important;
+            padding-bottom: 64px !important;
+            justify-content: flex-start !important;
+        }
+        .phoenix-redesign-hero .phoenix-redesign-title {
+            font-size: clamp(52px, 4.35vw, 86px) !important;
+            line-height: 1.04 !important;
+            text-align: left !important;
+        }
+        .phoenix-redesign-hero .phoenix-redesign-en,
+        .phoenix-redesign-hero .phoenix-redesign-intro,
+        .phoenix-redesign-hero .phoenix-redesign-meta {
+            text-align: left !important;
+        }
+        .phoenix-redesign-hero .phoenix-redesign-intro {
+            max-width: 560px !important;
+        }
+        .phoenix-study-page {
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.016) 1px, transparent 1px),
+                radial-gradient(circle at 88% 12%, rgba(88, 217, 255, 0.12), transparent 28%),
+                linear-gradient(135deg, #110716 0%, #0b0d18 52%, #090611 100%) !important;
+            background-size: 28px 28px, 28px 28px, auto, auto !important;
+        }
+        .phoenix-study-wrap.container {
+            width: calc(100vw - 96px) !important;
+            max-width: none !important;
+            margin-left: 48px !important;
+            margin-right: 48px !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+        }
+        .phoenix-installation {
+            grid-template-columns: minmax(360px, 0.36fr) minmax(0, 0.64fr) !important;
+            gap: clamp(44px, 5vw, 92px) !important;
+            align-items: center !important;
+        }
+        .phoenix-install-copy {
+            max-width: 570px !important;
+        }
+        .phoenix-install-visual {
+            min-height: min(58vw, 650px) !important;
+        }
+        .phoenix-series-header {
+            grid-template-columns: minmax(520px, 0.52fr) minmax(430px, 0.48fr) !important;
+            gap: clamp(42px, 5vw, 86px) !important;
+        }
+        .phoenix-series-header .phoenix-study-desc {
+            max-width: 620px !important;
+            margin-left: 0 !important;
+        }
+        .phoenix-series-track {
+            width: 100% !important;
+        }
+        @media (max-width: 1180px) {
+            .phoenix-redesign-hero .phoenix-redesign-copy.container {
+                width: min(76vw, 680px) !important;
+                margin-left: 36px !important;
+                padding-top: 132px !important;
+            }
+            .phoenix-study-wrap.container {
+                width: calc(100vw - 48px) !important;
+                margin-left: 24px !important;
+                margin-right: 24px !important;
+            }
+            .phoenix-installation,
+            .phoenix-series-header {
+                grid-template-columns: 1fr !important;
+            }
+        }
+        @media (max-width: 680px) {
+            .phoenix-redesign-hero .phoenix-redesign-copy.container {
+                width: calc(100vw - 34px) !important;
+                margin-left: 17px !important;
+                padding-top: 130px !important;
+            }
+            .phoenix-redesign-hero .phoenix-redesign-title {
+                font-size: clamp(38px, 11vw, 56px) !important;
+            }
+            .phoenix-study-wrap.container {
+                width: calc(100vw - 32px) !important;
+                margin-left: 16px !important;
+                margin-right: 16px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -7424,6 +7516,7 @@
     </script>
 </body>
 </html>
+
 
 
 
