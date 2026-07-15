@@ -6189,6 +6189,105 @@
                 transform: translateY(44px) !important;
             }
         }
+        /* Phoenix installation final composition: match the balanced wide layout */
+        .phoenix-study-page {
+            overflow-x: hidden !important;
+            background:
+                linear-gradient(rgba(255, 255, 255, 0.018) 1px, transparent 1px),
+                linear-gradient(90deg, rgba(255, 255, 255, 0.016) 1px, transparent 1px),
+                radial-gradient(circle at 18% 12%, rgba(255, 116, 205, 0.12), transparent 30%),
+                linear-gradient(135deg, #100715 0%, #0b0c18 52%, #090611 100%) !important;
+            background-size: 28px 28px, 28px 28px, auto, auto !important;
+        }
+        .phoenix-installation {
+            width: min(88vw, 1380px) !important;
+            max-width: none !important;
+            min-height: 100vh !important;
+            margin: 0 auto !important;
+            padding: clamp(110px, 13vh, 150px) 0 clamp(70px, 8vh, 104px) !important;
+            display: grid !important;
+            grid-template-columns: minmax(410px, 0.37fr) minmax(620px, 0.63fr) !important;
+            gap: clamp(46px, 5vw, 76px) !important;
+            align-items: center !important;
+            justify-content: center !important;
+            box-sizing: border-box !important;
+        }
+        .phoenix-install-copy {
+            width: 100% !important;
+            max-width: 520px !important;
+            padding-left: 0 !important;
+            box-sizing: border-box !important;
+        }
+        .phoenix-install-copy .phoenix-study-title {
+            font-size: clamp(76px, 5.7vw, 112px) !important;
+            line-height: 1.02 !important;
+            max-width: 620px !important;
+        }
+        .phoenix-install-copy .phoenix-study-desc {
+            max-width: 470px !important;
+            font-size: 15px !important;
+            line-height: 2 !important;
+        }
+        .phoenix-install-visual {
+            position: relative !important;
+            width: 100% !important;
+            max-width: 890px !important;
+            height: clamp(470px, 43vw, 570px) !important;
+            min-height: 0 !important;
+            overflow: visible !important;
+            justify-self: end !important;
+            box-sizing: border-box !important;
+        }
+        .phoenix-install-visual .phoenix-main-image {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            width: 76% !important;
+            height: 76% !important;
+            right: auto !important;
+            bottom: auto !important;
+            z-index: 1 !important;
+            max-width: none !important;
+        }
+        .phoenix-install-visual .phoenix-secondary-image {
+            position: absolute !important;
+            right: 0 !important;
+            bottom: 2% !important;
+            width: 46% !important;
+            height: 44% !important;
+            left: auto !important;
+            top: auto !important;
+            z-index: 3 !important;
+            max-width: none !important;
+        }
+        .phoenix-install-visual .phoenix-study-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+        }
+        @media (max-width: 1180px) {
+            .phoenix-installation {
+                width: min(92vw, 900px) !important;
+                grid-template-columns: 1fr !important;
+            }
+            .phoenix-install-visual {
+                justify-self: center !important;
+                max-width: 860px !important;
+                height: clamp(410px, 62vw, 560px) !important;
+            }
+        }
+        @media (max-width: 680px) {
+            .phoenix-installation {
+                width: calc(100vw - 32px) !important;
+                padding-top: 96px !important;
+            }
+            .phoenix-install-copy .phoenix-study-title {
+                font-size: clamp(46px, 14vw, 72px) !important;
+            }
+            .phoenix-install-visual {
+                height: 360px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -7845,6 +7944,7 @@
     </script>
 </body>
 </html>
+
 
 
 
