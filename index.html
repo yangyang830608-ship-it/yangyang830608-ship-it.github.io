@@ -4412,6 +4412,88 @@
                 height: 240px !important;
             }
         }
+    
+        /* Thank-you page: appended after the final page only. */
+        .thank-you-page {
+            min-height: 100vh !important;
+            background: #1b0823 !important;
+            overflow: hidden !important;
+            isolation: isolate !important;
+        }
+        .thank-you-stage {
+            position: absolute !important;
+            left: 50% !important;
+            top: 50% !important;
+            width: 100vw !important;
+            height: 100vh !important;
+            min-width: 177.7778vh !important;
+            min-height: 56.25vw !important;
+            transform: translate(-50%, -50%) !important;
+        }
+        .thank-you-bg,
+        .thank-you-contact-source {
+            position: absolute !important;
+            inset: 0 !important;
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            display: block !important;
+        }
+        .thank-you-bg {
+            z-index: 1 !important;
+        }
+        .thank-you-hotspot,
+        .thank-you-contact-card {
+            position: absolute !important;
+            z-index: 4 !important;
+            left: var(--x) !important;
+            top: var(--y) !important;
+            width: var(--w) !important;
+            height: var(--h) !important;
+            display: block !important;
+        }
+        .thank-you-hotspot {
+            border: 0 !important;
+            background: transparent !important;
+            cursor: pointer !important;
+            border-radius: 10px !important;
+        }
+        .thank-you-hotspot:focus-visible {
+            outline: 3px solid rgba(255, 255, 255, 0.92) !important;
+            outline-offset: 4px !important;
+        }
+        .thank-you-contact-card {
+            z-index: 3 !important;
+            overflow: hidden !important;
+            border-radius: 8px !important;
+            pointer-events: auto !important;
+            transform-origin: center center !important;
+            transition: transform 0.28s ease, filter 0.28s ease, box-shadow 0.28s ease !important;
+            box-shadow: 0 0 18px rgba(255, 166, 238, 0.18) !important;
+        }
+        .thank-you-contact-card:hover,
+        .thank-you-contact-card:focus-visible {
+            transform: scale(1.08) !important;
+            z-index: 6 !important;
+            filter: saturate(1.08) brightness(1.04) !important;
+            box-shadow: 0 16px 42px rgba(71, 14, 93, 0.28), 0 0 28px rgba(255, 142, 230, 0.42) !important;
+        }
+        .thank-you-contact-source {
+            left: var(--crop-left) !important;
+            top: var(--crop-top) !important;
+            width: var(--crop-width) !important;
+            height: var(--crop-height) !important;
+            max-width: none !important;
+        }
+        @media (max-width: 720px) {
+            .thank-you-contact-card {
+                transform-origin: 82% 52% !important;
+            }
+            .thank-you-contact-card:hover,
+            .thank-you-contact-card:focus-visible {
+                transform: scale(1.05) !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -5115,6 +5197,17 @@
             </div>
         </div>
     </section>
+    <section id="thank-you" class="thank-you-page" aria-label="Thank you">
+        <div class="thank-you-stage">
+            <img class="thank-you-bg" src="%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E6%84%9F%E8%B0%A2%E8%A7%82%E7%9C%8B%E9%A1%B5.png" onerror="this.onerror=null;this.src='%E6%84%9F%E8%B0%A2%E8%A7%82%E7%9C%8B%E9%A1%B5.png';" alt="Thank you page">
+            <a class="thank-you-hotspot" href="#about-me" onclick="scrollToSec('about-me'); return false;" style="--x:39.2%; --y:53.7%; --w:7.4%; --h:5.2%;" aria-label="Go to About Me"></a>
+            <a class="thank-you-hotspot" href="#directory" onclick="scrollToSec('directory'); return false;" style="--x:47.9%; --y:53.7%; --w:7.4%; --h:5.2%;" aria-label="Go to Works"></a>
+            <a class="thank-you-hotspot" href="#about-me" onclick="scrollToSec('about-me'); return false;" style="--x:56.6%; --y:53.7%; --w:7.4%; --h:5.2%;" aria-label="Go to Skills"></a>
+            <div class="thank-you-contact-card" tabindex="0" style="--x:71.25%; --y:42.6%; --w:19.6%; --h:20.9%; --crop-left:-363.52%; --crop-top:-203.83%; --crop-width:510.20%; --crop-height:478.47%;" aria-label="Contact card">
+                <img class="thank-you-contact-source" src="%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F%E9%A1%B5.png" onerror="this.onerror=null;this.src='%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F%E9%A1%B5.png';" alt="Contact">
+            </div>
+        </div>
+    </section>
 
     <canvas class="cursor-paint" id="cursorPaint" aria-hidden="true"></canvas>
 
@@ -5543,7 +5636,7 @@
                 "mirror-project-4"
             ]);
             const materialSections = new Set(["chapter-materials", "flower-project-1", "flower-project-2", "flower-project-3", "flower-project-4"]);
-            const imageSections = new Set(["photo"]);
+            const imageSections = new Set(["photo", "thank-you"]);
             const navTarget = aiSections.has(current)
                 ? "ai-generation"
                 : interactiveSections.has(current)
@@ -6019,6 +6112,7 @@
     </script>
 </body>
 </html>
+
 
 
 
