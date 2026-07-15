@@ -4706,7 +4706,7 @@
             }
         }
     
-        /* Nanjing City Wall cherry blossom project redesign: project display, not process deck. */
+        /* Nanjing City Wall cherry blossom project redesign: only this project. */
         .nj-redesign-page {
             min-height: 100vh !important;
             background:
@@ -4742,9 +4742,7 @@
             align-items: center !important;
             min-height: calc(100vh - 150px) !important;
         }
-        .nj-project-copy {
-            max-width: 500px !important;
-        }
+        .nj-project-copy { max-width: 500px !important; }
         .nj-project-index {
             display: inline-block !important;
             margin-bottom: 18px !important;
@@ -4777,11 +4775,7 @@
             line-height: 1.9 !important;
             font-weight: 800 !important;
         }
-        .nj-project-facts {
-            display: grid !important;
-            gap: 12px !important;
-            margin-top: 30px !important;
-        }
+        .nj-project-facts { display: grid !important; gap: 12px !important; margin-top: 30px !important; }
         .nj-fact {
             display: grid !important;
             grid-template-columns: 78px minmax(0, 1fr) !important;
@@ -4824,9 +4818,7 @@
             align-items: center !important;
             min-height: calc(100vh - 150px) !important;
         }
-        .nj-explore-copy {
-            max-width: 430px !important;
-        }
+        .nj-explore-copy { max-width: 430px !important; }
         .nj-section-title {
             margin: 0 !important;
             color: #2b1738 !important;
@@ -4841,12 +4833,7 @@
             font-size: 18px !important;
             font-weight: 900 !important;
         }
-        .nj-tags {
-            display: flex !important;
-            flex-wrap: wrap !important;
-            gap: 10px !important;
-            margin-top: 26px !important;
-        }
+        .nj-tags { display: flex !important; flex-wrap: wrap !important; gap: 10px !important; margin-top: 26px !important; }
         .nj-tags span {
             padding: 8px 11px !important;
             border: 2px solid rgba(88, 34, 105, 0.5) !important;
@@ -4856,11 +4843,7 @@
             font: 900 11px "Courier New", monospace !important;
             box-shadow: 3px 3px 0 rgba(88, 217, 255, 0.42) !important;
         }
-        .nj-explore-board {
-            position: relative !important;
-            height: min(72vh, 680px) !important;
-            min-height: 520px !important;
-        }
+        .nj-explore-board { position: relative !important; height: min(72vh, 680px) !important; min-height: 520px !important; }
         .nj-design-card {
             position: absolute !important;
             overflow: hidden !important;
@@ -4874,12 +4857,7 @@
             z-index: 8 !important;
             box-shadow: 0 28px 70px rgba(85, 30, 96, 0.25), 0 0 42px rgba(255, 119, 200, 0.28) !important;
         }
-        .nj-design-card img {
-            width: 100% !important;
-            height: calc(100% - 76px) !important;
-            object-fit: cover !important;
-            display: block !important;
-        }
+        .nj-design-card img { width: 100% !important; height: calc(100% - 76px) !important; object-fit: cover !important; display: block !important; }
         .nj-card-caption {
             height: 76px !important;
             padding: 12px 14px !important;
@@ -4905,17 +4883,9 @@
         .nj-card-iteration { left: 5%; bottom: 2%; width: 43%; height: 42%; }
         .nj-card-final { right: 0; bottom: 0; width: 50%; height: 50%; }
         @media (max-width: 1100px) {
-            .nj-redesign-page {
-                overflow: visible !important;
-            }
-            .nj-project-layout,
-            .nj-explore-layout {
-                grid-template-columns: 1fr !important;
-                min-height: auto !important;
-            }
-            .nj-hero-image {
-                height: 56vh !important;
-            }
+            .nj-redesign-page { overflow: visible !important; }
+            .nj-project-layout, .nj-explore-layout { grid-template-columns: 1fr !important; min-height: auto !important; }
+            .nj-hero-image { height: 56vh !important; }
             .nj-explore-board {
                 height: auto !important;
                 min-height: 0 !important;
@@ -4933,11 +4903,7 @@
                 height: 320px !important;
             }
         }
-        @media (max-width: 680px) {
-            .nj-explore-board {
-                grid-template-columns: 1fr !important;
-            }
-        }
+        @media (max-width: 680px) { .nj-explore-board { grid-template-columns: 1fr !important; } }
     </style>
 </head>
 <body>
@@ -5046,7 +5012,137 @@
                 </a>
             </div>
         </div>
-        <section id="nj-wall" class="nj-redesign-page">
+        <div class="project-arrow">&#8595;</div>
+    </section>
+
+<section id="hero-project" class="case-page">
+        <div class="story-bg" id="storyBg"></div>
+        <div class="container">
+            <article class="glass-card">
+                <p class="section-kicker">CORE PROJECT</p>
+                <h2>&#24425;&#34425;&#35806;&#29983;&#30340;&#25151;&#38388; / Rainbow Room</h2>
+                <p>从故事概念出发，借助 AI 完成画面生成、分镜规划与动态制作，尝试建立一套兼具效率与创意表达的视觉创作流程</p>
+                <div class="tag-row">
+                    <span>#分镜设计</span>
+                    <span>#AI工作流</span>
+                    <span>#视频生成</span>
+                </div>
+            </article>
+        </div>
+    </section>
+
+<section id="storyboard" class="storyboard">
+        <div class="container">
+            <div class="storyboard-band">
+                <div class="storyboard-hero">
+                    <div>
+                        <p class="section-kicker">AI SHORT FILM STORYBOARD / &#20998;&#38236;&#24635;&#35272;</p>
+                        <h2 class="section-title">AI&#30701;&#29255;&#20998;&#38236;&#29983;&#25104;</h2>
+                    </div>
+                    <div class="storyboard-note">
+                        &#26412;&#39029;&#23637;&#31034;&#12298;&#24425;&#34425;&#35806;&#29983;&#30340;&#25151;&#38388;&#12299;&#30340;&#23436;&#25972;&#20998;&#38236;&#35774;&#35745;&#65292;&#20849;&#21253;&#21547; 39 &#20010;&#38236;&#22836;&#30011;&#38754;&#12290;&#27599;&#19968;&#24103;&#20998;&#38236;&#37117;&#20316;&#20026;&#21518;&#32493; AI &#22270;&#20687;&#29983;&#25104;&#19982;&#35270;&#39057;&#21046;&#20316;&#30340;&#37325;&#35201;&#20381;&#25454;&#65292;&#29992;&#20110;&#35268;&#21010;&#25925;&#20107;&#33410;&#22863;&#12289;&#38236;&#22836;&#35821;&#35328;&#19982;&#35270;&#35273;&#34920;&#36798;&#12290;
+                    </div>
+                </div>
+                <div class="storyboard-meta">
+                    <span>39 SHOTS</span>
+                    <span>VISUAL STORYBOARD</span>
+                    <span>AI WORKFLOW</span>
+                </div>
+            </div>            <div class="gallery-wrapper">
+                <div class="moving-track"><div class="inner-rail" id="rail1"></div></div>
+                <div class="dots-row" id="dots1"></div>
+                <div class="moving-track"><div class="inner-rail" id="rail2"></div></div>
+                <div class="dots-row" id="dots2"></div>
+                <div class="moving-track"><div class="inner-rail" id="rail3"></div></div>
+                <div class="dots-row" id="dots3"></div>
+            </div>
+        </div>
+    </section>
+
+<section id="ch2" class="workflow-page">
+        <div class="container">
+            <p class="section-kicker">WORKFLOW / &#21046;&#20316;&#27969;&#31243;</p>
+            <h2 class="section-title">AI &#21019;&#20316;&#24037;&#20316;&#27969;</h2>
+            <p class="workflow-subtitle">AI CREATIVE WORKFLOW</p>
+            <p class="section-copy">&#20174;&#27010;&#24565;&#12289;&#21095;&#24773;&#12289;&#20998;&#38236;&#21040;&#25552;&#31034;&#35789;&#12289;&#35270;&#35273;&#29983;&#25104;&#19982;&#21160;&#24577;&#21098;&#36753;&#65292;&#24314;&#31435;&#19968;&#22871;&#23436;&#25972;&#19988;&#36830;&#32493;&#30340; AI &#30701;&#29255;&#21019;&#20316;&#36335;&#24452;&#12290;</p>
+            <div class="workflow-grid">
+                <div class="workflow-card size-md accent-a step-01">
+                    <div class="accent-ring"></div>
+                    <div class="scribble"></div>
+                    <div class="workflow-num">01</div>
+                    <h3>&#27010;&#24565;&#26500;&#24605;</h3>
+                    <h4>Concept Development</h4>
+                    <p>&#22260;&#32469;&#25925;&#20107;&#20027;&#39064;&#30830;&#23450;&#35270;&#35273;&#26041;&#21521;&#65292;&#26787;&#29702;&#35282;&#33394;&#35774;&#23450;&#12289;&#30011;&#38754;&#27675;&#22260;&#19982;&#25972;&#20307;&#21465;&#20107;&#36923;&#36753;&#65292;&#20026;&#21518;&#32493;&#21019;&#20316;&#24314;&#31435;&#32479;&#19968;&#30340;&#35774;&#35745;&#26694;&#26550;&#12290;</p>
+                    <div class="workflow-chip">CONCEPT / WORLDVIEW</div>
+                    <div class="workflow-flow">&rarr;</div>
+                </div>
+                <div class="workflow-card size-md accent-b step-02">
+                    <div class="accent-ring"></div>
+                    <div class="scribble"></div>
+                    <div class="workflow-num">02</div>
+                    <h3>&#21095;&#24773;&#35268;&#21010;</h3>
+                    <h4>Story Development</h4>
+                    <p>&#26500;&#24314;&#23436;&#25972;&#25925;&#20107;&#32467;&#26500;&#65292;&#26126;&#30830;&#35282;&#33394;&#20851;&#31995;&#12289;&#24773;&#33410;&#25512;&#36827;&#19982;&#24773;&#32490;&#33410;&#22863;&#65292;&#24418;&#25104;&#36830;&#32493;&#30340;&#21465;&#20107;&#26694;&#26550;&#12290;</p>
+                    <div class="workflow-chip">STORY / EMOTION</div>
+                    <div class="workflow-flow">&rarr;</div>
+                </div>
+                <div class="workflow-card size-md accent-c step-03">
+                    <div class="accent-ring"></div>
+                    <div class="scribble"></div>
+                    <div class="workflow-num">03</div>
+                    <h3>&#25552;&#31034;&#35789;&#35774;&#35745;</h3>
+                    <h4>Prompt Engineering</h4>
+                    <p>&#23558;&#25925;&#20107;&#20869;&#23481;&#25286;&#35299;&#20026;&#32467;&#26500;&#21270;&#25552;&#31034;&#35789;&#65292;&#32479;&#19968;&#35282;&#33394;&#12289;&#26500;&#22270;&#12289;&#38236;&#22836;&#12289;&#20809;&#24433;&#19982;&#30011;&#38754;&#39118;&#26684;&#65292;&#20026;&#21518;&#32493; AI &#30011;&#38754;&#29983;&#25104;&#24314;&#31435;&#19968;&#33268;&#30340;&#21019;&#20316;&#35268;&#33539;&#12290;</p>
+                    <div class="workflow-chip">PROMPT / CONSISTENCY</div>
+                    <div class="workflow-flow">&rarr;</div>
+                </div>                <div class="workflow-card size-md accent-d step-04">
+                    <div class="accent-ring"></div>
+                    <div class="scribble"></div>
+                    <div class="workflow-num">04</div>
+                    <h3>&#20998;&#38236;&#29983;&#25104;</h3>
+                    <h4>Storyboard Generation</h4>
+                    <p>&#22522;&#20110;&#25552;&#31034;&#35789;&#29983;&#25104;&#27599;&#20010;&#38236;&#22836;&#30340;&#20851;&#38190;&#30011;&#38754;&#65292;&#26500;&#24314;&#36830;&#32493;&#30340;&#20998;&#38236;&#24207;&#21015;&#65292;&#24182;&#20316;&#20026;&#21518;&#32493;&#22270;&#29983;&#35270;&#39057;&#30340;&#37325;&#35201;&#39318;&#23614;&#24103;&#12290;</p>
+                    <div class="workflow-chip">STORYBOARD / KEYFRAMES</div>
+                    <div class="workflow-flow">&rarr;</div>
+                </div>                <div class="workflow-card size-lg accent-a step-05">
+                    <div class="accent-ring"></div>
+                    <div class="scribble"></div>
+                    <div class="workflow-num">05</div>
+                    <h3>&#35270;&#35273;&#29983;&#25104;</h3>
+                    <h4>Visual Generation</h4>
+                    <p>&#32467;&#21512; AI &#24037;&#20855;&#23436;&#25104;&#35282;&#33394;&#12289;&#22330;&#26223;&#19982;&#38236;&#22836;&#30011;&#38754;&#30340;&#29983;&#25104;&#65292;&#25345;&#32493;&#20248;&#21270;&#32454;&#33410;&#19982;&#39118;&#26684;&#65292;&#36880;&#27493;&#26500;&#24314;&#23436;&#25972;&#30340;&#35270;&#35273;&#20869;&#23481;&#12290;</p>
+                    <div class="workflow-chip">IMAGE / REFINEMENT</div>
+                    <div class="workflow-flow">&rarr;</div>
+                </div>
+                <div class="workflow-card size-sm accent-b step-06">
+                    <div class="accent-ring"></div>
+                    <div class="scribble"></div>
+                    <div class="workflow-num">06</div>
+                    <h3>&#21160;&#30011;&#19982;&#21098;&#36753;</h3>
+                    <h4>Motion & Editing</h4>
+                    <p>&#23436;&#25104;&#22270;&#29983;&#35270;&#39057;&#12289;&#38236;&#22836;&#34900;&#25509;&#12289;&#33410;&#22863;&#35843;&#25972;&#19982;&#21518;&#26399;&#21098;&#36753;&#65292;&#26368;&#32456;&#36755;&#20986;&#23436;&#25972; AI &#30701;&#29255;&#20316;&#21697;&#12290;</p>
+                    <div class="workflow-chip">MOTION / FINAL</div>
+                    <div class="workflow-flow">END</div>
+                </div>
+            </div>
+        </div>
+    </section><section id="ch3" class="final-page">
+        <div class="container tv-stage">
+            <div class="tv-showcase">
+                <div class="tv-stack">
+                    <img class="tv-intro" src="&#30005;&#35270;&#26426;.png" alt="" aria-hidden="true">
+                    <img class="tv-case" src="&#30005;&#35270;&#26426;.png" alt="&#30005;&#35270;&#26426;&#22806;&#22771;">
+                    <div class="tv-screen" id="tvScreen">
+                        <video class="tv-video" id="finalVideo" muted loop playsinline preload="auto" poster="AI%E7%94%9F%E6%88%90/35.jpg" src="final-cut.mp4"></video>
+                        <div class="tv-noise" aria-hidden="true"></div>
+                    </div>
+                    <img class="tv-frame" src="&#30005;&#35270;&#26426;&#22806;&#26694;.png" alt="" aria-hidden="true">
+                </div>
+            </div>
+        </div>
+    </section>
+
+<section id="nj-wall" class="nj-redesign-page">
         <div class="container">
             <div class="nj-project-layout">
                 <div class="nj-project-copy">
@@ -5113,12 +5209,6 @@
             </div>
         </div>
     </section>
-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" alt="樱花装置灯光材质细节"></div>
-                </div>
-            </div>
-        </div>
-    </section>
-
 <section id="phoenix-bookstore" class="phoenix-page phoenix-hero-page">
         <img class="phoenix-hero-bg" src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(1).png" alt="南京凤凰书店装置设计主视觉">
         <div class="phoenix-shade"></div>
@@ -6332,7 +6422,7 @@
         }
 
         function initSakuraProcessLightbox() {
-            const cards = document.querySelectorAll("#nj-wall-detail .nj-design-card");
+            const cards = document.querySelectorAll("#nj-wall-detail .sakura-process-grid .sakura-card, #nj-wall-gallery .sakura-gallery .sakura-card");
             if (!cards.length) return;
 
             const lightbox = document.createElement("div");
