@@ -5767,6 +5767,28 @@
                 padding: 92px 0 70px;
             }
         }
+        /* Nanjing wall exploration cards: shorten cards so they do not overlap the final proposal title */
+        .nj-explore-cards {
+            align-items: start !important;
+        }
+        .nj-explore-option {
+            height: clamp(260px, 31vh, 350px) !important;
+            min-height: 0 !important;
+            align-self: start !important;
+        }
+        .nj-explore-option img {
+            height: 66% !important;
+        }
+        .nj-explore-option figcaption {
+            height: 34% !important;
+            padding: 11px 14px 10px !important;
+        }
+        .nj-explore-option h3 {
+            margin-bottom: 3px !important;
+        }
+        .nj-explore-option p {
+            line-height: 1.36 !important;
+        }
     </style>
 </head>
 <body>
@@ -7402,6 +7424,7 @@
     </script>
 </body>
 </html>
+
 
 
 
