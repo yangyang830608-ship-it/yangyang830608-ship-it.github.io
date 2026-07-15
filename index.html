@@ -6498,6 +6498,88 @@
                 aspect-ratio: 16 / 9 !important;
             }
         }
+        /* Phoenix Installation image-only enlarge pass: wider project visual */
+        #phoenix-bookstore-detail .phoenix-install-inner {
+            max-width: 1440px !important;
+            grid-template-columns: minmax(360px, 0.68fr) minmax(760px, 1.65fr) !important;
+            align-items: center !important;
+        }
+        #phoenix-bookstore-detail .phoenix-install-visual {
+            width: 100% !important;
+            max-width: 960px !important;
+            height: clamp(540px, 66vh, 700px) !important;
+            justify-self: end !important;
+            position: relative !important;
+            overflow: visible !important;
+            box-sizing: border-box !important;
+        }
+        #phoenix-bookstore-detail .phoenix-install-visual .phoenix-main-image {
+            position: absolute !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: auto !important;
+            bottom: auto !important;
+            width: 94% !important;
+            height: auto !important;
+            aspect-ratio: 2 / 1 !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            border-radius: 18px !important;
+        }
+        #phoenix-bookstore-detail .phoenix-install-visual .phoenix-secondary-image {
+            position: absolute !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            left: auto !important;
+            top: auto !important;
+            width: 54% !important;
+            height: auto !important;
+            aspect-ratio: 16 / 8.5 !important;
+            object-fit: cover !important;
+            object-position: center !important;
+            border-radius: 16px !important;
+        }
+        #phoenix-bookstore-detail .phoenix-install-visual .phoenix-study-image img {
+            width: 100% !important;
+            height: 100% !important;
+            object-fit: cover !important;
+            object-position: center !important;
+        }
+        @media (max-width: 1200px) {
+            #phoenix-bookstore-detail .phoenix-install-inner {
+                grid-template-columns: minmax(340px, 0.72fr) minmax(620px, 1.5fr) !important;
+            }
+            #phoenix-bookstore-detail .phoenix-install-visual {
+                max-width: 820px !important;
+                height: clamp(500px, 62vh, 640px) !important;
+            }
+            #phoenix-bookstore-detail .phoenix-install-visual .phoenix-main-image {
+                width: 92% !important;
+            }
+            #phoenix-bookstore-detail .phoenix-install-visual .phoenix-secondary-image {
+                width: 52% !important;
+            }
+        }
+        @media (max-width: 900px) {
+            #phoenix-bookstore-detail .phoenix-install-inner {
+                grid-template-columns: 1fr !important;
+            }
+            #phoenix-bookstore-detail .phoenix-install-visual {
+                display: grid !important;
+                gap: 20px !important;
+                height: auto !important;
+                max-width: 100% !important;
+                justify-self: center !important;
+                overflow: visible !important;
+            }
+            #phoenix-bookstore-detail .phoenix-install-visual .phoenix-main-image,
+            #phoenix-bookstore-detail .phoenix-install-visual .phoenix-secondary-image {
+                position: static !important;
+                width: 100% !important;
+                height: auto !important;
+                aspect-ratio: 16 / 9 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -8156,6 +8238,7 @@
     </script>
 </body>
 </html>
+
 
 
 
