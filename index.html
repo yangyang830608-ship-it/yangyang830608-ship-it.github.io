@@ -5639,6 +5639,134 @@
                 text-align: left;
             }
         }
+        /* Phoenix layout refinement: center the two study screens and simplify hero title */
+        .phoenix-redesign-copy {
+            width: min(42vw, 700px);
+            max-width: 700px;
+        }
+        .phoenix-redesign-title {
+            font-size: clamp(54px, 4.7vw, 92px);
+            line-height: 1.04;
+            white-space: normal;
+        }
+        .phoenix-redesign-title span {
+            display: block;
+            white-space: nowrap;
+        }
+        .phoenix-redesign-meta {
+            max-width: 470px;
+        }
+        .phoenix-redesign-meta div {
+            grid-template-columns: 66px 1fr;
+        }
+        .phoenix-study-page {
+            padding: 0;
+            min-height: auto;
+            overflow: hidden;
+            background:
+                radial-gradient(circle at 16% 10%, rgba(255, 116, 205, 0.2), transparent 36%),
+                radial-gradient(circle at 86% 12%, rgba(88, 217, 255, 0.16), transparent 34%),
+                linear-gradient(135deg, #150817 0%, #0b0f1d 48%, #0b0610 100%);
+        }
+        .phoenix-study-wrap.container {
+            width: min(1560px, calc(100vw - 132px));
+            max-width: none;
+            margin-left: auto;
+            margin-right: auto;
+            padding-left: 0;
+            padding-right: 0;
+            gap: 0;
+        }
+        .phoenix-installation {
+            min-height: 100vh;
+            padding: 104px 0 74px;
+            grid-template-columns: minmax(300px, 0.34fr) minmax(0, 0.66fr);
+            gap: clamp(38px, 5vw, 86px);
+            align-items: center;
+        }
+        .phoenix-install-copy {
+            max-width: 520px;
+        }
+        .phoenix-install-visual {
+            min-height: min(62vw, 680px);
+        }
+        .phoenix-main-image {
+            width: 82%;
+            height: 76%;
+        }
+        .phoenix-secondary-image {
+            width: 34%;
+            height: 40%;
+            right: 1%;
+            bottom: 4%;
+        }
+        .phoenix-series {
+            min-height: 100vh;
+            padding: 104px 0 78px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            gap: 42px;
+        }
+        .phoenix-series-header {
+            grid-template-columns: minmax(420px, 0.54fr) minmax(360px, 0.46fr);
+            gap: clamp(34px, 5vw, 80px);
+            align-items: end;
+        }
+        .phoenix-series-header .phoenix-study-desc {
+            max-width: 560px;
+            margin-left: auto;
+        }
+        .phoenix-series-toolbar {
+            justify-content: flex-end;
+        }
+        .phoenix-series-track {
+            width: 100%;
+            gap: 34px;
+            padding: 8px 4px 30px;
+        }
+        .phoenix-series-card {
+            flex-basis: clamp(620px, 43vw, 780px);
+        }
+        .phoenix-series-card img {
+            aspect-ratio: 16 / 9.5;
+        }
+        @media (max-width: 1180px) {
+            .phoenix-redesign-copy {
+                width: min(68vw, 680px);
+            }
+            .phoenix-study-wrap.container {
+                width: min(100% - 48px, 980px);
+            }
+            .phoenix-installation,
+            .phoenix-series-header {
+                grid-template-columns: 1fr;
+            }
+            .phoenix-install-copy,
+            .phoenix-series-header .phoenix-study-desc {
+                max-width: 720px;
+                margin-left: 0;
+            }
+        }
+        @media (max-width: 680px) {
+            .phoenix-redesign-copy {
+                width: calc(100vw - 44px);
+            }
+            .phoenix-redesign-title {
+                font-size: clamp(40px, 12vw, 58px);
+            }
+            .phoenix-redesign-title span {
+                white-space: normal;
+            }
+            .phoenix-study-wrap.container {
+                width: calc(100vw - 32px);
+            }
+            .phoenix-installation,
+            .phoenix-series {
+                min-height: auto;
+                padding: 92px 0 70px;
+            }
+        }
     </style>
 </head>
 <body>
@@ -5944,11 +6072,10 @@
         <div class="phoenix-redesign-shade"></div>
         <div class="container phoenix-redesign-copy">
             <p class="phoenix-project-label">PROJECT 02</p>
-            <h2 class="phoenix-redesign-title">&#21335;&#20140;&#20964;&#20976;&#20070;&#24215; AI &#35013;&#32622;&#29983;&#25104;</h2>
+            <h2 class="phoenix-redesign-title"><span>&#21335;&#20140;&#20964;&#20976;&#20070;&#24215;</span><span>AI &#35013;&#32622;&#29983;&#25104;</span></h2>
             <p class="phoenix-redesign-en">NANJING PHOENIX BOOKSTORE<br>AI INSTALLATION STUDY</p>
             <p class="phoenix-redesign-intro">&#26412;&#39033;&#30446;&#22260;&#32469;&#21335;&#20140;&#20964;&#20976;&#20070;&#24215;&#23637;&#24320; AI &#35013;&#32622;&#27010;&#24565;&#21019;&#20316;&#65292;&#20998;&#21035;&#25506;&#32034;&#20964;&#20976;&#38613;&#22609;&#35013;&#32622;&#19982;&#23460;&#20869;&#38405;&#35835;&#31354;&#38388;&#25171;&#21345;&#35013;&#32622;&#65292;&#23581;&#35797;&#22312;&#32479;&#19968;&#22330;&#26223;&#20013;&#24314;&#31435;&#20855;&#26377;&#25991;&#21270;&#35782;&#21035;&#24230;&#21644;&#35270;&#35273;&#35760;&#24518;&#28857;&#30340;&#35774;&#35745;&#34920;&#36798;&#12290;</p>
             <dl class="phoenix-redesign-meta">
-                <div><dt>YEAR</dt><dd>2025</dd></div>
                 <div><dt>TYPE</dt><dd>AI-assisted Installation Concept</dd></div>
                 <div><dt>TOOLS</dt><dd>Midjourney / ChatGPT / Photoshop</dd></div>
             </dl>
@@ -7275,6 +7402,7 @@
     </script>
 </body>
 </html>
+
 
 
 
