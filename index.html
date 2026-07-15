@@ -5240,6 +5240,405 @@
                 grid-template-columns: 1fr !important;
             }
         }
+        /* Phoenix Bookstore redesign: two real pages only */
+        .phoenix-redesign-hero {
+            min-height: 100vh;
+            background: #06070d;
+        }
+        .phoenix-redesign-hero::before {
+            opacity: 0.08;
+        }
+        .phoenix-redesign-bg {
+            position: absolute;
+            inset: 0;
+            z-index: 0;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center center;
+            filter: brightness(0.9) saturate(1.08) contrast(1.03);
+        }
+        .phoenix-redesign-shade {
+            position: absolute;
+            inset: 0;
+            z-index: 2;
+            pointer-events: none;
+            background:
+                linear-gradient(90deg, rgba(2, 3, 8, 0.82) 0%, rgba(6, 8, 16, 0.66) 28%, rgba(8, 10, 18, 0.24) 56%, rgba(8, 10, 18, 0.02) 82%),
+                linear-gradient(180deg, rgba(4, 5, 12, 0.12) 0%, rgba(4, 5, 12, 0.28) 100%);
+        }
+        .phoenix-redesign-copy {
+            position: relative;
+            z-index: 3;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            width: min(35vw, 520px);
+            padding-top: 72px;
+            padding-bottom: 70px;
+        }
+        .phoenix-project-label {
+            margin: 0 0 18px;
+            color: rgba(255, 225, 248, 0.72);
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.22em;
+            text-transform: uppercase;
+        }
+        .phoenix-redesign-title {
+            margin: 0;
+            color: #fff;
+            font-size: clamp(42px, 4.8vw, 82px);
+            font-weight: 900;
+            line-height: 1.02;
+            letter-spacing: 0;
+            text-shadow: 0 0 28px rgba(255, 155, 221, 0.22);
+        }
+        .phoenix-redesign-en {
+            margin: 18px 0 0;
+            color: rgba(255, 255, 255, 0.82);
+            font-size: clamp(14px, 1.2vw, 18px);
+            font-weight: 800;
+            line-height: 1.55;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+        }
+        .phoenix-redesign-intro {
+            margin: 30px 0 34px;
+            color: rgba(255, 255, 255, 0.78);
+            font-size: 14px;
+            line-height: 2.05;
+            letter-spacing: 0.04em;
+        }
+        .phoenix-redesign-meta {
+            display: grid;
+            gap: 17px;
+            margin: 0;
+            max-width: 420px;
+        }
+        .phoenix-redesign-meta div {
+            display: grid;
+            grid-template-columns: 74px 1fr;
+            gap: 18px;
+            align-items: baseline;
+            padding-top: 12px;
+            border-top: 1px solid rgba(255, 255, 255, 0.16);
+        }
+        .phoenix-redesign-meta dt {
+            color: rgba(255, 193, 235, 0.72);
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.18em;
+        }
+        .phoenix-redesign-meta dd {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.86);
+            font-size: 12px;
+            line-height: 1.6;
+        }
+        .phoenix-redesign-scroll {
+            margin-top: auto;
+            padding-top: 46px;
+            color: rgba(255, 255, 255, 0.62);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .phoenix-study-page {
+            min-height: 100vh;
+            overflow: visible;
+            padding: 118px 0 104px;
+            background:
+                radial-gradient(circle at 14% 8%, rgba(255, 116, 205, 0.2), transparent 32%),
+                radial-gradient(circle at 90% 18%, rgba(88, 217, 255, 0.16), transparent 34%),
+                linear-gradient(135deg, #110716 0%, #0a0d18 46%, #0c0612 100%);
+        }
+        .phoenix-study-page::before {
+            opacity: 0.2;
+        }
+        .phoenix-study-wrap {
+            position: relative;
+            z-index: 2;
+            display: grid;
+            gap: clamp(78px, 9vw, 130px);
+        }
+        .phoenix-installation {
+            display: grid;
+            grid-template-columns: minmax(250px, 0.29fr) minmax(0, 0.71fr);
+            gap: clamp(34px, 4.8vw, 74px);
+            align-items: center;
+        }
+        .phoenix-study-kicker {
+            margin: 0 0 13px;
+            color: #6ff2ee;
+            font-size: 12px;
+            font-weight: 900;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+        .phoenix-study-title {
+            margin: 0;
+            color: #fff;
+            font-size: clamp(42px, 5vw, 78px);
+            font-weight: 900;
+            line-height: 0.98;
+            letter-spacing: 0;
+            text-shadow: 0 0 24px rgba(255, 119, 205, 0.25);
+        }
+        .phoenix-study-cn {
+            margin: 14px 0 24px;
+            color: #ff8bd2;
+            font-size: 22px;
+            font-weight: 900;
+            letter-spacing: 0.04em;
+        }
+        .phoenix-study-desc {
+            margin: 0;
+            color: rgba(255, 255, 255, 0.68);
+            font-size: 14px;
+            line-height: 2;
+            letter-spacing: 0.035em;
+        }
+        .phoenix-study-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 28px;
+        }
+        .phoenix-study-tags span {
+            padding: 8px 13px;
+            border: 1px solid rgba(255, 255, 255, 0.18);
+            border-radius: 999px;
+            color: rgba(255, 255, 255, 0.78);
+            background: rgba(255, 255, 255, 0.045);
+            font-size: 11px;
+            font-weight: 800;
+            letter-spacing: 0.06em;
+        }
+        .phoenix-install-visual {
+            position: relative;
+            min-height: clamp(430px, 54vw, 720px);
+        }
+        .phoenix-study-image {
+            display: block;
+            width: 100%;
+            padding: 0;
+            border: 0;
+            background: transparent;
+            cursor: zoom-in;
+            overflow: hidden;
+        }
+        .phoenix-study-image img {
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1), filter 0.35s ease;
+        }
+        .phoenix-study-image:hover img {
+            transform: scale(1.035);
+            filter: brightness(1.05) saturate(1.06);
+        }
+        .phoenix-main-image {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 84%;
+            height: 78%;
+            border-radius: 18px;
+            box-shadow: 0 34px 80px rgba(0, 0, 0, 0.42), 0 0 42px rgba(255, 120, 205, 0.16);
+        }
+        .phoenix-secondary-image {
+            position: absolute;
+            right: 0;
+            bottom: 0;
+            width: 38%;
+            height: 44%;
+            border-radius: 14px;
+            box-shadow: 0 26px 62px rgba(0, 0, 0, 0.46), 0 0 28px rgba(106, 238, 255, 0.18);
+        }
+        .phoenix-secondary-label {
+            position: absolute;
+            right: 22px;
+            bottom: 18px;
+            z-index: 2;
+            padding: 7px 10px;
+            color: rgba(255, 255, 255, 0.78);
+            background: rgba(5, 5, 12, 0.58);
+            border: 1px solid rgba(255, 255, 255, 0.16);
+            border-radius: 999px;
+            font-size: 10px;
+            font-weight: 900;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            pointer-events: none;
+        }
+        .phoenix-series {
+            display: grid;
+            gap: 34px;
+        }
+        .phoenix-series-header {
+            display: grid;
+            grid-template-columns: minmax(280px, 0.42fr) minmax(320px, 0.58fr);
+            gap: 46px;
+            align-items: end;
+        }
+        .phoenix-series-toolbar {
+            display: flex;
+            gap: 12px;
+            justify-content: flex-end;
+            align-items: center;
+            margin-top: 22px;
+        }
+        .phoenix-series-arrow {
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(255, 255, 255, 0.26);
+            border-radius: 999px;
+            color: white;
+            background: rgba(255, 255, 255, 0.07);
+            font-size: 22px;
+            cursor: pointer;
+            transition: transform 0.24s ease, background 0.24s ease;
+        }
+        .phoenix-series-arrow:hover {
+            transform: translateY(-2px);
+            background: rgba(255, 126, 211, 0.18);
+        }
+        .phoenix-series-track {
+            display: flex;
+            gap: clamp(18px, 2.2vw, 30px);
+            overflow-x: auto;
+            overflow-y: hidden;
+            scroll-snap-type: x mandatory;
+            scroll-padding: 2px;
+            padding: 6px 4px 28px;
+            cursor: grab;
+            scrollbar-color: rgba(255, 126, 211, 0.72) rgba(255, 255, 255, 0.08);
+        }
+        .phoenix-series-track:active {
+            cursor: grabbing;
+        }
+        .phoenix-series-card {
+            flex: 0 0 clamp(520px, 44vw, 760px);
+            scroll-snap-align: start;
+            opacity: 0.82;
+            transform: scale(0.975);
+            transition: transform 0.3s ease, opacity 0.3s ease, filter 0.3s ease;
+        }
+        .phoenix-series-card:first-child {
+            opacity: 1;
+            transform: scale(1);
+        }
+        .phoenix-series-card:hover {
+            opacity: 1;
+            transform: scale(1.015);
+            filter: brightness(1.06);
+        }
+        .phoenix-series-card img {
+            width: 100%;
+            aspect-ratio: 16 / 10;
+            display: block;
+            object-fit: cover;
+            border-radius: 16px;
+            box-shadow: 0 28px 68px rgba(0, 0, 0, 0.38);
+        }
+        .phoenix-series-caption {
+            display: flex;
+            justify-content: space-between;
+            gap: 18px;
+            align-items: baseline;
+            margin-top: 15px;
+            color: rgba(255, 255, 255, 0.72);
+        }
+        .phoenix-series-caption h4 {
+            margin: 0;
+            color: #fff;
+            font-size: 16px;
+            font-weight: 900;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+        }
+        .phoenix-series-caption p {
+            margin: 0;
+            max-width: 270px;
+            font-size: 12px;
+            line-height: 1.7;
+            text-align: right;
+        }
+        @media (max-width: 980px) {
+            .phoenix-redesign-copy {
+                width: min(78vw, 520px);
+                padding-top: 112px;
+            }
+            .phoenix-installation,
+            .phoenix-series-header {
+                grid-template-columns: 1fr;
+            }
+            .phoenix-install-visual {
+                min-height: 520px;
+            }
+            .phoenix-series-toolbar {
+                justify-content: flex-start;
+            }
+        }
+        @media (max-width: 680px) {
+            .phoenix-redesign-copy {
+                width: 100%;
+                justify-content: flex-end;
+                padding-top: 150px;
+            }
+            .phoenix-redesign-meta div {
+                grid-template-columns: 1fr;
+                gap: 5px;
+            }
+            .phoenix-study-page {
+                padding: 96px 0 76px;
+            }
+            .phoenix-install-visual {
+                min-height: 0;
+                display: grid;
+                gap: 16px;
+            }
+            .phoenix-main-image,
+            .phoenix-secondary-image {
+                position: relative;
+                inset: auto;
+                width: 100%;
+                height: auto;
+                aspect-ratio: 4 / 3;
+            }
+            .phoenix-secondary-label {
+                right: 14px;
+                bottom: 14px;
+            }
+            .phoenix-series-track {
+                display: grid;
+                overflow: visible;
+                padding-bottom: 0;
+            }
+            .phoenix-series-card {
+                flex-basis: auto;
+                transform: none;
+                opacity: 1;
+            }
+            .phoenix-series-card img {
+                aspect-ratio: 4 / 3;
+            }
+            .phoenix-series-toolbar {
+                display: none;
+            }
+            .phoenix-series-caption {
+                display: block;
+            }
+            .phoenix-series-caption p {
+                margin-top: 8px;
+                max-width: none;
+                text-align: left;
+            }
+        }
     </style>
 </head>
 <body>
@@ -5540,62 +5939,70 @@
             </div>
         </div>
     </section>
-<section id="phoenix-bookstore" class="phoenix-page phoenix-hero-page">
-        <img class="phoenix-hero-bg" src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(1).png" alt="南京凤凰书店装置设计主视觉">
-        <div class="phoenix-shade"></div>
-        <div class="container phoenix-hero-layout">
-            <div class="phoenix-hero-copy">
-                <p class="phoenix-kicker">PROJECTS / INSTALLATION</p>
-                <h2>Phoenix</h2>
-                <p class="phoenix-subtitle">INTERACTIVE INSTALLATION</p>
-                <p class="phoenix-cn">凤凰 · 光影与阅读的对话</p>
-                <dl class="phoenix-meta-list">
-                    <div><dt>01. TYPE</dt><dd>Interactive Installation</dd></div>
-                    <div><dt>02. YEAR</dt><dd>2025</dd></div>
-                    <div><dt>03. LOCATION</dt><dd>Bookstore</dd></div>
-                    <div><dt>04. TEAM</dt><dd>Individual Work</dd></div>
-                </dl>
-                <span class="phoenix-scroll">SCROLL TO EXPLORE →</span>
-            </div>
-            <a class="phoenix-back" href="#ai-generation" onclick="scrollToSec('ai-generation'); return false;">← BACK TO PROJECTS</a>
+<section id="phoenix-bookstore" class="phoenix-page phoenix-redesign-hero">
+        <img class="phoenix-redesign-bg" src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(1).png" alt="鍗椾含鍑ゅ嚢涔﹀簵 AI 瑁呯疆鐢熸垚涓昏瑙?>
+        <div class="phoenix-redesign-shade"></div>
+        <div class="container phoenix-redesign-copy">
+            <p class="phoenix-project-label">PROJECT 02</p>
+            <h2 class="phoenix-redesign-title">鍗椾含鍑ゅ嚢涔﹀簵 AI 瑁呯疆鐢熸垚</h2>
+            <p class="phoenix-redesign-en">NANJING PHOENIX BOOKSTORE<br>AI INSTALLATION STUDY</p>
+            <p class="phoenix-redesign-intro">鏈」鐩洿缁曞崡浜嚖鍑颁功搴楀睍寮€ AI 瑁呯疆姒傚康鍒涗綔锛屽垎鍒帰绱㈠嚖鍑伴洉濉戣缃笌瀹ゅ唴闃呰绌洪棿鎵撳崱瑁呯疆锛屽皾璇曞湪缁熶竴鍦烘櫙涓缓绔嬪叿鏈夋枃鍖栬瘑鍒害鍜岃瑙夎蹇嗙偣鐨勮璁¤〃杈俱€?/p>
+            <dl class="phoenix-redesign-meta">
+                <div><dt>YEAR</dt><dd>2025</dd></div>
+                <div><dt>TYPE</dt><dd>AI-assisted Installation Concept</dd></div>
+                <div><dt>TOOLS</dt><dd>Midjourney / ChatGPT / Photoshop</dd></div>
+            </dl>
+            <span class="phoenix-redesign-scroll">SCROLL TO EXPLORE</span>
         </div>
     </section>
 
-<section id="phoenix-bookstore-detail" class="phoenix-page phoenix-overview-page">
-        <div class="container phoenix-overview-layout">
-            <aside class="phoenix-section-copy">
-                <span class="phoenix-num">01</span>
-                <p class="phoenix-kicker">PROJECT OVERVIEW</p>
-                <p>以凤凰为灵感，结合流动的线条与光影互动，打造一个沉浸式的书店打卡装置。装置在空间中轻盈地延展，与阅读场景形成诗意的对话，寓意知识的传承与新生。</p>
-                <div class="phoenix-tags"><span>Interactive</span><span>Light & Shadow</span><span>Metal</span><span>Public Art</span><span>Bookstore Experience</span></div>
-            </aside>
-            <button class="phoenix-image-card phoenix-main-card zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(2).png" aria-label="放大查看凤凰装置效果图">
-                <img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(2).png" alt="凤凰装置空间效果图">
-            </button>
-        </div>
-        <div class="container phoenix-concept-row">
-            <div class="phoenix-concept-title"><span class="phoenix-num">02</span><p class="phoenix-kicker">DESIGN CONCEPT</p></div>
-            <button class="phoenix-thumb zoom-card" type="button" data-zoom-src="" disabled><span>灵感来源<br>INSPIRATION</span></button>
-            <button class="phoenix-thumb zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(1).png" aria-label="放大查看凤凰书店雕塑效果图"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(1).png" alt="凤凰书店雕塑效果图"></button>
-            <button class="phoenix-thumb zoom-card" type="button" data-zoom-src="" disabled><span>光影互动<br>LIGHT</span></button>
-            <button class="phoenix-thumb zoom-card" type="button" data-zoom-src="" disabled><span>设计概念<br>SKETCH</span></button>
-            <button class="phoenix-sketch zoom-card" type="button" data-zoom-src="" disabled><span>Concept Sketch<br>图片待补充</span></button>
+    <section id="phoenix-bookstore-detail" class="phoenix-page phoenix-study-page">
+        <div class="container phoenix-study-wrap">
+            <section class="phoenix-installation" aria-labelledby="phoenix-installation-title">
+                <div class="phoenix-install-copy">
+                    <p class="phoenix-study-kicker">INSTALLATION STUDIES</p>
+                    <h2 id="phoenix-installation-title" class="phoenix-study-title">PHOENIX INSTALLATION</h2>
+                    <p class="phoenix-study-cn">鍑ゅ嚢闆曞瑁呯疆</p>
+                    <p class="phoenix-study-desc">浠ュ嚖鍑版剰璞′负鏍稿績锛岄€氳繃 AI 鐢熸垚鎺㈢储娴佺嚎褰㈡€併€侀噾灞炶川鎰熶笌涔﹀簵绌洪棿涔嬮棿鐨勮瑙夊叧绯伙紝鏈€缁堝舰鎴愬叿鏈夊叕鍏辫壓鏈劅鐨勮缃蹇点€?/p>
+                    <div class="phoenix-study-tags"><span>Phoenix Form</span><span>Metallic Surface</span><span>Bookstore Context</span></div>
+                </div>
+                <div class="phoenix-install-visual">
+                    <button class="phoenix-study-image phoenix-main-image zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(1).png" aria-label="鏀惧ぇ鏌ョ湅鍑ゅ嚢闆曞瑁呯疆涓诲浘">
+                        <img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(1).png" alt="鍑ゅ嚢闆曞瑁呯疆涓诲浘">
+                    </button>
+                    <button class="phoenix-study-image phoenix-secondary-image zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(2).png" aria-label="鏀惧ぇ鏌ョ湅鍑ゅ嚢闆曞瑁呯疆杈呭姪鍥?>
+                        <img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E9%9B%95%E5%A1%91%20(2).png" alt="鍑ゅ嚢闆曞瑁呯疆杈呭姪鍥?>
+                        <span class="phoenix-secondary-label">Secondary View</span>
+                    </button>
+                </div>
+            </section>
+
+            <section class="phoenix-series" aria-labelledby="phoenix-series-title">
+                <div class="phoenix-series-header">
+                    <div>
+                        <p class="phoenix-study-kicker">BOOKSTORE INSTALLATION SERIES</p>
+                        <h2 id="phoenix-series-title" class="phoenix-study-title">BOOKSTORE INSTALLATION SERIES</h2>
+                        <p class="phoenix-study-cn">涔﹀簵瀹ゅ唴鎵撳崱瑁呯疆绯诲垪</p>
+                    </div>
+                    <div>
+                        <p class="phoenix-study-desc">鍥寸粫鍚屼竴涔﹀簵绌洪棿涓庨槄璇讳富棰橈紝鍒╃敤 AI 鐢熸垚澶氱粍褰㈠紡鐩歌繎浣嗙粏鑺備笉鍚岀殑瑁呯疆鏂规锛屾帰绱㈢粺涓€瑙嗚璇█涓嬬殑绯诲垪鍖栫┖闂磋〃杈俱€?/p>
+                        <div class="phoenix-series-toolbar" aria-label="涔﹀簵瑁呯疆鍥鹃泦鍒囨崲">
+                            <button id="phoenixSeriesPrev" class="phoenix-series-arrow" type="button" aria-label="涓婁竴寮?>鈥?/button>
+                            <button id="phoenixSeriesNext" class="phoenix-series-arrow" type="button" aria-label="涓嬩竴寮?>鈥?/button>
+                        </div>
+                    </div>
+                </div>
+                <div id="phoenixSeriesTrack" class="phoenix-series-track">
+                    <article class="phoenix-series-card"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(1).png" alt="Reading Space 01"><div class="phoenix-series-caption"><h4>Reading Space 01</h4><p>鍚屼竴涔﹀簵鍦烘櫙涓嬬殑 AI 瑁呯疆鏂规寤跺睍銆?/p></div></article>
+                    <article class="phoenix-series-card"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(2).png" alt="Reading Space 02"><div class="phoenix-series-caption"><h4>Reading Space 02</h4><p>鍚屼竴涔﹀簵鍦烘櫙涓嬬殑 AI 瑁呯疆鏂规寤跺睍銆?/p></div></article>
+                    <article class="phoenix-series-card"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(3).png" alt="Reading Space 03"><div class="phoenix-series-caption"><h4>Reading Space 03</h4><p>鍚屼竴涔﹀簵鍦烘櫙涓嬬殑 AI 瑁呯疆鏂规寤跺睍銆?/p></div></article>
+                    <article class="phoenix-series-card"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(4).png" alt="Reading Space 04"><div class="phoenix-series-caption"><h4>Reading Space 04</h4><p>鍚屼竴涔﹀簵鍦烘櫙涓嬬殑 AI 瑁呯疆鏂规寤跺睍銆?/p></div></article>
+                    <article class="phoenix-series-card"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(5).png" alt="Reading Space 05"><div class="phoenix-series-caption"><h4>Reading Space 05</h4><p>鍚屼竴涔﹀簵鍦烘櫙涓嬬殑 AI 瑁呯疆鏂规寤跺睍銆?/p></div></article>
+                </div>
+            </section>
         </div>
     </section>
 
-<section id="phoenix-bookstore-gallery" class="phoenix-page phoenix-gallery-page">
-        <div class="container phoenix-gallery-layout">
-            <div class="phoenix-concept-title"><span class="phoenix-num">03</span><p class="phoenix-kicker">FINAL RENDERS</p></div>
-            <button class="phoenix-image-card phoenix-gallery-large zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(1).png" aria-label="放大查看书店打卡装置效果图一"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(1).png" alt="书店打卡装置效果图一"></button>
-            <div class="phoenix-gallery-grid">
-                <button class="phoenix-image-card zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(2).png" aria-label="放大查看书店打卡装置效果图二"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(2).png" alt="书店打卡装置效果图二"></button>
-                <button class="phoenix-image-card zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(3).png" aria-label="放大查看书店打卡装置效果图三"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(3).png" alt="书店打卡装置效果图三"></button>
-                <button class="phoenix-image-card zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(4).png" aria-label="放大查看书店打卡装置效果图四"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(4).png" alt="书店打卡装置效果图四"></button>
-                <button class="phoenix-image-card zoom-card" type="button" data-zoom-src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(5).png" aria-label="放大查看书店打卡装置效果图五"><img src="%E5%87%A4%E5%87%B0%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE/%E4%B9%A6%E5%BA%97%E6%89%93%E5%8D%A1%E8%A3%85%E7%BD%AE%20(5).png" alt="书店打卡装置效果图五"></button>
-            </div>
-            <aside class="phoenix-more">更多视角<br><span>MORE VIEWS<br>...</span></aside>
-        </div>
-    </section>
     <section id="chapter-interactive" class="chapter-page chapter-interactive">
         <div class="container chapter-layout chapter-layout-split">
             <div class="chapter-copy">
@@ -6833,7 +7240,21 @@
                 activeStateTicking = false;
             });
         }
-
+        function initPhoenixSeriesGallery() {
+            const track = document.getElementById("phoenixSeriesTrack");
+            if (!track) return;
+            const prev = document.getElementById("phoenixSeriesPrev");
+            const next = document.getElementById("phoenixSeriesNext");
+            const getStep = () => Math.min(track.clientWidth * 0.82, 760);
+            if (prev) prev.addEventListener("click", () => track.scrollBy({ left: -getStep(), behavior: "smooth" }));
+            if (next) next.addEventListener("click", () => track.scrollBy({ left: getStep(), behavior: "smooth" }));
+            track.addEventListener("wheel", event => {
+                if (window.matchMedia("(max-width: 680px)").matches) return;
+                if (Math.abs(event.deltaY) <= Math.abs(event.deltaX)) return;
+                event.preventDefault();
+                track.scrollBy({ left: event.deltaY, behavior: "auto" });
+            }, { passive: false });
+        }
         window.addEventListener("load", () => {
             initGallery();
             initModalControls();
@@ -6841,6 +7262,7 @@
             initAboutPhotoZoom();
             initImageZoomCards();
             initSakuraProcessLightbox();
+            initPhoenixSeriesGallery();
             initCursorPaint();
             cardObserver.observe(document.querySelector("#directory"));
             initTvOpening();
@@ -6852,6 +7274,7 @@
     </script>
 </body>
 </html>
+
 
 
 
