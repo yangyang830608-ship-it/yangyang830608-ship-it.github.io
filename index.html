@@ -4037,7 +4037,7 @@
         #nj-wall .sakura-brand,
         #nj-wall-detail .sakura-brand,
         #nj-wall-gallery .sakura-brand {
-            color: #4e465f !important;
+            display: none !important;
         }
         #nj-wall .sakura-brand,
         #nj-wall .sakura-nav {
@@ -4082,16 +4082,16 @@
             background: linear-gradient(90deg, rgba(255,248,248,0.9) 0%, rgba(255,248,248,0.68) 20%, rgba(255,248,248,0.24) 38%, rgba(255,248,248,0.04) 52%, rgba(255,248,248,0) 100%) !important;
         }
         #nj-wall-detail .sakura-process-layout {
-            width: min(1200px, calc(100% - 48px)) !important;
-            max-width: 1200px !important;
+            width: min(1360px, calc(100% - 56px)) !important;
+            max-width: 1360px !important;
             margin-left: auto !important;
             margin-right: auto !important;
-            grid-template-columns: minmax(0, 0.4fr) minmax(0, 0.6fr) !important;
-            gap: 40px !important;
+            grid-template-columns: minmax(300px, 0.34fr) minmax(0, 0.66fr) !important;
+            gap: 44px !important;
             min-height: 100vh !important;
             align-items: center !important;
-            padding-top: 96px !important;
-            padding-bottom: 64px !important;
+            padding-top: 82px !important;
+            padding-bottom: 48px !important;
         }
         #nj-wall-detail .sakura-process-layout .sakura-copy {
             align-self: center !important;
@@ -4102,11 +4102,11 @@
         }
         #nj-wall-detail .sakura-process-grid {
             width: 100% !important;
-            height: 500px !important;
+            height: 620px !important;
             display: grid !important;
             grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
             grid-template-rows: repeat(2, minmax(0, 1fr)) !important;
-            gap: 16px !important;
+            gap: 18px !important;
             align-items: stretch !important;
         }
         #nj-wall-detail .sakura-card {
@@ -4118,6 +4118,15 @@
             overflow: hidden !important;
             background: rgba(255,255,255,0.66) !important;
             box-shadow: 0 16px 38px rgba(181, 111, 128, 0.14) !important;
+            cursor: zoom-in !important;
+            transition: transform 0.28s ease, box-shadow 0.28s ease, border-color 0.28s ease !important;
+            transform-origin: center center !important;
+        }
+        #nj-wall-detail .sakura-card:hover {
+            transform: scale(1.045) !important;
+            z-index: 5 !important;
+            border-color: rgba(232, 141, 164, 0.68) !important;
+            box-shadow: 0 24px 54px rgba(181, 111, 128, 0.24) !important;
         }
         #nj-wall-detail .sakura-card img {
             position: absolute !important;
@@ -4166,6 +4175,47 @@
             border-radius: 999px !important;
             background: rgba(255, 248, 248, 0.78) !important;
             backdrop-filter: blur(8px) !important;
+        }
+        .sakura-lightbox {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 9999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 36px !important;
+            background: rgba(20, 12, 25, 0.76) !important;
+            backdrop-filter: blur(10px) !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: opacity 0.22s ease !important;
+        }
+        .sakura-lightbox.is-open {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+        .sakura-lightbox img {
+            max-width: min(92vw, 1400px) !important;
+            max-height: 88vh !important;
+            width: auto !important;
+            height: auto !important;
+            object-fit: contain !important;
+            border-radius: 8px !important;
+            box-shadow: 0 28px 80px rgba(0, 0, 0, 0.38) !important;
+        }
+        .sakura-lightbox button {
+            position: absolute !important;
+            top: 24px !important;
+            right: 24px !important;
+            width: 44px !important;
+            height: 44px !important;
+            border: 1px solid rgba(255, 255, 255, 0.54) !important;
+            border-radius: 50% !important;
+            background: rgba(255, 248, 248, 0.92) !important;
+            color: #302642 !important;
+            font-size: 28px !important;
+            line-height: 1 !important;
+            cursor: pointer !important;
         }
         @media (max-width: 1180px) {
             #nj-wall .sakura-layout,
@@ -5710,6 +5760,57 @@
             draw();
         }
 
+        function initSakuraProcessLightbox() {
+            const cards = document.querySelectorAll("#nj-wall-detail .sakura-process-grid .sakura-card");
+            if (!cards.length) return;
+
+            const lightbox = document.createElement("div");
+            lightbox.className = "sakura-lightbox";
+            lightbox.innerHTML = '<button type="button" aria-label="关闭大图">×</button><img alt="">';
+            document.body.appendChild(lightbox);
+
+            const lightboxImage = lightbox.querySelector("img");
+            const closeButton = lightbox.querySelector("button");
+
+            function openImage(img) {
+                lightboxImage.src = img.currentSrc || img.src;
+                lightboxImage.alt = img.alt || "";
+                lightbox.classList.add("is-open");
+                document.body.style.overflow = "hidden";
+            }
+
+            function closeImage() {
+                lightbox.classList.remove("is-open");
+                document.body.style.overflow = "";
+            }
+
+            cards.forEach(card => {
+                card.setAttribute("role", "button");
+                card.setAttribute("tabindex", "0");
+                card.setAttribute("aria-label", "查看大图");
+                card.addEventListener("click", () => {
+                    const img = card.querySelector("img");
+                    if (img) openImage(img);
+                });
+                card.addEventListener("keydown", event => {
+                    if (event.key === "Enter" || event.key === " ") {
+                        event.preventDefault();
+                        card.click();
+                    }
+                });
+            });
+
+            closeButton.addEventListener("click", closeImage);
+            lightbox.addEventListener("click", event => {
+                if (event.target === lightbox) closeImage();
+            });
+            document.addEventListener("keydown", event => {
+                if (event.key === "Escape" && lightbox.classList.contains("is-open")) {
+                    closeImage();
+                }
+            });
+        }
+
         let activeStateTicking = false;
         let coverPerfTimer = 0;
 
@@ -5747,6 +5848,7 @@
             initFlowerGallery();
             initAboutPhotoZoom();
             initImageZoomCards();
+            initSakuraProcessLightbox();
             initCursorPaint();
             cardObserver.observe(document.querySelector("#directory"));
             initTvOpening();
