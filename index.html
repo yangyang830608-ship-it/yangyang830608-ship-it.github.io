@@ -4575,6 +4575,136 @@
                 min-height: 240px !important;
             }
         }
+    
+        /* Refined AI workflow page: fit in one screen, Chinese-first titles, clearer sequence. */
+        #ch2.workflow-page {
+            align-items: flex-start !important;
+            min-height: 100vh !important;
+            overflow: hidden !important;
+        }
+        #ch2 .container {
+            width: min(1420px, 100%) !important;
+            padding-top: clamp(74px, 7vh, 92px) !important;
+            padding-bottom: clamp(24px, 3vh, 34px) !important;
+        }
+        #ch2 .section-kicker {
+            margin-bottom: 8px !important;
+            font-size: 11px !important;
+            color: rgba(124, 255, 220, 0.82) !important;
+        }
+        #ch2 .section-title {
+            max-width: 760px !important;
+            margin-bottom: 6px !important;
+            font-size: clamp(46px, 5.1vw, 76px) !important;
+            line-height: 0.98 !important;
+        }
+        #ch2 .workflow-subtitle {
+            margin: 0 0 12px !important;
+            color: rgba(255, 246, 255, 0.62) !important;
+            font-size: clamp(12px, 1.05vw, 15px) !important;
+            font-weight: 800 !important;
+            letter-spacing: 0.12em !important;
+            text-transform: uppercase !important;
+        }
+        #ch2 .section-copy {
+            max-width: 760px !important;
+            margin: 0 0 clamp(14px, 2vh, 22px) !important;
+            font-size: 14px !important;
+            line-height: 1.65 !important;
+        }
+        #ch2 .workflow-grid {
+            grid-template-columns: repeat(12, minmax(0, 1fr)) !important;
+            grid-auto-rows: minmax(222px, 24vh) !important;
+            gap: clamp(12px, 1.15vw, 18px) !important;
+            align-items: stretch !important;
+        }
+        #ch2 .workflow-card.size-lg,
+        #ch2 .workflow-card.size-md,
+        #ch2 .workflow-card.size-sm {
+            grid-row: span 1 !important;
+            min-height: 0 !important;
+        }
+        #ch2 .workflow-card.step-01,
+        #ch2 .workflow-card.step-02,
+        #ch2 .workflow-card.step-03,
+        #ch2 .workflow-card.step-04 {
+            grid-column: span 4 !important;
+        }
+        #ch2 .workflow-card.step-05 {
+            grid-column: span 5 !important;
+        }
+        #ch2 .workflow-card.step-06 {
+            grid-column: span 3 !important;
+        }
+        #ch2 .workflow-card {
+            padding: clamp(18px, 1.35vw, 24px) clamp(20px, 1.55vw, 28px) !important;
+        }
+        #ch2 .workflow-num {
+            position: relative !important;
+            z-index: 3 !important;
+            margin-bottom: 8px !important;
+            font-family: var(--font-title) !important;
+            font-size: clamp(30px, 2.6vw, 46px) !important;
+            line-height: 0.86 !important;
+            letter-spacing: 0 !important;
+            color: var(--acc, var(--blue)) !important;
+            text-shadow: 0 0 16px color-mix(in srgb, var(--acc, white) 55%, transparent) !important;
+        }
+        #ch2 .workflow-card h3 {
+            margin: 0 0 4px !important;
+            font-size: clamp(22px, 1.85vw, 32px) !important;
+            line-height: 1.08 !important;
+            letter-spacing: 0 !important;
+        }
+        #ch2 .workflow-card h4 {
+            margin: 0 0 10px !important;
+            color: rgba(255, 246, 255, 0.72) !important;
+            font-size: clamp(11px, 0.86vw, 14px) !important;
+            font-weight: 900 !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+        }
+        #ch2 .workflow-card p {
+            max-width: 94% !important;
+            font-size: clamp(12px, 0.9vw, 14px) !important;
+            line-height: 1.58 !important;
+        }
+        #ch2 .workflow-chip {
+            margin-top: auto !important;
+            padding: 6px 10px !important;
+            font-size: 9px !important;
+        }
+        #ch2 .workflow-flow {
+            right: 18px !important;
+            bottom: 14px !important;
+            font-size: clamp(28px, 2.6vw, 42px) !important;
+        }
+        @media (max-width: 1180px) {
+            #ch2.workflow-page {
+                overflow: visible !important;
+            }
+            #ch2 .workflow-grid {
+                grid-template-columns: repeat(2, minmax(0, 1fr)) !important;
+                grid-auto-rows: auto !important;
+            }
+            #ch2 .workflow-card.step-01,
+            #ch2 .workflow-card.step-02,
+            #ch2 .workflow-card.step-03,
+            #ch2 .workflow-card.step-04,
+            #ch2 .workflow-card.step-05,
+            #ch2 .workflow-card.step-06 {
+                grid-column: auto !important;
+                min-height: 230px !important;
+            }
+        }
+        @media (max-width: 720px) {
+            #ch2 .workflow-grid {
+                grid-template-columns: 1fr !important;
+            }
+            #ch2 .workflow-card {
+                min-height: 230px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -4736,64 +4866,65 @@
         <div class="container">
             <p class="section-kicker">WORKFLOW / &#21046;&#20316;&#27969;&#31243;</p>
             <h2 class="section-title">AI &#21019;&#20316;&#24037;&#20316;&#27969;</h2>
+            <p class="workflow-subtitle">AI CREATIVE WORKFLOW</p>
             <p class="section-copy">&#20174;&#27010;&#24565;&#12289;&#21095;&#24773;&#12289;&#20998;&#38236;&#21040;&#25552;&#31034;&#35789;&#12289;&#35270;&#35273;&#29983;&#25104;&#19982;&#21160;&#24577;&#21098;&#36753;&#65292;&#24314;&#31435;&#19968;&#22871;&#23436;&#25972;&#19988;&#36830;&#32493;&#30340; AI &#30701;&#29255;&#21019;&#20316;&#36335;&#24452;&#12290;</p>
             <div class="workflow-grid">
-                <div class="workflow-card size-md accent-a">
+                <div class="workflow-card size-md accent-a step-01">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">01</div>
-                    <h3>Concept Development</h3>
-                    <h4>&#27010;&#24565;&#26500;&#24605;</h4>
+                    <h3>&#27010;&#24565;&#26500;&#24605;</h3>
+                    <h4>Concept Development</h4>
                     <p>&#22260;&#32469;&#25925;&#20107;&#20027;&#39064;&#30830;&#23450;&#35270;&#35273;&#26041;&#21521;&#65292;&#26787;&#29702;&#35282;&#33394;&#35774;&#23450;&#12289;&#30011;&#38754;&#27675;&#22260;&#19982;&#25972;&#20307;&#21465;&#20107;&#36923;&#36753;&#65292;&#20026;&#21518;&#32493;&#21019;&#20316;&#24314;&#31435;&#32479;&#19968;&#30340;&#35774;&#35745;&#26694;&#26550;&#12290;</p>
                     <div class="workflow-chip">CONCEPT / WORLDVIEW</div>
                     <div class="workflow-flow">&rarr;</div>
                 </div>
-                <div class="workflow-card size-md accent-b">
+                <div class="workflow-card size-md accent-b step-02">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">02</div>
-                    <h3>Story Development</h3>
-                    <h4>&#21095;&#24773;&#35268;&#21010;</h4>
+                    <h3>&#21095;&#24773;&#35268;&#21010;</h3>
+                    <h4>Story Development</h4>
                     <p>&#26500;&#24314;&#23436;&#25972;&#25925;&#20107;&#32467;&#26500;&#65292;&#26126;&#30830;&#35282;&#33394;&#20851;&#31995;&#12289;&#24773;&#33410;&#25512;&#36827;&#19982;&#24773;&#32490;&#33410;&#22863;&#65292;&#24418;&#25104;&#36830;&#32493;&#30340;&#21465;&#20107;&#26694;&#26550;&#12290;</p>
                     <div class="workflow-chip">STORY / EMOTION</div>
                     <div class="workflow-flow">&rarr;</div>
                 </div>
-                <div class="workflow-card size-md accent-c">
+                <div class="workflow-card size-md accent-c step-03">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">03</div>
-                    <h3>Storyboard Design</h3>
-                    <h4>&#20998;&#38236;&#35774;&#35745;</h4>
+                    <h3>&#20998;&#38236;&#35774;&#35745;</h3>
+                    <h4>Storyboard Design</h4>
                     <p>&#26681;&#25454;&#21095;&#24773;&#35268;&#21010;&#38236;&#22836;&#35821;&#35328;&#65292;&#23558;&#25925;&#20107;&#25286;&#35299;&#20026;&#36830;&#32493;&#30011;&#38754;&#65292;&#24314;&#31435;&#21518;&#32493; AI &#21019;&#20316;&#30340;&#35270;&#35273;&#20381;&#25454;&#12290;</p>
                     <div class="workflow-chip">SHOT / CAMERA</div>
                     <div class="workflow-flow">&rarr;</div>
                 </div>
-                <div class="workflow-card size-lg accent-d">
+                <div class="workflow-card size-md accent-d step-04">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">04</div>
-                    <h3>Prompt Engineering</h3>
-                    <h4>&#25552;&#31034;&#35789;&#35774;&#35745;</h4>
+                    <h3>&#25552;&#31034;&#35789;&#35774;&#35745;</h3>
+                    <h4>Prompt Engineering</h4>
                     <p>&#23558;&#38236;&#22836;&#38656;&#27714;&#36716;&#21270;&#20026;&#32467;&#26500;&#21270;&#25552;&#31034;&#35789;&#65292;&#32479;&#19968;&#35282;&#33394;&#12289;&#26500;&#22270;&#12289;&#20809;&#24433;&#19982;&#30011;&#38754;&#39118;&#26684;&#65292;&#20445;&#35777;&#38236;&#22836;&#20043;&#38388;&#30340;&#19968;&#33268;&#24615;&#12290;</p>
                     <div class="workflow-chip">PROMPT / CONSISTENCY</div>
                     <div class="workflow-flow">&rarr;</div>
                 </div>
-                <div class="workflow-card size-lg accent-a">
+                <div class="workflow-card size-lg accent-a step-05">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">05</div>
-                    <h3>Visual Generation</h3>
-                    <h4>&#35270;&#35273;&#29983;&#25104;</h4>
+                    <h3>&#35270;&#35273;&#29983;&#25104;</h3>
+                    <h4>Visual Generation</h4>
                     <p>&#32467;&#21512; AI &#24037;&#20855;&#23436;&#25104;&#35282;&#33394;&#12289;&#22330;&#26223;&#19982;&#38236;&#22836;&#30011;&#38754;&#30340;&#29983;&#25104;&#65292;&#25345;&#32493;&#20248;&#21270;&#32454;&#33410;&#19982;&#39118;&#26684;&#65292;&#36880;&#27493;&#26500;&#24314;&#23436;&#25972;&#30340;&#35270;&#35273;&#20869;&#23481;&#12290;</p>
                     <div class="workflow-chip">IMAGE / REFINEMENT</div>
                     <div class="workflow-flow">&rarr;</div>
                 </div>
-                <div class="workflow-card size-sm accent-b">
+                <div class="workflow-card size-sm accent-b step-06">
                     <div class="accent-ring"></div>
                     <div class="scribble"></div>
                     <div class="workflow-num">06</div>
-                    <h3>Motion & Editing</h3>
-                    <h4>&#21160;&#30011;&#19982;&#21098;&#36753;</h4>
+                    <h3>&#21160;&#30011;&#19982;&#21098;&#36753;</h3>
+                    <h4>Motion & Editing</h4>
                     <p>&#23436;&#25104;&#22270;&#29983;&#35270;&#39057;&#12289;&#38236;&#22836;&#34900;&#25509;&#12289;&#33410;&#22863;&#35843;&#25972;&#19982;&#21518;&#26399;&#21098;&#36753;&#65292;&#26368;&#32456;&#36755;&#20986;&#23436;&#25972; AI &#30701;&#29255;&#20316;&#21697;&#12290;</p>
                     <div class="workflow-chip">MOTION / FINAL</div>
                     <div class="workflow-flow">END</div>
@@ -6197,6 +6328,7 @@
     </script>
 </body>
 </html>
+
 
 
 
