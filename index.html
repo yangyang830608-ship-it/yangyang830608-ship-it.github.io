@@ -8845,10 +8845,19 @@
         }
 
         function adjustActiveStates() {
-            const sectionIds = ["cover-new", "about-me", "directory", "ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "phoenix-bookstore", "phoenix-bookstore-detail", "chapter-interactive", "kite-project-1", "kite-project-2", "mirror-project-1", "mirror-project-2", "mirror-project-3", "mirror-project-4", "chapter-materials", "flower-project-1", "flower-project-2", "flower-project-3", "flower-project-4", "photo", "thank-you"];
             let current = "cover-new";
-            document.querySelectorAll("section").forEach(section => {
-                if (window.scrollY >= section.offsetTop - 320) current = section.id;
+            let currentScore = -1;
+            document.querySelectorAll("section[id]").forEach(section => {
+                const rect = section.getBoundingClientRect();
+                const visibleTop = Math.max(rect.top, 0);
+                const visibleBottom = Math.min(rect.bottom, window.innerHeight);
+                const visibleHeight = Math.max(0, visibleBottom - visibleTop);
+                const centerDistance = Math.abs((rect.top + rect.bottom) / 2 - window.innerHeight / 2);
+                const score = visibleHeight - centerDistance * 0.18;
+                if (visibleHeight > 0 && score > currentScore) {
+                    currentScore = score;
+                    current = section.id;
+                }
             });
             const aiSections = new Set(["ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "nj-wall-gallery", "phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery"]);
             const phoenixSections = new Set(["phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery"]);
@@ -8879,8 +8888,10 @@
                 link.classList.toggle("active", target === `#${navTarget}`);
             });
             const dotTarget = current;
-            document.querySelectorAll(".dot-item").forEach((dot, i) => {
-                dot.classList.toggle("active", sectionIds[i] === dotTarget);
+            document.querySelectorAll(".dot-item").forEach(dot => {
+                const target = dot.dataset.section || (dot.getAttribute("onclick") || "").match(/scrollToSec\('([^']+)'\)/)?.[1] || "";
+                dot.dataset.section = target;
+                dot.classList.toggle("active", target === dotTarget);
             });
             const bg = document.getElementById("storyBg");
             if (bg) bg.style.transform = `translateY(${window.scrollY * 0.035}px)`;
