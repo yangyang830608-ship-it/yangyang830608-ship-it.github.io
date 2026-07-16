@@ -7546,6 +7546,14 @@
 
         #photo .image-portfolio-card:not(.tall) {
             z-index: 1 !important;
+            transform-origin: center center !important;
+            transition: transform 0.28s ease, z-index 0s linear !important;
+        }
+
+        #photo .image-portfolio-card:not(.tall).has-embed:hover,
+        #photo .image-portfolio-card:not(.tall).has-embed:focus-within {
+            z-index: 900 !important;
+            transform: scale(1.12) !important;
         }
 
         @media (max-width: 1440px) {
