@@ -7778,6 +7778,7 @@
 
         #phoenix-bookstore-series .phoenix-series-card {
             flex-basis: clamp(500px, 38vw, 680px) !important;
+            cursor: zoom-in !important;
         }
 
         #phoenix-bookstore-series .phoenix-series-card img {
@@ -9034,7 +9035,7 @@
                 document.body.style.overflow = "";
             };
 
-            document.querySelectorAll(".zoom-card:not(:disabled), #nj-wall-detail .nj-final-image").forEach(card => {
+            document.querySelectorAll(".zoom-card:not(:disabled), #nj-wall-detail .nj-final-image, #phoenix-bookstore-series .phoenix-series-card").forEach(card => {
                 card.addEventListener("click", () => {
                     const img = card.matches("img") ? card : card.querySelector("img");
                     open((img && (img.currentSrc || img.src)) || card.dataset.zoomSrc);
