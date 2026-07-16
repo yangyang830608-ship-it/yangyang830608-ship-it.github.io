@@ -4467,6 +4467,7 @@
             overflow: hidden !important;
             border-radius: 8px !important;
             pointer-events: auto !important;
+            cursor: pointer !important;
             transform-origin: center center !important;
             transition: transform 0.28s ease, filter 0.28s ease, box-shadow 0.28s ease !important;
             box-shadow: 0 0 18px rgba(255, 166, 238, 0.18) !important;
@@ -4493,6 +4494,64 @@
             .thank-you-contact-card:focus-visible {
                 transform: scale(1.05) !important;
             }
+        }
+
+        .wechat-card-modal {
+            position: fixed !important;
+            inset: 0 !important;
+            z-index: 12000 !important;
+            display: grid !important;
+            place-items: center !important;
+            padding: clamp(20px, 4vw, 56px) !important;
+            background: rgba(18, 4, 28, 0.72) !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+            transition: opacity 0.24s ease !important;
+            backdrop-filter: blur(8px) saturate(1.08) !important;
+        }
+
+        .wechat-card-modal.is-open {
+            opacity: 1 !important;
+            pointer-events: auto !important;
+        }
+
+        .wechat-card-modal-panel {
+            position: relative !important;
+            width: min(86vw, 920px) !important;
+            max-height: 86vh !important;
+            display: grid !important;
+            place-items: center !important;
+            transform: translateY(12px) scale(0.98) !important;
+            transition: transform 0.24s ease !important;
+        }
+
+        .wechat-card-modal.is-open .wechat-card-modal-panel {
+            transform: translateY(0) scale(1) !important;
+        }
+
+        .wechat-card-modal img {
+            width: 100% !important;
+            max-height: 86vh !important;
+            object-fit: contain !important;
+            display: block !important;
+            border-radius: 14px !important;
+            box-shadow: 0 24px 80px rgba(23, 4, 39, 0.38), 0 0 36px rgba(255, 159, 236, 0.46) !important;
+        }
+
+        .wechat-card-modal-close {
+            position: absolute !important;
+            top: -18px !important;
+            right: -18px !important;
+            width: 42px !important;
+            height: 42px !important;
+            border: 2px solid rgba(255, 255, 255, 0.9) !important;
+            border-radius: 999px !important;
+            background: linear-gradient(135deg, #ff77c8, #8d6bff) !important;
+            color: #fff !important;
+            font-size: 26px !important;
+            line-height: 1 !important;
+            cursor: pointer !important;
+            box-shadow: 4px 4px 0 rgba(88, 217, 255, 0.62) !important;
         }
     
         /* AI workflow page: content and composition update only. */
@@ -8111,11 +8170,18 @@
             <a class="thank-you-hotspot" href="#about-me" onclick="scrollToSec('about-me'); return false;" style="--x:39.2%; --y:53.7%; --w:7.4%; --h:5.2%;" aria-label="Go to About Me"></a>
             <a class="thank-you-hotspot" href="#directory" onclick="scrollToSec('directory'); return false;" style="--x:47.9%; --y:53.7%; --w:7.4%; --h:5.2%;" aria-label="Go to Works"></a>
             <a class="thank-you-hotspot" href="#about-me" onclick="scrollToSec('about-me'); return false;" style="--x:56.6%; --y:53.7%; --w:7.4%; --h:5.2%;" aria-label="Go to Skills"></a>
-            <div class="thank-you-contact-card" tabindex="0" style="--x:71.25%; --y:42.6%; --w:19.6%; --h:20.9%; --crop-left:-363.52%; --crop-top:-203.83%; --crop-width:510.20%; --crop-height:478.47%;" aria-label="Contact card">
+            <div class="thank-you-contact-card" tabindex="0" role="button" style="--x:71.25%; --y:42.6%; --w:19.6%; --h:20.9%; --crop-left:-363.52%; --crop-top:-203.83%; --crop-width:510.20%; --crop-height:478.47%;" aria-label="Open WeChat contact card">
                 <img class="thank-you-contact-source" src="%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F%E9%A1%B5.png" onerror="this.onerror=null;this.src='%E8%81%94%E7%B3%BB%E6%96%B9%E5%BC%8F%E9%A1%B5.png';" alt="Contact">
             </div>
         </div>
     </section>
+
+    <div class="wechat-card-modal" id="wechatCardModal" aria-hidden="true">
+        <figure class="wechat-card-modal-panel">
+            <img src="%E5%B0%81%E9%9D%A2%20%E8%A7%86%E8%A7%89%E7%BB%9F%E4%B8%80/%E5%BE%AE%E4%BF%A1%E5%90%8D%E7%89%87.png" onerror="this.onerror=null;this.src='%E5%BE%AE%E4%BF%A1%E5%90%8D%E7%89%87.png';" alt="&#24494;&#20449;&#21517;&#29255;">
+            <button class="wechat-card-modal-close" id="wechatCardModalClose" type="button" aria-label="&#20851;&#38381;&#24494;&#20449;&#21517;&#29255;">&times;</button>
+        </figure>
+    </div>
 
     <canvas class="cursor-paint" id="cursorPaint" aria-hidden="true"></canvas>
 
@@ -8477,6 +8543,40 @@
             };
 
             trigger.addEventListener("click", open);
+            close.addEventListener("click", closeModal);
+            modal.addEventListener("click", event => {
+                if (event.target === modal) closeModal();
+            });
+            window.addEventListener("keydown", event => {
+                if (event.key === "Escape" && modal.classList.contains("is-open")) closeModal();
+            });
+        }
+
+        function initWechatCardModal() {
+            const trigger = document.querySelector(".thank-you-contact-card");
+            const modal = document.getElementById("wechatCardModal");
+            const close = document.getElementById("wechatCardModalClose");
+            if (!trigger || !modal || !close) return;
+
+            const openModal = () => {
+                modal.classList.add("is-open");
+                modal.setAttribute("aria-hidden", "false");
+                document.body.style.overflow = "hidden";
+            };
+
+            const closeModal = () => {
+                modal.classList.remove("is-open");
+                modal.setAttribute("aria-hidden", "true");
+                document.body.style.overflow = "";
+            };
+
+            trigger.addEventListener("click", openModal);
+            trigger.addEventListener("keydown", event => {
+                if (event.key === "Enter" || event.key === " " || event.code === "Space") {
+                    event.preventDefault();
+                    openModal();
+                }
+            });
             close.addEventListener("click", closeModal);
             modal.addEventListener("click", event => {
                 if (event.target === modal) closeModal();
@@ -9030,6 +9130,7 @@
             initModalControls();
             initFlowerGallery();
             initAboutPhotoZoom();
+            initWechatCardModal();
             initImageZoomCards();
             initSakuraProcessLightbox();
             initPhoenixSeriesGallery();
