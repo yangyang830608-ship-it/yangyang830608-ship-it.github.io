@@ -7122,6 +7122,202 @@
                 font-size: clamp(62px, 18vw, 84px) !important;
             }
         }
+
+        /* Chapter 02/03/04 adaptive title system: fixed number, flexible label, no Chinese word breaks */
+        #chapter-interactive .chapter-copy,
+        #chapter-materials .chapter-copy,
+        #photo .chapter-copy {
+            width: 100% !important;
+            max-width: 640px !important;
+            min-width: 0 !important;
+            position: relative !important;
+            z-index: 2 !important;
+        }
+
+        #chapter-interactive .chapter-layout-split,
+        #chapter-materials .chapter-layout-grid,
+        #photo .chapter-layout {
+            gap: clamp(48px, 5vw, 92px) !important;
+        }
+
+        #chapter-interactive .chapter-layout-split,
+        #chapter-materials .chapter-layout-grid {
+            grid-template-columns: minmax(540px, 0.9fr) minmax(700px, 1.4fr) !important;
+            align-items: center !important;
+        }
+
+        #photo .chapter-layout {
+            grid-template-columns: minmax(540px, 0.9fr) minmax(700px, 1.4fr) !important;
+            align-items: center !important;
+        }
+
+        #chapter-interactive .chapter-title-system,
+        #chapter-materials .chapter-title-system,
+        #photo .chapter-title-system {
+            display: block !important;
+            width: 100% !important;
+            max-width: 640px !important;
+            min-width: 0 !important;
+            margin: 0 0 18px !important;
+            position: relative !important;
+            z-index: 3 !important;
+            overflow: visible !important;
+        }
+
+        #chapter-interactive .chapter-title-row,
+        #chapter-materials .chapter-title-row,
+        #photo .chapter-title-row {
+            display: inline-flex !important;
+            align-items: stretch !important;
+            max-width: 100% !important;
+            min-width: 0 !important;
+            filter: drop-shadow(6px 6px 0 rgba(88, 217, 255, 0.64)) drop-shadow(12px 12px 0 rgba(255, 119, 200, 0.42)) !important;
+        }
+
+        #chapter-interactive .chapter-number,
+        #chapter-materials .chapter-number,
+        #photo .chapter-number {
+            flex: 0 0 auto !important;
+            width: clamp(118px, 8.5vw, 156px) !important;
+            min-width: clamp(118px, 8.5vw, 156px) !important;
+            height: clamp(64px, 5vw, 82px) !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            color: #231235 !important;
+            background: linear-gradient(180deg, #ff8ed6 0%, #ff69c3 100%) !important;
+            border: 3px solid var(--window-deep-border) !important;
+            outline: 2px solid var(--window-border) !important;
+            font-family: var(--font-title) !important;
+            font-size: clamp(46px, 5vw, 70px) !important;
+            font-weight: 900 !important;
+            line-height: 1 !important;
+            letter-spacing: 0 !important;
+            text-shadow: 2px 2px 0 #fff6ff, -2px 0 0 #58d9ff !important;
+            box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.24), inset 4px 4px 0 rgba(255, 255, 255, 0.36) !important;
+            box-sizing: border-box !important;
+        }
+
+        #chapter-interactive .chapter-label,
+        #chapter-materials .chapter-label,
+        #photo .chapter-label {
+            flex: 1 1 auto !important;
+            width: auto !important;
+            min-width: 0 !important;
+            max-width: min(620px, calc(100vw - 240px)) !important;
+            height: clamp(64px, 5vw, 82px) !important;
+            padding: 0 clamp(20px, 2vw, 32px) !important;
+            display: flex !important;
+            align-items: center !important;
+            color: #231235 !important;
+            background: linear-gradient(90deg, #fff36d 0%, #8bf4ff 54%, #7cffdc 100%) !important;
+            border: 3px solid var(--window-deep-border) !important;
+            border-left: 0 !important;
+            outline: 2px solid var(--window-border) !important;
+            box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.18), inset 3px 3px 0 rgba(255, 255, 255, 0.34) !important;
+            box-sizing: border-box !important;
+            overflow: hidden !important;
+            white-space: nowrap !important;
+            text-overflow: clip !important;
+            font-family: "Courier New", monospace !important;
+            font-size: clamp(15px, 1.18vw, 21px) !important;
+            line-height: 1 !important;
+            letter-spacing: 0.035em !important;
+            font-weight: 900 !important;
+            text-transform: uppercase !important;
+            text-align: left !important;
+        }
+
+        #chapter-interactive .chapter-label.is-long {
+            font-size: clamp(14px, 1.05vw, 19px) !important;
+            letter-spacing: 0.015em !important;
+        }
+
+        #chapter-interactive .chapter-main-title,
+        #chapter-materials .chapter-main-title,
+        #photo .chapter-main-title {
+            display: block !important;
+            width: max-content !important;
+            max-width: 100% !important;
+            margin: 10px 0 18px !important;
+            white-space: nowrap !important;
+            word-break: keep-all !important;
+            overflow-wrap: normal !important;
+            line-break: strict !important;
+            font-family: var(--font-title) !important;
+            font-size: clamp(68px, 6vw, 108px) !important;
+            line-height: 0.92 !important;
+            font-weight: 800 !important;
+            color: #fff6ff !important;
+            letter-spacing: -0.05em !important;
+            text-shadow: 4px 4px 0 rgba(255, 119, 200, 0.52), -3px 0 0 rgba(88, 217, 255, 0.46), 0 0 28px rgba(255, 255, 255, 0.22) !important;
+        }
+
+        #chapter-materials .chapter-main-title.is-long {
+            font-size: clamp(60px, 5.3vw, 92px) !important;
+            letter-spacing: -0.06em !important;
+        }
+
+        @media (max-width: 1100px) {
+            #chapter-interactive .chapter-layout-split,
+            #chapter-materials .chapter-layout-grid,
+            #photo .chapter-layout {
+                grid-template-columns: 1fr !important;
+            }
+
+            #chapter-interactive .chapter-copy,
+            #chapter-materials .chapter-copy,
+            #photo .chapter-copy,
+            #chapter-interactive .chapter-title-system,
+            #chapter-materials .chapter-title-system,
+            #photo .chapter-title-system {
+                max-width: 100% !important;
+            }
+
+            #chapter-interactive .chapter-label,
+            #chapter-materials .chapter-label,
+            #photo .chapter-label {
+                max-width: calc(100vw - 180px) !important;
+            }
+        }
+
+        @media (max-width: 700px) {
+            #chapter-interactive .chapter-title-row,
+            #chapter-materials .chapter-title-row,
+            #photo .chapter-title-row {
+                width: 100% !important;
+            }
+
+            #chapter-interactive .chapter-number,
+            #chapter-materials .chapter-number,
+            #photo .chapter-number {
+                width: clamp(78px, 22vw, 108px) !important;
+                min-width: clamp(78px, 22vw, 108px) !important;
+                height: clamp(58px, 16vw, 72px) !important;
+                font-size: clamp(38px, 12vw, 58px) !important;
+            }
+
+            #chapter-interactive .chapter-label,
+            #chapter-materials .chapter-label,
+            #photo .chapter-label,
+            #chapter-interactive .chapter-label.is-long {
+                height: clamp(58px, 16vw, 72px) !important;
+                max-width: none !important;
+                padding: 0 14px !important;
+                white-space: normal !important;
+                line-height: 1.15 !important;
+                font-size: clamp(12px, 3.2vw, 15px) !important;
+                letter-spacing: 0.01em !important;
+            }
+
+            #chapter-interactive .chapter-main-title,
+            #chapter-materials .chapter-main-title,
+            #photo .chapter-main-title,
+            #chapter-materials .chapter-main-title.is-long {
+                width: 100% !important;
+                font-size: clamp(54px, 15vw, 76px) !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -7512,8 +7708,13 @@
     <section id="chapter-interactive" class="chapter-page chapter-interactive">
         <div class="container chapter-layout chapter-layout-split">
             <div class="chapter-copy">
-                <p class="section-kicker interactive-chapter-kicker chapter-heading"><span class="chapter-mark chapter-heading__number">02</span><span class="chapter-heading__label">CHAPTER 02 / INTERACTIVE INSTALLATION</span></p>
-                <h2 class="section-title chapter-heading__title">&#20132;&#20114;&#35013;&#32622;</h2>
+                <div class="chapter-title-system">
+                    <div class="chapter-title-row">
+                        <div class="chapter-number">02</div>
+                        <div class="chapter-label is-long">CHAPTER 02 / INTERACTIVE INSTALLATION</div>
+                    </div>
+                    <h1 class="chapter-main-title">&#20132;&#20114;&#35013;&#32622;</h1>
+                </div>
                 <p class="section-copy">&#26412;&#31456;&#33410;&#25910;&#24405;&#20004;&#32452;&#22522;&#20110; TouchDesigner &#30340;&#20132;&#20114;&#35013;&#32622;&#20316;&#21697;&#65292;&#32467;&#21512; AI &#22270;&#20687;&#29983;&#25104;&#12289;&#23454;&#26102;&#35270;&#35273;&#35745;&#31639;&#19982;&#25163;&#21183;&#35782;&#21035;&#25216;&#26415;&#65292;&#25506;&#32034;&#25968;&#23383;&#24433;&#20687;&#12289;&#31354;&#38388;&#35013;&#32622;&#19982;&#35266;&#20247;&#20114;&#21160;&#20043;&#38388;&#30340;&#20307;&#39564;&#20851;&#31995;&#12290;</p>
                 <div class="project-meta">
                     <span>&#26495;&#40542;&#39118;&#31581; TD &#20132;&#20114;&#20316;&#21697;</span>
@@ -7639,8 +7840,13 @@
     <section id="chapter-materials" class="chapter-page chapter-materials">
         <div class="container chapter-layout chapter-layout-grid">
             <div class="chapter-copy">
-                <p class="section-kicker materials-eyebrow chapter-heading"><span class="chapter-mark chapter-heading__number">03</span><span class="chapter-heading__label">CHAPTER 03 / MIXED MATERIALS</span></p>
-                <h2 class="section-title chapter-heading__title">&#32508;&#21512;&#26448;&#26009;</h2>
+                <div class="chapter-title-system">
+                    <div class="chapter-title-row">
+                        <div class="chapter-number">03</div>
+                        <div class="chapter-label">CHAPTER 03 / MIXED MATERIALS</div>
+                    </div>
+                    <h1 class="chapter-main-title is-long">&#32508;&#21512;&#26448;&#26009;</h1>
+                </div>
                 <p class="section-copy">&#26412;&#31456;&#33410;&#20197;&#29627;&#29827;&#20026;&#21019;&#20316;&#23186;&#20171;&#65292;&#36890;&#36807;&#29100;&#34701;&#22609;&#24418;&#12289;&#33394;&#24425;&#25645;&#37197;&#19982;&#32454;&#33410;&#25171;&#30952;&#65292;&#23436;&#25104;&#31995;&#21015;&#39318;&#39280;&#35774;&#35745;&#65292;&#25506;&#32034;&#26448;&#26009;&#24037;&#33402;&#19982;&#26085;&#24120;&#20329;&#25140;&#20043;&#38388;&#30340;&#35774;&#35745;&#34920;&#36798;&#12290;</p>
             </div>
             <div class="chapter-material-grid">
@@ -7797,8 +8003,13 @@
     <section id="photo" class="chapter-page chapter-image">
         <div class="container chapter-layout">
             <div class="chapter-copy">
-                <p class="section-kicker image-chapter-kicker chapter-heading"><span class="chapter-mark chapter-heading__number">04</span><span class="chapter-heading__label">CHAPTER 04 / IMAGE & MOTION</span></p>
-                <h2 class="section-title chapter-heading__title">&#24433;&#20687;</h2>
+                <div class="chapter-title-system">
+                    <div class="chapter-title-row">
+                        <div class="chapter-number">04</div>
+                        <div class="chapter-label">CHAPTER 04 / IMAGE & MOTION</div>
+                    </div>
+                    <h1 class="chapter-main-title">&#24433;&#20687;</h1>
+                </div>
                 <p class="section-copy">&#26412;&#31456;&#33410;&#25910;&#24405;&#20004;&#32452;&#21160;&#24577;&#35270;&#35273;&#20316;&#21697;&#65292;&#20998;&#21035;&#20197;&#21160;&#24577;&#28023;&#25253;&#19982; MG &#21160;&#30011;&#20026;&#20027;&#35201;&#24418;&#24335;&#65292;&#36890;&#36807;&#22270;&#24418;&#36816;&#21160;&#12289;&#33410;&#22863;&#32534;&#25490;&#19982;&#30011;&#38754;&#36716;&#22330;&#65292;&#25506;&#32034;&#35270;&#35273;&#20449;&#24687;&#22312;&#26102;&#38388;&#32500;&#24230;&#20013;&#30340;&#34920;&#36798;&#26041;&#24335;&#12290;</p>
             </div>
             <div class="image-portfolio-grid">
