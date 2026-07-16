@@ -6768,6 +6768,102 @@
                 max-width: 100% !important;
             }
         }
+        /* Image chapter title system: reuse Chapter 01 pixel title component */
+        #photo .chapter-layout {
+            width: min(92vw, 1600px) !important;
+            grid-template-columns: minmax(420px, 0.34fr) minmax(780px, 0.66fr) !important;
+            gap: clamp(48px, 5vw, 90px) !important;
+        }
+        #photo .chapter-copy {
+            max-width: 560px !important;
+        }
+        #photo .image-chapter-kicker {
+            display: inline-grid !important;
+            grid-template-columns: auto auto !important;
+            align-items: center !important;
+            gap: 0 !important;
+            width: fit-content !important;
+            margin: 0 0 14px !important;
+            padding: 0 !important;
+            color: #231235 !important;
+            font: 900 clamp(16px, 1.35vw, 22px) "Courier New", monospace !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            border: 4px solid #1b0b28 !important;
+            outline: 3px solid #fff6ff !important;
+            box-shadow: 6px 6px 0 rgba(88, 217, 255, 0.64), 12px 12px 0 rgba(255, 119, 200, 0.42) !important;
+            filter: none !important;
+        }
+        #photo .image-chapter-kicker .chapter-mark {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 116px !important;
+            height: 72px !important;
+            color: #231235 !important;
+            background: linear-gradient(135deg, #ff77c8 0%, #f6a2ff 48%, #ff77c8 100%) !important;
+            font-family: var(--font-title) !important;
+            font-size: clamp(42px, 5.2vw, 74px) !important;
+            line-height: 0.82 !important;
+            letter-spacing: 0 !important;
+            text-shadow: 3px 0 0 rgba(88, 217, 255, 0.52), -2px 0 0 rgba(255, 246, 255, 0.64) !important;
+            box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.24), inset 4px 4px 0 rgba(255, 255, 255, 0.36) !important;
+        }
+        #photo .image-chapter-kicker > span:last-child {
+            display: inline-flex !important;
+            align-items: center !important;
+            min-height: 54px !important;
+            height: 72px !important;
+            padding: 0 18px !important;
+            color: #231235 !important;
+            background: linear-gradient(90deg, #fff36d 0%, #f7ff9a 38%, #7cffdc 100%) !important;
+            border-left: 4px solid #1b0b28 !important;
+            box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.18), inset 3px 3px 0 rgba(255, 255, 255, 0.34) !important;
+            white-space: nowrap !important;
+        }
+        #photo .section-title {
+            font-family: var(--font-title) !important;
+            font-size: clamp(76px, 7vw, 118px) !important;
+            line-height: 0.9 !important;
+            font-weight: 800 !important;
+            color: #fff6ff !important;
+            margin: 0 0 18px !important;
+            letter-spacing: -0.05em !important;
+            text-shadow: 4px 4px 0 rgba(255, 119, 200, 0.52), -3px 0 0 rgba(88, 217, 255, 0.46), 0 0 28px rgba(255, 255, 255, 0.22) !important;
+        }
+        #photo .section-copy {
+            max-width: 520px !important;
+            line-height: 1.8 !important;
+        }
+        #photo .image-portfolio-grid {
+            max-width: 1120px !important;
+            grid-template-columns: minmax(340px, 0.4fr) minmax(520px, 0.6fr) !important;
+            grid-template-rows: minmax(460px, 62vh) !important;
+        }
+        #photo .image-portfolio-card.tall {
+            min-height: clamp(460px, 58vh, 660px) !important;
+        }
+        #photo .image-portfolio-card:not(.tall) {
+            min-height: clamp(280px, 34vh, 390px) !important;
+        }
+        @media (max-width: 1180px) {
+            #photo .chapter-layout {
+                grid-template-columns: 1fr !important;
+                gap: 34px !important;
+            }
+            #photo .image-portfolio-grid {
+                max-width: 980px !important;
+            }
+        }
+        @media (max-width: 680px) {
+            #photo .image-chapter-kicker {
+                transform: scale(0.82) !important;
+                transform-origin: left center !important;
+            }
+            #photo .section-title {
+                font-size: clamp(62px, 18vw, 84px) !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -7443,9 +7539,9 @@
     <section id="photo" class="chapter-page chapter-image">
         <div class="container chapter-layout">
             <div class="chapter-copy">
-                <p class="section-kicker">CHAPTER 04 / IMAGE & MOTION</p>
+                <p class="section-kicker image-chapter-kicker"><span class="chapter-mark">04</span><span>CHAPTER 04 / IMAGE & MOTION</span></p>
                 <h2 class="section-title">&#24433;&#20687;</h2>
-                <p class="section-copy">&#36825;&#19968;&#31456;&#25910;&#24405;&#21160;&#24577;&#28023;&#25253;&#19982; MG &#23567;&#21160;&#30011;&#20004;&#32452;&#24433;&#20687;&#20316;&#21697;&#65292;&#20197;&#26356;&#38598;&#20013;&#30340;&#29256;&#24335;&#23637;&#31034;&#21160;&#24577;&#22270;&#24418;&#12289;&#33410;&#22863;&#21464;&#21270;&#19982;&#35270;&#35273;&#21465;&#20107;&#12290;</p>
+                <p class="section-copy">&#26412;&#31456;&#33410;&#25910;&#24405;&#20004;&#32452;&#21160;&#24577;&#35270;&#35273;&#20316;&#21697;&#65292;&#20998;&#21035;&#20197;&#21160;&#24577;&#28023;&#25253;&#19982; MG &#21160;&#30011;&#20026;&#20027;&#35201;&#24418;&#24335;&#65292;&#36890;&#36807;&#22270;&#24418;&#36816;&#21160;&#12289;&#33410;&#22863;&#32534;&#25490;&#19982;&#30011;&#38754;&#36716;&#22330;&#65292;&#25506;&#32034;&#35270;&#35273;&#20449;&#24687;&#22312;&#26102;&#38388;&#32500;&#24230;&#20013;&#30340;&#34920;&#36798;&#26041;&#24335;&#12290;</p>
             </div>
             <div class="image-portfolio-grid">
                 <article class="image-portfolio-card tall has-embed">
