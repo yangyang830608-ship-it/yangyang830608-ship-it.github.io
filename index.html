@@ -6619,6 +6619,89 @@
             outline: 2px solid #7cffdc !important;
             outline-offset: 4px !important;
         }
+        /* Image & Motion directory only: two-card centered composition */
+        #photo .chapter-layout {
+            width: min(90vw, 1500px) !important;
+            margin: 0 auto !important;
+            display: grid !important;
+            grid-template-columns: minmax(260px, 0.32fr) minmax(620px, 0.68fr) !important;
+            align-items: center !important;
+            gap: clamp(44px, 5vw, 86px) !important;
+        }
+        #photo .chapter-copy {
+            align-self: center !important;
+        }
+        #photo .image-portfolio-grid {
+            display: grid !important;
+            grid-template-columns: minmax(280px, 0.4fr) minmax(420px, 0.6fr) !important;
+            grid-template-rows: minmax(360px, 54vh) !important;
+            align-items: center !important;
+            gap: clamp(18px, 2vw, 30px) !important;
+            width: 100% !important;
+            max-width: 980px !important;
+            justify-self: center !important;
+            margin: 0 !important;
+        }
+        #photo .image-portfolio-card {
+            width: 100% !important;
+            max-width: none !important;
+            min-height: 0 !important;
+            height: auto !important;
+            margin: 0 !important;
+            grid-column: auto !important;
+            grid-row: auto !important;
+        }
+        #photo .image-portfolio-card.tall {
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+            align-self: center !important;
+            aspect-ratio: 0.78 / 1 !important;
+            min-height: clamp(380px, 52vh, 560px) !important;
+        }
+        #photo .image-portfolio-card:not(.tall) {
+            grid-column: 2 !important;
+            grid-row: 1 !important;
+            align-self: center !important;
+            aspect-ratio: 16 / 7 !important;
+            min-height: clamp(220px, 28vh, 320px) !important;
+        }
+        #photo .media-embed,
+        #photo .media-embed iframe {
+            width: 100% !important;
+            height: 100% !important;
+        }
+        #photo .image-portfolio-card:not(.tall) .image-card-copy {
+            max-width: 72% !important;
+        }
+        @media (max-width: 1120px) {
+            #photo .chapter-layout {
+                grid-template-columns: 1fr !important;
+                align-content: center !important;
+                gap: 34px !important;
+            }
+            #photo .chapter-copy {
+                max-width: 680px !important;
+            }
+            #photo .image-portfolio-grid {
+                max-width: 900px !important;
+            }
+        }
+        @media (max-width: 760px) {
+            #photo .chapter-layout {
+                width: min(92vw, 560px) !important;
+            }
+            #photo .image-portfolio-grid {
+                grid-template-columns: 1fr !important;
+                grid-template-rows: auto auto !important;
+            }
+            #photo .image-portfolio-card.tall,
+            #photo .image-portfolio-card:not(.tall) {
+                grid-column: 1 !important;
+                grid-row: auto !important;
+                min-height: 280px !important;
+                aspect-ratio: 4 / 3 !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -7303,7 +7386,7 @@
             <div class="chapter-copy">
                 <p class="section-kicker">CHAPTER 04 / IMAGE & MOTION</p>
                 <h2 class="section-title">&#24433;&#20687;</h2>
-                <p class="section-copy">&#36825;&#19968;&#31456;&#25226; MG &#21160;&#30011;&#12289;&#25668;&#24433;&#20316;&#21697;&#21644;&#24433;&#20687;&#25490;&#29256;&#25918;&#22312;&#21516;&#19968;&#20010;&#35270;&#35273;&#31995;&#32479;&#37324;&#65292;&#20559;&#21521;&#26356;&#36731;&#24555;&#12289;&#26356;&#20415;&#20110;&#27983;&#35272;&#30340;&#20316;&#21697;&#22681;&#32467;&#26500;&#12290;</p>
+                <p class="section-copy">&#36825;&#19968;&#31456;&#25910;&#24405;&#21160;&#24577;&#28023;&#25253;&#19982; MG &#23567;&#21160;&#30011;&#20004;&#32452;&#24433;&#20687;&#20316;&#21697;&#65292;&#20197;&#26356;&#38598;&#20013;&#30340;&#29256;&#24335;&#23637;&#31034;&#21160;&#24577;&#22270;&#24418;&#12289;&#33410;&#22863;&#21464;&#21270;&#19982;&#35270;&#35273;&#21465;&#20107;&#12290;</p>
             </div>
             <div class="image-portfolio-grid">
                 <article class="image-portfolio-card tall has-embed">
@@ -7336,12 +7419,6 @@
                         <span>MG 02</span>
                         <h3>MG &#23567;&#21160;&#30011;</h3>
                         <p>Bilibili / BV1Nu4m1P7Cm</p>
-                    </div>
-                </article>
-                <article class="image-portfolio-card wide" style="--img:url('AI%E7%94%9F%E6%88%90/35.jpg')">
-                    <div class="image-card-copy">
-                        <span>PHOTO</span>
-                        <h3>&#25668;&#24433;&#20316;&#21697;</h3>
                     </div>
                 </article>
             </div>
