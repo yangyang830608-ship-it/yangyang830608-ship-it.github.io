@@ -7622,17 +7622,25 @@
         }
 
         /* Directory page: keep labels and titles clear of the preview image. */
+        #directory .container {
+            transform: translateY(clamp(12px, 2.2vh, 28px)) !important;
+        }
+
+        #directory .section-kicker {
+            margin-bottom: 26px !important;
+        }
+
         #directory .index-card {
-            padding-top: calc(38px + 48% + 28px) !important;
+            padding-top: calc(38px + 48% + 10px) !important;
         }
 
         #directory .index-card span {
-            margin-bottom: 16px !important;
+            margin-bottom: 12px !important;
         }
 
         #directory .index-card h3 {
-            padding-top: 14px !important;
-            margin-bottom: 14px !important;
+            padding-top: 10px !important;
+            margin-bottom: 12px !important;
         }
     </style>
 </head>
