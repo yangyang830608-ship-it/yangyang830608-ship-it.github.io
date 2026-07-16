@@ -7674,6 +7674,61 @@
             background: transparent !important;
             padding: 0 !important;
         }
+
+        /* Phoenix bookstore series: give this subpage its own calmer spacing and guide target. */
+        #phoenix-bookstore-series {
+            min-height: 100vh !important;
+            box-sizing: border-box !important;
+            padding: clamp(150px, 15vh, 190px) 0 clamp(86px, 9vh, 112px) !important;
+            justify-content: flex-start !important;
+            gap: clamp(54px, 7vh, 82px) !important;
+            scroll-margin-top: 0 !important;
+        }
+
+        #phoenix-bookstore-series .phoenix-series-header {
+            width: min(1420px, calc(100vw - 190px)) !important;
+            margin: 0 auto !important;
+            grid-template-columns: minmax(420px, 0.48fr) minmax(430px, 0.52fr) !important;
+            gap: clamp(64px, 7vw, 112px) !important;
+            align-items: center !important;
+        }
+
+        #phoenix-bookstore-series .phoenix-study-title {
+            max-width: 700px !important;
+            font-size: clamp(42px, 4.25vw, 74px) !important;
+            line-height: 1.08 !important;
+        }
+
+        #phoenix-bookstore-series .phoenix-study-cn {
+            margin-top: 20px !important;
+            margin-bottom: 0 !important;
+        }
+
+        #phoenix-bookstore-series .phoenix-study-desc {
+            max-width: 570px !important;
+            line-height: 1.9 !important;
+        }
+
+        #phoenix-bookstore-series .phoenix-series-toolbar {
+            margin-top: 30px !important;
+        }
+
+        #phoenix-bookstore-series .phoenix-series-track {
+            padding-top: 4px !important;
+            padding-bottom: 44px !important;
+        }
+
+        #phoenix-bookstore-series .phoenix-series-card {
+            flex-basis: clamp(560px, 40vw, 720px) !important;
+        }
+
+        @media (max-width: 1180px) {
+            #phoenix-bookstore-series .phoenix-series-header {
+                width: min(860px, calc(100vw - 52px)) !important;
+                grid-template-columns: 1fr !important;
+                gap: 28px !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -7712,6 +7767,7 @@
         <button class="dot-item" onclick="scrollToSec('nj-wall-detail')" aria-label="Wall Exploration"></button>
         <button class="dot-item" onclick="scrollToSec('phoenix-bookstore')" aria-label="Phoenix Hero"></button>
         <button class="dot-item" onclick="scrollToSec('phoenix-bookstore-detail')" aria-label="Phoenix Studies"></button>
+        <button class="dot-item" onclick="scrollToSec('phoenix-bookstore-series')" aria-label="Phoenix Series"></button>
         <button class="dot-item" onclick="scrollToSec('chapter-interactive')" aria-label="Interactive"></button>
         <button class="dot-item" onclick="scrollToSec('kite-project-1')" aria-label="Kite 01"></button>
         <button class="dot-item" onclick="scrollToSec('kite-project-2')" aria-label="Kite 02"></button>
@@ -8035,7 +8091,7 @@
                 </div>
             </section>
 
-            <section class="phoenix-series" aria-labelledby="phoenix-series-title">
+            <section id="phoenix-bookstore-series" class="phoenix-series" aria-labelledby="phoenix-series-title">
                 <div class="phoenix-series-header">
                     <div>
                         <p class="phoenix-study-kicker">BOOKSTORE INSTALLATION SERIES</p>
@@ -8949,8 +9005,8 @@
                     current = section.id;
                 }
             });
-            const aiSections = new Set(["ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "nj-wall-gallery", "phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery"]);
-            const phoenixSections = new Set(["phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-gallery"]);
+            const aiSections = new Set(["ai-generation", "hero-project", "storyboard", "ch2", "ch3", "nj-wall", "nj-wall-detail", "nj-wall-gallery", "phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-series", "phoenix-bookstore-gallery"]);
+            const phoenixSections = new Set(["phoenix-bookstore", "phoenix-bookstore-detail", "phoenix-bookstore-series", "phoenix-bookstore-gallery"]);
             const interactiveSections = new Set([
                 "chapter-interactive",
                 "kite-project-1",
