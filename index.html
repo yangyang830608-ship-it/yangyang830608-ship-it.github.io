@@ -1006,6 +1006,17 @@
         .tv-screen:focus-within .tv-video {
             pointer-events: auto;
         }
+        .tv-video:fullscreen,
+        .tv-video:-webkit-full-screen {
+            width: 100vw !important;
+            height: 100vh !important;
+            opacity: 1 !important;
+            transform: none !important;
+            animation: none !important;
+            filter: none !important;
+            pointer-events: auto !important;
+            background: #000 !important;
+        }
         .final-page.is-video-ready .tv-video {
             animation: tvVideoIn 0.45s ease forwards;
         }
@@ -7503,6 +7514,29 @@
 
         #photo .image-portfolio-card {
             box-sizing: border-box !important;
+        }
+
+        #photo .image-portfolio-card.tall.has-embed {
+            transform-origin: center center !important;
+            transition: transform 0.28s ease, z-index 0s linear !important;
+        }
+
+        #photo .image-portfolio-card.tall.has-embed:hover,
+        #photo .image-portfolio-card.tall.has-embed:focus-within {
+            z-index: 20 !important;
+            width: min(72vw, 680px) !important;
+            min-width: min(72vw, 680px) !important;
+            transform: scaleY(1.04) !important;
+        }
+
+        #photo .image-portfolio-card.tall.has-embed:hover .media-embed,
+        #photo .image-portfolio-card.tall.has-embed:focus-within .media-embed {
+            inset: 0 !important;
+        }
+
+        #photo .image-portfolio-card.tall.has-embed:hover .image-card-copy,
+        #photo .image-portfolio-card.tall.has-embed:focus-within .image-card-copy {
+            opacity: 0 !important;
         }
 
         @media (max-width: 1440px) {
