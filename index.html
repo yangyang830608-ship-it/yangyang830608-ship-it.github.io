@@ -8696,9 +8696,6 @@
                 const target = targetSelector
                     ? document.querySelector(targetSelector)
                     : trigger.closest(".image-portfolio-card, .tv-screen")?.querySelector("iframe");
-                if (target && target.src && target.getAttribute("src") !== target.src) {
-                    target.setAttribute("src", target.src);
-                }
                 return target?.getAttribute("src") || target?.src || "";
             };
 
@@ -8997,10 +8994,7 @@
             caseImg.src = ASSETS.tvCase;
             frameImg.src = ASSETS.tvFrame;
             const isNativeVideo = video.tagName.toLowerCase() === "video";
-            const videoSource = video.getAttribute("src") || video.src || ASSETS.tvVideo;
-            if (videoSource) {
-                video.setAttribute("src", videoSource);
-            }
+            video.src = ASSETS.tvVideo;
             if (isNativeVideo) {
                 video.preload = "auto";
                 video.muted = true;
