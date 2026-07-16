@@ -7647,6 +7647,33 @@
         #ch2 .container {
             padding-top: clamp(132px, 13vh, 158px) !important;
         }
+
+        /* Nanjing wall exploration page: full-page background, complete card images, clickable zoom. */
+        #nj-wall-detail.nj-redesign-page {
+            min-height: max(100vh, 100dvh) !important;
+            height: auto !important;
+            overflow: visible !important;
+            background:
+                linear-gradient(90deg, rgba(255, 232, 244, 0.92), rgba(238, 252, 255, 0.96)),
+                #fff8fb !important;
+        }
+
+        #nj-wall-detail.nj-redesign-page::before,
+        #nj-wall-detail.nj-redesign-page::after {
+            min-height: max(100vh, 100dvh) !important;
+        }
+
+        #nj-wall-detail .nj-explore-option,
+        #nj-wall-detail .nj-final-image {
+            cursor: zoom-in !important;
+        }
+
+        #nj-wall-detail .nj-explore-option img {
+            object-fit: contain !important;
+            object-position: center center !important;
+            background: rgba(255, 248, 252, 0.84) !important;
+            padding: 0 !important;
+        }
     </style>
 </head>
 <body>
@@ -7936,21 +7963,21 @@
                         <p class="nj-project-desc">&#20026;&#20102;&#23547;&#25214;&#26368;&#36866;&#21512;&#21335;&#20140;&#22478;&#22681;&#22330;&#26223;&#30340;&#20844;&#20849;&#33402;&#26415;&#35013;&#32622;&#24418;&#24335;&#65292;&#36890;&#36807; AI &#36827;&#34892;&#20102;&#22810;&#36718;&#26041;&#26696;&#25506;&#32034;&#65292;&#19981;&#26029;&#27604;&#36739;&#19981;&#21516;&#36896;&#22411;&#12289;&#31354;&#38388;&#20851;&#31995;&#19982;&#20809;&#24433;&#25928;&#26524;&#65292;&#26368;&#32456;&#30830;&#23450;&#27185;&#33457;&#38376;&#20316;&#20026;&#26368;&#32456;&#35774;&#35745;&#26041;&#21521;&#12290;</p>
                     </div>
                     <div class="nj-explore-cards">
-                        <figure class="nj-explore-option">
+                        <figure class="nj-explore-option zoom-card">
                             <img src="%E5%9F%8E%E5%A2%99%E6%A8%B1%E8%8A%B1%E8%A3%85%E7%BD%AE/%E7%90%83%E5%BD%A2%E8%A3%85%E7%BD%AE%E6%8E%A2%E7%B4%A2.png" onerror="this.onerror=null;this.src='球形装置探索.png';" alt="球形装置探索">
                             <figcaption>
                                 <h3>&#29699;&#24418;&#35013;&#32622;&#25506;&#32034;</h3>
                                 <p>&#20197;&#29699;&#24418;&#26500;&#25104;&#20026;&#22522;&#30784;&#65292;&#25506;&#32034;&#27185;&#33457;&#20027;&#39064;&#20844;&#20849;&#33402;&#26415;&#35013;&#32622;&#30340;&#34920;&#29616;&#24418;&#24335;&#12290;</p>
                             </figcaption>
                         </figure>
-                        <figure class="nj-explore-option">
+                        <figure class="nj-explore-option zoom-card">
                             <img src="%E5%9F%8E%E5%A2%99%E6%A8%B1%E8%8A%B1%E8%A3%85%E7%BD%AE/%E9%9B%95%E5%A1%91%E8%A3%85%E7%BD%AE%E6%8E%A2%E7%B4%A2.jpg" onerror="this.onerror=null;this.src='雕塑装置探索.jpg';" alt="雕塑装置探索">
                             <figcaption>
                                 <h3>&#38613;&#22609;&#35013;&#32622;&#25506;&#32034;</h3>
                                 <p>&#23581;&#35797;&#19981;&#21516;&#38613;&#22609;&#35821;&#35328;&#19982;&#27185;&#33457;&#20803;&#32032;&#32467;&#21512;&#65292;&#23547;&#25214;&#26356;&#20855;&#33402;&#26415;&#24615;&#30340;&#35774;&#35745;&#26041;&#21521;&#12290;</p>
                             </figcaption>
                         </figure>
-                        <figure class="nj-explore-option">
+                        <figure class="nj-explore-option zoom-card">
                             <img src="%E5%9F%8E%E5%A2%99%E6%A8%B1%E8%8A%B1%E8%A3%85%E7%BD%AE/%E6%A8%B1%E8%8A%B1%E9%97%A8%E8%A3%85%E7%BD%AE%E6%8E%A2%E7%B4%A2.jpg" onerror="this.onerror=null;this.src='樱花门装置探索.jpg';" alt="樱花门装置探索">
                             <figcaption>
                                 <h3>&#27185;&#33457;&#38376;&#35013;&#32622;&#25506;&#32034;</h3>
@@ -8887,9 +8914,9 @@
                 document.body.style.overflow = "";
             };
 
-            document.querySelectorAll(".zoom-card:not(:disabled)").forEach(card => {
+            document.querySelectorAll(".zoom-card:not(:disabled), #nj-wall-detail .nj-final-image").forEach(card => {
                 card.addEventListener("click", () => {
-                    const img = card.querySelector("img");
+                    const img = card.matches("img") ? card : card.querySelector("img");
                     open((img && (img.currentSrc || img.src)) || card.dataset.zoomSrc);
                 });
             });
