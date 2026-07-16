@@ -1002,6 +1002,10 @@
             will-change: transform, opacity, filter;
             pointer-events: none;
         }
+        .tv-screen:hover .tv-video,
+        .tv-screen:focus-within .tv-video {
+            pointer-events: auto;
+        }
         .final-page.is-video-ready .tv-video {
             animation: tvVideoIn 0.45s ease forwards;
         }
@@ -1337,12 +1341,21 @@
             background: #000;
             pointer-events: none;
         }
+        .image-portfolio-card.has-embed:hover .media-embed iframe,
+        .image-portfolio-card.has-embed:focus-within .media-embed iframe {
+            pointer-events: auto;
+        }
         .embed-shade {
             position: absolute;
             inset: 0;
-            z-index: 0;
+            z-index: 6;
             pointer-events: none;
             background: linear-gradient(180deg, rgba(3,4,6,0.06) 8%, rgba(3,4,6,0.16) 50%, rgba(3,4,6,0.84) 100%);
+            transition: opacity 0.22s ease;
+        }
+        .image-portfolio-card.has-embed:hover .embed-shade,
+        .image-portfolio-card.has-embed:focus-within .embed-shade {
+            opacity: 0;
         }
         .image-portfolio-card.has-embed .image-card-copy {
             max-width: 82%;
@@ -1355,19 +1368,18 @@
             display: grid;
             place-items: center;
             border: 0;
-            background:
-                radial-gradient(circle at center, rgba(255, 119, 200, 0.18), transparent 34%),
-                rgba(8, 4, 15, 0.18);
+            background: linear-gradient(180deg, rgba(3,4,6,0.72) 0%, rgba(3,4,6,0) 25%, rgba(3,4,6,0) 58%, rgba(3,4,6,0.78) 100%);
             color: #fff6ff;
-            cursor: pointer;
-            opacity: 0;
+            cursor: default;
+            opacity: 1;
+            pointer-events: none;
             transition: opacity 0.22s ease, background 0.22s ease;
             font-family: var(--font-title);
             letter-spacing: 0.08em;
             text-shadow: 2px 2px 0 rgba(255, 119, 200, 0.66), 0 0 18px rgba(88, 217, 255, 0.68);
         }
         .video-fullscreen-trigger span {
-            display: inline-flex;
+            display: none;
             align-items: center;
             justify-content: center;
             padding: 12px 18px;
@@ -1381,7 +1393,7 @@
         .image-portfolio-card.has-embed:focus-within .video-fullscreen-trigger,
         .tv-screen:hover .video-fullscreen-trigger,
         .tv-screen:focus-within .video-fullscreen-trigger {
-            opacity: 1;
+            opacity: 0;
         }
         .video-fullscreen-modal {
             position: fixed;
@@ -8696,6 +8708,9 @@
                 const target = targetSelector
                     ? document.querySelector(targetSelector)
                     : trigger.closest(".image-portfolio-card, .tv-screen")?.querySelector("iframe");
+                if (target && target.src && target.getAttribute("src") !== target.src) {
+                    target.setAttribute("src", target.src);
+                }
                 return target?.getAttribute("src") || target?.src || "";
             };
 
@@ -8994,7 +9009,10 @@
             caseImg.src = ASSETS.tvCase;
             frameImg.src = ASSETS.tvFrame;
             const isNativeVideo = video.tagName.toLowerCase() === "video";
-            video.src = ASSETS.tvVideo;
+            const videoSource = video.getAttribute("src") || video.src || ASSETS.tvVideo;
+            if (videoSource) {
+                video.setAttribute("src", videoSource);
+            }
             if (isNativeVideo) {
                 video.preload = "auto";
                 video.muted = true;
