@@ -7510,10 +7510,15 @@
             grid-template-columns: minmax(320px, 0.42fr) minmax(430px, 0.58fr) !important;
             gap: clamp(18px, 1.8vw, 28px) !important;
             box-sizing: border-box !important;
+            isolation: isolate !important;
+            overflow: visible !important;
         }
 
         #photo .image-portfolio-card {
             box-sizing: border-box !important;
+            position: relative !important;
+            z-index: 1 !important;
+            isolation: isolate !important;
         }
 
         #photo .image-portfolio-card.tall.has-embed {
@@ -7523,7 +7528,7 @@
 
         #photo .image-portfolio-card.tall.has-embed:hover,
         #photo .image-portfolio-card.tall.has-embed:focus-within {
-            z-index: 20 !important;
+            z-index: 1000 !important;
             width: min(50vw, 500px) !important;
             min-width: min(50vw, 500px) !important;
             transform: none !important;
@@ -7537,6 +7542,10 @@
         #photo .image-portfolio-card.tall.has-embed:hover .image-card-copy,
         #photo .image-portfolio-card.tall.has-embed:focus-within .image-card-copy {
             opacity: 0 !important;
+        }
+
+        #photo .image-portfolio-card:not(.tall) {
+            z-index: 1 !important;
         }
 
         @media (max-width: 1440px) {
