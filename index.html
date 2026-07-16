@@ -6702,6 +6702,72 @@
                 aspect-ratio: 4 / 3 !important;
             }
         }
+        /* Mixed Materials chapter only: single jewelry project composition */
+        #chapter-materials .materials-eyebrow {
+            color: #fff36d !important;
+            font-size: clamp(14px, 1.15vw, 18px) !important;
+            font-weight: 700 !important;
+            letter-spacing: 0.08em !important;
+            margin-bottom: 22px !important;
+            line-height: 1 !important;
+            text-transform: uppercase !important;
+            text-shadow: 0 0 10px rgba(255, 243, 109, 0.36) !important;
+        }
+        #chapter-materials .section-copy {
+            max-width: 500px !important;
+            line-height: 1.8 !important;
+        }
+        #chapter-materials .chapter-layout-grid {
+            width: min(90vw, 1500px) !important;
+            margin: 0 auto !important;
+            display: grid !important;
+            grid-template-columns: minmax(320px, 0.35fr) minmax(640px, 0.65fr) !important;
+            align-items: center !important;
+            gap: clamp(48px, 6vw, 92px) !important;
+        }
+        #chapter-materials .chapter-material-grid {
+            display: grid !important;
+            grid-template-columns: 1fr !important;
+            width: 100% !important;
+            max-width: 980px !important;
+            justify-self: center !important;
+            align-self: center !important;
+            margin: 0 !important;
+            gap: 0 !important;
+        }
+        #chapter-materials .material-card {
+            width: 100% !important;
+            min-height: 0 !important;
+            aspect-ratio: 16 / 10 !important;
+            max-height: min(62vh, 620px) !important;
+            margin: 0 !important;
+            grid-column: 1 !important;
+            grid-row: 1 !important;
+        }
+        #chapter-materials .material-card > div {
+            max-width: min(58%, 520px) !important;
+        }
+        @media (max-width: 1120px) {
+            #chapter-materials .chapter-layout-grid {
+                grid-template-columns: 1fr !important;
+                gap: 34px !important;
+            }
+            #chapter-materials .chapter-material-grid {
+                max-width: 900px !important;
+            }
+        }
+        @media (max-width: 720px) {
+            #chapter-materials .chapter-layout-grid {
+                width: min(92vw, 560px) !important;
+            }
+            #chapter-materials .material-card {
+                aspect-ratio: 4 / 3 !important;
+                min-height: 300px !important;
+            }
+            #chapter-materials .material-card > div {
+                max-width: 100% !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -7219,21 +7285,14 @@
     <section id="chapter-materials" class="chapter-page chapter-materials">
         <div class="container chapter-layout chapter-layout-grid">
             <div class="chapter-copy">
-                <p class="section-kicker">CHAPTER 03 / MIXED MATERIALS</p>
+                <p class="section-kicker materials-eyebrow">CHAPTER 03 / MIXED MATERIALS</p>
                 <h2 class="section-title">&#32508;&#21512;&#26448;&#26009;</h2>
-                <p class="section-copy">&#36825;&#19968;&#31456;&#20197;&#26448;&#26009;&#12289;&#35302;&#24863;&#21644;&#24037;&#33402;&#20026;&#20027;&#65292;&#23637;&#31034;&#35013;&#32622;&#19982;&#39318;&#39280;&#20043;&#38388;&#26356;&#25509;&#36817;&#23454;&#20307;&#30340;&#34920;&#36798;&#26041;&#24335;&#65292;&#30011;&#38754;&#20250;&#26356;&#20687;&#19968;&#39029;&#39029;&#26448;&#26009;&#26723;&#26696;&#12290;</p>
+                <p class="section-copy">&#26412;&#31456;&#33410;&#20197;&#29627;&#29827;&#20026;&#21019;&#20316;&#23186;&#20171;&#65292;&#36890;&#36807;&#29100;&#34701;&#22609;&#24418;&#12289;&#33394;&#24425;&#25645;&#37197;&#19982;&#32454;&#33410;&#25171;&#30952;&#65292;&#23436;&#25104;&#31995;&#21015;&#39318;&#39280;&#35774;&#35745;&#65292;&#25506;&#32034;&#26448;&#26009;&#24037;&#33402;&#19982;&#26085;&#24120;&#20329;&#25140;&#20043;&#38388;&#30340;&#35774;&#35745;&#34920;&#36798;&#12290;</p>
             </div>
             <div class="chapter-material-grid">
-                <article class="material-card material-card-wide" style="--mat-img:url('%E6%B5%B7%E6%B1%A0%E8%8A%B1/F-P1%E8%83%8C%E6%99%AF%E5%BA%95%E5%9B%BE.png')">
-                    <div>
-                        <span>01 / INSTALLATION</span>
-                        <h3>&#32508;&#21512;&#26448;&#26009;&#35013;&#32622;</h3>
-                        <p>&#25226;&#29627;&#29827;&#12289;&#37329;&#23646;&#12289;&#32440;&#24352;&#21644;&#32467;&#26500;&#20214;&#32452;&#21512;&#25104;&#19968;&#20010;&#20860;&#20855;&#23454;&#39564;&#24863;&#19982;&#23436;&#25104;&#24230;&#30340;&#31354;&#38388;&#20316;&#21697;&#12290;</p>
-                    </div>
-                </article>
                 <article class="material-card" style="--mat-img:url('%E6%B5%B7%E6%B1%A0%E8%8A%B1/F-P4%E8%83%8C%E6%99%AF.png')">
                     <div>
-                        <span>02 / JEWELRY</span>
+                        <span>01 / JEWELRY</span>
                         <h3>&#28023;&#27744;&#33457;&#29627;&#29827;&#39318;&#39280;</h3>
                         <p>&#20197;&#36879;&#26126;&#24230;&#12289;&#25240;&#23556;&#21644;&#24494;&#22937;&#30340;&#20307;&#31215;&#24046;&#24322;&#65292;&#21435;&#24314;&#31435;&#26356;&#32454;&#23567;&#30340;&#20329;&#25140;&#29289;&#21465;&#20107;&#12290;</p>
                     </div>
