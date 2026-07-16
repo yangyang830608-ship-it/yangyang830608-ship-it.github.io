@@ -7625,7 +7625,7 @@
                     <img class="tv-intro" src="&#30005;&#35270;&#26426;.png" alt="" aria-hidden="true">
                     <img class="tv-case" src="&#30005;&#35270;&#26426;.png" alt="&#30005;&#35270;&#26426;&#22806;&#22771;">
                     <div class="tv-screen" id="tvScreen">
-                        <video class="tv-video" id="finalVideo" muted loop playsinline preload="auto" poster="AI%E7%94%9F%E6%88%90/35.jpg" src="final-cut.mp4"></video>
+                        <iframe class="tv-video" id="finalVideo" src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1q5K56DEGu&p=1&danmaku=0" title="AI &#30701;&#29255;&#35270;&#39057;" scrolling="no" frameborder="0" allow="autoplay; fullscreen" allowfullscreen="true"></iframe>
                         <div class="tv-noise" aria-hidden="true"></div>
                     </div>
                     <img class="tv-frame" src="&#30005;&#35270;&#26426;&#22806;&#26694;.png" alt="" aria-hidden="true">
@@ -8073,7 +8073,7 @@
                 <article class="image-portfolio-card tall has-embed portfolio-window-card">
                     <div class="media-embed">
                         <iframe
-                            src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1wj421D7PS&p=1&danmaku=0"
+                            src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1bYK56zE3S&p=1&danmaku=0"
                             title="&#19981;&#24517;&#25104;&#20026;&#38754;&#38754;&#20465;&#22278;&#30340;&#20154; &#21160;&#24577;&#28023;&#25253;"
                             scrolling="no"
                             allow="autoplay; fullscreen"
@@ -8083,13 +8083,13 @@
                     <div class="image-card-copy">
                         <span>MG 01</span>
                         <h3>&#19981;&#24517;&#25104;&#20026;&#38754;&#38754;&#20465;&#22278;&#30340;&#20154; &#21160;&#24577;&#28023;&#25253;</h3>
-                        <p>Bilibili / BV1wj421D7PS</p>
+                        <p>Bilibili / BV1bYK56zE3S</p>
                     </div>
                 </article>
                 <article class="image-portfolio-card has-embed portfolio-window-card">
                     <div class="media-embed">
                         <iframe
-                            src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1Nu4m1P7Cm&p=1&danmaku=0"
+                            src="https://player.bilibili.com/player.html?isOutside=true&bvid=BV1tYK56BEBz&p=1&danmaku=0"
                             title="MG &#23567;&#21160;&#30011;"
                             scrolling="no"
                             allow="autoplay; fullscreen"
@@ -8099,7 +8099,7 @@
                     <div class="image-card-copy">
                         <span>MG 02</span>
                         <h3>MG &#23567;&#21160;&#30011;</h3>
-                        <p>Bilibili / BV1Nu4m1P7Cm</p>
+                        <p>Bilibili / BV1tYK56BEBz</p>
                     </div>
                 </article>
             </div>
@@ -8160,7 +8160,7 @@
             tvCase: "\u7535\u89c6\u673a\u5916\u6846.png",
             tvFrame: "\u7535\u89c6\u673a\u5916\u6846.png",
             tvMask: "\u7535\u89c6\u673a\u5c4f\u5e55.png",
-            tvVideo: "final-cut.mp4"
+            tvVideo: "https://player.bilibili.com/player.html?isOutside=true&bvid=BV1q5K56DEGu&p=1&danmaku=0"
         };
 
         const storyboardImages = [
@@ -8742,14 +8742,17 @@
             introImg.src = ASSETS.tvIntro;
             caseImg.src = ASSETS.tvCase;
             frameImg.src = ASSETS.tvFrame;
+            const isNativeVideo = video.tagName.toLowerCase() === "video";
             video.src = ASSETS.tvVideo;
-            video.preload = "auto";
-            video.muted = true;
-            video.loop = true;
-            video.removeAttribute("controls");
-            video.pause();
-            video.currentTime = 0;
-            video.load();
+            if (isNativeVideo) {
+                video.preload = "auto";
+                video.muted = true;
+                video.loop = true;
+                video.removeAttribute("controls");
+                video.pause();
+                video.currentTime = 0;
+                video.load();
+            }
 
             let active = false;
             let timers = [];
@@ -8763,13 +8766,15 @@
                 clearTimers();
                 screen.classList.remove("is-glitch");
                 section.classList.remove("is-visible", "is-screen-open", "is-video-ready");
-                video.pause();
-                try {
-                    video.currentTime = 0;
-                } catch (error) {
-                    /* Some browsers need metadata before rewinding. */
+                if (isNativeVideo) {
+                    video.pause();
+                    try {
+                        video.currentTime = 0;
+                    } catch (error) {
+                        /* Some browsers need metadata before rewinding. */
+                    }
+                    video.load();
                 }
-                video.load();
             };
 
             const startSequence = () => {
@@ -8777,7 +8782,9 @@
                 active = true;
                 resetSequence();
                 void showcase.offsetWidth;
-                video.load();
+                if (isNativeVideo) {
+                    video.load();
+                }
                 section.classList.add("is-visible");
 
                 timers.push(window.setTimeout(() => {
@@ -8791,9 +8798,11 @@
                                 timers.push(window.setTimeout(() => {
                                     screen.classList.remove("is-glitch");
                                     section.classList.add("is-video-ready");
-                                    const play = video.play();
-                                    if (play && typeof play.catch === "function") {
-                                        play.catch(() => {});
+                                    if (isNativeVideo) {
+                                        const play = video.play();
+                                        if (play && typeof play.catch === "function") {
+                                            play.catch(() => {});
+                                        }
                                     }
                                 }, 180));
                             }, 110));
