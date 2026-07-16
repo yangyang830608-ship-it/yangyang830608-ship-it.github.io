@@ -7318,6 +7318,63 @@
                 font-size: clamp(54px, 15vw, 76px) !important;
             }
         }
+        /* Chapter 04 only: keep the two-card composition clear of the right page guide */
+        #photo.chapter-image {
+            overflow: hidden !important;
+        }
+
+        #photo .chapter-layout {
+            width: min(calc(100vw - clamp(170px, 14vw, 260px)), 1500px) !important;
+            margin-left: clamp(64px, 7vw, 140px) !important;
+            margin-right: auto !important;
+            padding-left: 0 !important;
+            padding-right: 0 !important;
+            box-sizing: border-box !important;
+            grid-template-columns: minmax(500px, 0.38fr) minmax(660px, 0.62fr) !important;
+            gap: clamp(36px, 4vw, 72px) !important;
+            align-items: center !important;
+        }
+
+        #photo .image-portfolio-grid {
+            width: 100% !important;
+            max-width: min(1040px, 100%) !important;
+            justify-self: start !important;
+            grid-template-columns: minmax(320px, 0.42fr) minmax(430px, 0.58fr) !important;
+            gap: clamp(18px, 1.8vw, 28px) !important;
+            box-sizing: border-box !important;
+        }
+
+        #photo .image-portfolio-card {
+            box-sizing: border-box !important;
+        }
+
+        @media (max-width: 1440px) {
+            #photo .chapter-layout {
+                width: min(calc(100vw - 150px), 1220px) !important;
+                margin-left: clamp(48px, 5vw, 92px) !important;
+                grid-template-columns: minmax(430px, 0.38fr) minmax(560px, 0.62fr) !important;
+                gap: clamp(30px, 3.5vw, 56px) !important;
+            }
+
+            #photo .image-portfolio-grid {
+                max-width: min(900px, 100%) !important;
+                grid-template-columns: minmax(300px, 0.42fr) minmax(390px, 0.58fr) !important;
+            }
+        }
+
+        @media (max-width: 1180px) {
+            #photo .chapter-layout {
+                width: min(92vw, 980px) !important;
+                margin-left: auto !important;
+                margin-right: auto !important;
+                grid-template-columns: 1fr !important;
+            }
+
+            #photo .image-portfolio-grid {
+                justify-self: center !important;
+                max-width: 940px !important;
+            }
+        }
     </style>
 </head>
 <body>
