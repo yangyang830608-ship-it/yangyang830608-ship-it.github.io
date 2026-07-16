@@ -6864,6 +6864,74 @@
                 font-size: clamp(62px, 18vw, 84px) !important;
             }
         }
+        /* Interactive chapter title system: reuse Chapter 01 pixel title component */
+        #chapter-interactive .interactive-chapter-kicker {
+            display: inline-grid !important;
+            grid-template-columns: auto auto !important;
+            align-items: center !important;
+            gap: 0 !important;
+            width: fit-content !important;
+            margin: 0 0 14px !important;
+            padding: 0 !important;
+            color: #231235 !important;
+            font: 900 clamp(16px, 1.35vw, 22px) "Courier New", monospace !important;
+            letter-spacing: 0.08em !important;
+            text-transform: uppercase !important;
+            border: 4px solid #1b0b28 !important;
+            outline: 3px solid #fff6ff !important;
+            box-shadow: 6px 6px 0 rgba(88, 217, 255, 0.64), 12px 12px 0 rgba(255, 119, 200, 0.42) !important;
+            filter: none !important;
+            text-shadow: none !important;
+        }
+        #chapter-interactive .interactive-chapter-kicker::before {
+            content: none !important;
+        }
+        #chapter-interactive .interactive-chapter-kicker .chapter-mark {
+            display: inline-flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            min-width: 116px !important;
+            height: 72px !important;
+            color: #231235 !important;
+            background: linear-gradient(135deg, #ff77c8 0%, #f6a2ff 48%, #ff77c8 100%) !important;
+            font-family: var(--font-title) !important;
+            font-size: clamp(42px, 5.2vw, 74px) !important;
+            line-height: 0.82 !important;
+            letter-spacing: 0 !important;
+            text-shadow: 3px 0 0 rgba(88, 217, 255, 0.52), -2px 0 0 rgba(255, 246, 255, 0.64) !important;
+            box-shadow: inset -4px -4px 0 rgba(0, 0, 0, 0.24), inset 4px 4px 0 rgba(255, 255, 255, 0.36) !important;
+        }
+        #chapter-interactive .interactive-chapter-kicker > span:last-child {
+            display: inline-flex !important;
+            align-items: center !important;
+            min-height: 54px !important;
+            height: 72px !important;
+            padding: 0 18px !important;
+            color: #231235 !important;
+            background: linear-gradient(90deg, #fff36d 0%, #f7ff9a 38%, #7cffdc 100%) !important;
+            border-left: 4px solid #1b0b28 !important;
+            box-shadow: inset -3px -3px 0 rgba(0, 0, 0, 0.18), inset 3px 3px 0 rgba(255, 255, 255, 0.34) !important;
+            white-space: nowrap !important;
+        }
+        #chapter-interactive .section-title {
+            font-family: var(--font-title) !important;
+            font-size: clamp(76px, 7vw, 118px) !important;
+            line-height: 0.9 !important;
+            font-weight: 800 !important;
+            color: #fff6ff !important;
+            margin: 0 0 18px !important;
+            letter-spacing: -0.05em !important;
+            text-shadow: 4px 4px 0 rgba(255, 119, 200, 0.52), -3px 0 0 rgba(88, 217, 255, 0.46), 0 0 28px rgba(255, 255, 255, 0.22) !important;
+        }
+        @media (max-width: 680px) {
+            #chapter-interactive .interactive-chapter-kicker {
+                transform: scale(0.82) !important;
+                transform-origin: left center !important;
+            }
+            #chapter-interactive .section-title {
+                font-size: clamp(62px, 18vw, 84px) !important;
+            }
+        }
     </style>
 </head>
 <body>
@@ -7254,9 +7322,9 @@
     <section id="chapter-interactive" class="chapter-page chapter-interactive">
         <div class="container chapter-layout chapter-layout-split">
             <div class="chapter-copy">
-                <p class="section-kicker chapter-eyebrow">CHAPTER 02 / INTERACTIVE INSTALLATION</p>
+                <p class="section-kicker interactive-chapter-kicker"><span class="chapter-mark">02</span><span>CHAPTER 02 / INTERACTIVE INSTALLATION</span></p>
                 <h2 class="section-title">&#20132;&#20114;&#35013;&#32622;</h2>
-                <p class="section-copy">&#26412;&#31456;&#33410;&#25910;&#24405;&#20004;&#32452;&#22522;&#20110; TouchDesigner &#30340;&#23454;&#26102;&#20132;&#20114;&#20316;&#21697;&#65292;&#20998;&#21035;&#20174;&#20256;&#32479;&#39118;&#31581;&#35270;&#35273;&#19982;&#38236;&#38754;&#31890;&#23376;&#24418;&#24577;&#20986;&#21457;&#65292;&#36890;&#36807;&#25163;&#21183;&#35782;&#21035;&#12289;&#21160;&#24577;&#31890;&#23376;&#21453;&#39304;&#21450;&#28783;&#20809;&#23186;&#20171;&#65292;&#25506;&#32034;&#36523;&#20307;&#21160;&#20316;&#19982;&#25968;&#23383;&#35270;&#35273;&#20043;&#38388;&#30340;&#23454;&#26102;&#36830;&#25509;&#12290;</p>
+                <p class="section-copy">&#26412;&#31456;&#33410;&#25910;&#24405;&#20004;&#32452;&#22522;&#20110; TouchDesigner &#30340;&#20132;&#20114;&#35013;&#32622;&#20316;&#21697;&#65292;&#32467;&#21512; AI &#22270;&#20687;&#29983;&#25104;&#12289;&#23454;&#26102;&#35270;&#35273;&#35745;&#31639;&#19982;&#25163;&#21183;&#35782;&#21035;&#25216;&#26415;&#65292;&#25506;&#32034;&#25968;&#23383;&#24433;&#20687;&#12289;&#31354;&#38388;&#35013;&#32622;&#19982;&#35266;&#20247;&#20114;&#21160;&#20043;&#38388;&#30340;&#20307;&#39564;&#20851;&#31995;&#12290;</p>
                 <div class="project-meta">
                     <span>&#26495;&#40542;&#39118;&#31581; TD &#20132;&#20114;&#20316;&#21697;</span>
                     <span>&#38236;&#29983;&#19975;&#35937;&#20132;&#20114;&#35013;&#32622;</span>
@@ -7269,14 +7337,14 @@
                     <div class="chapter-panel-copy">
                         <span>01 / TD INTERACTION</span>
                         <h3>&#26495;&#40542;&#39118;&#31581; TD &#20132;&#20114;&#20316;&#21697;</h3>
-                        <p>&#20197;&#20256;&#32479;&#26495;&#40542;&#39118;&#31581;&#20026;&#26680;&#24515;&#35270;&#35273;&#65292;&#23558;&#24748;&#25346;&#12289;&#39118;&#24863;&#21644;&#23454;&#26102;&#20114;&#21160;&#21512;&#25104;&#19968;&#22871;&#21487;&#34987;&#35266;&#30475;&#21644;&#35302;&#21457;&#30340;&#31354;&#38388;&#35013;&#32622;&#12290;</p>
+                        <p>&#22522;&#20110; AI &#29983;&#25104;&#30340;&#26495;&#40542;&#39118;&#31581;&#24418;&#24577;&#65292;&#23558;&#29983;&#25104;&#22270;&#20687;&#36716;&#21270;&#20026; TouchDesigner &#23454;&#26102;&#31890;&#23376;&#31995;&#32479;&#65292;&#23454;&#29616;&#25163;&#21183;&#20132;&#20114;&#19979;&#30340;&#21160;&#24577;&#35270;&#35273;&#20307;&#39564;&#12290;</p>
                     </div>
                 </a>
                 <a href="#mirror-project-1" class="chapter-panel chapter-panel-small chapter-panel-link" style="--panel-img:url('%E9%95%9C%E6%B7%B1%E4%B8%87%E8%B1%A1/M-P1.png')">
                     <div class="chapter-panel-copy">
                         <span>02 / MIRROR SCENE</span>
                         <h3>&#38236;&#29983;&#19975;&#35937;&#20132;&#20114;&#35013;&#32622;</h3>
-                        <p>&#20511;&#30001;&#38236;&#38754;&#12289;&#21160;&#24577;&#25237;&#24433;&#21644;&#35266;&#20247;&#20301;&#32622;&#21464;&#21270;&#65292;&#24418;&#25104;&#20250;&#38543;&#20154;&#31227;&#21160;&#32780;&#21457;&#29983;&#21464;&#21270;&#30340;&#30011;&#38754;&#21453;&#39304;&#12290;</p>
+                        <p>&#32467;&#21512;&#29627;&#29827;&#22521;&#20859;&#30399;&#35013;&#32622;&#19982;&#25237;&#24433;&#26144;&#23556;&#65292;&#36890;&#36807; TouchDesigner &#25163;&#21183;&#20132;&#20114;&#25511;&#21046;&#21160;&#24577;&#30011;&#38754;&#65292;&#33829;&#36896;&#34394;&#23454;&#32467;&#21512;&#30340;&#27785;&#28024;&#24335;&#35270;&#35273;&#20307;&#39564;&#12290;</p>
                     </div>
                 </a>
             </div>
