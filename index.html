@@ -7797,7 +7797,7 @@
         }
 
 
-        /* Static screenshot export mode: reveal content immediately and remove motion. */
+        /* Static screenshot export v2: keep layout transforms, only remove motion/hiding. */
         body.static-export-mode *,
         body.static-export-mode *::before,
         body.static-export-mode *::after {
@@ -7807,7 +7807,7 @@
         }
 
         body.static-export-mode {
-            overflow-x: visible !important;
+            overflow-x: hidden !important;
         }
 
         body.static-export-mode .reveal-left,
@@ -7819,25 +7819,103 @@
         body.static-export-mode .kite-layer,
         body.static-export-mode .mirror-layer,
         body.static-export-mode .flower-layer,
-        body.static-export-mode .tv-intro,
-        body.static-export-mode .tv-case,
-        body.static-export-mode .tv-frame,
-        body.static-export-mode .tv-video-wrap,
+        body.static-export-mode .image-portfolio-card,
+        body.static-export-mode .media-embed,
+        body.static-export-mode iframe,
         body.static-export-mode img {
             opacity: 1 !important;
             visibility: visible !important;
             filter: none !important;
         }
 
-        body.static-export-mode .index-card,
-        body.static-export-mode .reveal-left,
-        body.static-export-mode .reveal-right,
-        body.static-export-mode .reveal-up {
+        body.static-export-mode .index-card {
+            transform: translateY(0) !important;
+        }
+
+        body.static-export-mode .kite-layer.reveal-left,
+        body.static-export-mode .kite-layer.reveal-right,
+        body.static-export-mode .kite-layer.reveal-up,
+        body.static-export-mode .kite-layer.reveal-scale,
+        body.static-export-mode .mirror-layer.reveal-left,
+        body.static-export-mode .mirror-layer.reveal-right,
+        body.static-export-mode .mirror-layer.reveal-up,
+        body.static-export-mode .mirror-layer.reveal-scale,
+        body.static-export-mode .flower-layer.reveal-left,
+        body.static-export-mode .flower-layer.reveal-right,
+        body.static-export-mode .flower-layer.reveal-up,
+        body.static-export-mode .flower-layer.reveal-scale {
             transform: none !important;
         }
 
-        body.static-export-mode .frame-card {
+        body.static-export-mode #hero-project {
+            position: relative !important;
+            min-height: 100vh !important;
+            overflow: hidden !important;
+        }
+
+        body.static-export-mode #hero-project .story-bg {
+            position: absolute !important;
+            inset: 0 !important;
+            z-index: 1 !important;
+            transform: none !important;
+        }
+
+        body.static-export-mode #hero-project .story-bg::before {
+            inset: 0 !important;
+            transform: none !important;
+            background-size: cover, cover, cover !important;
+            background-position: center center, center center, center center !important;
+        }
+
+        body.static-export-mode #hero-project .container {
+            position: relative !important;
+            z-index: 2 !important;
+        }
+
+        body.static-export-mode .final-page,
+        body.static-export-mode .final-page.is-visible,
+        body.static-export-mode .final-page.is-screen-open,
+        body.static-export-mode .final-page.is-video-ready {
+            opacity: 1 !important;
+            min-height: 100vh !important;
+        }
+
+        body.static-export-mode .tv-showcase {
+            opacity: 1 !important;
             transform: scale(1) !important;
+            visibility: visible !important;
+        }
+
+        body.static-export-mode .tv-intro {
+            opacity: 0 !important;
+        }
+
+        body.static-export-mode .tv-case,
+        body.static-export-mode .tv-frame,
+        body.static-export-mode .tv-screen,
+        body.static-export-mode .tv-video {
+            opacity: 1 !important;
+            visibility: visible !important;
+            filter: none !important;
+        }
+
+        body.static-export-mode .tv-video {
+            pointer-events: auto !important;
+        }
+
+        body.static-export-mode #photo.chapter-image {
+            min-height: 100vh !important;
+            display: flex !important;
+            align-items: center !important;
+            overflow: hidden !important;
+        }
+
+        body.static-export-mode #photo .chapter-layout,
+        body.static-export-mode #photo .chapter-copy,
+        body.static-export-mode #photo .image-portfolio-grid,
+        body.static-export-mode #photo .image-portfolio-card {
+            opacity: 1 !important;
+            visibility: visible !important;
         }
 
         body.static-export-mode .dot-nav,
@@ -7853,27 +7931,12 @@
 
         body.static-export-mode .story-rail,
         body.static-export-mode .phoenix-series-track {
-            overflow: visible !important;
-            scroll-snap-type: none !important;
             scrollbar-width: none !important;
         }
 
         body.static-export-mode .story-rail::-webkit-scrollbar,
         body.static-export-mode .phoenix-series-track::-webkit-scrollbar {
             display: none !important;
-        }
-
-        body.static-export-mode .final-page,
-        body.static-export-mode .final-page.is-visible,
-        body.static-export-mode .final-page.is-screen-open,
-        body.static-export-mode .final-page.is-video-ready {
-            opacity: 1 !important;
-        }
-
-        body.static-export-mode .final-page .tv-screen,
-        body.static-export-mode .final-page .tv-video-wrap {
-            opacity: 1 !important;
-            visibility: visible !important;
         }
 
     </style>
@@ -8678,24 +8741,21 @@
         window.__STATIC_SCREENSHOT_EXPORT__ = STATIC_SCREENSHOT_EXPORT;
 
         function applyStaticScreenshotState() {
-            const root = document.documentElement;
-            if (root) root.classList.add("static-export-mode");
+            document.documentElement.classList.add("static-export-mode");
             if (document.body) document.body.classList.add("static-export-mode");
             document.querySelectorAll(".reveal-left, .reveal-right, .reveal-up, .reveal-scale").forEach(el => {
                 el.classList.add("is-visible");
             });
-            document.querySelectorAll(".index-card").forEach(el => {
-                el.classList.add("visible");
-            });
+            document.querySelectorAll(".index-card").forEach(el => el.classList.add("visible"));
             document.querySelectorAll("img").forEach(img => {
                 img.loading = "eager";
                 img.decoding = "sync";
-                img.style.opacity = "1";
-                img.style.visibility = "visible";
             });
             document.querySelectorAll(".final-page").forEach(section => {
                 section.classList.add("is-visible", "is-screen-open", "is-video-ready");
             });
+            const storyBg = document.getElementById("storyBg");
+            if (storyBg) storyBg.style.transform = "none";
         }
 
         const ASSETS = {
@@ -9410,6 +9470,9 @@
             if (window.__STATIC_SCREENSHOT_EXPORT__) {
                 screen.classList.remove("is-glitch");
                 section.classList.add("is-visible", "is-screen-open", "is-video-ready");
+                showcase.style.opacity = "1";
+                showcase.style.transform = "scale(1)";
+                video.style.opacity = "1";
                 return;
             }
 
