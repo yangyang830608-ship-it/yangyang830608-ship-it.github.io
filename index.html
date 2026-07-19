@@ -7996,6 +7996,78 @@
             overflow-x: hidden !important;
         }
 
+    
+
+        /* Hard crop for long-screenshot tools: keep the document width equal to the viewport. */
+        html,
+        body,
+        body.static-export-mode {
+            inline-size: 100% !important;
+            max-inline-size: 100% !important;
+            overflow-x: clip !important;
+            overscroll-behavior-x: none !important;
+        }
+
+        body.static-export-mode {
+            left: 0 !important;
+            right: auto !important;
+            margin-left: 0 !important;
+            margin-right: 0 !important;
+        }
+
+        body.static-export-mode > *:not(.top-nav),
+        body.static-export-mode main,
+        body.static-export-mode section {
+            max-inline-size: 100vw !important;
+            overflow-x: clip !important;
+        }
+
+        body.static-export-mode .moving-track,
+        body.static-export-mode .inner-rail,
+        body.static-export-mode .phoenix-series-track,
+        body.static-export-mode .phoenix-series-gallery,
+        body.static-export-mode .phoenix-series-viewport,
+        body.static-export-mode .gallery-wrapper,
+        body.static-export-mode .frame-strip,
+        body.static-export-mode .story-track,
+        body.static-export-mode .media-grid,
+        body.static-export-mode .chapter-media,
+        body.static-export-mode .flower-layout,
+        body.static-export-mode .mirror-stage,
+        body.static-export-mode .kite-stage {
+            max-inline-size: 100vw !important;
+            overflow-x: clip !important;
+        }
+
+        body.static-export-mode .dot-nav,
+        body.static-export-mode .cursor-paint,
+        body.static-export-mode .scroll-indicator,
+        body.static-export-mode .scroll-hint,
+        body.static-export-mode .project-arrow,
+        body.static-export-mode .phoenix-redesign-scroll,
+        body.static-export-mode .phoenix-series-toolbar,
+        body.static-export-mode .wechat-card-modal,
+        body.static-export-mode .lightbox,
+        body.static-export-mode .story-modal,
+        body.static-export-mode .phoenix-lightbox,
+        body.static-export-mode [id*="chat" i],
+        body.static-export-mode [class*="chat" i],
+        body.static-export-mode [id*="assist" i],
+        body.static-export-mode [class*="assist" i],
+        body.static-export-mode [id*="translate" i],
+        body.static-export-mode [class*="translate" i],
+        body.static-export-mode [id*="float" i],
+        body.static-export-mode [class*="float" i],
+        body.static-export-mode [id*="corner" i],
+        body.static-export-mode [class*="corner" i],
+        body.static-export-mode [id*="toolbar" i],
+        body.static-export-mode [class*="toolbar" i] {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
+
     </style>
 </head>
 <body class="static-export-mode">
@@ -8796,6 +8868,45 @@
     <script>
         const STATIC_SCREENSHOT_EXPORT = true;
         window.__STATIC_SCREENSHOT_EXPORT__ = STATIC_SCREENSHOT_EXPORT;
+
+
+
+        function fixStaticScreenshotOverflow() {
+            if (!STATIC_SCREENSHOT_EXPORT) return;
+            const root = document.documentElement;
+            const body = document.body;
+            root.style.width = "100%";
+            root.style.maxWidth = "100%";
+            root.style.overflowX = "clip";
+            body.style.width = "100%";
+            body.style.maxWidth = "100%";
+            body.style.overflowX = "clip";
+
+            const viewportWidth = root.clientWidth || window.innerWidth;
+            document.querySelectorAll(".moving-track, .inner-rail, .phoenix-series-track, .phoenix-series-gallery, .phoenix-series-viewport, .gallery-wrapper, .frame-strip, .story-track").forEach((el) => {
+                el.style.maxWidth = "100vw";
+                el.style.overflowX = "clip";
+                if (el.scrollWidth > viewportWidth + 4) {
+                    el.style.width = "100%";
+                    el.style.transform = "none";
+                }
+            });
+
+            document.querySelectorAll("body *").forEach((el) => {
+                if (el.closest(".top-nav")) return;
+                const rect = el.getBoundingClientRect();
+                const style = window.getComputedStyle(el);
+                const name = `${el.id || ""} ${el.className || ""}`.toLowerCase();
+                const isUiOverlay = /(dot-nav|cursor-paint|scroll-hint|scroll-indicator|project-arrow|toolbar|corner|float|chat|assist|translate|modal|lightbox)/.test(name);
+                const isFixedRightOverlay = (style.position === "fixed" || style.position === "sticky") && rect.left > viewportWidth - 180;
+                if (isUiOverlay || isFixedRightOverlay) {
+                    el.style.display = "none";
+                    el.style.visibility = "hidden";
+                    el.style.opacity = "0";
+                    el.style.pointerEvents = "none";
+                }
+            });
+        }
 
         function applyStaticScreenshotState() {
             document.documentElement.classList.add("static-export-mode");
@@ -9825,6 +9936,9 @@
             updateCoverPerfMode();
             adjustActiveStates();
             applyStaticScreenshotState();
+            fixStaticScreenshotOverflow();
+            setTimeout(fixStaticScreenshotOverflow, 80);
+            setTimeout(fixStaticScreenshotOverflow, 300);
         });
         if (!window.__STATIC_SCREENSHOT_EXPORT__) {
             window.addEventListener("scroll", handlePageScroll, { passive: true });
