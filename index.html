@@ -9595,19 +9595,27 @@
         });
     </script>
 <style>
-      /* 当网页 URL 后面加上 #static 或者你按下打印时，动效才会定格 */
-      :root:has(#static), 
+      /* 当按下 P 键进入静态模式时 */
       body.static-pdf-mode *, 
       body.static-pdf-mode *:before, 
       body.static-pdf-mode *:after {
+        /* 1. 只定格动画和过渡，不强制改变透明度和可见性 */
         transition: none !important;
         animation: none !important;
-        opacity: 1 !important; 
+      }
+      
+      /* 2. 针对常见的滚动动效插件（如 AOS, Wow.js, GSAP 等）的初始化隐藏状态进行强制还原 */
+      body.static-pdf-mode [data-aos],
+      body.static-pdf-mode .wow,
+      body.static-pdf-mode .reveal,
+      body.static-pdf-mode .fade-in,
+      body.static-pdf-mode .animated {
+        opacity: 1 !important;
+        transform: none !important;
         visibility: visible !important;
       }
     </style>
     <script>
-      // 监听键盘按键：当你按下键盘上的 P 键（大小写均可）时，瞬间切换成静态模式
       document.addEventListener('keydown', function(e) {
         if (e.key === 'p' || e.key === 'P') {
           document.body.classList.toggle('static-pdf-mode');
