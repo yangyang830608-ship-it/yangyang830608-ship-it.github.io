@@ -9034,7 +9034,7 @@
                 document.body.style.overflow = "";
             };
 
-            document.querySelectorAll(".zoom-card:not(:disabled), #nj-wall-detail .nj-final-image, #phoenix-bookstore-series .phoenix-series-card").forEach(card => {
+            document.querySelectorAll(".zoom-card:not(:disabled), #nj-wall-detail .nj-explore-option, #nj-wall-detail .nj-final-image, #phoenix-bookstore-series .phoenix-series-card").forEach(card => {
                 card.addEventListener("click", () => {
                     const img = card.matches("img") ? card : card.querySelector("img");
                     open((img && (img.currentSrc || img.src)) || card.dataset.zoomSrc);
