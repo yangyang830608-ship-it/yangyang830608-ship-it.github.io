@@ -9594,6 +9594,20 @@
             });
         });
     </script>
+    <style>
+      @media print {
+        /* 1. 瞬间定格所有动画，让隐藏的元素直接显示 */
+        *, *:before, *:after {
+          transition: none !important;
+          animation: none !important;
+          opacity: 1 !important; 
+          visibility: visible !important;
+        }
+        
+        /* 2. （可选）如果你有不想打印出来的多余元素（如返回顶部按钮），可以在下方加上类名并取消注释 */
+        /* .your-button-class { display: none !important; } */
+      }
+    </style>
 </body>
 </html>
 
