@@ -7795,9 +7795,90 @@
         #phoenix-bookstore-series .phoenix-series-caption p {
             line-height: 1.45 !important;
         }
+
+
+        /* Static screenshot export mode: reveal content immediately and remove motion. */
+        body.static-export-mode *,
+        body.static-export-mode *::before,
+        body.static-export-mode *::after {
+            animation: none !important;
+            transition: none !important;
+            scroll-behavior: auto !important;
+        }
+
+        body.static-export-mode {
+            overflow-x: visible !important;
+        }
+
+        body.static-export-mode .reveal-left,
+        body.static-export-mode .reveal-right,
+        body.static-export-mode .reveal-up,
+        body.static-export-mode .reveal-scale,
+        body.static-export-mode .index-card,
+        body.static-export-mode .frame-card,
+        body.static-export-mode .kite-layer,
+        body.static-export-mode .mirror-layer,
+        body.static-export-mode .flower-layer,
+        body.static-export-mode .tv-intro,
+        body.static-export-mode .tv-case,
+        body.static-export-mode .tv-frame,
+        body.static-export-mode .tv-video-wrap,
+        body.static-export-mode img {
+            opacity: 1 !important;
+            visibility: visible !important;
+            filter: none !important;
+        }
+
+        body.static-export-mode .index-card,
+        body.static-export-mode .reveal-left,
+        body.static-export-mode .reveal-right,
+        body.static-export-mode .reveal-up {
+            transform: none !important;
+        }
+
+        body.static-export-mode .frame-card {
+            transform: scale(1) !important;
+        }
+
+        body.static-export-mode .dot-nav,
+        body.static-export-mode .scroll-hint,
+        body.static-export-mode .corner-actions,
+        body.static-export-mode .phoenix-series-controls,
+        body.static-export-mode .story-dots,
+        body.static-export-mode .frame-dots,
+        body.static-export-mode .flower-hotspot,
+        body.static-export-mode #cursorPaint {
+            display: none !important;
+        }
+
+        body.static-export-mode .story-rail,
+        body.static-export-mode .phoenix-series-track {
+            overflow: visible !important;
+            scroll-snap-type: none !important;
+            scrollbar-width: none !important;
+        }
+
+        body.static-export-mode .story-rail::-webkit-scrollbar,
+        body.static-export-mode .phoenix-series-track::-webkit-scrollbar {
+            display: none !important;
+        }
+
+        body.static-export-mode .final-page,
+        body.static-export-mode .final-page.is-visible,
+        body.static-export-mode .final-page.is-screen-open,
+        body.static-export-mode .final-page.is-video-ready {
+            opacity: 1 !important;
+        }
+
+        body.static-export-mode .final-page .tv-screen,
+        body.static-export-mode .final-page .tv-video-wrap {
+            opacity: 1 !important;
+            visibility: visible !important;
+        }
+
     </style>
 </head>
-<body>
+<body class="static-export-mode">
     <svg style="position:absolute;width:0;height:0" aria-hidden="true">
         <filter id="liquid-chrome">
             <feTurbulence type="fractalNoise" baseFrequency="0.018 0.04" numOctaves="3" seed="7" result="noise"/>
@@ -8593,6 +8674,30 @@
     </div>
 
     <script>
+        const STATIC_SCREENSHOT_EXPORT = true;
+        window.__STATIC_SCREENSHOT_EXPORT__ = STATIC_SCREENSHOT_EXPORT;
+
+        function applyStaticScreenshotState() {
+            const root = document.documentElement;
+            if (root) root.classList.add("static-export-mode");
+            if (document.body) document.body.classList.add("static-export-mode");
+            document.querySelectorAll(".reveal-left, .reveal-right, .reveal-up, .reveal-scale").forEach(el => {
+                el.classList.add("is-visible");
+            });
+            document.querySelectorAll(".index-card").forEach(el => {
+                el.classList.add("visible");
+            });
+            document.querySelectorAll("img").forEach(img => {
+                img.loading = "eager";
+                img.decoding = "sync";
+                img.style.opacity = "1";
+                img.style.visibility = "visible";
+            });
+            document.querySelectorAll(".final-page").forEach(section => {
+                section.classList.add("is-visible", "is-screen-open", "is-video-ready");
+            });
+        }
+
         const ASSETS = {
             tvIntro: "\u7535\u89c6\u673a.png",
             tvCase: "\u7535\u89c6\u673a\u5916\u6846.png",
@@ -8787,15 +8892,17 @@
                     applyRailState(rail, dots, state);
                 });
 
-                rail.parentElement.addEventListener("wheel", event => {
-                    event.preventDefault();
-                    const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
-                    const maxMove = getMaxMove(rail);
-                    if (maxMove <= 0) return;
-                    state.offset = clamp(state.offset - delta * 0.56, -maxMove, 0);
-                    state.wheelBoost = clamp(state.wheelBoost - delta * 0.0035, -0.72, 0.72);
-                    applyRailState(rail, dots, state);
-                }, { passive: false });
+                if (!window.__STATIC_SCREENSHOT_EXPORT__) {
+                    rail.parentElement.addEventListener("wheel", event => {
+                        event.preventDefault();
+                        const delta = Math.abs(event.deltaX) > Math.abs(event.deltaY) ? event.deltaX : event.deltaY;
+                        const maxMove = getMaxMove(rail);
+                        if (maxMove <= 0) return;
+                        state.offset = clamp(state.offset - delta * 0.56, -maxMove, 0);
+                        state.wheelBoost = clamp(state.wheelBoost - delta * 0.0035, -0.72, 0.72);
+                        applyRailState(rail, dots, state);
+                    }, { passive: false });
+                }
 
                 function drift() {
                     const maxMove = getMaxMove(rail);
@@ -8814,7 +8921,7 @@
                     }
                     requestAnimationFrame(drift);
                 }
-                drift();
+                if (!window.__STATIC_SCREENSHOT_EXPORT__) drift();
             }
         }
 
@@ -9117,6 +9224,10 @@
         }, { threshold: 0.18 });
 
         function initKiteReveal() {
+            if (window.__STATIC_SCREENSHOT_EXPORT__) {
+                document.querySelectorAll(".reveal-left, .reveal-right, .reveal-up, .reveal-scale").forEach(target => target.classList.add("is-visible"));
+                return;
+            }
             const sections = document.querySelectorAll("[data-kite-replay='true']");
             if (!sections.length) return;
 
@@ -9296,6 +9407,12 @@
                 video.load();
             }
 
+            if (window.__STATIC_SCREENSHOT_EXPORT__) {
+                screen.classList.remove("is-glitch");
+                section.classList.add("is-visible", "is-screen-open", "is-video-ready");
+                return;
+            }
+
             let active = false;
             let timers = [];
 
@@ -9375,6 +9492,7 @@
         }
 
         function initCursorPaint() {
+            if (window.__STATIC_SCREENSHOT_EXPORT__) return;
             const canvas = document.getElementById("cursorPaint");
             const ctx = canvas.getContext("2d");
             const strokes = [];
@@ -9553,6 +9671,7 @@
             });
         }
         function initPhoenixSeriesGallery() {
+            if (window.__STATIC_SCREENSHOT_EXPORT__) return;
             const track = document.getElementById("phoenixSeriesTrack");
             if (!track) return;
             const prev = document.getElementById("phoenixSeriesPrev");
@@ -9567,7 +9686,9 @@
                 track.scrollBy({ left: event.deltaY, behavior: "auto" });
             }, { passive: false });
         }
+        document.addEventListener("DOMContentLoaded", applyStaticScreenshotState);
         window.addEventListener("load", () => {
+            applyStaticScreenshotState();
             initGallery();
             initModalControls();
             initFlowerGallery();
@@ -9583,8 +9704,11 @@
             initKiteReveal();
             updateCoverPerfMode();
             adjustActiveStates();
+            applyStaticScreenshotState();
         });
-        window.addEventListener("scroll", handlePageScroll, { passive: true });
+        if (!window.__STATIC_SCREENSHOT_EXPORT__) {
+            window.addEventListener("scroll", handlePageScroll, { passive: true });
+        }
         document.querySelectorAll("#chapter-interactive .chapter-panel-link").forEach(card => {
             card.addEventListener("keydown", event => {
                 if (event.key === " " || event.code === "Space") {
