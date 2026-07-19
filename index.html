@@ -7939,6 +7939,63 @@
             display: none !important;
         }
 
+    
+
+        /* Screenshot software full-page width fix: prevent off-canvas elements from widening the capture. */
+        html,
+        body {
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+
+        body.static-export-mode {
+            position: relative !important;
+            width: 100% !important;
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+
+        body.static-export-mode main,
+        body.static-export-mode section,
+        body.static-export-mode .section,
+        body.static-export-mode .page,
+        body.static-export-mode .chapter-page,
+        body.static-export-mode .final-page,
+        body.static-export-mode .phoenix-page,
+        body.static-export-mode .flower-page,
+        body.static-export-mode #photo,
+        body.static-export-mode #hero-project,
+        body.static-export-mode #chapter-interactive {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+            box-sizing: border-box !important;
+        }
+
+        body.static-export-mode .dot-nav,
+        body.static-export-mode .scroll-hint,
+        body.static-export-mode .corner-actions,
+        body.static-export-mode .floating-actions,
+        body.static-export-mode .assistant-widget,
+        body.static-export-mode [class*="floating"],
+        body.static-export-mode [class*="chat"],
+        body.static-export-mode [class*="translate"],
+        body.static-export-mode [class*="toolbar"] {
+            display: none !important;
+            visibility: hidden !important;
+            pointer-events: none !important;
+        }
+
+        body.static-export-mode .phoenix-scroll,
+        body.static-export-mode .phoenix-track,
+        body.static-export-mode .gallery-track,
+        body.static-export-mode .horizontal-track,
+        body.static-export-mode .media-grid,
+        body.static-export-mode .works-track {
+            max-width: 100% !important;
+            overflow-x: hidden !important;
+        }
+
     </style>
 </head>
 <body class="static-export-mode">
@@ -9781,20 +9838,6 @@
             });
         });
     </script>
-   /* 1. 強行隱藏右側固定的導航小圓點/側邊欄 */
-  #fp-nav,
-  .fp-slidesNav,
-  [class*="sidebar"], 
-  [class*="nav-dots"] { 
-    display: none !important; 
-  }
-
-  /* 2. 修复可能存在的横向溢出 */
-  html, body {
-    overflow-x: hidden !important;
-    width: 100% !important;
-  }
-</style>
 </body>
 </html>
 
