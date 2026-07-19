@@ -8068,6 +8068,52 @@
             pointer-events: none !important;
         }
 
+    
+
+        /* Keep the top navigation fully inside the viewport for screenshot export. */
+        body.static-export-mode .top-nav {
+            position: fixed !important;
+            top: 30px !important;
+            left: auto !important;
+            right: clamp(16px, 2vw, 28px) !important;
+            width: auto !important;
+            max-width: calc(100vw - clamp(360px, 28vw, 460px)) !important;
+            min-width: 0 !important;
+            transform: none !important;
+            display: flex !important;
+            flex-wrap: nowrap !important;
+            justify-content: flex-end !important;
+            align-items: center !important;
+            gap: clamp(5px, 0.55vw, 10px) !important;
+            padding: clamp(6px, 0.6vw, 10px) !important;
+            overflow: hidden !important;
+            box-sizing: border-box !important;
+            z-index: 120 !important;
+        }
+
+        body.static-export-mode .top-nav a {
+            flex: 0 1 auto !important;
+            min-width: 0 !important;
+            min-height: clamp(28px, 2vw, 38px) !important;
+            padding: clamp(5px, 0.52vw, 9px) clamp(8px, 0.9vw, 15px) !important;
+            font-size: clamp(10px, 0.68vw, 13px) !important;
+            line-height: 1.1 !important;
+            white-space: nowrap !important;
+            box-sizing: border-box !important;
+        }
+
+        @media (max-width: 1400px) {
+            body.static-export-mode .top-nav {
+                max-width: calc(100vw - 320px) !important;
+                gap: 5px !important;
+                padding: 6px !important;
+            }
+            body.static-export-mode .top-nav a {
+                padding: 5px 8px !important;
+                font-size: 10px !important;
+            }
+        }
+
     </style>
 </head>
 <body class="static-export-mode">
@@ -8870,6 +8916,35 @@
         window.__STATIC_SCREENSHOT_EXPORT__ = STATIC_SCREENSHOT_EXPORT;
 
 
+
+
+
+        function fitStaticExportTopNav() {
+            if (!STATIC_SCREENSHOT_EXPORT) return;
+            const nav = document.querySelector(".top-nav");
+            if (!nav) return;
+            const viewportWidth = document.documentElement.clientWidth || window.innerWidth;
+            const brand = document.querySelector(".profile-brand");
+            const brandRect = brand ? brand.getBoundingClientRect() : { right: 320 };
+            const safeLeft = Math.max(300, Math.ceil(brandRect.right + 28));
+            const safeRight = 28;
+            const maxWidth = Math.max(420, viewportWidth - safeLeft - safeRight);
+            nav.style.left = "auto";
+            nav.style.right = `${safeRight}px`;
+            nav.style.transform = "none";
+            nav.style.maxWidth = `${maxWidth}px`;
+            nav.style.overflow = "hidden";
+            nav.style.boxSizing = "border-box";
+            nav.querySelectorAll("a").forEach((link) => {
+                link.style.minWidth = "0";
+                link.style.whiteSpace = "nowrap";
+                link.style.boxSizing = "border-box";
+            });
+            const rect = nav.getBoundingClientRect();
+            if (rect.right > viewportWidth) {
+                nav.style.maxWidth = `${Math.max(360, viewportWidth - rect.left - safeRight)}px`;
+            }
+        }
 
         function fixStaticScreenshotOverflow() {
             if (!STATIC_SCREENSHOT_EXPORT) return;
@@ -9936,9 +10011,10 @@
             updateCoverPerfMode();
             adjustActiveStates();
             applyStaticScreenshotState();
+            fitStaticExportTopNav();
             fixStaticScreenshotOverflow();
-            setTimeout(fixStaticScreenshotOverflow, 80);
-            setTimeout(fixStaticScreenshotOverflow, 300);
+            setTimeout(() => { fitStaticExportTopNav(); fixStaticScreenshotOverflow(); }, 80);
+            setTimeout(() => { fitStaticExportTopNav(); fixStaticScreenshotOverflow(); }, 300);
         });
         if (!window.__STATIC_SCREENSHOT_EXPORT__) {
             window.addEventListener("scroll", handlePageScroll, { passive: true });
