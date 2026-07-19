@@ -9594,20 +9594,27 @@
             });
         });
     </script>
-    <style>
-      @media print {
-        /* 1. 瞬间定格所有动画，让隐藏的元素直接显示 */
-        *, *:before, *:after {
-          transition: none !important;
-          animation: none !important;
-          opacity: 1 !important; 
-          visibility: visible !important;
-        }
-        
-        /* 2. （可选）如果你有不想打印出来的多余元素（如返回顶部按钮），可以在下方加上类名并取消注释 */
-        /* .your-button-class { display: none !important; } */
+<style>
+      /* 当网页 URL 后面加上 #static 或者你按下打印时，动效才会定格 */
+      :root:has(#static), 
+      body.static-pdf-mode *, 
+      body.static-pdf-mode *:before, 
+      body.static-pdf-mode *:after {
+        transition: none !important;
+        animation: none !important;
+        opacity: 1 !important; 
+        visibility: visible !important;
       }
     </style>
+    <script>
+      // 监听键盘按键：当你按下键盘上的 P 键（大小写均可）时，瞬间切换成静态模式
+      document.addEventListener('keydown', function(e) {
+        if (e.key === 'p' || e.key === 'P') {
+          document.body.classList.toggle('static-pdf-mode');
+          console.log('静态模式已切换');
+        }
+      });
+    </script>
 </body>
 </html>
 
