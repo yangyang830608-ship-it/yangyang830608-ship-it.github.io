@@ -9781,6 +9781,20 @@
             });
         });
     </script>
+   /* 1. 強行隱藏右側固定的導航小圓點/側邊欄 */
+  #fp-nav,
+  .fp-slidesNav,
+  [class*="sidebar"], 
+  [class*="nav-dots"] { 
+    display: none !important; 
+  }
+
+  /* 2. 修复可能存在的横向溢出 */
+  html, body {
+    overflow-x: hidden !important;
+    width: 100% !important;
+  }
+</style>
 </body>
 </html>
 
